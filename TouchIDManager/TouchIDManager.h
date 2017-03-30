@@ -9,18 +9,18 @@
 
 @interface TouchIDManager : NSObject
 
-+ (void)setPasscode:(NSString *)passcode forTokenSerialNumber:(NSString *)tokenSerialNumber;
-+ (void)deletePasscodeForTokenSerialNumber:(NSString *)tokenSerialNumber;
-+ (void)getCurrentPasscodeWithSuccess:(void(^)(NSString *passcode))success failure:(void(^)(OSStatus failureStatus))failure operationPrompt:(NSString *)operationPrompt forTokenSerialNumber:(NSString *)tokenSerialNumber;
-+ (void)checkIfTouchIDShouldBeUsedAndTouchIDSettingsAreChangedWithCompletion:(void (^)(BOOL))completion forTokenSerialNumbers:(NSArray *)tokenSerialNumbers;
++ (void)setPasscode:(NSString *)passcode forUniqueIdentifier:(NSString *)uniqueIdentifier;
++ (void)deletePasscodeForUniqueIdentifier:(NSString *)uniqueIdentifier;
++ (void)getCurrentPasscodeWithSuccess:(void(^)(NSString *passcode))success failure:(void(^)(OSStatus failureStatus))failure operationPrompt:(NSString *)operationPrompt forUniqueIdentifier:(NSString *)uniqueIdentifier;
++ (void)checkIfTouchIDShouldBeUsedAndTouchIDSettingsAreChangedWithCompletion:(void (^)(BOOL))completion forUniqueIdentifiers:(NSArray *)uniqueIdentifiers;
 + (BOOL)deviceSupportsTouchID;
 + (BOOL)canUseTouchID;
-+ (BOOL)shouldUseTouchIDForTokenSerialNumber:(NSString *)tokenSerialNumber;
-+ (void)setShouldUseTouchID:(BOOL)shouldUseTouchID forTokenSerialNumber:(NSString *)tokenSerialNumber;
-+ (BOOL)didAskToUseTouchIDForTokenSerialNumber:(NSString *)tokenSerialNumber;
-+ (void)setDidAskToUseTouchID:(BOOL)askToUseTouchID forTokenSerialNumber:(NSString *)tokenSerialNumber;
-+ (BOOL)shouldAddPasscodeToKeychainOnNextLoginForTokenSerialNumber:(NSString *)tokenSerialNumber;
-+ (void)setShouldAddPasscodeToKeychainOnNextLogin:(BOOL)shouldAddPasscodeToKeychainOnNextLogin forTokenSerialNumber:(NSString *)tokenSerialNumber;
-+ (void)resetForTokenSerialNumber:(NSString *)tokenSerialNumber;
++ (BOOL)shouldUseTouchIDForUniqueIdentifier:(NSString *)uniqueIdentifier;
++ (void)setShouldUseTouchID:(BOOL)shouldUseTouchID forUniqueIdentifier:(NSString *)uniqueIdentifier;
++ (BOOL)didAskToUseTouchIDForUniqueIdentifier:(NSString *)uniqueIdentifier;
++ (void)setDidAskToUseTouchID:(BOOL)askToUseTouchID forUniqueIdentifier:(NSString *)uniqueIdentifier;
++ (BOOL)shouldAddPasscodeToKeychainOnNextLoginForUniqueIdentifier:(NSString *)uniqueIdentifier;
++ (void)setShouldAddPasscodeToKeychainOnNextLogin:(BOOL)shouldAddPasscodeToKeychainOnNextLogin forUniqueIdentifier:(NSString *)uniqueIdentifier;
++ (void)resetForUniqueIdentifier:(NSString *)uniqueIdentifier;
 
 @end
