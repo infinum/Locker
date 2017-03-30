@@ -309,30 +309,30 @@ static NSString *kOperationPrompt;
 
 + (NSString *)keyKeychainServiceName
 {
-    return [NSString stringWithFormat:@"%@KeychainService", kBundleName];
+    return [NSString stringWithFormat:@"%@_KeychainService", kBundleName];
 }
 
 + (NSString *)keyKeychainAccountNameForTokenKey:(NSString *)tokenKey
 {
-    NSString *kKeychainAccountName = [NSString stringWithFormat:@"%@KeychainAccount", kBundleName];
+    NSString *kKeychainAccountName = [NSString stringWithFormat:@"%@_KeychainAccount", kBundleName];
     return [NSString stringWithFormat:@"%@_%@", kKeychainAccountName, tokenKey];
 }
 
 + (NSString *)keyDidAskToUseTouchIDForTokenKey:(NSString *)tokenKey
 {
-    NSString *kUserDefaultsDidAskToUseTouchID = [NSString stringWithFormat:@"%@UserDefaultsDidAskToUseTouchID", kBundleName];
+    NSString *kUserDefaultsDidAskToUseTouchID = [NSString stringWithFormat:@"%@_UserDefaultsDidAskToUseTouchID", kBundleName];
     return [NSString stringWithFormat:@"%@_%@", kUserDefaultsDidAskToUseTouchID, tokenKey];
 }
 
 + (NSString *)keyTouchIDActivatedForTokenKey:(NSString *)tokenKey
 {
-    NSString *kUserDefaultsKeyTouchIDActivated = [NSString stringWithFormat:@"%@UserDefaultsKeyTouchIDActivated", kBundleName];
+    NSString *kUserDefaultsKeyTouchIDActivated = [NSString stringWithFormat:@"%@_UserDefaultsKeyTouchIDActivated", kBundleName];
     return [NSString stringWithFormat:@"%@_%@", kUserDefaultsKeyTouchIDActivated, tokenKey];
 }
 
 + (NSString *)keyUserDefaultsLAPolicyDomainState
 {
-    return [NSString stringWithFormat:@"%@UserDefaultsLAPolicyDomainState", kBundleName];
+    return [NSString stringWithFormat:@"%@_UserDefaultsLAPolicyDomainState", kBundleName];
 }
 
 @end
