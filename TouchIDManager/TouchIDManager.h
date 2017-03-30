@@ -9,18 +9,18 @@
 
 @interface TouchIDManager : NSObject
 
-+ (void)setPasscode:(NSString *)passcode forTokenKey:(NSString *)tokenKey;
-+ (void)deletePasscodeForTokenKey:(NSString *)tokenKey;
-+ (void)getCurrentPasscodeWithSuccess:(void(^)(NSString *passcode))success failure:(void(^)(OSStatus failureStatus))failure operationPrompt:(NSString *)operationPrompt forTokenKey:(NSString *)tokenKey;
-+ (void)checkIfTouchIDShouldBeUsedAndTouchIDSettingsAreChangedWithCompletion:(void (^)(BOOL))completion forTokenKeys:(NSArray *)tokenKeys;
++ (void)setPasscode:(NSString *)passcode forTokenSerialNumber:(NSString *)tokenSerialNumber;
++ (void)deletePasscodeForTokenSerialNumber:(NSString *)tokenSerialNumber;
++ (void)getCurrentPasscodeWithSuccess:(void(^)(NSString *passcode))success failure:(void(^)(OSStatus failureStatus))failure operationPrompt:(NSString *)operationPrompt forTokenSerialNumber:(NSString *)tokenSerialNumber;
++ (void)checkIfTouchIDShouldBeUsedAndTouchIDSettingsAreChangedWithCompletion:(void (^)(BOOL))completion forTokenSerialNumbers:(NSArray *)tokenSerialNumbers;
 + (BOOL)deviceSupportsTouchID;
 + (BOOL)canUseTouchID;
-+ (BOOL)shouldUseTouchIDForTokenKey:(NSString *)tokenKey;
-+ (void)setShouldUseTouchID:(BOOL)shouldUseTouchID forTokenKey:(NSString *)tokenKey;
-+ (BOOL)didAskToUseTouchIDForTokenKey:(NSString *)tokenKey;
-+ (void)setDidAskToUseTouchID:(BOOL)askToUseTouchID forTokenKey:(NSString *)tokenKey;
-+ (BOOL)shouldAddPasscodeToKeychainOnNextLoginForTokenKey:(NSString *)tokenKey;
-+ (void)setShouldAddPasscodeToKeychainOnNextLogin:(BOOL)shouldAddPasscodeToKeychainOnNextLogin forTokenKey:(NSString *)tokenKey;
-+ (void)resetForTokenKey:(NSString *)tokenKey;
++ (BOOL)shouldUseTouchIDForTokenSerialNumber:(NSString *)tokenSerialNumber;
++ (void)setShouldUseTouchID:(BOOL)shouldUseTouchID forTokenSerialNumber:(NSString *)tokenSerialNumber;
++ (BOOL)didAskToUseTouchIDForTokenSerialNumber:(NSString *)tokenSerialNumber;
++ (void)setDidAskToUseTouchID:(BOOL)askToUseTouchID forTokenSerialNumber:(NSString *)tokenSerialNumber;
++ (BOOL)shouldAddPasscodeToKeychainOnNextLoginForTokenSerialNumber:(NSString *)tokenSerialNumber;
++ (void)setShouldAddPasscodeToKeychainOnNextLogin:(BOOL)shouldAddPasscodeToKeychainOnNextLogin forTokenSerialNumber:(NSString *)tokenSerialNumber;
++ (void)resetForTokenSerialNumber:(NSString *)tokenSerialNumber;
 
 @end

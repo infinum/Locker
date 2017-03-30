@@ -17,12 +17,12 @@
 
 #pragma mark - Keychain Methods
 
-+ (void)getCurrentPasscodeWithSuccess:(void (^)(NSString *))success failure:(void (^)(OSStatus))failure operationPrompt:(NSString *)operationPrompt forTokenKey:(NSString *)tokenKey
++ (void)getCurrentPasscodeWithSuccess:(void (^)(NSString *))success failure:(void (^)(OSStatus))failure operationPrompt:(NSString *)operationPrompt forTokenSerialNumber:(NSString *)tokenSerialNumber
 {
     NSDictionary *query = @{
                             (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
                             (__bridge id)kSecAttrService: [TouchIDManager keyKeychainServiceName],
-                            (__bridge id)kSecAttrAccount: [TouchIDManager keyKeychainAccountNameForTokenKey:tokenKey],
+                            (__bridge id)kSecAttrAccount: [TouchIDManager keyKeychainAccountNameForTokenSerialNumber:tokenSerialNumber],
                             (__bridge id)kSecMatchLimit: (__bridge id)kSecMatchLimitOne,
                             (__bridge id)kSecReturnData: @YES,
                             (__bridge id)kSecUseOperationPrompt: operationPrompt
@@ -51,12 +51,12 @@
     });
 }
 
-+ (void)setPasscode:(NSString *)passcode forTokenKey:(NSString *)tokenKey
++ (void)setPasscode:(NSString *)passcode forTokenSerialNumber:(NSString *)tokenSerialNumber
 {
     NSDictionary *query = @{
                             (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
                             (__bridge id)kSecAttrService: [TouchIDManager keyKeychainServiceName],
-                            (__bridge id)kSecAttrAccount: [TouchIDManager keyKeychainAccountNameForTokenKey:tokenKey],
+                            (__bridge id)kSecAttrAccount: [TouchIDManager keyKeychainAccountNameForTokenSerialNumber:tokenSerialNumber],
                             };
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -85,7 +85,7 @@
         NSDictionary *attributes = @{
                                      (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
                                      (__bridge id)kSecAttrService: [TouchIDManager keyKeychainServiceName],
-                                     (__bridge id)kSecAttrAccount: [TouchIDManager keyKeychainAccountNameForTokenKey:tokenKey],
+                                     (__bridge id)kSecAttrAccount: [TouchIDManager keyKeychainAccountNameForTokenSerialNumber:tokenSerialNumber],
                                      (__bridge id)kSecValueData: [passcode dataUsingEncoding:NSUTF8StringEncoding],
                                      (__bridge id)kSecUseNoAuthenticationUI: @YES,
                                      (__bridge id)kSecAttrAccessControl: (__bridge_transfer id)sacObject
@@ -101,15 +101,15 @@
     });
 }
 
-+ (void)deletePasscodeForTokenKey:(NSString *)tokenKey
++ (void)deletePasscodeForTokenSerialNumber:(NSString *)tokenSerialNumber
 {
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[TouchIDManager keyTouchIDActivatedForTokenKey:tokenKey]];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[TouchIDManager keyTouchIDActivatedForTokenSerialNumber:tokenSerialNumber]];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     NSDictionary *query = @{
                             (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
                             (__bridge id)kSecAttrService: [TouchIDManager keyKeychainServiceName],
-                            (__bridge id)kSecAttrAccount: [TouchIDManager keyKeychainAccountNameForTokenKey:tokenKey],
+                            (__bridge id)kSecAttrAccount: [TouchIDManager keyKeychainAccountNameForTokenSerialNumber:tokenSerialNumber]
                             };
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -164,12 +164,7 @@
             error:nil];
 }
 
-+ (BOOL)shouldUseTouchIDForTokenKey:(NSString *)tokenKey
-{
-    return [[NSUserDefaults standardUserDefaults] boolForKey:[TouchIDManager keyTouchIDActivatedForTokenKey:tokenKey]];
-}
-
-+ (void)checkIfPasscodeExistsInKeychainWithCompletion:(void (^)(BOOL))completion forTokenKey:(NSString *)tokenKey
++ (void)checkIfPasscodeExistsInKeychainWithCompletion:(void (^)(BOOL))completion forTokenSerialNumber:(NSString *)tokenSerialNumber
 {
     NSDictionary *query = nil;
     
@@ -177,7 +172,7 @@
         query = @{
                   (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
                   (__bridge id)kSecAttrService: [TouchIDManager keyKeychainServiceName],
-                  (__bridge id)kSecAttrAccount: [TouchIDManager keyKeychainAccountNameForTokenKey:tokenKey],
+                  (__bridge id)kSecAttrAccount: [TouchIDManager keyKeychainAccountNameForTokenSerialNumber:tokenSerialNumber],
                   (__bridge id)kSecMatchLimit: (__bridge id)kSecMatchLimitOne,
                   (__bridge id)kSecReturnData: @NO,
                   (__bridge id)kSecUseAuthenticationUI : (__bridge id)kSecUseAuthenticationUIFail
@@ -186,7 +181,7 @@
         query = @{
                   (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
                   (__bridge id)kSecAttrService: [TouchIDManager keyKeychainServiceName],
-                  (__bridge id)kSecAttrAccount: [TouchIDManager keyKeychainAccountNameForTokenKey:tokenKey],
+                  (__bridge id)kSecAttrAccount: [TouchIDManager keyKeychainAccountNameForTokenSerialNumber:tokenSerialNumber],
                   (__bridge id)kSecMatchLimit: (__bridge id)kSecMatchLimitOne,
                   (__bridge id)kSecReturnData: @NO,
                   (__bridge id)kSecUseNoAuthenticationUI: @YES
@@ -220,7 +215,7 @@
     return touchIDSettingsChanged;
 }
 
-+ (void)checkIfTouchIDShouldBeUsedAndTouchIDSettingsAreChangedWithCompletion:(void (^)(BOOL))completion forTokenKeys:(NSArray *)tokenKeys
++ (void)checkIfTouchIDShouldBeUsedAndTouchIDSettingsAreChangedWithCompletion:(void (^)(BOOL))completion forTokenSerialNumbers:(NSArray *)tokenSerialNumbers
 {
     __block BOOL shouldBeUsedAndTouchIDSettingsAreChanged = NO;
     BOOL fingerIsAddedOrRemovedInTouchIDSettings = NO;
@@ -231,11 +226,11 @@
     
     dispatch_group_t group = dispatch_group_create();
     
-    for (NSString *tokenKey in tokenKeys) {
+    for (NSString *tokenSerialNumber in tokenSerialNumbers) {
         dispatch_group_enter(group);
         
         [TouchIDManager checkIfPasscodeExistsInKeychainWithCompletion:^(BOOL itemExists) {
-            BOOL shouldUseTouchID = [self shouldUseTouchIDForTokenKey:tokenKey];
+            BOOL shouldUseTouchID = [self shouldUseTouchIDForTokenSerialNumber:tokenSerialNumber];
             
             if (completion) {
                 if (shouldBeUsedAndTouchIDSettingsAreChanged == NO) {
@@ -243,7 +238,7 @@
                 }
                 dispatch_group_leave(group);
             }
-        } forTokenKey:tokenKey];
+        } forTokenSerialNumber:tokenSerialNumber];
     }
     
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
@@ -255,35 +250,40 @@
     });
 }
 
-+ (void)setShouldUseTouchID:(BOOL)shouldUseTouchID forTokenKey:(NSString *)tokenKey
++ (BOOL)shouldUseTouchIDForTokenSerialNumber:(NSString *)tokenSerialNumber
 {
-    if (shouldUseTouchID == NO && [TouchIDManager shouldAddPasscodeToKeychainOnNextLoginForTokenKey:tokenKey]) {
-        [TouchIDManager setShouldAddPasscodeToKeychainOnNextLogin:NO forTokenKey:tokenKey];
+    return [[NSUserDefaults standardUserDefaults] boolForKey:[TouchIDManager keyTouchIDActivatedForTokenSerialNumber:tokenSerialNumber]];
+}
+
++ (void)setShouldUseTouchID:(BOOL)shouldUseTouchID forTokenSerialNumber:(NSString *)tokenSerialNumber
+{
+    if (shouldUseTouchID == NO && [TouchIDManager shouldAddPasscodeToKeychainOnNextLoginForTokenSerialNumber:tokenSerialNumber]) {
+        [TouchIDManager setShouldAddPasscodeToKeychainOnNextLogin:NO forTokenSerialNumber:tokenSerialNumber];
     }
     
-    [[NSUserDefaults standardUserDefaults] setBool:shouldUseTouchID forKey:[TouchIDManager keyUserDefaultsShouldAddPasscodeToKeychainOnNextLoginForTokenKey:tokenKey]];
+    [[NSUserDefaults standardUserDefaults] setBool:shouldUseTouchID forKey:[TouchIDManager keyTouchIDActivatedForTokenSerialNumber:tokenSerialNumber]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-+ (BOOL)didAskToUseTouchIDForTokenKey:(NSString *)tokenKey
++ (BOOL)didAskToUseTouchIDForTokenSerialNumber:(NSString *)tokenSerialNumber
 {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:[TouchIDManager keyDidAskToUseTouchIDForTokenKey:tokenKey]];
+    return [[NSUserDefaults standardUserDefaults] boolForKey:[TouchIDManager keyDidAskToUseTouchIDForTokenSerialNumber:tokenSerialNumber]];
 }
 
-+ (void)setDidAskToUseTouchID:(BOOL)askToUseTouchID forTokenKey:(NSString *)tokenKey
++ (void)setDidAskToUseTouchID:(BOOL)askToUseTouchID forTokenSerialNumber:(NSString *)tokenSerialNumber
 {
-    [[NSUserDefaults standardUserDefaults] setBool:askToUseTouchID forKey:[TouchIDManager keyDidAskToUseTouchIDForTokenKey:tokenKey]];
+    [[NSUserDefaults standardUserDefaults] setBool:askToUseTouchID forKey:[TouchIDManager keyDidAskToUseTouchIDForTokenSerialNumber:tokenSerialNumber]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-+ (BOOL)shouldAddPasscodeToKeychainOnNextLoginForTokenKey:(NSString *)tokenKey
++ (BOOL)shouldAddPasscodeToKeychainOnNextLoginForTokenSerialNumber:(NSString *)tokenSerialNumber
 {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:[TouchIDManager keyUserDefaultsShouldAddPasscodeToKeychainOnNextLoginForTokenKey:tokenKey]];
+    return [[NSUserDefaults standardUserDefaults] boolForKey:[TouchIDManager keyShouldAddPasscodeToKeychainOnNextLoginForTokenSerialNumber:tokenSerialNumber]];
 }
 
-+ (void)setShouldAddPasscodeToKeychainOnNextLogin:(BOOL)shouldAddPasscodeToKeychainOnNextLogin forTokenKey:(NSString *)tokenKey
++ (void)setShouldAddPasscodeToKeychainOnNextLogin:(BOOL)shouldAddPasscodeToKeychainOnNextLogin forTokenSerialNumber:(NSString *)tokenSerialNumber
 {
-    [[NSUserDefaults standardUserDefaults] setBool:shouldAddPasscodeToKeychainOnNextLogin forKey:[TouchIDManager keyUserDefaultsShouldAddPasscodeToKeychainOnNextLoginForTokenKey:tokenKey]];
+    [[NSUserDefaults standardUserDefaults] setBool:shouldAddPasscodeToKeychainOnNextLogin forKey:[TouchIDManager keyShouldAddPasscodeToKeychainOnNextLoginForTokenSerialNumber:tokenSerialNumber]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -296,21 +296,22 @@
 
 + (NSData *)savedLAPolicyDomainState
 {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:[TouchIDManager keyUserDefaultsLAPolicyDomainState]];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:[TouchIDManager keyLAPolicyDomainState]];
 }
 
 + (void)setLAPolicyDomainState:(NSData *)domainState
 {
-    [[NSUserDefaults standardUserDefaults] setObject:domainState forKey:[TouchIDManager keyUserDefaultsLAPolicyDomainState]];
+    [[NSUserDefaults standardUserDefaults] setObject:domainState forKey:[TouchIDManager keyLAPolicyDomainState]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-+ (void)resetForTokenKey:(NSString *)tokenKey
++ (void)resetForTokenSerialNumber:(NSString *)tokenSerialNumber
 {
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[TouchIDManager keyDidAskToUseTouchIDForTokenKey:tokenKey]];
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[TouchIDManager keyTouchIDActivatedForTokenKey:tokenKey]];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[TouchIDManager keyDidAskToUseTouchIDForTokenSerialNumber:tokenSerialNumber]];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[TouchIDManager keyTouchIDActivatedForTokenSerialNumber:tokenSerialNumber]];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[TouchIDManager keyShouldAddPasscodeToKeychainOnNextLoginForTokenSerialNumber:tokenSerialNumber]];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [TouchIDManager deletePasscodeForTokenKey:tokenKey];
+    [TouchIDManager deletePasscodeForTokenSerialNumber:tokenSerialNumber];
 }
 
 #pragma mark - User defaults keys help methods
@@ -320,30 +321,30 @@
     return [NSString stringWithFormat:@"%@_KeychainService", kBundleName];
 }
 
-+ (NSString *)keyKeychainAccountNameForTokenKey:(NSString *)tokenKey
++ (NSString *)keyKeychainAccountNameForTokenSerialNumber:(NSString *)tokenSerialNumber
 {
     NSString *kKeychainAccountName = [NSString stringWithFormat:@"%@_KeychainAccount", kBundleName];
-    return [NSString stringWithFormat:@"%@_%@", kKeychainAccountName, tokenKey];
+    return [NSString stringWithFormat:@"%@_%@", kKeychainAccountName, tokenSerialNumber];
 }
 
-+ (NSString *)keyDidAskToUseTouchIDForTokenKey:(NSString *)tokenKey
++ (NSString *)keyDidAskToUseTouchIDForTokenSerialNumber:(NSString *)tokenSerialNumber
 {
     NSString *kUserDefaultsDidAskToUseTouchID = [NSString stringWithFormat:@"%@_UserDefaultsDidAskToUseTouchID", kBundleName];
-    return [NSString stringWithFormat:@"%@_%@", kUserDefaultsDidAskToUseTouchID, tokenKey];
+    return [NSString stringWithFormat:@"%@_%@", kUserDefaultsDidAskToUseTouchID, tokenSerialNumber];
 }
 
-+ (NSString *)keyTouchIDActivatedForTokenKey:(NSString *)tokenKey
++ (NSString *)keyTouchIDActivatedForTokenSerialNumber:(NSString *)tokenSerialNumber
 {
     NSString *kUserDefaultsKeyTouchIDActivated = [NSString stringWithFormat:@"%@_UserDefaultsKeyTouchIDActivated", kBundleName];
-    return [NSString stringWithFormat:@"%@_%@", kUserDefaultsKeyTouchIDActivated, tokenKey];
+    return [NSString stringWithFormat:@"%@_%@", kUserDefaultsKeyTouchIDActivated, tokenSerialNumber];
 }
 
-+ (NSString *)keyUserDefaultsShouldAddPasscodeToKeychainOnNextLoginForTokenKey:(NSString *)tokenKey {
++ (NSString *)keyShouldAddPasscodeToKeychainOnNextLoginForTokenSerialNumber:(NSString *)tokenSerialNumber {
     NSString *kUserDefaultsShouldAddPasscodeToKeychainOnNextLogin = [NSString stringWithFormat:@"%@_UserDefaultsShouldAddPasscodeToKeychainOnNextLogin", kBundleName];
-    return [NSString stringWithFormat:@"%@_%@", kUserDefaultsShouldAddPasscodeToKeychainOnNextLogin, tokenKey];
+    return [NSString stringWithFormat:@"%@_%@", kUserDefaultsShouldAddPasscodeToKeychainOnNextLogin, tokenSerialNumber];
 }
 
-+ (NSString *)keyUserDefaultsLAPolicyDomainState
++ (NSString *)keyLAPolicyDomainState
 {
     return [NSString stringWithFormat:@"%@_UserDefaultsLAPolicyDomainState", kBundleName];
 }
