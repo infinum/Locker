@@ -257,7 +257,11 @@
 
 + (void)setShouldUseTouchID:(BOOL)shouldUseTouchID forTokenKey:(NSString *)tokenKey
 {
-    [[NSUserDefaults standardUserDefaults] setBool:shouldUseTouchID forKey:[TouchIDManager keyTouchIDActivatedForTokenKey:tokenKey]];
+    if (shouldUseTouchID == NO && [TouchIDManager shouldAddPasscodeToKeychainOnNextLoginForTokenKey:tokenKey]) {
+        [TouchIDManager setShouldAddPasscodeToKeychainOnNextLogin:NO forTokenKey:tokenKey];
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setBool:shouldUseTouchID forKey:[TouchIDManager keyUserDefaultsShouldAddPasscodeToKeychainOnNextLoginForTokenKey:tokenKey]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -269,6 +273,17 @@
 + (void)setDidAskToUseTouchID:(BOOL)askToUseTouchID forTokenKey:(NSString *)tokenKey
 {
     [[NSUserDefaults standardUserDefaults] setBool:askToUseTouchID forKey:[TouchIDManager keyDidAskToUseTouchIDForTokenKey:tokenKey]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (BOOL)shouldAddPasscodeToKeychainOnNextLoginForTokenKey:(NSString *)tokenKey
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:[TouchIDManager keyUserDefaultsShouldAddPasscodeToKeychainOnNextLoginForTokenKey:tokenKey]];
+}
+
++ (void)setShouldAddPasscodeToKeychainOnNextLogin:(BOOL)shouldAddPasscodeToKeychainOnNextLogin forTokenKey:(NSString *)tokenKey
+{
+    [[NSUserDefaults standardUserDefaults] setBool:shouldAddPasscodeToKeychainOnNextLogin forKey:[TouchIDManager keyUserDefaultsShouldAddPasscodeToKeychainOnNextLoginForTokenKey:tokenKey]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -321,6 +336,11 @@
 {
     NSString *kUserDefaultsKeyTouchIDActivated = [NSString stringWithFormat:@"%@_UserDefaultsKeyTouchIDActivated", kBundleName];
     return [NSString stringWithFormat:@"%@_%@", kUserDefaultsKeyTouchIDActivated, tokenKey];
+}
+
++ (NSString *)keyUserDefaultsShouldAddPasscodeToKeychainOnNextLoginForTokenKey:(NSString *)tokenKey {
+    NSString *kUserDefaultsShouldAddPasscodeToKeychainOnNextLogin = [NSString stringWithFormat:@"%@_UserDefaultsShouldAddPasscodeToKeychainOnNextLogin", kBundleName];
+    return [NSString stringWithFormat:@"%@_%@", kUserDefaultsShouldAddPasscodeToKeychainOnNextLogin, tokenKey];
 }
 
 + (NSString *)keyUserDefaultsLAPolicyDomainState
