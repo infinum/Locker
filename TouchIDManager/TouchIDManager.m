@@ -13,13 +13,11 @@
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define kBundleName [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"]
 
-static NSString *kOperationPrompt;
-
 @implementation TouchIDManager
 
 #pragma mark - Keychain Methods
 
-+ (void)getCurrentPasscodeWithSuccess:(void (^)(NSString *))success failure:(void (^)(OSStatus))failure forTokenKey:(NSString *)tokenKey
++ (void)getCurrentPasscodeWithSuccess:(void (^)(NSString *))success failure:(void (^)(OSStatus))failure operationPrompt:(NSString *)operationPrompt forTokenKey:(NSString *)tokenKey
 {
     NSDictionary *query = @{
                             (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
@@ -27,7 +25,7 @@ static NSString *kOperationPrompt;
                             (__bridge id)kSecAttrAccount: [TouchIDManager keyKeychainAccountNameForTokenKey:tokenKey],
                             (__bridge id)kSecMatchLimit: (__bridge id)kSecMatchLimitOne,
                             (__bridge id)kSecReturnData: @YES,
-                            (__bridge id)kSecUseOperationPrompt: kOperationPrompt
+                            (__bridge id)kSecUseOperationPrompt: operationPrompt
                             };
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -298,11 +296,6 @@ static NSString *kOperationPrompt;
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[TouchIDManager keyTouchIDActivatedForTokenKey:tokenKey]];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [TouchIDManager deletePasscodeForTokenKey:tokenKey];
-}
-
-+ (void)setupOperationPrompt:(NSString *)operationPrompt
-{
-    kOperationPrompt = operationPrompt;
 }
 
 #pragma mark - User defaults keys help methods
