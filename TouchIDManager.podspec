@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 
   s.name         = "TouchIDManager"
   s.version      = "0.0.1"
-  s.summary      = "A short description of TouchIDManager."
+  s.summary      = "Manager for handling Touch ID in Your app"
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -25,9 +25,10 @@ Pod::Spec.new do |s|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = <<-DESC
+                  Manager for handling Touch ID in Your app
                    DESC
 
-  s.homepage     = "http://EXAMPLE/TouchIDManager"
+  s.homepage     = "https://github.com/infinum/iOS-TouchIDManager"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -79,7 +80,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "http://EXAMPLE/TouchIDManager.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/infinum/iOS-TouchIDManager.git", :tag => "#{s.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
