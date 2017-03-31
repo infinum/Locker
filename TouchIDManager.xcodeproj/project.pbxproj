@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DF8FB5051E8D119C00EC2740 /* TouchIDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DF8FB5041E8D119C00EC2740 /* TouchIDManager.m */; };
-		DF8FB5061E8D119C00EC2740 /* TouchIDManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF8FB5031E8D119C00EC2740 /* TouchIDManager.h */; };
 		DF8FB52F1E8DAFFF00EC2740 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF8FB52E1E8DAFFF00EC2740 /* UIKit.framework */; };
 		DF8FB5311E8DB00600EC2740 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF8FB5301E8DB00600EC2740 /* LocalAuthentication.framework */; };
 		DF8FB5351E8DB03600EC2740 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF8FB5341E8DB03600EC2740 /* Security.framework */; };
@@ -21,7 +19,6 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				DF8FB5061E8D119C00EC2740 /* TouchIDManager.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -29,12 +26,12 @@
 
 /* Begin PBXFileReference section */
 		DF8FB5001E8D119C00EC2740 /* libTouchIDManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTouchIDManager.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		DF8FB5031E8D119C00EC2740 /* TouchIDManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TouchIDManager.h; sourceTree = "<group>"; };
-		DF8FB5041E8D119C00EC2740 /* TouchIDManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TouchIDManager.m; sourceTree = "<group>"; };
 		DF8FB52E1E8DAFFF00EC2740 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DF8FB5301E8DB00600EC2740 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		DF8FB5321E8DB00E00EC2740 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DF8FB5341E8DB03600EC2740 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		DF8FB5381E8E3CDC00EC2740 /* TouchIDManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TouchIDManager.h; sourceTree = "<group>"; };
+		DF8FB5391E8E3CDC00EC2740 /* TouchIDManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TouchIDManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,7 +51,7 @@
 		DF8FB4F71E8D119C00EC2740 = {
 			isa = PBXGroup;
 			children = (
-				DF8FB5021E8D119C00EC2740 /* TouchIDManager */,
+				DF8FB5361E8E3CDC00EC2740 /* Classes */,
 				DF8FB5011E8D119C00EC2740 /* Products */,
 				DF8FB52D1E8DAFFF00EC2740 /* Frameworks */,
 			);
@@ -68,15 +65,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DF8FB5021E8D119C00EC2740 /* TouchIDManager */ = {
-			isa = PBXGroup;
-			children = (
-				DF8FB5031E8D119C00EC2740 /* TouchIDManager.h */,
-				DF8FB5041E8D119C00EC2740 /* TouchIDManager.m */,
-			);
-			path = TouchIDManager;
-			sourceTree = "<group>";
-		};
 		DF8FB52D1E8DAFFF00EC2740 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +74,23 @@
 				DF8FB52E1E8DAFFF00EC2740 /* UIKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DF8FB5361E8E3CDC00EC2740 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				DF8FB5371E8E3CDC00EC2740 /* TouchIDManager */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		DF8FB5371E8E3CDC00EC2740 /* TouchIDManager */ = {
+			isa = PBXGroup;
+			children = (
+				DF8FB5381E8E3CDC00EC2740 /* TouchIDManager.h */,
+				DF8FB5391E8E3CDC00EC2740 /* TouchIDManager.m */,
+			);
+			path = TouchIDManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,7 +151,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DF8FB5051E8D119C00EC2740 /* TouchIDManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

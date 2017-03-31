@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
                    DESC
   s.homepage     = "https://github.com/infinum/iOS-TouchIDManager"
   s.license      = "MIT"
-  s.author             = { "" => "barbara.vujicic@infinum.hr" }
+  s.author       = { "" => "barbara.vujicic@infinum.hr" }
   s.platform     = :ios, "8.0"
   s.source       = { :git => "https://github.com/infinum/iOS-TouchIDManager.git", :tag => "0.0.1" }
   s.source_files  = "Classes", "Classes/**/*.{h,m}"
