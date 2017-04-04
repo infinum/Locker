@@ -234,7 +234,7 @@
             
             if (completion) {
                 if (shouldBeUsedAndTouchIDSettingsAreChanged == NO) {
-                    shouldBeUsedAndTouchIDSettingsAreChanged = shouldUseTouchID && !itemExists && fingerIsAddedOrRemovedInTouchIDSettings;
+                    shouldBeUsedAndTouchIDSettingsAreChanged = shouldUseTouchID && (!itemExists || fingerIsAddedOrRemovedInTouchIDSettings);
                 }
                 dispatch_group_leave(group);
             }
