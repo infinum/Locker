@@ -193,7 +193,11 @@
         BOOL keyAlreadyInKeychain = (status == errSecInteractionNotAllowed || status == errSecSuccess);
         
         if (completion) {
-            completion(keyAlreadyInKeychain);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (completion) {
+                    completion(shouldBeUsedAndTouchIDSettingsAreChanged);
+                }
+            });
         }
     });
 }
@@ -231,21 +235,17 @@
         
         [TouchIDManager checkIfPasscodeExistsInKeychainWithCompletion:^(BOOL itemExists) {
             BOOL shouldUseTouchID = [self shouldUseTouchIDForUniqueIdentifier:uniqueIdentifier];
-            
-            if (completion) {
-                if (shouldBeUsedAndTouchIDSettingsAreChanged == NO) {
-                    shouldBeUsedAndTouchIDSettingsAreChanged = shouldUseTouchID && (!itemExists || fingerIsAddedOrRemovedInTouchIDSettings);
-                }
-                dispatch_group_leave(group);
+        
+            if (shouldBeUsedAndTouchIDSettingsAreChanged == NO) {
+                shouldBeUsedAndTouchIDSettingsAreChanged = shouldUseTouchID && (!itemExists || fingerIsAddedOrRemovedInTouchIDSettings);
             }
+            dispatch_group_leave(group);
         } forUniqueIdentifier:uniqueIdentifier];
     }
     
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         if (completion) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                completion(shouldBeUsedAndTouchIDSettingsAreChanged);
-            });
+            completion(shouldBeUsedAndTouchIDSettingsAreChanged);
         }
     });
 }
