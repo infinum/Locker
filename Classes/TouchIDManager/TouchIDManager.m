@@ -70,7 +70,7 @@
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"9.0")) {
             sacObject = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
                                                         kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly,
-                                                        kSecAccessControlTouchIDAny, &error);
+                                                        kSecAccessControlTouchIDCurrentSet, &error);
         } else {
             sacObject = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
                                                         kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly,
