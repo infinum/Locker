@@ -121,44 +121,14 @@
 
 + (BOOL)deviceSupportsTouchID
 {
-    if(![LAContext class]) {
-        return false;
+    LAContext *context = [[LAContext alloc] init];
+    NSError *error;
+    if (![context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
+        if (error.code == -6) {
+            return NO;
+        }
     }
-    
-    struct utsname systemInfo;
-    uname(&systemInfo);
-    NSString *deviceModel = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
-    
-    // https://www.theiphonewiki.com/wiki/Models
-    NSArray *deviceModelsWithTouchID = @[
-                                         @"iPhone6,1",
-                                         @"iPhone6,2",
-                                         @"iPhone7,1",
-                                         @"iPhone7,2",
-                                         @"iPhone8,1",
-                                         @"iPhone8,2",
-                                         @"iPhone8,4",
-                                         @"iPhone9,1",
-                                         @"iPhone9,3",
-                                         @"iPhone9,2",
-                                         @"iPhone9,4",
-                                         @"iPhone10,1",
-                                         @"iPhone10,4",
-                                         @"iPhone10,2",
-                                         @"iPhone10,5",
-                                         @"iPad4,8",
-                                         @"iPad4,9",
-                                         @"iPad5,1",
-                                         @"iPad5,2",
-                                         @"iPad5,3",
-                                         @"iPad5,4",
-                                         @"iPad6,3",
-                                         @"iPad6,4",
-                                         @"iPad6,7",
-                                         @"iPad6,8",
-                                         ];
-    
-    return [deviceModelsWithTouchID containsObject:deviceModel];
+    return YES;
 }
 
 + (BOOL)canUseTouchID
