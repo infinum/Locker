@@ -332,7 +332,7 @@
     
     if (@available(iOS 11.0, *)) {
         if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
-            if (context.biometryType == LABiometryTypeTouchID) {
+            if (context.biometryType == LABiometryTypeFaceID) {
                 return YES;
             }
         }
