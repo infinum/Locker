@@ -22,5 +22,6 @@
 + (BOOL)shouldAddPasscodeToKeychainOnNextLoginForUniqueIdentifier:(NSString *)uniqueIdentifier;
 + (void)setShouldAddPasscodeToKeychainOnNextLogin:(BOOL)shouldAddPasscodeToKeychainOnNextLogin forUniqueIdentifier:(NSString *)uniqueIdentifier;
 + (void)resetForUniqueIdentifier:(NSString *)uniqueIdentifier;
++ (BOOL)canAuthenticateByFaceID;
 
 @end

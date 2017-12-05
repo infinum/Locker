@@ -323,4 +323,21 @@
     return [NSString stringWithFormat:@"%@_UserDefaultsLAPolicyDomainState", kBundleName];
 }
 
+#pragma mark - Helpers
+
++ (BOOL)canAuthenticateByFaceID
+{
+    LAContext *context = [LAContext new];
+    NSError *error;
+    
+    if (@available(iOS 11.0, *)) {
+        if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
+            if (context.biometryType == LABiometryTypeTouchID) {
+                return YES;
+            }
+        }
+    }
+    return NO;
+}
+
 @end
