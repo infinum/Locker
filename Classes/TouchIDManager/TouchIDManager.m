@@ -117,9 +117,9 @@
     });
 }
 
-#pragma mark - Touch ID Methods
+#pragma mark - Authentication with Biometrics methods
 
-+ (BOOL)deviceSupportsTouchID
++ (BOOL)deviceSupportsAuthenticationWithBiometrics
 {
     LAContext *context = [[LAContext alloc] init];
     NSError *error;
@@ -131,11 +131,36 @@
     return YES;
 }
 
-+ (BOOL)canUseTouchID
++ (BOOL)deviceSupportsAuthenticationWithFaceID
+{
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    NSString *code = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
+    NSArray *faceIdDevices = @[@"iPhone10,3", @"iPhone10,6"];
+    
+    return [faceIdDevices containsObject:code];
+}
+
++ (BOOL)canUseAuthenticationWithBiometrics
 {
     return [[[LAContext alloc] init]
             canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
             error:nil];
+}
+
++ (BOOL)canUseAuthenticationWithFaceID
+{
+    LAContext *context = [LAContext new];
+    NSError *error;
+    
+    if (@available(iOS 11.0, *)) {
+        if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
+            if (context.biometryType == LABiometryTypeFaceID) {
+                return YES;
+            }
+        }
+    }
+    return NO;
 }
 
 + (void)checkIfPasscodeExistsInKeychainWithCompletion:(void (^)(BOOL))completion forUniqueIdentifier:(NSString *)uniqueIdentifier
@@ -176,30 +201,30 @@
     });
 }
 
-+ (BOOL)checkIfFingerIsAddedOrRemovedInTouchIDSettings
++ (BOOL)checkIfBiometricsAreChangedSettings
 {
-    __block BOOL touchIDSettingsChanged = NO;
+    __block BOOL biometricsSettingsChanged = NO;
     
     NSData *oldDomainState = [TouchIDManager savedLAPolicyDomainState];
     NSData *newDomainState = [TouchIDManager currentLAPolicyDomainState];
     
     // Check for domain state changes
     if (![oldDomainState isEqual:newDomainState]) {
-        touchIDSettingsChanged = YES;
+        biometricsSettingsChanged = YES;
         
         [TouchIDManager setLAPolicyDomainState:newDomainState];
     }
     
-    return touchIDSettingsChanged;
+    return biometricsSettingsChanged;
 }
 
-+ (void)checkIfTouchIDShouldBeUsedAndTouchIDSettingsAreChangedWithCompletion:(void (^)(BOOL))completion forUniqueIdentifiers:(NSArray *)uniqueIdentifiers
++ (void)checkIfAuthenticationWithBiometricsShouldBeUsedAndBiometricsSettingsAreChangedWithCompletion:(void (^)(BOOL))completion forUniqueIdentifiers:(NSArray *)uniqueIdentifiers
 {
-    __block BOOL shouldBeUsedAndTouchIDSettingsAreChanged = NO;
-    BOOL fingerIsAddedOrRemovedInTouchIDSettings = NO;
+    __block BOOL shouldBeUsedAndBiometricsSettingsAreChanged = NO;
+    BOOL biometricsSettingsAreChanged = NO;
     
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"9.0")) {
-        fingerIsAddedOrRemovedInTouchIDSettings = [self checkIfFingerIsAddedOrRemovedInTouchIDSettings];
+        biometricsSettingsAreChanged = [self checkIfBiometricsAreChangedSettings];
     }
     
     dispatch_group_t group = dispatch_group_create();
@@ -208,10 +233,10 @@
         dispatch_group_enter(group);
         
         [TouchIDManager checkIfPasscodeExistsInKeychainWithCompletion:^(BOOL itemExists) {
-            BOOL shouldUseTouchID = [self shouldUseTouchIDForUniqueIdentifier:uniqueIdentifier];
+            BOOL shouldUseAuthenticationWithBiometrics = [self shouldUseAuthenticationWithBiometricsForUniqueIdentifier:uniqueIdentifier];
         
-            if (shouldBeUsedAndTouchIDSettingsAreChanged == NO) {
-                shouldBeUsedAndTouchIDSettingsAreChanged = shouldUseTouchID && (!itemExists || fingerIsAddedOrRemovedInTouchIDSettings);
+            if (shouldBeUsedAndBiometricsSettingsAreChanged == NO) {
+                shouldBeUsedAndBiometricsSettingsAreChanged = shouldUseAuthenticationWithBiometrics && (!itemExists || biometricsSettingsAreChanged);
             }
             dispatch_group_leave(group);
         } forUniqueIdentifier:uniqueIdentifier];
@@ -219,34 +244,34 @@
     
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         if (completion) {
-            completion(shouldBeUsedAndTouchIDSettingsAreChanged);
+            completion(shouldBeUsedAndBiometricsSettingsAreChanged);
         }
     });
 }
 
-+ (BOOL)shouldUseTouchIDForUniqueIdentifier:(NSString *)uniqueIdentifier
++ (BOOL)shouldUseAuthenticationWithBiometricsForUniqueIdentifier:(NSString *)uniqueIdentifier
 {
     return [[NSUserDefaults standardUserDefaults] boolForKey:[TouchIDManager keyTouchIDActivatedForUniqueIdentifier:uniqueIdentifier]];
 }
 
-+ (void)setShouldUseTouchID:(BOOL)shouldUseTouchID forUniqueIdentifier:(NSString *)uniqueIdentifier
++ (void)setShouldUseAuthenticationWithBiometrics:(BOOL)shouldUseAuthenticationWithBiometrics forUniqueIdentifier:(NSString *)uniqueIdentifier
 {
-    if (shouldUseTouchID == NO && [TouchIDManager shouldAddPasscodeToKeychainOnNextLoginForUniqueIdentifier:uniqueIdentifier]) {
+    if (shouldUseAuthenticationWithBiometrics == NO && [TouchIDManager shouldAddPasscodeToKeychainOnNextLoginForUniqueIdentifier:uniqueIdentifier]) {
         [TouchIDManager setShouldAddPasscodeToKeychainOnNextLogin:NO forUniqueIdentifier:uniqueIdentifier];
     }
     
-    [[NSUserDefaults standardUserDefaults] setBool:shouldUseTouchID forKey:[TouchIDManager keyTouchIDActivatedForUniqueIdentifier:uniqueIdentifier]];
+    [[NSUserDefaults standardUserDefaults] setBool:shouldUseAuthenticationWithBiometrics forKey:[TouchIDManager keyTouchIDActivatedForUniqueIdentifier:uniqueIdentifier]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-+ (BOOL)didAskToUseTouchIDForUniqueIdentifier:(NSString *)uniqueIdentifier
++ (BOOL)didAskToUseAuthenticationWithBiometricsForUniqueIdentifier:(NSString *)uniqueIdentifier
 {
     return [[NSUserDefaults standardUserDefaults] boolForKey:[TouchIDManager keyDidAskToUseTouchIDForUniqueIdentifier:uniqueIdentifier]];
 }
 
-+ (void)setDidAskToUseTouchID:(BOOL)askToUseTouchID forUniqueIdentifier:(NSString *)uniqueIdentifier
++ (void)setDidAskToUseAuthenticationWithBiometrics:(BOOL)askToUseAuthenticationWithBiometrics forUniqueIdentifier:(NSString *)uniqueIdentifier
 {
-    [[NSUserDefaults standardUserDefaults] setBool:askToUseTouchID forKey:[TouchIDManager keyDidAskToUseTouchIDForUniqueIdentifier:uniqueIdentifier]];
+    [[NSUserDefaults standardUserDefaults] setBool:askToUseAuthenticationWithBiometrics forKey:[TouchIDManager keyDidAskToUseTouchIDForUniqueIdentifier:uniqueIdentifier]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -321,23 +346,6 @@
 + (NSString *)keyLAPolicyDomainState
 {
     return [NSString stringWithFormat:@"%@_UserDefaultsLAPolicyDomainState", kBundleName];
-}
-
-#pragma mark - Helpers
-
-+ (BOOL)canAuthenticateByFaceID
-{
-    LAContext *context = [LAContext new];
-    NSError *error;
-    
-    if (@available(iOS 11.0, *)) {
-        if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
-            if (context.biometryType == LABiometryTypeFaceID) {
-                return YES;
-            }
-        }
-    }
-    return NO;
 }
 
 @end
