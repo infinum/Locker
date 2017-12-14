@@ -133,6 +133,10 @@
 
 + (BOOL)deviceSupportsAuthenticationWithFaceID
 {
+    if ([TouchIDManager canUseAuthenticationWithFaceID]) {
+        return YES;
+    }
+    
     struct utsname systemInfo;
     uname(&systemInfo);
     NSString *code = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
