@@ -119,16 +119,21 @@
 
 #pragma mark - Authentication with Biometrics methods
 
-+ (BOOL)deviceSupportsAuthenticationWithBiometrics
++ (BiometricsType)deviceSupportsAuthenticationWithBiometrics
 {
     LAContext *context = [[LAContext alloc] init];
     NSError *error;
     if (![context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
         if (error.code == -6) {
-            return NO;
+            return BiometricsTypeNone;
         }
     }
-    return YES;
+    
+    if (TouchIDManager.deviceSupportsAuthenticationWithFaceID) {
+        return BiometricsTypeFaceID;
+    } else {
+        return BiometricsTypeTouchID;
+    }
 }
 
 + (BOOL)deviceSupportsAuthenticationWithFaceID
@@ -145,11 +150,19 @@
     return [faceIdDevices containsObject:code];
 }
 
-+ (BOOL)canUseAuthenticationWithBiometrics
++ (BiometricsType)canUseAuthenticationWithBiometrics
 {
-    return [[[LAContext alloc] init]
-            canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
-            error:nil];
+    BOOL canUse = [[[LAContext alloc] init]
+                   canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
+                   error:nil];
+    
+    if (canUse && TouchIDManager.canUseAuthenticationWithFaceID) {
+        return BiometricsTypeFaceID;
+    } else if (canUse) {
+        return BiometricsTypeTouchID;
+    } else {
+        return BiometricsTypeNone;
+    }
 }
 
 + (BOOL)canUseAuthenticationWithFaceID
