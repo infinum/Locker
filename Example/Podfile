@@ -1,0 +1,14 @@
+platform :ios, '9.0'
+
+target 'TouchID' do
+  use_frameworks!
+
+  pod 'TouchIDManager', :path => '../TouchIDManager.podspec'
+  # Pods for TouchID
+
+  target 'TouchIDTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end

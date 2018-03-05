@@ -1,0 +1,16 @@
+PODS:
+  - TouchIDManager (0.0.2)
+
+DEPENDENCIES:
+  - TouchIDManager (from `../TouchIDManager.podspec`)
+
+EXTERNAL SOURCES:
+  TouchIDManager:
+    :path: ../TouchIDManager.podspec
+
+SPEC CHECKSUMS:
+  TouchIDManager: a3938fe4a0568c3c4cde076861ad7fb57fad7bac
+
+PODFILE CHECKSUM: 4c770e12d2ff73e3eff2f977efe041edcbe62448
+
+COCOAPODS: 1.4.0
