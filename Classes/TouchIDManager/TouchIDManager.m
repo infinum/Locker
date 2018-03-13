@@ -121,19 +121,19 @@
 
 + (BiometricsType)deviceSupportsAuthenticationWithBiometrics
 {
+    if (TouchIDManager.deviceSupportsAuthenticationWithFaceID) {
+        return BiometricsTypeFaceID;
+    }
+    
     LAContext *context = [[LAContext alloc] init];
     NSError *error;
     if (![context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
-        if (error.code == -6) {
+        if (error.code == kLAErrorBiometryNotAvailable) {
             return BiometricsTypeNone;
         }
     }
     
-    if (TouchIDManager.deviceSupportsAuthenticationWithFaceID) {
-        return BiometricsTypeFaceID;
-    } else {
-        return BiometricsTypeTouchID;
-    }
+    return BiometricsTypeTouchID;
 }
 
 + (BOOL)deviceSupportsAuthenticationWithFaceID
