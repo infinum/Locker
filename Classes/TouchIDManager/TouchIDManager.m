@@ -218,7 +218,7 @@
     });
 }
 
-+ (BOOL)checkIfBiometricsAreChangedSettings
++ (BOOL)checkIfBiometricsSettingsAreChanged
 {
     __block BOOL biometricsSettingsChanged = NO;
     
@@ -241,7 +241,7 @@
     BOOL biometricsSettingsAreChanged = NO;
     
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"9.0")) {
-        biometricsSettingsAreChanged = [self checkIfBiometricsAreChangedSettings];
+        biometricsSettingsAreChanged = [self checkIfBiometricsSettingsAreChanged];
     }
     
     dispatch_group_t group = dispatch_group_create();
