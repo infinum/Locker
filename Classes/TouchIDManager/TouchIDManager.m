@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 #import <sys/utsname.h>
 
-#define kBundleName [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"]
+#define kBundleIdentifier [[NSBundle mainBundle] bundleIdentifier]
 
 @implementation TouchIDManager
 
@@ -308,35 +308,35 @@
 
 + (NSString *)keyKeychainServiceName
 {
-    return [NSString stringWithFormat:@"%@_KeychainService", kBundleName];
+    return [NSString stringWithFormat:@"%@_KeychainService", kBundleIdentifier];
 }
 
 + (NSString *)keyKeychainAccountNameForUniqueIdentifier:(NSString *)uniqueIdentifier
 {
-    NSString *kKeychainAccountName = [NSString stringWithFormat:@"%@_KeychainAccount", kBundleName];
+    NSString *kKeychainAccountName = [NSString stringWithFormat:@"%@_KeychainAccount", kBundleIdentifier];
     return [NSString stringWithFormat:@"%@_%@", kKeychainAccountName, uniqueIdentifier];
 }
 
 + (NSString *)keyDidAskToUseBiometricsIDForUniqueIdentifier:(NSString *)uniqueIdentifier
 {
-    NSString *kUserDefaultsDidAskToUseBiometricsID = [NSString stringWithFormat:@"%@_UserDefaultsDidAskToUseTouchID", kBundleName];
+    NSString *kUserDefaultsDidAskToUseBiometricsID = [NSString stringWithFormat:@"%@_UserDefaultsDidAskToUseTouchID", kBundleIdentifier];
     return [NSString stringWithFormat:@"%@_%@", kUserDefaultsDidAskToUseBiometricsID, uniqueIdentifier];
 }
 
 + (NSString *)keyBiometricsIDActivatedForUniqueIdentifier:(NSString *)uniqueIdentifier
 {
-    NSString *kUserDefaultsKeyBiometricsIDActivated = [NSString stringWithFormat:@"%@_UserDefaultsKeyTouchIDActivated", kBundleName];
+    NSString *kUserDefaultsKeyBiometricsIDActivated = [NSString stringWithFormat:@"%@_UserDefaultsKeyTouchIDActivated", kBundleIdentifier];
     return [NSString stringWithFormat:@"%@_%@", kUserDefaultsKeyBiometricsIDActivated, uniqueIdentifier];
 }
 
 + (NSString *)keyShouldAddPasscodeToKeychainOnNextLoginForUniqueIdentifier:(NSString *)uniqueIdentifier {
-    NSString *kUserDefaultsShouldAddPasscodeToKeychainOnNextLogin = [NSString stringWithFormat:@"%@_UserDefaultsShouldAddPasscodeToKeychainOnNextLogin", kBundleName];
+    NSString *kUserDefaultsShouldAddPasscodeToKeychainOnNextLogin = [NSString stringWithFormat:@"%@_UserDefaultsShouldAddPasscodeToKeychainOnNextLogin", kBundleIdentifier];
     return [NSString stringWithFormat:@"%@_%@", kUserDefaultsShouldAddPasscodeToKeychainOnNextLogin, uniqueIdentifier];
 }
 
 + (NSString *)keyLAPolicyDomainState
 {
-    return [NSString stringWithFormat:@"%@_UserDefaultsLAPolicyDomainState", kBundleName];
+    return [NSString stringWithFormat:@"%@_UserDefaultsLAPolicyDomainState", kBundleIdentifier];
 }
 
 @end
