@@ -78,7 +78,7 @@
                                      (__bridge id)kSecAttrService: [TouchIDManager keyKeychainServiceName],
                                      (__bridge id)kSecAttrAccount: [TouchIDManager keyKeychainAccountNameForUniqueIdentifier:uniqueIdentifier],
                                      (__bridge id)kSecValueData: [passcode dataUsingEncoding:NSUTF8StringEncoding],
-                                     (__bridge id)kSecUseNoAuthenticationUI: @YES,
+                                     (__bridge id)kSecUseAuthenticationUI: @NO,
                                      (__bridge id)kSecAttrAccessControl: (__bridge_transfer id)sacObject
                                      };
         
