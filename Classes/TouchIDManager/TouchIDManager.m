@@ -10,7 +10,6 @@
 #import <UIKit/UIKit.h>
 #import <sys/utsname.h>
 
-#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define kBundleName [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"]
 
 @implementation TouchIDManager
@@ -65,17 +64,9 @@
         
         // Then store it
         CFErrorRef error = NULL;
-        SecAccessControlRef sacObject;
-        
-        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"9.0")) {
-            sacObject = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
+        SecAccessControlRef sacObject = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
                                                         kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly,
                                                         kSecAccessControlTouchIDCurrentSet, &error);
-        } else {
-            sacObject = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
-                                                        kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly,
-                                                        kSecAccessControlUserPresence, &error);
-        }
         
         if(sacObject == NULL || error != NULL) {
             NSLog(@"can't create sacObject: %@", error);
@@ -103,7 +94,7 @@
 
 + (void)deletePasscodeForUniqueIdentifier:(NSString *)uniqueIdentifier
 {
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[TouchIDManager keyTouchIDActivatedForUniqueIdentifier:uniqueIdentifier]];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[TouchIDManager keyBiometricsIDActivatedForUniqueIdentifier:uniqueIdentifier]];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     NSDictionary *query = @{
@@ -182,10 +173,7 @@
 
 + (void)checkIfPasscodeExistsInKeychainWithCompletion:(void (^)(BOOL))completion forUniqueIdentifier:(NSString *)uniqueIdentifier
 {
-    NSDictionary *query = nil;
-    
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"9.0")) {
-        query = @{
+    NSDictionary *query = @{
                   (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
                   (__bridge id)kSecAttrService: [TouchIDManager keyKeychainServiceName],
                   (__bridge id)kSecAttrAccount: [TouchIDManager keyKeychainAccountNameForUniqueIdentifier:uniqueIdentifier],
@@ -193,16 +181,6 @@
                   (__bridge id)kSecReturnData: @NO,
                   (__bridge id)kSecUseAuthenticationUI : (__bridge id)kSecUseAuthenticationUIFail
                   };
-    } else {
-        query = @{
-                  (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
-                  (__bridge id)kSecAttrService: [TouchIDManager keyKeychainServiceName],
-                  (__bridge id)kSecAttrAccount: [TouchIDManager keyKeychainAccountNameForUniqueIdentifier:uniqueIdentifier],
-                  (__bridge id)kSecMatchLimit: (__bridge id)kSecMatchLimitOne,
-                  (__bridge id)kSecReturnData: @NO,
-                  (__bridge id)kSecUseNoAuthenticationUI: @YES
-                  };
-    }
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)(query), nil);
@@ -238,11 +216,7 @@
 + (void)checkIfAuthenticationWithBiometricsShouldBeUsedAndBiometricsSettingsAreChangedWithCompletion:(void (^)(BOOL))completion forUniqueIdentifiers:(NSArray *)uniqueIdentifiers
 {
     __block BOOL shouldBeUsedAndBiometricsSettingsAreChanged = NO;
-    BOOL biometricsSettingsAreChanged = NO;
-    
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"9.0")) {
-        biometricsSettingsAreChanged = [self checkIfBiometricsSettingsAreChanged];
-    }
+    BOOL biometricsSettingsAreChanged = [self checkIfBiometricsSettingsAreChanged];
     
     dispatch_group_t group = dispatch_group_create();
     
@@ -268,7 +242,7 @@
 
 + (BOOL)shouldUseAuthenticationWithBiometricsForUniqueIdentifier:(NSString *)uniqueIdentifier
 {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:[TouchIDManager keyTouchIDActivatedForUniqueIdentifier:uniqueIdentifier]];
+    return [[NSUserDefaults standardUserDefaults] boolForKey:[TouchIDManager keyBiometricsIDActivatedForUniqueIdentifier:uniqueIdentifier]];
 }
 
 + (void)setShouldUseAuthenticationWithBiometrics:(BOOL)shouldUseAuthenticationWithBiometrics forUniqueIdentifier:(NSString *)uniqueIdentifier
@@ -277,18 +251,18 @@
         [TouchIDManager setShouldAddPasscodeToKeychainOnNextLogin:NO forUniqueIdentifier:uniqueIdentifier];
     }
     
-    [[NSUserDefaults standardUserDefaults] setBool:shouldUseAuthenticationWithBiometrics forKey:[TouchIDManager keyTouchIDActivatedForUniqueIdentifier:uniqueIdentifier]];
+    [[NSUserDefaults standardUserDefaults] setBool:shouldUseAuthenticationWithBiometrics forKey:[TouchIDManager keyBiometricsIDActivatedForUniqueIdentifier:uniqueIdentifier]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (BOOL)didAskToUseAuthenticationWithBiometricsForUniqueIdentifier:(NSString *)uniqueIdentifier
 {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:[TouchIDManager keyDidAskToUseTouchIDForUniqueIdentifier:uniqueIdentifier]];
+    return [[NSUserDefaults standardUserDefaults] boolForKey:[TouchIDManager keyDidAskToUseBiometricsIDForUniqueIdentifier:uniqueIdentifier]];
 }
 
 + (void)setDidAskToUseAuthenticationWithBiometrics:(BOOL)askToUseAuthenticationWithBiometrics forUniqueIdentifier:(NSString *)uniqueIdentifier
 {
-    [[NSUserDefaults standardUserDefaults] setBool:askToUseAuthenticationWithBiometrics forKey:[TouchIDManager keyDidAskToUseTouchIDForUniqueIdentifier:uniqueIdentifier]];
+    [[NSUserDefaults standardUserDefaults] setBool:askToUseAuthenticationWithBiometrics forKey:[TouchIDManager keyDidAskToUseBiometricsIDForUniqueIdentifier:uniqueIdentifier]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -323,8 +297,8 @@
 
 + (void)resetForUniqueIdentifier:(NSString *)uniqueIdentifier
 {
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[TouchIDManager keyDidAskToUseTouchIDForUniqueIdentifier:uniqueIdentifier]];
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[TouchIDManager keyTouchIDActivatedForUniqueIdentifier:uniqueIdentifier]];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[TouchIDManager keyDidAskToUseBiometricsIDForUniqueIdentifier:uniqueIdentifier]];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[TouchIDManager keyBiometricsIDActivatedForUniqueIdentifier:uniqueIdentifier]];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[TouchIDManager keyShouldAddPasscodeToKeychainOnNextLoginForUniqueIdentifier:uniqueIdentifier]];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [TouchIDManager deletePasscodeForUniqueIdentifier:uniqueIdentifier];
@@ -343,16 +317,16 @@
     return [NSString stringWithFormat:@"%@_%@", kKeychainAccountName, uniqueIdentifier];
 }
 
-+ (NSString *)keyDidAskToUseTouchIDForUniqueIdentifier:(NSString *)uniqueIdentifier
++ (NSString *)keyDidAskToUseBiometricsIDForUniqueIdentifier:(NSString *)uniqueIdentifier
 {
-    NSString *kUserDefaultsDidAskToUseTouchID = [NSString stringWithFormat:@"%@_UserDefaultsDidAskToUseTouchID", kBundleName];
-    return [NSString stringWithFormat:@"%@_%@", kUserDefaultsDidAskToUseTouchID, uniqueIdentifier];
+    NSString *kUserDefaultsDidAskToUseBiometricsID = [NSString stringWithFormat:@"%@_UserDefaultsDidAskToUseTouchID", kBundleName];
+    return [NSString stringWithFormat:@"%@_%@", kUserDefaultsDidAskToUseBiometricsID, uniqueIdentifier];
 }
 
-+ (NSString *)keyTouchIDActivatedForUniqueIdentifier:(NSString *)uniqueIdentifier
++ (NSString *)keyBiometricsIDActivatedForUniqueIdentifier:(NSString *)uniqueIdentifier
 {
-    NSString *kUserDefaultsKeyTouchIDActivated = [NSString stringWithFormat:@"%@_UserDefaultsKeyTouchIDActivated", kBundleName];
-    return [NSString stringWithFormat:@"%@_%@", kUserDefaultsKeyTouchIDActivated, uniqueIdentifier];
+    NSString *kUserDefaultsKeyBiometricsIDActivated = [NSString stringWithFormat:@"%@_UserDefaultsKeyTouchIDActivated", kBundleName];
+    return [NSString stringWithFormat:@"%@_%@", kUserDefaultsKeyBiometricsIDActivated, uniqueIdentifier];
 }
 
 + (NSString *)keyShouldAddPasscodeToKeychainOnNextLoginForUniqueIdentifier:(NSString *)uniqueIdentifier {
