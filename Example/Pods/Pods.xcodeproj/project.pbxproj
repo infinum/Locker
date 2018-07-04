@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -34,43 +34,43 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		12D3554AE79DBC5BAF0EB17758889D60 /* TouchIDManager.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = TouchIDManager.modulemap; sourceTree = "<group>"; };
+		12D3554AE79DBC5BAF0EB17758889D60 /* TouchIDManager.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = TouchIDManager.modulemap; sourceTree = "<group>"; };
 		15F51D793C341654482BF7FFD2978201 /* Pods-TouchIDTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TouchIDTests-dummy.m"; sourceTree = "<group>"; };
 		18FBED0186D8F1D8D1D4C2C113C8FE45 /* Pods-TouchID.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TouchID.debug.xcconfig"; sourceTree = "<group>"; };
 		252BA0BF7BADC3B8F47021AC7F3E507D /* Pods-TouchID-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TouchID-umbrella.h"; sourceTree = "<group>"; };
-		28D7DC3A28FBC28374B59CD8FCC86E11 /* TouchIDManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = TouchIDManager.framework; path = TouchIDManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		28D7DC3A28FBC28374B59CD8FCC86E11 /* TouchIDManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TouchIDManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FD9AB19B5518359C1D4CFA71216F120 /* Pods-TouchIDTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TouchIDTests-frameworks.sh"; sourceTree = "<group>"; };
 		3C588368034E375B16C0AB49B78B6A6E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4267B893C5A8082625358A5438387702 /* TouchIDManager-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TouchIDManager-dummy.m"; sourceTree = "<group>"; };
 		45BA631D443C1C39B498148E20722FAF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		4C3EE3A4824DC5A346764E06195F4DAD /* Pods-TouchID-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TouchID-resources.sh"; sourceTree = "<group>"; };
 		566D5312EE8BA4C2D9EE481DCE81C270 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		58E6E16ED6B1E2C3EEB772B6128B9351 /* Pods_TouchIDTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_TouchIDTests.framework; path = "Pods-TouchIDTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		58E6E16ED6B1E2C3EEB772B6128B9351 /* Pods_TouchIDTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TouchIDTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E00B251324B9572C58325139290A519 /* TouchIDManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TouchIDManager.h; path = Classes/TouchIDManager/TouchIDManager.h; sourceTree = "<group>"; };
 		62AB897BF041F58FCDF1820E9B988F3A /* Pods-TouchIDTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TouchIDTests.release.xcconfig"; sourceTree = "<group>"; };
 		6329E45F4E32CB6B856868BE690B1B0E /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/LocalAuthentication.framework; sourceTree = DEVELOPER_DIR; };
 		6B1AAEE95DE5D461D38D4204B9EB0CE4 /* Pods-TouchIDTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TouchIDTests-resources.sh"; sourceTree = "<group>"; };
 		76990F4E50A00795F8CAAC267ED40E72 /* Pods-TouchID-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TouchID-acknowledgements.plist"; sourceTree = "<group>"; };
 		79A5996BCDC1A013DACD233AE7187E04 /* Pods-TouchIDTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TouchIDTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		875FF65C18CC60EA0713018CECEC08BE /* Pods-TouchIDTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-TouchIDTests.modulemap"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		875FF65C18CC60EA0713018CECEC08BE /* Pods-TouchIDTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-TouchIDTests.modulemap"; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9BC4714BF435154935EA260AF3CDF508 /* Pods-TouchID-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TouchID-frameworks.sh"; sourceTree = "<group>"; };
 		9C427FD759E91DBEC04E39C1980D1946 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A51BAAB14B488C854D7D228672279C46 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		AA568078D63A92A895AB693F650F85B0 /* Pods-TouchIDTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TouchIDTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AB3D1BA5385BF3C671BA900B5136454E /* Pods-TouchIDTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TouchIDTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		ACB334092B2AE5F6F5DE71D7C9DE0E25 /* Pods-TouchID-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TouchID-acknowledgements.markdown"; sourceTree = "<group>"; };
-		AD42CED1811337E899898400FFD6B55F /* Pods_TouchID.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_TouchID.framework; path = "Pods-TouchID.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD42CED1811337E899898400FFD6B55F /* Pods_TouchID.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TouchID.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B692041BDA661900692C5288C7AD06EB /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD44ABCF79702EA3ECB8B6B8925D4022 /* TouchIDManager-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TouchIDManager-prefix.pch"; sourceTree = "<group>"; };
 		C138530B761D02CE7E4124A82D6AE706 /* TouchIDManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TouchIDManager.m; path = Classes/TouchIDManager/TouchIDManager.m; sourceTree = "<group>"; };
 		C499D7C1AE108F002120008712455811 /* Pods-TouchID.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TouchID.release.xcconfig"; sourceTree = "<group>"; };
-		C7E88BBCE340EEBD74C67552668FAB11 /* TouchIDManager.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = TouchIDManager.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		C7E88BBCE340EEBD74C67552668FAB11 /* TouchIDManager.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = TouchIDManager.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		CB5FE0A0A92585DFCA1F033B49E8FB07 /* TouchIDManager.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TouchIDManager.xcconfig; sourceTree = "<group>"; };
 		E4676105157A1A7CE8487A76DF0EA2BF /* Pods-TouchID-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TouchID-dummy.m"; sourceTree = "<group>"; };
 		EABC0161DC7FEF875527F41FD54982F1 /* TouchIDManager-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TouchIDManager-umbrella.h"; sourceTree = "<group>"; };
 		EDFE43DA8FE778D0692139EC777EB38E /* Pods-TouchIDTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TouchIDTests-umbrella.h"; sourceTree = "<group>"; };
-		FC2CE8C4E267988E1A1C55B4EBA963C8 /* Pods-TouchID.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-TouchID.modulemap"; sourceTree = "<group>"; };
+		FC2CE8C4E267988E1A1C55B4EBA963C8 /* Pods-TouchID.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-TouchID.modulemap"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -517,7 +517,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/TouchIDManager/TouchIDManager-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/TouchIDManager/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/TouchIDManager/TouchIDManager.modulemap";
 				PRODUCT_NAME = TouchIDManager;
@@ -640,7 +640,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/TouchIDManager/TouchIDManager-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/TouchIDManager/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/TouchIDManager/TouchIDManager.modulemap";
 				PRODUCT_NAME = TouchIDManager;
