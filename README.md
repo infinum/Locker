@@ -8,7 +8,7 @@ Library for handling sensitive data (`String` type) in Keychain with Biometric I
   * Fetch data from Keychain with Biometric ID.
   * Delete data from Keychain.
   * There are additional methods that help You with saving and fetching some additional info regarding the authentication with biometric usage.
-  * Handle changes in Biometric settings.
+  * Detect changes in Biometric settings.
   * Check if device has support for certain Biometric ID.
 
 ## Requirements
