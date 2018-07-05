@@ -33,9 +33,9 @@ You'll get Your data in `success` completion block. If, for some reason, Your da
 // Objective-C
 [TouchIDManager getCurrentPasscodeWithSuccess:^(NSString *passcode) {
     // do sth with passcode        
-    } failure:^(OSStatus failureStatus) {
+} failure:^(OSStatus failureStatus) {
     // handle failure
-    } operationPrompt:@"Touch ID description" forUniqueIdentifier:@"kUniqueIdentifier"];
+} operationPrompt:@"Touch ID description" forUniqueIdentifier:@"kUniqueIdentifier"];
 ```
 
 #### 3. Delete data with `deletePasscodeForUniqueIdentifier` method.
@@ -69,10 +69,10 @@ It will return `true` in `completion` block if Biometric settings are changed si
 ```objective-c
 // Objective-C
 [TouchIDManager checkIfAuthenticationWithBiometricsShouldBeUsedAndBiometricsSettingsAreChangedWithCompletion:^(BOOL shouldBeUsedAndBiometricsSettingsAreChanged) {
-        if (shouldBeUsedAndBiometricsSettingsAreChanged) {
-            // handle case when settings are changed but Biometric should be used to fetch data
-        }
-    } forUniqueIdentifiers:@[@"kUniqueIdentifier1", @"kUniqueIdentifier2"]];
+    if (shouldBeUsedAndBiometricsSettingsAreChanged) {
+        // handle case when settings are changed but Biometric should be used to fetch data
+    }
+} forUniqueIdentifiers:@[@"kUniqueIdentifier1", @"kUniqueIdentifier2"]];
 ```
 
 #### 7. There are `deviceSupportsAuthenticationWithBiometrics` and `canUseAuthenticationWithBiometrics` methods which return `BiometricsType` enum (`BiometricsTypeNone`, `BiometricsTypeTouchID`, `BiometricsTypeFaceID`).
