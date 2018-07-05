@@ -1,6 +1,6 @@
 # TouchIDManager
 
-Library for handling sensitive data (String type) in Keychain with Biometric ID.
+Library for handling sensitive data (`String` type) in Keychain with Biometric ID.
 
 ## Features
 
@@ -20,11 +20,6 @@ Library for handling sensitive data (String type) in Keychain with Biometric ID.
 ##### 1. Save Your data with `setPasscode: forUniqueIdentifier` method. 
 For `uniqueIdentifier` pass `String` value You will later use to fetch Your data.
 
-```swift
-// Swift
-URLProtocol.registerClass(LoggieURLProtocol.self)
-```
-
 ```objective-c
 // Objective-C
 [TouchIDManager setPasscode:@"passcode" forUniqueIdentifier:@"kUniqueIdentifier"];
@@ -33,11 +28,6 @@ URLProtocol.registerClass(LoggieURLProtocol.self)
 ##### 2. Fetch Your data with `getCurrentPasscodeWithSuccess: failure: operationPrompt: forUniqueIdentifier`. 
 `operationPrompt` is `String` value which will be displayed as message on system Touch ID dialog.
 You'll get Your data in `success` completion block. If, for some reason, Your data is not found in Keychain, You'll get error status in `failure` completion block.
-
-```swift
-// Swift
-URLSession(configuration: URLSessionConfiguration.loggie)
-```
 
 ```objective-c
 // Objective-C
@@ -49,11 +39,6 @@ URLSession(configuration: URLSessionConfiguration.loggie)
 ```
 
 #### 3. Delete data with `deletePasscodeForUniqueIdentifier` method.
-
-```swift
-// Swift
-let logs = LoggieManager.shared.logs
-```
 
 ```objective-c
 // Objective-C
