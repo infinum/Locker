@@ -162,7 +162,7 @@
     NSError *error;
     
     if (@available(iOS 11.0, *)) {
-        if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
+        if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error] && [context respondsToSelector:@selector(biometryType)]) {
             if (context.biometryType == LABiometryTypeFaceID) {
                 return YES;
             }
