@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "TouchIDManager"
-  s.version      = "1.0.0"
+  s.version      = "1.0.1"
   s.summary      = "Manager for handling Biometrics ID in Your app"
   s.description  = <<-DESC
                   Manager for handling Touch ID in Your app.
