@@ -171,17 +171,22 @@
 + (BOOL)checkIfBiometricsSettingsAreChanged
 {
     BOOL biometricsSettingsChanged = NO;
-    
+
     NSData *oldDomainState = [BiometricsManager savedLAPolicyDomainState];
     NSData *newDomainState = [BiometricsManager currentLAPolicyDomainState];
-    
+
     // Check for domain state changes
-    if (![oldDomainState isEqual:newDomainState]) {
+    // For deactivated biometrics, LAContext in validation will return nil
+    // storing that nil and comparing it to nil will result as `isEqual` NO
+    // even data is not actually changed.
+    BOOL biometricsDeactivated = (oldDomainState || newDomainState);
+    BOOL biometircSettingsDidChange = ![oldDomainState isEqual:newDomainState];
+    if (biometricsDeactivated && biometircSettingsDidChange) {
         biometricsSettingsChanged = YES;
-        
+
         [BiometricsManager setLAPolicyDomainState:newDomainState];
     }
-    
+
     return biometricsSettingsChanged;
 }
 
