@@ -170,7 +170,7 @@
 
 + (BOOL)checkIfBiometricsSettingsAreChanged
 {
-    __block BOOL biometricsSettingsChanged = NO;
+    BOOL biometricsSettingsChanged = NO;
     
     NSData *oldDomainState = [BiometricsManager savedLAPolicyDomainState];
     NSData *newDomainState = [BiometricsManager currentLAPolicyDomainState];
