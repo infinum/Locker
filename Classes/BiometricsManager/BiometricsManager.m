@@ -168,31 +168,6 @@
     return NO;
 }
 
-+ (void)checkIfPasscodeExistsInKeychainWithCompletion:(void (^)(BOOL))completion forUniqueIdentifier:(NSString *)uniqueIdentifier
-{
-    NSDictionary *query = @{
-                  (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
-                  (__bridge id)kSecAttrService: [BiometricsManager keyKeychainServiceName],
-                  (__bridge id)kSecAttrAccount: [BiometricsManager keyKeychainAccountNameForUniqueIdentifier:uniqueIdentifier],
-                  (__bridge id)kSecMatchLimit: (__bridge id)kSecMatchLimitOne,
-                  (__bridge id)kSecReturnData: @NO,
-                  (__bridge id)kSecUseAuthenticationUI : (__bridge id)kSecUseAuthenticationUIFail
-                  };
-    
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)(query), nil);
-        BOOL keyAlreadyInKeychain = (status == errSecInteractionNotAllowed || status == errSecSuccess);
-        
-        if (completion) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (completion) {
-                    completion(keyAlreadyInKeychain);
-                }
-            });
-        }
-    });
-}
-
 + (BOOL)checkIfBiometricsSettingsAreChanged
 {
     __block BOOL biometricsSettingsChanged = NO;
@@ -208,29 +183,6 @@
     }
     
     return biometricsSettingsChanged;
-}
-
-+ (void)checkIfBiometricsSettingsAreChangedWithCompletion:(void (^)(BOOL))completion forUniqueIdentifiers:(NSArray *)uniqueIdentifiers;
-{
-    __block BOOL biometricsSettingsAreChanged = NO;
-    BOOL deviceBiometricsSettingsAreChanged = [self checkIfBiometricsSettingsAreChanged];
-
-    dispatch_group_t group = dispatch_group_create();
-
-    for (NSString *uniqueIdentifier in uniqueIdentifiers) {
-        dispatch_group_enter(group);
-
-        [TouchIDManager checkIfPasscodeExistsInKeychainWithCompletion:^(BOOL itemExists) {
-            biometricsSettingsAreChanged = (!itemExists || deviceBiometricsSettingsAreChanged);
-            dispatch_group_leave(group);
-        } forUniqueIdentifier:uniqueIdentifier];
-    }
-
-    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-        if (completion) {
-            completion(biometricsSettingsAreChanged);
-        }
-    });
 }
 
 + (BOOL)shouldUseAuthenticationWithBiometricsForUniqueIdentifier:(NSString *)uniqueIdentifier

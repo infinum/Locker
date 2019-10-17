@@ -18,7 +18,7 @@ typedef NS_CLOSED_ENUM(NSInteger, BiometricsType) {
 + (void)setPasscode:(NSString *)passcode forUniqueIdentifier:(NSString *)uniqueIdentifier;
 + (void)deletePasscodeForUniqueIdentifier:(NSString *)uniqueIdentifier;
 + (void)getCurrentPasscodeWithSuccess:(void(^)(NSString *passcode))success failure:(void(^)(OSStatus failureStatus))failure operationPrompt:(NSString *)operationPrompt forUniqueIdentifier:(NSString *)uniqueIdentifier;
-+ (void)checkIfBiometricsSettingsAreChangedWithCompletion:(void (^)(BOOL))completion forUniqueIdentifiers:(NSArray *)uniqueIdentifiers;
++ (BOOL)checkIfBiometricsSettingsAreChanged;
 + (BiometricsType)deviceSupportsAuthenticationWithBiometrics;
 + (BiometricsType)canUseAuthenticationWithBiometrics;
 + (BOOL)shouldUseAuthenticationWithBiometricsForUniqueIdentifier:(NSString *)uniqueIdentifier;
