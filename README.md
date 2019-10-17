@@ -1,4 +1,4 @@
-# TouchIDManager
+# **BiometricManager**
 
 Library for handling sensitive data (`String` type) in Keychain with Biometric ID.
 

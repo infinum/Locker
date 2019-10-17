@@ -1,6 +1,0 @@
-framework module TouchIDManager {
-  umbrella header "TouchIDManager-umbrella.h"
-
-  export *
-  module * { export * }
-}

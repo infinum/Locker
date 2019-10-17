@@ -10,8 +10,8 @@
 #endif
 #endif
 
-#import "TouchIDManager.h"
+#import "BiometricsManager.h"
 
-FOUNDATION_EXPORT double TouchIDManagerVersionNumber;
-FOUNDATION_EXPORT const unsigned char TouchIDManagerVersionString[];
+FOUNDATION_EXPORT double BiometricsManagerVersionNumber;
+FOUNDATION_EXPORT const unsigned char BiometricsManagerVersionString[];
 

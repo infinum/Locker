@@ -1,16 +1,16 @@
 PODS:
-  - TouchIDManager (0.0.2)
+  - BiometricsManager (2.0.0)
 
 DEPENDENCIES:
-  - TouchIDManager (from `../TouchIDManager.podspec`)
+  - BiometricsManager (from `../BiometricsManager.podspec`)
 
 EXTERNAL SOURCES:
-  TouchIDManager:
-    :path: ../TouchIDManager.podspec
+  BiometricsManager:
+    :path: "../BiometricsManager.podspec"
 
 SPEC CHECKSUMS:
-  TouchIDManager: a3938fe4a0568c3c4cde076861ad7fb57fad7bac
+  BiometricsManager: 3ac30a85d7b7521a474cac0ebaf3d5a297088e08
 
-PODFILE CHECKSUM: 4c770e12d2ff73e3eff2f977efe041edcbe62448
+PODFILE CHECKSUM: d3fb94a99a9c9c3305df1cb4935f93817184befc
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.8.1

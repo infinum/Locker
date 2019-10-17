@@ -1,5 +1,5 @@
 {
-  "name": "BiometricManager",
+  "name": "BiometricsManager",
   "version": "2.0.0",
   "summary": "Manager for handling Biometrics ID in Your app",
   "description": "Manager for handling Touch ID in Your app.",

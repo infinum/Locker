@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import TouchIDManager
+import BiometricsManager
 
 class ViewController: UIViewController {
 
@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        switch TouchIDManager.deviceSupportsAuthenticationWithBiometrics() {
+        switch BiometricsManager.deviceSupportsAuthenticationWithBiometrics() {
         case .none:
             print("Device doesnt support Biometrics")
         case .touchID:

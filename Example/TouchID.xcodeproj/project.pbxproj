@@ -139,8 +139,7 @@
 				AB567BDD2049A57C003ABEE0 /* Sources */,
 				AB567BDE2049A57C003ABEE0 /* Frameworks */,
 				AB567BDF2049A57C003ABEE0 /* Resources */,
-				1FAE3F0A3B1990A785EE7C23 /* [CP] Embed Pods Frameworks */,
-				522F8D69FB64AEE42B83C866 /* [CP] Copy Pods Resources */,
+				299626CA48552F027B9E1A20 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -159,8 +158,6 @@
 				AB567BF12049A57C003ABEE0 /* Sources */,
 				AB567BF22049A57C003ABEE0 /* Frameworks */,
 				AB567BF32049A57C003ABEE0 /* Resources */,
-				0B43F3F3F1595DB12EBE87FB /* [CP] Embed Pods Frameworks */,
-				1EBE2D03C6CD1102AF1FA28F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -233,52 +230,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0B43F3F3F1595DB12EBE87FB /* [CP] Embed Pods Frameworks */ = {
+		299626CA48552F027B9E1A20 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TouchID/Pods-TouchID-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BiometricsManager/BiometricsManager.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BiometricsManager.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TouchIDTests/Pods-TouchIDTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		1EBE2D03C6CD1102AF1FA28F /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TouchIDTests/Pods-TouchIDTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		1FAE3F0A3B1990A785EE7C23 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TouchID/Pods-TouchID-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/TouchIDManager/TouchIDManager.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TouchIDManager.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TouchID/Pods-TouchID-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TouchID/Pods-TouchID-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		3D42CE476B74A5DD88B36575 /* [CP] Check Pods Manifest.lock */ = {
@@ -297,21 +264,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		522F8D69FB64AEE42B83C866 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TouchID/Pods-TouchID-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6F9D6510BD13CF9200595262 /* [CP] Check Pods Manifest.lock */ = {

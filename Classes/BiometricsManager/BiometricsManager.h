@@ -1,6 +1,6 @@
 //
-//  TouchIDManager.h
-//  TouchIDManager
+//  BiometricsManager.h
+//  BiometricsManager
 //
 //  Copyright © 2017 Infinum. All rights reserved.
 //
@@ -13,7 +13,7 @@ typedef NS_CLOSED_ENUM(NSInteger, BiometricsType) {
     BiometricsTypeFaceID = 2
 };
 
-@interface TouchIDManager : NSObject
+@interface BiometricsManager : NSObject
 
 + (void)setPasscode:(NSString *)passcode forUniqueIdentifier:(NSString *)uniqueIdentifier;
 + (void)deletePasscodeForUniqueIdentifier:(NSString *)uniqueIdentifier;
