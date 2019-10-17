@@ -94,15 +94,12 @@
 
 + (void)deletePasscodeForUniqueIdentifier:(NSString *)uniqueIdentifier
 {
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[BiometricsManager keyBiometricsIDActivatedForUniqueIdentifier:uniqueIdentifier]];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
     NSDictionary *query = @{
                             (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
-                            (__bridge id)kSecAttrService: [BiometricsManager keyKeychainServiceName],
-                            (__bridge id)kSecAttrAccount: [BiometricsManager keyKeychainAccountNameForUniqueIdentifier:uniqueIdentifier]
+                            (__bridge id)kSecAttrService: [TouchIDManager keyKeychainServiceName],
+                            (__bridge id)kSecAttrAccount: [TouchIDManager keyKeychainAccountNameForUniqueIdentifier:uniqueIdentifier]
                             };
-    
+
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         SecItemDelete((__bridge CFDictionaryRef)(query));
     });
@@ -213,29 +210,25 @@
     return biometricsSettingsChanged;
 }
 
-+ (void)checkIfAuthenticationWithBiometricsShouldBeUsedAndBiometricsSettingsAreChangedWithCompletion:(void (^)(BOOL))completion forUniqueIdentifiers:(NSArray *)uniqueIdentifiers
++ (void)checkIfBiometricsSettingsAreChangedWithCompletion:(void (^)(BOOL))completion forUniqueIdentifiers:(NSArray *)uniqueIdentifiers;
 {
-    __block BOOL shouldBeUsedAndBiometricsSettingsAreChanged = NO;
-    BOOL biometricsSettingsAreChanged = [self checkIfBiometricsSettingsAreChanged];
-    
+    __block BOOL biometricsSettingsAreChanged = NO;
+    BOOL deviceBiometricsSettingsAreChanged = [self checkIfBiometricsSettingsAreChanged];
+
     dispatch_group_t group = dispatch_group_create();
-    
+
     for (NSString *uniqueIdentifier in uniqueIdentifiers) {
         dispatch_group_enter(group);
-        
-        [BiometricsManager checkIfPasscodeExistsInKeychainWithCompletion:^(BOOL itemExists) {
-            BOOL shouldUseAuthenticationWithBiometrics = [self shouldUseAuthenticationWithBiometricsForUniqueIdentifier:uniqueIdentifier];
-        
-            if (shouldBeUsedAndBiometricsSettingsAreChanged == NO) {
-                shouldBeUsedAndBiometricsSettingsAreChanged = shouldUseAuthenticationWithBiometrics && (!itemExists || biometricsSettingsAreChanged);
-            }
+
+        [TouchIDManager checkIfPasscodeExistsInKeychainWithCompletion:^(BOOL itemExists) {
+            biometricsSettingsAreChanged = (!itemExists || deviceBiometricsSettingsAreChanged);
             dispatch_group_leave(group);
         } forUniqueIdentifier:uniqueIdentifier];
     }
-    
+
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         if (completion) {
-            completion(shouldBeUsedAndBiometricsSettingsAreChanged);
+            completion(biometricsSettingsAreChanged);
         }
     });
 }
@@ -252,7 +245,6 @@
     }
     
     [[NSUserDefaults standardUserDefaults] setBool:shouldUseAuthenticationWithBiometrics forKey:[BiometricsManager keyBiometricsIDActivatedForUniqueIdentifier:uniqueIdentifier]];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (BOOL)didAskToUseAuthenticationWithBiometricsForUniqueIdentifier:(NSString *)uniqueIdentifier
@@ -263,7 +255,6 @@
 + (void)setDidAskToUseAuthenticationWithBiometrics:(BOOL)askToUseAuthenticationWithBiometrics forUniqueIdentifier:(NSString *)uniqueIdentifier
 {
     [[NSUserDefaults standardUserDefaults] setBool:askToUseAuthenticationWithBiometrics forKey:[BiometricsManager keyDidAskToUseBiometricsIDForUniqueIdentifier:uniqueIdentifier]];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (BOOL)shouldAddPasscodeToKeychainOnNextLoginForUniqueIdentifier:(NSString *)uniqueIdentifier
@@ -274,7 +265,6 @@
 + (void)setShouldAddPasscodeToKeychainOnNextLogin:(BOOL)shouldAddPasscodeToKeychainOnNextLogin forUniqueIdentifier:(NSString *)uniqueIdentifier
 {
     [[NSUserDefaults standardUserDefaults] setBool:shouldAddPasscodeToKeychainOnNextLogin forKey:[BiometricsManager keyShouldAddPasscodeToKeychainOnNextLoginForUniqueIdentifier:uniqueIdentifier]];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (NSData *)currentLAPolicyDomainState
@@ -292,7 +282,6 @@
 + (void)setLAPolicyDomainState:(NSData *)domainState
 {
     [[NSUserDefaults standardUserDefaults] setObject:domainState forKey:[BiometricsManager keyLAPolicyDomainState]];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (void)resetForUniqueIdentifier:(NSString *)uniqueIdentifier
@@ -300,7 +289,7 @@
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[BiometricsManager keyDidAskToUseBiometricsIDForUniqueIdentifier:uniqueIdentifier]];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[BiometricsManager keyBiometricsIDActivatedForUniqueIdentifier:uniqueIdentifier]];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[BiometricsManager keyShouldAddPasscodeToKeychainOnNextLoginForUniqueIdentifier:uniqueIdentifier]];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[TouchIDManager keyBiometricsIDActivatedForUniqueIdentifier:uniqueIdentifier]];
     [BiometricsManager deletePasscodeForUniqueIdentifier:uniqueIdentifier];
 }
 
