@@ -96,8 +96,8 @@
 {
     NSDictionary *query = @{
                             (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
-                            (__bridge id)kSecAttrService: [TouchIDManager keyKeychainServiceName],
-                            (__bridge id)kSecAttrAccount: [TouchIDManager keyKeychainAccountNameForUniqueIdentifier:uniqueIdentifier]
+                            (__bridge id)kSecAttrService: [BiometricsManager keyKeychainServiceName],
+                            (__bridge id)kSecAttrAccount: [BiometricsManager keyKeychainAccountNameForUniqueIdentifier:uniqueIdentifier]
                             };
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -241,7 +241,7 @@
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[BiometricsManager keyDidAskToUseBiometricsIDForUniqueIdentifier:uniqueIdentifier]];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[BiometricsManager keyBiometricsIDActivatedForUniqueIdentifier:uniqueIdentifier]];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[BiometricsManager keyShouldAddPasscodeToKeychainOnNextLoginForUniqueIdentifier:uniqueIdentifier]];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[TouchIDManager keyBiometricsIDActivatedForUniqueIdentifier:uniqueIdentifier]];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[BiometricsManager keyBiometricsIDActivatedForUniqueIdentifier:uniqueIdentifier]];
     [BiometricsManager deletePasscodeForUniqueIdentifier:uniqueIdentifier];
 }
 
