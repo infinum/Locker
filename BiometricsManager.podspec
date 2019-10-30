@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
   s.name         = "BiometricsManager"
   s.version      = "2.0.0"
-  s.summary      = "Manager for handling Biometrics ID in Your app"
+  s.summary      = "Manager for handling Secure data with Biometric"
   s.description  = <<-DESC
-                  Manager for handling TouchID and FaceID in Your app.
+                  Manager for saving, fetching and updating data in Keychain using Biometric Authentication. Supports methods for checking changes in Biometric settings. Also supports device biometric type info. 
                    DESC
   s.homepage     = "https://github.com/infinum/iOS-BiometricsManager"
   s.license      = "MIT"
