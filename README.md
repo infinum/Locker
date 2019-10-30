@@ -64,7 +64,6 @@ The other ones will be useful if Your app has certain behaviour.
 
 ##### 6. You can check for Biometric settings changes with `checkIfBiometricsSettingsAreChanged`.
 It will return `true` if Biometric settings are changed since Your last calling this method or last saving in Keychain.
-Note: This method checks only Biometric settings. You 
 
 ```objective-c
 // Objective-C
