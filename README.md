@@ -64,14 +64,15 @@ The other ones will be useful if Your app has certain behaviour.
 
 ##### 6. You can check for Biometric settings changes with `checkIfBiometricsSettingsAreChanged`.
 It will return `true` if Biometric settings are changed since Your last calling this method or last saving in Keychain.
+Note: This method checks only Biometric settings. You 
 
 ```objective-c
 // Objective-C
-[BiometricsManager checkIfAuthenticationWithBiometricsShouldBeUsedAndBiometricsSettingsAreChangedWithCompletion:^(BOOL shouldBeUsedAndBiometricsSettingsAreChanged) {
-    if (shouldBeUsedAndBiometricsSettingsAreChanged) {
-        // handle case when settings are changed but Biometric should be used to fetch data
-    }
-} forUniqueIdentifiers:@[@"kUniqueIdentifier1", @"kUniqueIdentifier2"]];
+BOOL biometrySettingsChanged = [BiometricsManager checkIfBiometricsSettingsAreChanged];
+BOOL usingBiometry = [BiometricsManager shouldUseAuthenticationWithBiometricsForUniqueIdentifier:@"kUniqueIdentifier"];
+if (biometrySettingsChanged && usingBiometry) {
+    // handle case when settings are changed and biometry should be used
+}
 ```
 
 ##### 7. There are `deviceSupportsAuthenticationWithBiometrics` and `canUseAuthenticationWithBiometrics` methods which return `BiometricsType` enum (`BiometricsTypeNone`, `BiometricsTypeTouchID`, `BiometricsTypeFaceID`).
