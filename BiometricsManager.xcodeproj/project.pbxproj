@@ -25,13 +25,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		DF8FB5001E8D119C00EC2740 /* libTouchIDManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTouchIDManager.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF8FB5001E8D119C00EC2740 /* libBiometricsManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBiometricsManager.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF8FB52E1E8DAFFF00EC2740 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DF8FB5301E8DB00600EC2740 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		DF8FB5321E8DB00E00EC2740 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DF8FB5341E8DB03600EC2740 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		DF8FB5381E8E3CDC00EC2740 /* TouchIDManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TouchIDManager.h; sourceTree = "<group>"; };
-		DF8FB5391E8E3CDC00EC2740 /* TouchIDManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TouchIDManager.m; sourceTree = "<group>"; };
+		DF8FB5381E8E3CDC00EC2740 /* BiometricsManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BiometricsManager.h; sourceTree = "<group>"; };
+		DF8FB5391E8E3CDC00EC2740 /* BiometricsManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BiometricsManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +60,7 @@
 		DF8FB5011E8D119C00EC2740 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DF8FB5001E8D119C00EC2740 /* libTouchIDManager.a */,
+				DF8FB5001E8D119C00EC2740 /* libBiometricsManager.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -79,26 +79,26 @@
 		DF8FB5361E8E3CDC00EC2740 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				DF8FB5371E8E3CDC00EC2740 /* TouchIDManager */,
+				DF8FB5371E8E3CDC00EC2740 /* BiometricsManager */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		DF8FB5371E8E3CDC00EC2740 /* TouchIDManager */ = {
+		DF8FB5371E8E3CDC00EC2740 /* BiometricsManager */ = {
 			isa = PBXGroup;
 			children = (
-				DF8FB5381E8E3CDC00EC2740 /* TouchIDManager.h */,
-				DF8FB5391E8E3CDC00EC2740 /* TouchIDManager.m */,
+				DF8FB5381E8E3CDC00EC2740 /* BiometricsManager.h */,
+				DF8FB5391E8E3CDC00EC2740 /* BiometricsManager.m */,
 			);
-			path = TouchIDManager;
+			path = BiometricsManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		DF8FB4FF1E8D119C00EC2740 /* TouchIDManager */ = {
+		DF8FB4FF1E8D119C00EC2740 /* BiometricsManager */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DF8FB5091E8D119C00EC2740 /* Build configuration list for PBXNativeTarget "TouchIDManager" */;
+			buildConfigurationList = DF8FB5091E8D119C00EC2740 /* Build configuration list for PBXNativeTarget "BiometricsManager" */;
 			buildPhases = (
 				DF8FB4FC1E8D119C00EC2740 /* Sources */,
 				DF8FB4FD1E8D119C00EC2740 /* Frameworks */,
@@ -108,9 +108,9 @@
 			);
 			dependencies = (
 			);
-			name = TouchIDManager;
+			name = BiometricsManager;
 			productName = TouchIDManager;
-			productReference = DF8FB5001E8D119C00EC2740 /* libTouchIDManager.a */;
+			productReference = DF8FB5001E8D119C00EC2740 /* libBiometricsManager.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -119,7 +119,7 @@
 		DF8FB4F81E8D119C00EC2740 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 1030;
 				ORGANIZATIONNAME = Infinum;
 				TargetAttributes = {
 					DF8FB4FF1E8D119C00EC2740 = {
@@ -129,11 +129,12 @@
 					};
 				};
 			};
-			buildConfigurationList = DF8FB4FB1E8D119C00EC2740 /* Build configuration list for PBXProject "TouchIDManager" */;
+			buildConfigurationList = DF8FB4FB1E8D119C00EC2740 /* Build configuration list for PBXProject "BiometricsManager" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = DF8FB4F71E8D119C00EC2740;
@@ -141,7 +142,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DF8FB4FF1E8D119C00EC2740 /* TouchIDManager */,
+				DF8FB4FF1E8D119C00EC2740 /* BiometricsManager */,
 			);
 		};
 /* End PBXProject section */
@@ -166,15 +167,24 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -213,15 +223,24 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -268,7 +287,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DF8FB4FB1E8D119C00EC2740 /* Build configuration list for PBXProject "TouchIDManager" */ = {
+		DF8FB4FB1E8D119C00EC2740 /* Build configuration list for PBXProject "BiometricsManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DF8FB5071E8D119C00EC2740 /* Debug */,
@@ -277,7 +296,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DF8FB5091E8D119C00EC2740 /* Build configuration list for PBXNativeTarget "TouchIDManager" */ = {
+		DF8FB5091E8D119C00EC2740 /* Build configuration list for PBXNativeTarget "BiometricsManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DF8FB50A1E8D119C00EC2740 /* Debug */,

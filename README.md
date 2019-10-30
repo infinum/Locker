@@ -1,4 +1,4 @@
-# TouchIDManager
+# **BiometricsManager**
 
 Library for handling sensitive data (`String` type) in Keychain with Biometric ID.
 
@@ -22,7 +22,7 @@ For `uniqueIdentifier` pass `String` value You will later use to fetch Your data
 
 ```objective-c
 // Objective-C
-[TouchIDManager setPasscode:@"passcode" forUniqueIdentifier:@"kUniqueIdentifier"];
+[BiometricsManager setPasscode:@"passcode" forUniqueIdentifier:@"kUniqueIdentifier"];
 ```
 
 ##### 2. Fetch Your data with `getCurrentPasscodeWithSuccess: failure: operationPrompt: forUniqueIdentifier`. 
@@ -31,7 +31,7 @@ You'll get Your data in `success` completion block. If, for some reason, Your da
 
 ```objective-c
 // Objective-C
-[TouchIDManager getCurrentPasscodeWithSuccess:^(NSString *passcode) {
+[BiometricsManager getCurrentPasscodeWithSuccess:^(NSString *passcode) {
     // do sth with passcode        
 } failure:^(OSStatus failureStatus) {
     // handle failure
@@ -42,7 +42,7 @@ You'll get Your data in `success` completion block. If, for some reason, Your da
 
 ```objective-c
 // Objective-C
-[TouchIDManager deletePasscodeForUniqueIdentifier:@"kUniqueIdentifier"];
+[BiometricsManager deletePasscodeForUniqueIdentifier:@"kUniqueIdentifier"];
 ```
 
 ##### 4. If You need to update Your saved data, just call `setPasscode: forUniqueIdentifier`. This method first deletes old value, if there is one, and then saves new one. 
@@ -62,13 +62,12 @@ Note: This methods are here because they were used on some of our projects.
 You should probably want to use the first two, `setShouldUseAuthenticationWithBiometrics: forUniqueIdentifier` and `shouldUseAuthenticationWithBiometricsForUniqueIdentifier`. Additional, You must use them if You're going to use `checkIfAuthenticationWithBiometricsShouldBeUsedAndBiometricsSettingsAreChangedWithCompletion: forUniqueIdentifiers` method.
 The other ones will be useful if Your app has certain behaviour.
 
-##### 6. You can observe changes in Biometric settings with `checkIfAuthenticationWithBiometricsShouldBeUsedAndBiometricsSettingsAreChangedWithCompletion: forUniqueIdentifiers`.
-Method receives an array of unique identifiers since you'll probably want to handle this only one time in app, not for every saved data. If that's not the case, You can still pass one elemenent array.
-It will return `true` in `completion` block if Biometric settings are changed since Your last saving in Keychain and there is unique identifier for which `shouldUseAuthenticationWithBiometricsForUniqueIdentifier` returns `true`.
+##### 6. You can check for Biometric settings changes with `checkIfBiometricsSettingsAreChanged`.
+It will return `true` if Biometric settings are changed since Your last calling this method or last saving in Keychain.
 
 ```objective-c
 // Objective-C
-[TouchIDManager checkIfAuthenticationWithBiometricsShouldBeUsedAndBiometricsSettingsAreChangedWithCompletion:^(BOOL shouldBeUsedAndBiometricsSettingsAreChanged) {
+[BiometricsManager checkIfAuthenticationWithBiometricsShouldBeUsedAndBiometricsSettingsAreChangedWithCompletion:^(BOOL shouldBeUsedAndBiometricsSettingsAreChanged) {
     if (shouldBeUsedAndBiometricsSettingsAreChanged) {
         // handle case when settings are changed but Biometric should be used to fetch data
     }
