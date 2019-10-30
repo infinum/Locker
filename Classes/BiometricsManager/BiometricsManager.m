@@ -243,9 +243,8 @@
 
 + (void)resetForUniqueIdentifier:(NSString *)uniqueIdentifier
 {
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[BiometricsManager keyDidAskToUseBiometricsIDForUniqueIdentifier:uniqueIdentifier]];
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[BiometricsManager keyBiometricsIDActivatedForUniqueIdentifier:uniqueIdentifier]];
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[BiometricsManager keyShouldAddPasscodeToKeychainOnNextLoginForUniqueIdentifier:uniqueIdentifier]];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[BiometricsManager keyDidAskToUseBiometricsIDForUniqueIdentifier:uniqueIdentifier]];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[BiometricsManager keyShouldAddPasscodeToKeychainOnNextLoginForUniqueIdentifier:uniqueIdentifier]];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:[BiometricsManager keyBiometricsIDActivatedForUniqueIdentifier:uniqueIdentifier]];
     [BiometricsManager deletePasscodeForUniqueIdentifier:uniqueIdentifier];
 }
