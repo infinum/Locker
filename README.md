@@ -59,7 +59,7 @@ Use `setShouldAddPasscodeToKeychainOnNextLogin: forUniqueIdentifier` method to s
 Use `shouldAddPasscodeToKeychainOnNextLoginForUniqueIdentifier` method to fetch that info.
 
 Note: This methods are here because they were used on some of our projects.
-You should probably want to use the first two, `setShouldUseAuthenticationWithBiometrics: forUniqueIdentifier` and `shouldUseAuthenticationWithBiometricsForUniqueIdentifier`. Additional, You must use them if You're going to use `checkIfAuthenticationWithBiometricsShouldBeUsedAndBiometricsSettingsAreChangedWithCompletion: forUniqueIdentifiers` method.
+You should probably want to use the first two, `setShouldUseAuthenticationWithBiometrics: forUniqueIdentifier` and `shouldUseAuthenticationWithBiometricsForUniqueIdentifier`.
 The other ones will be useful if Your app has certain behaviour.
 
 ##### 6. You can check for Biometric settings changes with `checkIfBiometricsSettingsAreChanged`.
