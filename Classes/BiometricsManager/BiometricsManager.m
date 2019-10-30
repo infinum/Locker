@@ -180,8 +180,8 @@
     // storing that nil and comparing it to nil will result as `isEqual` NO
     // even data is not actually changed.
     BOOL biometricsDeactivated = (oldDomainState || newDomainState);
-    BOOL biometircSettingsDidChange = ![oldDomainState isEqual:newDomainState];
-    if (biometricsDeactivated && biometircSettingsDidChange) {
+    BOOL biometricSettingsDidChange = ![oldDomainState isEqual:newDomainState];
+    if (biometricsDeactivated && biometricSettingsDidChange) {
         biometricsSettingsChanged = YES;
 
         [BiometricsManager setLAPolicyDomainState:newDomainState];
