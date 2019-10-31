@@ -237,11 +237,11 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-TouchID/Pods-TouchID-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BiometricsManager/BiometricsManager.framework",
+				"${BUILT_PRODUCTS_DIR}/Locker/Locker.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BiometricsManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Locker.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

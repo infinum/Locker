@@ -3,7 +3,7 @@ platform :ios, '9.0'
 target 'TouchID' do
   use_frameworks!
 
-  pod 'BiometricsManager', :path => '../BiometricsManager.podspec'
+  pod 'Locker', :path => '../Locker.podspec'
   # Pods for TouchID
 
   target 'TouchIDTests' do

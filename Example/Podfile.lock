@@ -1,16 +1,16 @@
 PODS:
-  - BiometricsManager (2.0.0)
+  - Locker (2.0.0)
 
 DEPENDENCIES:
-  - BiometricsManager (from `../BiometricsManager.podspec`)
+  - Locker (from `../Locker.podspec`)
 
 EXTERNAL SOURCES:
-  BiometricsManager:
-    :path: "../BiometricsManager.podspec"
+  Locker:
+    :path: "../Locker.podspec"
 
 SPEC CHECKSUMS:
-  BiometricsManager: 3ac30a85d7b7521a474cac0ebaf3d5a297088e08
+  Locker: e946fb0ecfc5a92cc3933094f37a5fff6b7589bf
 
-PODFILE CHECKSUM: d3fb94a99a9c9c3305df1cb4935f93817184befc
+PODFILE CHECKSUM: ffc994a4ed4a9f019de7d9c4cae5147951c79fd6
 
 COCOAPODS: 1.8.1

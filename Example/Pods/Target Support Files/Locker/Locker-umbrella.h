@@ -10,8 +10,8 @@
 #endif
 #endif
 
-#import "BiometricsManager.h"
+#import "Locker.h"
 
-FOUNDATION_EXPORT double BiometricsManagerVersionNumber;
-FOUNDATION_EXPORT const unsigned char BiometricsManagerVersionString[];
+FOUNDATION_EXPORT double LockerVersionNumber;
+FOUNDATION_EXPORT const unsigned char LockerVersionString[];
 
