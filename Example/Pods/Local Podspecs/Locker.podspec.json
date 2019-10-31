@@ -15,11 +15,7 @@
     "git": "https://github.com/infinum/Locker.git",
     "tag": "2.0.0"
   },
-  "source_files": [
-    "Classes",
-    "Classes/**/*.{h,m}"
-  ],
-  "exclude_files": "Classes/Exclude",
+  "source_files": "Locker/**/*.{h,m}",
   "frameworks": [
     "UIKit",
     "LocalAuthentication",

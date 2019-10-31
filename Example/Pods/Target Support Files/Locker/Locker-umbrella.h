@@ -10,6 +10,8 @@
 #endif
 #endif
 
+#import "BiometricsType.h"
+#import "LockerHelpers.h"
 #import "Locker.h"
 
 FOUNDATION_EXPORT double LockerVersionNumber;

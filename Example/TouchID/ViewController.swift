@@ -26,8 +26,8 @@ class ViewController: UIViewController {
         super.viewDidAppear(animated)
 
         checkApplicationSettings()
-        storeReadDeleteSecret()
         runAdditionalHelpers()
+        storeReadDeleteSecret()
         resetEverything()
     }
 }
@@ -71,9 +71,9 @@ private extension ViewController {
             operationPrompt: "Unlock locker!",
             success: { (secret) in
                 print(secret ?? "Missing data!")
-        }, failure: {failureReason in
-            print("Failed because: \(failureReason)")
-        }
+            }, failure: {failureReason in
+                print("Failed because: \(failureReason)")
+            }
         )
         Locker.deleteSecret(for: identifier)
     }
@@ -86,12 +86,12 @@ private extension ViewController {
         print("Should Use Authentication With Biometrics: \(shouldUseAuthenticationWithBiometrics)")
 
         Locker.setDidAskToUseAuthenticationWithBiometrics(true, forUniqueIdentifier: identifier)
-        let setDidAskToUseAuthenticationWithBiometrics = Locker.didAskToUseAuthenticationWithBiometrics(for: identifier)
-        print("Should Use Authentication With Biometrics: \(setDidAskToUseAuthenticationWithBiometrics)")
+        let didAskToUseAuthenticationWithBiometrics = Locker.didAskToUseAuthenticationWithBiometrics(for: identifier)
+        print("Did Ask to use Authentication With Biometrics: \(didAskToUseAuthenticationWithBiometrics)")
 
         Locker.setShouldAddSecretToKeychainOnNextLogin(true, forUniqueIdentifier: identifier)
         let shouldAddSecretToKeychainOnNextLoginForUniqueIdentifier = Locker.shouldAddSecretToKeychainOnNextLogin(for: identifier)
-        print("Should Use Authentication With Biometrics: \(shouldAddSecretToKeychainOnNextLoginForUniqueIdentifier)")
+        print("Should Add Secret to Keychain on next login: \(shouldAddSecretToKeychainOnNextLoginForUniqueIdentifier)")
     }
 
     // MARK: Reseting
