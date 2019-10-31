@@ -1,18 +1,18 @@
 //
-//  BiometricsManager.m
-//  BiometricsManager
+//  Locker.m
+//  Locker
 //
 //  Copyright © 2017 Infinum. All rights reserved.
 //
 
-#import "BiometricsManager.h"
+#import "Locker.h"
 #import <LocalAuthentication/LocalAuthentication.h>
 #import <UIKit/UIKit.h>
 #import <sys/utsname.h>
 
 #define kBundleIdentifier [[NSBundle mainBundle] bundleIdentifier]
 
-@implementation BiometricsManager
+@implementation Locker
 
 #pragma mark - Keychain Methods
 

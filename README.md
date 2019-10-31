@@ -1,19 +1,43 @@
-# **BiometricsManager**
+# **Locker 🔒** 
 
-Library for handling sensitive data (`String` type) in Keychain with Biometric ID.
+Lightweight library for handling sensitive data (`String` type) in Keychain using iOS Biometric features.
 
 ## Features
 
   * Save data in Keychain.
   * Fetch data from Keychain with Biometric ID.
   * Delete data from Keychain.
-  * There are additional methods that help You with saving and fetching some additional info regarding the authentication with biometric usage.
+  * There are additional methods that help you with saving and fetching some additional info regarding the authentication with biometric usage.
   * Detect changes in Biometric settings.
   * Check if device has support for certain Biometric ID.
 
 ## Requirements
 
-- iOS 9
+- iOS 9.0 +
+
+## Installation
+
+The easiest way to use Locker in your project is by using the CocaPods package manager.
+
+
+#### CocoaPods
+
+See installation instructions for [CocoaPods](http://cocoapods.org) if not already installed
+
+To integrate the library into your Xcode project specify the pod dependency to your `Podfile`:
+
+```ruby
+platform :ios, '9.0'
+use_frameworks!
+
+pod 'Locker'
+```
+
+run pod install
+
+```bash
+pod install
+```
 
 ## Usage
 
@@ -77,3 +101,7 @@ if (biometrySettingsChanged && usingBiometry) {
 ##### 7. There are `deviceSupportsAuthenticationWithBiometrics` and `canUseAuthenticationWithBiometrics` methods which return `BiometricsType` enum (`BiometricsTypeNone`, `BiometricsTypeTouchID`, `BiometricsTypeFaceID`).
 `deviceSupportsAuthenticationWithBiometrics` checks if device has support for some Biometric type.
 `canUseAuthenticationWithBiometrics` checks if device has support for some Biometrics type and if that Biometric is enabled in device settings.
+
+## Contributing
+
+Feedback and code contributions are very much welcome. Just make a pull request with a short description of your changes. By making contributions to this project you give permission for your code to be used under the same [license](https://github.com/infinum/Android-prince-of-versions/blob/dev/LICENCE).

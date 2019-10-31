@@ -25,13 +25,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		DF8FB5001E8D119C00EC2740 /* libBiometricsManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBiometricsManager.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF8FB5001E8D119C00EC2740 /* libLocker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLocker.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF8FB52E1E8DAFFF00EC2740 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DF8FB5301E8DB00600EC2740 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		DF8FB5321E8DB00E00EC2740 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DF8FB5341E8DB03600EC2740 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		DF8FB5381E8E3CDC00EC2740 /* BiometricsManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BiometricsManager.h; sourceTree = "<group>"; };
-		DF8FB5391E8E3CDC00EC2740 /* BiometricsManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BiometricsManager.m; sourceTree = "<group>"; };
+		DF8FB5381E8E3CDC00EC2740 /* Locker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Locker.h; sourceTree = "<group>"; };
+		DF8FB5391E8E3CDC00EC2740 /* Locker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Locker.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +60,7 @@
 		DF8FB5011E8D119C00EC2740 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DF8FB5001E8D119C00EC2740 /* libBiometricsManager.a */,
+				DF8FB5001E8D119C00EC2740 /* libLocker.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -79,26 +79,26 @@
 		DF8FB5361E8E3CDC00EC2740 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				DF8FB5371E8E3CDC00EC2740 /* BiometricsManager */,
+				DF8FB5371E8E3CDC00EC2740 /* Locker */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		DF8FB5371E8E3CDC00EC2740 /* BiometricsManager */ = {
+		DF8FB5371E8E3CDC00EC2740 /* Locker */ = {
 			isa = PBXGroup;
 			children = (
-				DF8FB5381E8E3CDC00EC2740 /* BiometricsManager.h */,
-				DF8FB5391E8E3CDC00EC2740 /* BiometricsManager.m */,
+				DF8FB5381E8E3CDC00EC2740 /* Locker.h */,
+				DF8FB5391E8E3CDC00EC2740 /* Locker.m */,
 			);
-			path = BiometricsManager;
+			path = Locker;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		DF8FB4FF1E8D119C00EC2740 /* BiometricsManager */ = {
+		DF8FB4FF1E8D119C00EC2740 /* Locker */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DF8FB5091E8D119C00EC2740 /* Build configuration list for PBXNativeTarget "BiometricsManager" */;
+			buildConfigurationList = DF8FB5091E8D119C00EC2740 /* Build configuration list for PBXNativeTarget "Locker" */;
 			buildPhases = (
 				DF8FB4FC1E8D119C00EC2740 /* Sources */,
 				DF8FB4FD1E8D119C00EC2740 /* Frameworks */,
@@ -108,9 +108,9 @@
 			);
 			dependencies = (
 			);
-			name = BiometricsManager;
+			name = Locker;
 			productName = TouchIDManager;
-			productReference = DF8FB5001E8D119C00EC2740 /* libBiometricsManager.a */;
+			productReference = DF8FB5001E8D119C00EC2740 /* libLocker.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -129,7 +129,7 @@
 					};
 				};
 			};
-			buildConfigurationList = DF8FB4FB1E8D119C00EC2740 /* Build configuration list for PBXProject "BiometricsManager" */;
+			buildConfigurationList = DF8FB4FB1E8D119C00EC2740 /* Build configuration list for PBXProject "Locker" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -142,7 +142,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DF8FB4FF1E8D119C00EC2740 /* BiometricsManager */,
+				DF8FB4FF1E8D119C00EC2740 /* Locker */,
 			);
 		};
 /* End PBXProject section */
@@ -287,7 +287,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DF8FB4FB1E8D119C00EC2740 /* Build configuration list for PBXProject "BiometricsManager" */ = {
+		DF8FB4FB1E8D119C00EC2740 /* Build configuration list for PBXProject "Locker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DF8FB5071E8D119C00EC2740 /* Debug */,
@@ -296,7 +296,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DF8FB5091E8D119C00EC2740 /* Build configuration list for PBXNativeTarget "BiometricsManager" */ = {
+		DF8FB5091E8D119C00EC2740 /* Build configuration list for PBXNativeTarget "Locker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DF8FB50A1E8D119C00EC2740 /* Debug */,
