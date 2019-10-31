@@ -17,19 +17,31 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Locker : NSObject
 
-+ (void)setPasscode:(NSString *)passcode forUniqueIdentifier:(NSString *)uniqueIdentifier;
-+ (void)deletePasscodeForUniqueIdentifier:(NSString *)uniqueIdentifier;
-+ (void)getCurrentPasscodeWithSuccess:(void(^)(NSString * _Nullable passcode))success failure:(void(^)(OSStatus failureStatus))failure operationPrompt:(NSString *)operationPrompt forUniqueIdentifier:(NSString *)uniqueIdentifier;
-+ (BOOL)checkIfBiometricsSettingsAreChanged;
-+ (BiometricsType)deviceSupportsAuthenticationWithBiometrics;
-+ (BiometricsType)canUseAuthenticationWithBiometrics;
-+ (BOOL)shouldUseAuthenticationWithBiometricsForUniqueIdentifier:(NSString *)uniqueIdentifier;
+@property (nonatomic, assign, class, readonly) BOOL biometricsSettingsAreChanged;
+@property (nonatomic, assign, class, readonly) BiometricsType deviceSupportsAuthenticationWithBiometrics;
+@property (nonatomic, assign, class, readonly) BiometricsType canUseAuthenticationWithBiometrics;
+
+
+// Handle secrets (store, delete, fetch)
+
++ (void)setSecret:(NSString *)secret forUniqueIdentifier:(NSString *)uniqueIdentifier NS_SWIFT_NAME(setSecret(_:for:));
++ (void)retrieveCurrentSecretForUniqueIdentifier:(NSString *)uniqueIdentifier operationPrompt:(NSString *)operationPrompt success:(void(^)(NSString * _Nullable secret))success failure:(void(^)(OSStatus failureStatus))failure NS_SWIFT_NAME(retrieveCurrentSecret(for:operationPrompt:success:failure:));
++ (void)deleteSecretForUniqueIdentifier:(NSString *)uniqueIdentifier NS_SWIFT_NAME(deleteSecret(for:));
+
+// Additional helpers
+
++ (BOOL)shouldUseAuthenticationWithBiometricsForUniqueIdentifier:(NSString *)uniqueIdentifier NS_SWIFT_NAME(shouldUseAuthenticationWithBiometrics(for:));
 + (void)setShouldUseAuthenticationWithBiometrics:(BOOL)shouldUseAuthenticationWithBiometrics forUniqueIdentifier:(NSString *)uniqueIdentifier;
-+ (BOOL)didAskToUseAuthenticationWithBiometricsForUniqueIdentifier:(NSString *)uniqueIdentifier;
+
++ (BOOL)didAskToUseAuthenticationWithBiometricsForUniqueIdentifier:(NSString *)uniqueIdentifier NS_SWIFT_NAME(didAskToUseAuthenticationWithBiometrics(for:));
 + (void)setDidAskToUseAuthenticationWithBiometrics:(BOOL)askToUseAuthenticationWithBiometrics forUniqueIdentifier:(NSString *)uniqueIdentifier;
-+ (BOOL)shouldAddPasscodeToKeychainOnNextLoginForUniqueIdentifier:(NSString *)uniqueIdentifier;
-+ (void)setShouldAddPasscodeToKeychainOnNextLogin:(BOOL)shouldAddPasscodeToKeychainOnNextLogin forUniqueIdentifier:(NSString *)uniqueIdentifier;
-+ (void)resetForUniqueIdentifier:(NSString *)uniqueIdentifier;
+
++ (BOOL)shouldAddSecretToKeychainOnNextLoginForUniqueIdentifier:(NSString *)uniqueIdentifier NS_SWIFT_NAME(shouldAddSecretToKeychainOnNextLogin(for:));
++ (void)setShouldAddSecretToKeychainOnNextLogin:(BOOL)shouldAddPasscodeToKeychainOnNextLogin forUniqueIdentifier:(NSString *)uniqueIdentifier;
+
+// Data reset
+
++ (void)resetForUniqueIdentifier:(NSString *)uniqueIdentifier NS_SWIFT_NAME(reset(for:));
 
 @end
 
