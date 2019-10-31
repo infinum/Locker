@@ -13,11 +13,13 @@ typedef NS_CLOSED_ENUM(NSInteger, BiometricsType) {
     BiometricsTypeFaceID = 2
 };
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface Locker : NSObject
 
 + (void)setPasscode:(NSString *)passcode forUniqueIdentifier:(NSString *)uniqueIdentifier;
 + (void)deletePasscodeForUniqueIdentifier:(NSString *)uniqueIdentifier;
-+ (void)getCurrentPasscodeWithSuccess:(void(^)(NSString *passcode))success failure:(void(^)(OSStatus failureStatus))failure operationPrompt:(NSString *)operationPrompt forUniqueIdentifier:(NSString *)uniqueIdentifier;
++ (void)getCurrentPasscodeWithSuccess:(void(^)(NSString * _Nullable passcode))success failure:(void(^)(OSStatus failureStatus))failure operationPrompt:(NSString *)operationPrompt forUniqueIdentifier:(NSString *)uniqueIdentifier;
 + (BOOL)checkIfBiometricsSettingsAreChanged;
 + (BiometricsType)deviceSupportsAuthenticationWithBiometrics;
 + (BiometricsType)canUseAuthenticationWithBiometrics;
@@ -30,3 +32,5 @@ typedef NS_CLOSED_ENUM(NSInteger, BiometricsType) {
 + (void)resetForUniqueIdentifier:(NSString *)uniqueIdentifier;
 
 @end
+
+NS_ASSUME_NONNULL_END
