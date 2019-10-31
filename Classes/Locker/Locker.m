@@ -20,8 +20,8 @@
 {
     NSDictionary *query = @{
                             (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
-                            (__bridge id)kSecAttrService: [BiometricsManager keyKeychainServiceName],
-                            (__bridge id)kSecAttrAccount: [BiometricsManager keyKeychainAccountNameForUniqueIdentifier:uniqueIdentifier],
+                            (__bridge id)kSecAttrService: [Locker keyKeychainServiceName],
+                            (__bridge id)kSecAttrAccount: [Locker keyKeychainAccountNameForUniqueIdentifier:uniqueIdentifier],
                             (__bridge id)kSecMatchLimit: (__bridge id)kSecMatchLimitOne,
                             (__bridge id)kSecReturnData: @YES,
                             (__bridge id)kSecUseOperationPrompt: operationPrompt
@@ -54,8 +54,8 @@
 {
     NSDictionary *query = @{
                             (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
-                            (__bridge id)kSecAttrService: [BiometricsManager keyKeychainServiceName],
-                            (__bridge id)kSecAttrAccount: [BiometricsManager keyKeychainAccountNameForUniqueIdentifier:uniqueIdentifier],
+                            (__bridge id)kSecAttrService: [Locker keyKeychainServiceName],
+                            (__bridge id)kSecAttrAccount: [Locker keyKeychainAccountNameForUniqueIdentifier:uniqueIdentifier],
                             };
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -75,8 +75,8 @@
         
         NSDictionary *attributes = @{
                                      (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
-                                     (__bridge id)kSecAttrService: [BiometricsManager keyKeychainServiceName],
-                                     (__bridge id)kSecAttrAccount: [BiometricsManager keyKeychainAccountNameForUniqueIdentifier:uniqueIdentifier],
+                                     (__bridge id)kSecAttrService: [Locker keyKeychainServiceName],
+                                     (__bridge id)kSecAttrAccount: [Locker keyKeychainAccountNameForUniqueIdentifier:uniqueIdentifier],
                                      (__bridge id)kSecValueData: [passcode dataUsingEncoding:NSUTF8StringEncoding],
                                      (__bridge id)kSecUseAuthenticationUI: @NO,
                                      (__bridge id)kSecAttrAccessControl: (__bridge_transfer id)sacObject
@@ -86,8 +86,8 @@
             SecItemAdd((__bridge CFDictionaryRef)attributes, nil);
             
             // Store current LA policy domain state
-            NSData *newDomainState = [BiometricsManager currentLAPolicyDomainState];
-            [BiometricsManager setLAPolicyDomainState:newDomainState];
+            NSData *newDomainState = [Locker currentLAPolicyDomainState];
+            [Locker setLAPolicyDomainState:newDomainState];
         });
     });
 }
@@ -96,8 +96,8 @@
 {
     NSDictionary *query = @{
                             (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
-                            (__bridge id)kSecAttrService: [BiometricsManager keyKeychainServiceName],
-                            (__bridge id)kSecAttrAccount: [BiometricsManager keyKeychainAccountNameForUniqueIdentifier:uniqueIdentifier]
+                            (__bridge id)kSecAttrService: [Locker keyKeychainServiceName],
+                            (__bridge id)kSecAttrAccount: [Locker keyKeychainAccountNameForUniqueIdentifier:uniqueIdentifier]
                             };
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -109,7 +109,7 @@
 
 + (BiometricsType)deviceSupportsAuthenticationWithBiometrics
 {
-    if (BiometricsManager.deviceSupportsAuthenticationWithFaceID) {
+    if (Locker.deviceSupportsAuthenticationWithFaceID) {
         return BiometricsTypeFaceID;
     }
     
@@ -126,7 +126,7 @@
 
 + (BOOL)deviceSupportsAuthenticationWithFaceID
 {
-    if ([BiometricsManager canUseAuthenticationWithFaceID]) {
+    if ([Locker canUseAuthenticationWithFaceID]) {
         return YES;
     }
     
@@ -144,7 +144,7 @@
                    canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
                    error:nil];
     
-    if (canUse && BiometricsManager.canUseAuthenticationWithFaceID) {
+    if (canUse && Locker.canUseAuthenticationWithFaceID) {
         return BiometricsTypeFaceID;
     } else if (canUse) {
         return BiometricsTypeTouchID;
@@ -172,8 +172,8 @@
 {
     BOOL biometricsSettingsChanged = NO;
 
-    NSData *oldDomainState = [BiometricsManager savedLAPolicyDomainState];
-    NSData *newDomainState = [BiometricsManager currentLAPolicyDomainState];
+    NSData *oldDomainState = [Locker savedLAPolicyDomainState];
+    NSData *newDomainState = [Locker currentLAPolicyDomainState];
 
     // Check for domain state changes
     // For deactivated biometrics, LAContext in validation will return nil
@@ -184,7 +184,7 @@
     if (biometricsDeactivated && biometricSettingsDidChange) {
         biometricsSettingsChanged = YES;
 
-        [BiometricsManager setLAPolicyDomainState:newDomainState];
+        [Locker setLAPolicyDomainState:newDomainState];
     }
 
     return biometricsSettingsChanged;
@@ -192,36 +192,36 @@
 
 + (BOOL)shouldUseAuthenticationWithBiometricsForUniqueIdentifier:(NSString *)uniqueIdentifier
 {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:[BiometricsManager keyBiometricsIDActivatedForUniqueIdentifier:uniqueIdentifier]];
+    return [[NSUserDefaults standardUserDefaults] boolForKey:[Locker keyBiometricsIDActivatedForUniqueIdentifier:uniqueIdentifier]];
 }
 
 + (void)setShouldUseAuthenticationWithBiometrics:(BOOL)shouldUseAuthenticationWithBiometrics forUniqueIdentifier:(NSString *)uniqueIdentifier
 {
-    if (shouldUseAuthenticationWithBiometrics == NO && [BiometricsManager shouldAddPasscodeToKeychainOnNextLoginForUniqueIdentifier:uniqueIdentifier]) {
-        [BiometricsManager setShouldAddPasscodeToKeychainOnNextLogin:NO forUniqueIdentifier:uniqueIdentifier];
+    if (shouldUseAuthenticationWithBiometrics == NO && [Locker shouldAddPasscodeToKeychainOnNextLoginForUniqueIdentifier:uniqueIdentifier]) {
+        [Locker setShouldAddPasscodeToKeychainOnNextLogin:NO forUniqueIdentifier:uniqueIdentifier];
     }
     
-    [[NSUserDefaults standardUserDefaults] setBool:shouldUseAuthenticationWithBiometrics forKey:[BiometricsManager keyBiometricsIDActivatedForUniqueIdentifier:uniqueIdentifier]];
+    [[NSUserDefaults standardUserDefaults] setBool:shouldUseAuthenticationWithBiometrics forKey:[Locker keyBiometricsIDActivatedForUniqueIdentifier:uniqueIdentifier]];
 }
 
 + (BOOL)didAskToUseAuthenticationWithBiometricsForUniqueIdentifier:(NSString *)uniqueIdentifier
 {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:[BiometricsManager keyDidAskToUseBiometricsIDForUniqueIdentifier:uniqueIdentifier]];
+    return [[NSUserDefaults standardUserDefaults] boolForKey:[Locker keyDidAskToUseBiometricsIDForUniqueIdentifier:uniqueIdentifier]];
 }
 
 + (void)setDidAskToUseAuthenticationWithBiometrics:(BOOL)askToUseAuthenticationWithBiometrics forUniqueIdentifier:(NSString *)uniqueIdentifier
 {
-    [[NSUserDefaults standardUserDefaults] setBool:askToUseAuthenticationWithBiometrics forKey:[BiometricsManager keyDidAskToUseBiometricsIDForUniqueIdentifier:uniqueIdentifier]];
+    [[NSUserDefaults standardUserDefaults] setBool:askToUseAuthenticationWithBiometrics forKey:[Locker keyDidAskToUseBiometricsIDForUniqueIdentifier:uniqueIdentifier]];
 }
 
 + (BOOL)shouldAddPasscodeToKeychainOnNextLoginForUniqueIdentifier:(NSString *)uniqueIdentifier
 {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:[BiometricsManager keyShouldAddPasscodeToKeychainOnNextLoginForUniqueIdentifier:uniqueIdentifier]];
+    return [[NSUserDefaults standardUserDefaults] boolForKey:[Locker keyShouldAddPasscodeToKeychainOnNextLoginForUniqueIdentifier:uniqueIdentifier]];
 }
 
 + (void)setShouldAddPasscodeToKeychainOnNextLogin:(BOOL)shouldAddPasscodeToKeychainOnNextLogin forUniqueIdentifier:(NSString *)uniqueIdentifier
 {
-    [[NSUserDefaults standardUserDefaults] setBool:shouldAddPasscodeToKeychainOnNextLogin forKey:[BiometricsManager keyShouldAddPasscodeToKeychainOnNextLoginForUniqueIdentifier:uniqueIdentifier]];
+    [[NSUserDefaults standardUserDefaults] setBool:shouldAddPasscodeToKeychainOnNextLogin forKey:[Locker keyShouldAddPasscodeToKeychainOnNextLoginForUniqueIdentifier:uniqueIdentifier]];
 }
 
 + (NSData *)currentLAPolicyDomainState
@@ -233,20 +233,20 @@
 
 + (NSData *)savedLAPolicyDomainState
 {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:[BiometricsManager keyLAPolicyDomainState]];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:[Locker keyLAPolicyDomainState]];
 }
 
 + (void)setLAPolicyDomainState:(NSData *)domainState
 {
-    [[NSUserDefaults standardUserDefaults] setObject:domainState forKey:[BiometricsManager keyLAPolicyDomainState]];
+    [[NSUserDefaults standardUserDefaults] setObject:domainState forKey:[Locker keyLAPolicyDomainState]];
 }
 
 + (void)resetForUniqueIdentifier:(NSString *)uniqueIdentifier
 {
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[BiometricsManager keyDidAskToUseBiometricsIDForUniqueIdentifier:uniqueIdentifier]];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[BiometricsManager keyShouldAddPasscodeToKeychainOnNextLoginForUniqueIdentifier:uniqueIdentifier]];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[BiometricsManager keyBiometricsIDActivatedForUniqueIdentifier:uniqueIdentifier]];
-    [BiometricsManager deletePasscodeForUniqueIdentifier:uniqueIdentifier];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[Locker keyDidAskToUseBiometricsIDForUniqueIdentifier:uniqueIdentifier]];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[Locker keyShouldAddPasscodeToKeychainOnNextLoginForUniqueIdentifier:uniqueIdentifier]];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[Locker keyBiometricsIDActivatedForUniqueIdentifier:uniqueIdentifier]];
+    [Locker deletePasscodeForUniqueIdentifier:uniqueIdentifier];
 }
 
 #pragma mark - User defaults keys help methods
