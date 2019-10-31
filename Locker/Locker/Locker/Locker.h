@@ -6,12 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-typedef NS_CLOSED_ENUM(NSInteger, BiometricsType) {
-    BiometricsTypeNone = 0,
-    BiometricsTypeTouchID = 1,
-    BiometricsTypeFaceID = 2
-};
+#import "BiometricsType.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,7 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, class, readonly) BOOL biometricsSettingsAreChanged;
 @property (nonatomic, assign, class, readonly) BiometricsType deviceSupportsAuthenticationWithBiometrics;
 @property (nonatomic, assign, class, readonly) BiometricsType canUseAuthenticationWithBiometrics;
-
 
 // Handle secrets (store, delete, fetch)
 
