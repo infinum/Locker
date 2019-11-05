@@ -8,7 +8,6 @@
 
 import XCTest
 @testable import TouchID
-import Locker
 
 class TouchIDTests: XCTestCase {
 

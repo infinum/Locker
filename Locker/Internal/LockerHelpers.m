@@ -16,8 +16,9 @@
 @interface LockerHelpers()
 
 @property (nonatomic, strong, class, readonly) NSString *keyLAPolicyDomainState;
-@property (nonatomic, assign, class, readonly) BOOL deviceSupportsAuthenticationWithFaceID;
 @property (nonatomic, assign, class, readonly) BOOL canUseAuthenticationWithFaceID;
+@property (nonatomic, strong, class, readonly) NSString *deviceCode;
+@property (nonatomic, assign, class, readonly) BOOL deviceSupportsAuthenticationWithFaceID;
 @property (nonatomic, assign, class, readonly) BOOL isSimulator;
 
 @end
@@ -161,26 +162,27 @@
     return [NSString stringWithFormat:@"%@_UserDefaultsLAPolicyDomainState", kBundleIdentifier];
 }
 
++ (NSString *)deviceCode
+{
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    return [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
+}
+
 + (BOOL)deviceSupportsAuthenticationWithFaceID
 {
     if (LockerHelpers.canUseAuthenticationWithFaceID) {
         return YES;
     }
 
-    struct utsname systemInfo;
-    uname(&systemInfo);
-    NSString *code = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
     NSArray *faceIdDevices = @[@"iPhone10,3", @"iPhone10,6", @"iPhone11,2", @"iPhone11,4", @"iPhone11,6", @"iPhone11,8", @"iPhone12,1", @"iPhone12,3", @"iPhone12,5"];
 
-    return [faceIdDevices containsObject:code];
+    return [faceIdDevices containsObject:LockerHelpers.deviceCode];
 }
 
 + (BOOL)isSimulator
 {
-    struct utsname systemInfo;
-    uname(&systemInfo);
-    NSString *code = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
-    return [code isEqualToString:@"x86_64"];
+    return [LockerHelpers.deviceCode isEqualToString:@"x86_64"];
 }
 
 @end
