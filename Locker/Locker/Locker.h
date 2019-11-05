@@ -105,10 +105,10 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Used for saving whether secret should be stored to Keychain on next login.
  
- @param shouldAddPasscodeToKeychainOnNextLogin used to determine whether secret should be stored to Keychain on next login
+ @param shouldAddSecretToKeychainOnNextLogin used to determine whether secret should be stored to Keychain on next login
  @param uniqueIdentifier used for saving shouldAddPasscodeToKeychainOnNextLogin value
  */
-+ (void)setShouldAddSecretToKeychainOnNextLogin:(BOOL)shouldAddPasscodeToKeychainOnNextLogin forUniqueIdentifier:(NSString *)uniqueIdentifier;
++ (void)setShouldAddSecretToKeychainOnNextLogin:(BOOL)shouldAddSecretToKeychainOnNextLogin forUniqueIdentifier:(NSString *)uniqueIdentifier;
 
 
 #pragma mark - Data reset

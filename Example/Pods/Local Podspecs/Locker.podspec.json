@@ -16,6 +16,7 @@
     "tag": "2.0.0"
   },
   "source_files": "Locker/**/*.{h,m}",
+  "private_header_files": "Locker/Internal/**/*.h",
   "frameworks": [
     "UIKit",
     "LocalAuthentication",

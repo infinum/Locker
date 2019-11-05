@@ -57,7 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				06FB9484236B264700988BA1 /* Locker */,
-				06FB9487236B264700988BA1 /* Helpers */,
+				06FB9487236B264700988BA1 /* Internal */,
 			);
 			path = Locker;
 			sourceTree = "<group>";
@@ -65,20 +65,20 @@
 		06FB9484236B264700988BA1 /* Locker */ = {
 			isa = PBXGroup;
 			children = (
+				06FB9483236B264700988BA1 /* BiometricsType.h */,
 				06FB9486236B264700988BA1 /* Locker.h */,
 				06FB9485236B264700988BA1 /* Locker.m */,
 			);
 			path = Locker;
 			sourceTree = "<group>";
 		};
-		06FB9487236B264700988BA1 /* Helpers */ = {
+		06FB9487236B264700988BA1 /* Internal */ = {
 			isa = PBXGroup;
 			children = (
-				06FB9483236B264700988BA1 /* BiometricsType.h */,
 				06FB9489236B264700988BA1 /* LockerHelpers.h */,
 				06FB9488236B264700988BA1 /* LockerHelpers.m */,
 			);
-			path = Helpers;
+			path = Internal;
 			sourceTree = "<group>";
 		};
 		DF8FB4F71E8D119C00EC2740 = {

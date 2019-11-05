@@ -14,26 +14,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Check device support
 
-+ (BOOL)deviceSupportsAuthenticationWithFaceID;
-+ (BOOL)canUseAuthenticationWithFaceID;
-+ (BOOL)checkIfBiometricsSettingsAreChanged;
-+ (BiometricsType)checkIfDeviceSupportsAuthenticationWithBiometrics;
-+ (BiometricsType)checkIfCanUseAuthenticationWithBiometrics;
+@property (nonatomic, assign, class, readonly) BOOL biometricsSettingsAreChanged;
+@property (nonatomic, assign, class, readonly) BiometricsType deviceSupportsAuthenticationWithBiometrics;
+@property (nonatomic, assign, class, readonly) BiometricsType canUseAuthenticationWithBiometrics;
 
 // LAPolicy helpers
-
-+ (NSData *)currentLAPolicyDomainState;
-+ (NSData *)savedLAPolicyDomainState;
-+ (void)setLAPolicyDomainState:(NSData *)domainState;
++ (void)storeCurrentLAPolicyDomainState;
 
 // UserDefaults helpers
 
-+ (NSString *)keyKeychainServiceName;
+@property (nonatomic, strong, class, readonly) NSString *keyKeychainServiceName;
 + (NSString *)keyKeychainAccountNameForUniqueIdentifier:(NSString *)uniqueIdentifier;
 + (NSString *)keyDidAskToUseBiometricsIDForUniqueIdentifier:(NSString *)uniqueIdentifier;
 + (NSString *)keyBiometricsIDActivatedForUniqueIdentifier:(NSString *)uniqueIdentifier;
-+ (NSString *)keyShouldAddPasscodeToKeychainOnNextLoginForUniqueIdentifier:(NSString *)uniqueIdentifier;
-+ (NSString *)keyLAPolicyDomainState;
++ (NSString *)keyShouldAddSecretToKeychainOnNextLoginForUniqueIdentifier:(NSString *)uniqueIdentifier;
 
 @end
 
