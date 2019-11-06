@@ -19,7 +19,7 @@ Lightweight library for handling sensitive data (`String` type) in Keychain usin
 
 ## Installation
 
-The easiest way to use Locker in your project is by using the CocaPods package manager.
+The easiest way to use Locker in your project is by using the CocoaPods package manager.
 
 
 #### CocoaPods
@@ -53,7 +53,7 @@ For `uniqueIdentifier` pass `String` value You will later use to fetch Your data
 
 ```swift
 // Swift
-Locker.setSecret(@"passcode", for: "kUniqueIdentifier")
+Locker.setSecret("passcode", for: "kUniqueIdentifier")
 ```
 
  ##### 2. Fetch Your data with `retrieveCurrentSecretForUniqueIdentifier: operationPrompt: success: failure:`. 
