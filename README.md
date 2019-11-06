@@ -43,60 +43,88 @@ pod install
 
 ## Usage
 
-##### 1. Save Your data with `setPasscode: forUniqueIdentifier` method. 
+##### 1. Save Your data with `setSecret: forUniqueIdentifier:` method. 
 For `uniqueIdentifier` pass `String` value You will later use to fetch Your data.
 
 ```objective-c
 // Objective-C
-[BiometricsManager setPasscode:@"passcode" forUniqueIdentifier:@"kUniqueIdentifier"];
+[Locker setSecret:@"passcode" forUniqueIdentifier:@"kUniqueIdentifier"];
 ```
 
-##### 2. Fetch Your data with `getCurrentPasscodeWithSuccess: failure: operationPrompt: forUniqueIdentifier`. 
+```swift
+// Swift
+Locker.setSecret(@"passcode", for: "kUniqueIdentifier")
+```
+
+ ##### 2. Fetch Your data with `retrieveCurrentSecretForUniqueIdentifier: operationPrompt: success: failure:`. 
 `operationPrompt` is `String` value which will be displayed as message on system Touch ID dialog.
 You'll get Your data in `success` completion block. If, for some reason, Your data is not found in Keychain, You'll get error status in `failure` completion block.
 
 ```objective-c
 // Objective-C
-[BiometricsManager getCurrentPasscodeWithSuccess:^(NSString *passcode) {
-    // do sth with passcode        
+[Locker retrieveCurrentSecretForUniqueIdentifier:@"kUniqueIdentifier" operationPrompt:@"Touch ID description" success:^(NSString *secret) {
+    // do sth with secret        
 } failure:^(OSStatus failureStatus) {
     // handle failure
-} operationPrompt:@"Touch ID description" forUniqueIdentifier:@"kUniqueIdentifier"];
+}];
 ```
 
-##### 3. Delete data with `deletePasscodeForUniqueIdentifier` method.
+```swift
+// Swift
+Locker.retrieveCurrentSecret(for: "kUniqueIdentifier", operationPrompt: "Touch ID description", success: { (secret) in
+    // do sth with secret
+}, failure: { (failureStatus) in
+    // handle failure
+})
+```
+
+##### 3. Delete data with `deleteSecretForUniqueIdentifier:` method.
 
 ```objective-c
 // Objective-C
-[BiometricsManager deletePasscodeForUniqueIdentifier:@"kUniqueIdentifier"];
+[Locker deleteSecretForUniqueIdentifier:@"kUniqueIdentifier"];
 ```
 
-##### 4. If You need to update Your saved data, just call `setPasscode: forUniqueIdentifier`. This method first deletes old value, if there is one, and then saves new one. 
+```swift
+// Swift
+Locker.deleteSecret(for: "kUniqueIdentifier")
+```
+
+##### 4. If You need to update Your saved data, just call `setSecret: forUniqueIdentifier:`. This method first deletes old value, if there is one, and then saves new one. 
 
 ##### 5. There are some additional methods that may help You with handling the authentication with Biometric usage.
 
-Use `setShouldUseAuthenticationWithBiometrics: forUniqueIdentifier` method to save if Biometric ID should be used for fetching data from Keychain.
-Use `shouldUseAuthenticationWithBiometricsForUniqueIdentifier` method to fetch that info.
+Use `setShouldUseAuthenticationWithBiometrics: forUniqueIdentifier:` method to save if Biometric ID should be used for fetching data from Keychain.
+Use `shouldUseAuthenticationWithBiometricsForUniqueIdentifier:` method to fetch that info.
 
-Use `setDidAskToUseAuthenticationWithBiometrics: forUniqueIdentifier` method to save if user was asked to use Biometric ID for certain data.
-Use `didAskToUseAuthenticationWithBiometricsForUniqueIdentifier` method to fetch that info.
+Use `setDidAskToUseAuthenticationWithBiometrics: forUniqueIdentifier:` method to save if user was asked to use Biometric ID for certain data.
+Use `didAskToUseAuthenticationWithBiometricsForUniqueIdentifier:` method to fetch that info.
 
-Use `setShouldAddPasscodeToKeychainOnNextLogin: forUniqueIdentifier` method to save if data should be saved to Keychain on next user entering.
-Use `shouldAddPasscodeToKeychainOnNextLoginForUniqueIdentifier` method to fetch that info.
+Use `setShouldAddSecretToKeychainOnNextLogin: forUniqueIdentifier:` method to save if data should be saved to Keychain on next user entering.
+Use `shouldAddSecretToKeychainOnNextLoginForUniqueIdentifier:` method to fetch that info.
 
 Note: This methods are here because they were used on some of our projects.
 You should probably want to use the first two, `setShouldUseAuthenticationWithBiometrics: forUniqueIdentifier` and `shouldUseAuthenticationWithBiometricsForUniqueIdentifier`.
 The other ones will be useful if Your app has certain behaviour.
 
-##### 6. You can check for Biometric settings changes with `checkIfBiometricsSettingsAreChanged`.
+##### 6. You can check for Biometrics settings changes with `biometricsSettingsAreChanged`.
 It will return `true` if Biometric settings are changed since Your last calling this method or last saving in Keychain.
 
 ```objective-c
 // Objective-C
-BOOL biometrySettingsChanged = [BiometricsManager checkIfBiometricsSettingsAreChanged];
-BOOL usingBiometry = [BiometricsManager shouldUseAuthenticationWithBiometricsForUniqueIdentifier:@"kUniqueIdentifier"];
+BOOL biometrySettingsChanged = Locker.biometricsSettingsAreChanged;
+BOOL usingBiometry = [Locker shouldUseAuthenticationWithBiometricsForUniqueIdentifier:@"kUniqueIdentifier"];
 if (biometrySettingsChanged && usingBiometry) {
     // handle case when settings are changed and biometry should be used
+}
+```
+
+```swift
+// Swift
+let biometrySettingsChanged = Locker.biometricsSettingsAreChanged
+let usingBiometry = Locker.shouldUseAuthenticationWithBiometrics(for: "kUniqueIdentifier")
+if biometrySettingsChanged && usingBiometry {
+// handle case when settings are changed and biometry should be used
 }
 ```
 
