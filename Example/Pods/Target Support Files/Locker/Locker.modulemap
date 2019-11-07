@@ -1,0 +1,6 @@
+framework module Locker {
+  umbrella header "Locker-umbrella.h"
+
+  export *
+  module * { export * }
+}

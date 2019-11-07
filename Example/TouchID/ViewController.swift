@@ -7,33 +7,79 @@
 //
 
 import UIKit
-import BiometricsManager
+import Locker
 
-class ViewController: UIViewController {
+public final class ViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        switch BiometricsManager.deviceSupportsAuthenticationWithBiometrics() {
-        case .none:
-            print("Device doesnt support Biometrics")
-        case .touchID:
-            print("Device supports TouchID")
-        case .faceID:
-            print("Device supports FaceID")
-        }
-    }
+    // MARK: - Public properties -
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    let topSecret = "My Secret!"
 
+    // MARK: - Private properties -
 
+    private let identifier = "TouchIDSampleApp"
 }
 
+// MARK: - Locker usage -
+
+// MARK: Read Write Delete
+
+extension ViewController {
+
+    func storeSecret() {
+        Locker.setSecret(topSecret, for: identifier)
+    }
+
+    func readSecret(success: @escaping (String?) -> Void, failure: @escaping (OSStatus) -> Void) {
+        Locker.retrieveCurrentSecret(for: identifier, operationPrompt: "Unlock locker!", success: success, failure: failure)
+    }
+
+    func deleteSecret() {
+        Locker.deleteSecret(for: identifier)
+    }
+}
+
+// MARK: Device settings
+
+extension ViewController {
+
+    var settingsChanged: Bool {
+        return Locker.biometricsSettingsAreChanged
+    }
+
+    var deviceSupportsAuthenticationWithBiometrics: BiometricsType {
+        return Locker.deviceSupportsAuthenticationWithBiometrics
+    }
+
+    var canUseAuthenticationWithBiometrics: BiometricsType {
+        return Locker.canUseAuthenticationWithBiometrics
+    }
+}
+
+// MARK: Helpers
+
+extension ViewController {
+
+    var shouldUseAuthWithBiometrics: Bool {
+        get { return Locker.shouldUseAuthenticationWithBiometrics(for: identifier) }
+        set (newValue) { Locker.setShouldUseAuthenticationWithBiometrics(newValue, forUniqueIdentifier: identifier) }
+    }
+
+    var didAskToUseAuthWithBiometrics: Bool {
+        get { return Locker.didAskToUseAuthenticationWithBiometrics(for: identifier) }
+        set (newValue) { Locker.setDidAskToUseAuthenticationWithBiometrics(true, forUniqueIdentifier: identifier) }
+    }
+
+    var shouldAddSecretToKeychainOnNextLogin: Bool {
+        get { return Locker.shouldAddSecretToKeychainOnNextLogin(for: identifier) }
+        set (newValue) { Locker.setShouldAddSecretToKeychainOnNextLogin(true, forUniqueIdentifier: identifier) }
+    }
+}
+
+// MARK: Reseting
+
+extension ViewController {
+    func resetEverything() {
+        Locker.reset(for: identifier)
+    }
+}
