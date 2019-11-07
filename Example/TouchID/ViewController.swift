@@ -62,17 +62,17 @@ extension ViewController {
 
     var shouldUseAuthWithBiometrics: Bool {
         get { return Locker.shouldUseAuthenticationWithBiometrics(for: identifier) }
-        set (newValue) { Locker.setShouldUseAuthenticationWithBiometrics(newValue, forUniqueIdentifier: identifier) }
+        set (newValue) { Locker.setShouldUseAuthenticationWithBiometrics(newValue, for: identifier) }
     }
 
     var didAskToUseAuthWithBiometrics: Bool {
         get { return Locker.didAskToUseAuthenticationWithBiometrics(for: identifier) }
-        set (newValue) { Locker.setDidAskToUseAuthenticationWithBiometrics(true, forUniqueIdentifier: identifier) }
+        set (newValue) { Locker.setDidAskToUseAuthenticationWithBiometrics(true, for: identifier) }
     }
 
     var shouldAddSecretToKeychainOnNextLogin: Bool {
         get { return Locker.shouldAddSecretToKeychainOnNextLogin(for: identifier) }
-        set (newValue) { Locker.setShouldAddSecretToKeychainOnNextLogin(true, forUniqueIdentifier: identifier) }
+        set (newValue) { Locker.setShouldAddSecretToKeychainOnNextLogin(true, for: identifier) }
     }
 }
 
