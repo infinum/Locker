@@ -76,7 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param shouldUseAuthenticationWithBiometrics used to determine whether user enabled authentication with biometrics
  @param uniqueIdentifier used for saving shouldUseAuthenticationWithBiometrics value
  */
-+ (void)setShouldUseAuthenticationWithBiometrics:(BOOL)shouldUseAuthenticationWithBiometrics forUniqueIdentifier:(NSString *)uniqueIdentifier;
++ (void)setShouldUseAuthenticationWithBiometrics:(BOOL)shouldUseAuthenticationWithBiometrics forUniqueIdentifier:(NSString *)uniqueIdentifier NS_SWIFT_NAME(setShouldUseAuthenticationWithBiometrics(_:for:));
 
 /**
  Used for fetching whether user was asked to use authentication with biometrics.
@@ -92,7 +92,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param askToUseAuthenticationWithBiometrics used to determine whether user was asked to use authentication with biometrics
  @param uniqueIdentifier used for saving askToUseAuthenticationWithBiometrics value
  */
-+ (void)setDidAskToUseAuthenticationWithBiometrics:(BOOL)askToUseAuthenticationWithBiometrics forUniqueIdentifier:(NSString *)uniqueIdentifier;
++ (void)setDidAskToUseAuthenticationWithBiometrics:(BOOL)askToUseAuthenticationWithBiometrics forUniqueIdentifier:(NSString *)uniqueIdentifier NS_SWIFT_NAME(setDidAskToUseAuthenticationWithBiometrics(_:for:));
 
 /**
  Used for fetching whether secret should be stored to Keychain on next login.
@@ -108,7 +108,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param shouldAddSecretToKeychainOnNextLogin used to determine whether secret should be stored to Keychain on next login
  @param uniqueIdentifier used for saving shouldAddPasscodeToKeychainOnNextLogin value
  */
-+ (void)setShouldAddSecretToKeychainOnNextLogin:(BOOL)shouldAddSecretToKeychainOnNextLogin forUniqueIdentifier:(NSString *)uniqueIdentifier;
++ (void)setShouldAddSecretToKeychainOnNextLogin:(BOOL)shouldAddSecretToKeychainOnNextLogin forUniqueIdentifier:(NSString *)uniqueIdentifier NS_SWIFT_NAME(setShouldAddSecretToKeychainOnNextLogin(_:for:));
 
 
 #pragma mark - Data reset
