@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
                    DESC
   s.homepage     = "https://github.com/infinum/Locker.git"
   s.license      = "MIT"
-  s.author       = { "" => "barbara.vujicic@infinum.com" }
+  s.author       = { "Barbara Vujičić" => "barbara.vujicic@infinum.com" }
   s.platform     = :ios, "9.0"
   s.source       = { :git => "https://github.com/infinum/Locker.git", :tag => "#{s.version}" }
   s.source_files  = "Locker/**/*.{h,m}"
