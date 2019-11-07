@@ -62,7 +62,8 @@ You'll get Your data in `success` completion block. If, for some reason, Your da
 
 ```objective-c
 // Objective-C
-[Locker retrieveCurrentSecretForUniqueIdentifier:@"kUniqueIdentifier" operationPrompt:@"Touch ID description" success:^(NSString *secret) {
+[Locker retrieveCurrentSecretForUniqueIdentifier:@"kUniqueIdentifier" 
+ operationPrompt:@"Touch ID description" success:^(NSString *secret) {
     // do sth with secret        
 } failure:^(OSStatus failureStatus) {
     // handle failure
@@ -71,11 +72,15 @@ You'll get Your data in `success` completion block. If, for some reason, Your da
 
 ```swift
 // Swift
-Locker.retrieveCurrentSecret(for: "kUniqueIdentifier", operationPrompt: "Touch ID description", success: { (secret) in
+Locker.retrieveCurrentSecret(
+  for: "kUniqueIdentifier", 
+  operationPrompt: "Touch ID description", 
+  success: { (secret) in
     // do sth with secret
-}, failure: { (failureStatus) in
+  }, failure: { (failureStatus) in
     // handle failure
-})
+  }
+)
 ```
 
 ##### 3. Delete data with `deleteSecretForUniqueIdentifier:` method.
