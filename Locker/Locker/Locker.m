@@ -149,9 +149,9 @@
 
 #pragma mark - Getters -
 
-+ (BOOL)biometricsSettingsAreChanged
++ (BOOL)biometricsSettingsDidChange
 {
-    return LockerHelpers.biometricsSettingsAreChanged;
+    return LockerHelpers.biometricsSettingsChanged;
 }
 
 + (BiometricsType)deviceSupportsAuthenticationWithBiometrics
@@ -159,9 +159,9 @@
     return LockerHelpers.deviceSupportsAuthenticationWithBiometrics;
 }
 
-+ (BiometricsType)canUseAuthenticationWithBiometrics
++ (BiometricsType)configuredBiometricsAuthentication
 {
-    return LockerHelpers.canUseAuthenticationWithBiometrics;
+    return LockerHelpers.configuredBiometricsAuthentication;
 }
 
 @end

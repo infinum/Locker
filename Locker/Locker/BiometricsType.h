@@ -6,7 +6,7 @@
 //
 
 typedef NS_CLOSED_ENUM(NSInteger, BiometricsType) {
-    BiometricsTypeNone = 0,
-    BiometricsTypeTouchID = 1,
-    BiometricsTypeFaceID = 2
+    BiometricsTypeNone,
+    BiometricsTypeTouchID,
+    BiometricsTypeFaceID
 };

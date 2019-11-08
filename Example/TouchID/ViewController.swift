@@ -44,15 +44,15 @@ extension ViewController {
 extension ViewController {
 
     var settingsChanged: Bool {
-        return Locker.biometricsSettingsAreChanged
+        return Locker.biometricsSettingsDidChange
     }
 
     var deviceSupportsAuthenticationWithBiometrics: BiometricsType {
         return Locker.deviceSupportsAuthenticationWithBiometrics
     }
 
-    var canUseAuthenticationWithBiometrics: BiometricsType {
-        return Locker.canUseAuthenticationWithBiometrics
+    var configuredBiometricsAuthentication: BiometricsType {
+        return Locker.configuredBiometricsAuthentication
     }
 }
 

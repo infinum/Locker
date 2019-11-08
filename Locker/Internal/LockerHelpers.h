@@ -14,9 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Check device support
 
-@property (nonatomic, assign, class, readonly) BOOL biometricsSettingsAreChanged;
+@property (nonatomic, assign, class, readonly) BOOL biometricsSettingsChanged;
 @property (nonatomic, assign, class, readonly) BiometricsType deviceSupportsAuthenticationWithBiometrics;
-@property (nonatomic, assign, class, readonly) BiometricsType canUseAuthenticationWithBiometrics;
+@property (nonatomic, assign, class, readonly) BiometricsType configuredBiometricsAuthentication;
 
 // LAPolicy helpers
 + (void)storeCurrentLAPolicyDomainState;
