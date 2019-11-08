@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Locker"
-  s.version      = "2.0.1"
+  s.version      = "2.0.2"
   s.summary      = "Securely lock your secrets under the watch of TouchID or FaceID keeper 🔒"
   s.description  = <<-DESC
                   Lightweight manager for saving, fetching and updating secrets (string value) in Keychain using Biometric Authentication. 
