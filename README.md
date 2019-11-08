@@ -2,6 +2,14 @@
 
 ![Bitrise](https://img.shields.io/bitrise/eb8928b119a9df30?token=753GPSmElQJ1aRfplKYJLw) ![GitHub](https://img.shields.io/github/license/infinum/Locker) ![Cocoapods](https://img.shields.io/cocoapods/v/Locker) ![Cocoapods platforms](https://img.shields.io/cocoapods/p/Locker) 
 
+
+
+<p align="center">
+    <img src="./Locker-github.jpg" width="700" max-width="50%" alt="Locker"/>
+</p>
+
+
+
 Lightweight library for handling sensitive data (`String` type) in Keychain using iOS Biometric features.
 
 ## Features

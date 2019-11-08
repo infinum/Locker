@@ -79,9 +79,9 @@
 
 #pragma mark - Getters
 
-+ (BOOL)biometricsSettingsAreChanged
++ (BOOL)biometricsSettingsChanged
 {
-    BOOL biometricsSettingsChanged = NO;
+    BOOL biometricsSettingsChangedStatus = NO;
 
     NSData *oldDomainState = [LockerHelpers savedLAPolicyDomainState];
     NSData *newDomainState = [LockerHelpers currentLAPolicyDomainState];
@@ -93,12 +93,12 @@
     BOOL biometricsDeactivated = (oldDomainState || newDomainState);
     BOOL biometricSettingsDidChange = ![oldDomainState isEqual:newDomainState];
     if (biometricsDeactivated && biometricSettingsDidChange) {
-        biometricsSettingsChanged = YES;
+        biometricsSettingsChangedStatus = YES;
 
         [LockerHelpers setLAPolicyDomainState:newDomainState];
     }
 
-    return biometricsSettingsChanged;
+    return biometricsSettingsChangedStatus;
 }
 
 + (BOOL)canUseAuthenticationWithFaceID
@@ -137,7 +137,7 @@
     return BiometricsTypeTouchID;
 }
 
-+ (BiometricsType)canUseAuthenticationWithBiometrics
++ (BiometricsType)configuredBiometricsAuthentication
 {
     BOOL canUse = [[[LAContext alloc] init]
                    canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics

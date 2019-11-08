@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Boolean value that indicates if biometric settings have changed
  */
-@property (nonatomic, assign, class, readonly) BOOL biometricsSettingsAreChanged;
+@property (nonatomic, assign, class, readonly) BOOL biometricsSettingsDidChange;
 
 /**
  The biometrics type that the device supports (None, TouchID, FaceID).
@@ -26,9 +26,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, class, readonly) BiometricsType deviceSupportsAuthenticationWithBiometrics;
 
 /**
- The biometrics type that the device supports which is enabled in the device settings.
+ The biometrics type that the device supports which is enabled and configured in the device settings.
  */
-@property (nonatomic, assign, class, readonly) BiometricsType canUseAuthenticationWithBiometrics;
+@property (nonatomic, assign, class, readonly) BiometricsType configuredBiometricsAuthentication;
 
 
 #pragma mark - Handle secrets (store, delete, fetch)
