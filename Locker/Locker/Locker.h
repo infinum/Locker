@@ -21,6 +21,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, class, readonly) BOOL biometricsSettingsDidChange;
 
 /**
+ Boolean value that indicates if Locker is running from the simulator
+
+ As Simulator does not support Keychain storage, Locker run from the simulator
+ will use UserDefaults storage instead.
+ */
+@property (nonatomic, assign, class, readonly) BOOL isRunningFromTheSimulator;
+
+/**
  The biometrics type that the device supports (None, TouchID, FaceID).
  */
 @property (nonatomic, assign, class, readonly) BiometricsType deviceSupportsAuthenticationWithBiometrics;
@@ -35,6 +43,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Used for storing value to Keychain with unique identifier.
+
+ If Locker is run on the Simulator, the secret will not be stored securely in the keychain.
+ Instead, the UserDefaults storage will be used.
 
  @param secret value to store to Keychain
  @param uniqueIdentifier unique key used for storing secret

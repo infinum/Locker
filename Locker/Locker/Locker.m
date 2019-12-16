@@ -15,6 +15,9 @@
 
 + (void)setSecret:(NSString *)secret forUniqueIdentifier:(NSString *)uniqueIdentifier
 {
+    #if TARGET_OS_SIMULATOR
+    [[NSUserDefaults standardUserDefaults] setObject:secret forKey:uniqueIdentifier];
+    #else
     NSDictionary *query = @{
                             (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
                             (__bridge id)kSecAttrService: [LockerHelpers keyKeychainServiceName],
@@ -52,10 +55,19 @@
             [LockerHelpers storeCurrentLAPolicyDomainState];
         });
     });
+    #endif
 }
 
 + (void)retrieveCurrentSecretForUniqueIdentifier:(NSString *)uniqueIdentifier operationPrompt:(NSString *)operationPrompt success:(void(^)(NSString * _Nullable secret))success failure:(void(^)(OSStatus failureStatus))failure
 {
+    #if TARGET_OS_SIMULATOR
+    NSString *simulatorSecret = [[NSUserDefaults standardUserDefaults] stringForKey:uniqueIdentifier];
+    if (!simulatorSecret) {
+        failure(errSecItemNotFound);
+        return;
+    }
+    success(simulatorSecret);
+    #else
     NSDictionary *query = @{
                             (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
                             (__bridge id)kSecAttrService: [LockerHelpers keyKeychainServiceName],
@@ -86,10 +98,15 @@
             }
         }
     });
+    #endif
 }
 
 + (void)deleteSecretForUniqueIdentifier:(NSString *)uniqueIdentifier
 {
+
+    #if TARGET_OS_SIMULATOR
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:uniqueIdentifier];
+    #else
     NSDictionary *query = @{
                             (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
                             (__bridge id)kSecAttrService: [LockerHelpers keyKeychainServiceName],
@@ -99,6 +116,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         SecItemDelete((__bridge CFDictionaryRef)(query));
     });
+    #endif
 }
 
 #pragma mark - Additional helpers
@@ -152,6 +170,15 @@
 + (BOOL)biometricsSettingsDidChange
 {
     return LockerHelpers.biometricsSettingsChanged;
+}
+
++ (BOOL)isRunningFromTheSimulator
+{
+    #if TARGET_OS_SIMULATOR
+    return YES;
+    #else
+    return NO;
+    #endif
 }
 
 + (BiometricsType)deviceSupportsAuthenticationWithBiometrics
