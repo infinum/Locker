@@ -20,6 +20,7 @@ Lightweight library for handling sensitive data (`String` type) in Keychain usin
   * There are additional methods that help you with saving and fetching some additional info regarding the authentication with biometric usage.
   * Detect changes in Biometric settings.
   * Check if device has support for certain Biometric ID.
+  * Detect and supports Simulator.
 
 ## Requirements
 
@@ -64,7 +65,10 @@ For `uniqueIdentifier` pass `String` value You will later use to fetch Your data
 Locker.setSecret("passcode", for: "kUniqueIdentifier")
 ```
 
+> If Locker is run from the Simulator, instead of storing it into the Keychain, Locker will store data to the `UserDefaults`. You can check if Locker is running from the simulator with `isRunningFromTheSimulator` property.
+
  ##### 2. Fetch Your data with `retrieveCurrentSecretForUniqueIdentifier: operationPrompt: success: failure:`. 
+
 `operationPrompt` is `String` value which will be displayed as message on system Touch ID dialog.
 You'll get Your data in `success` completion block. If, for some reason, Your data is not found in Keychain, You'll get error status in `failure` completion block.
 
