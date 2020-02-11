@@ -17,6 +17,7 @@ class TouchIDTests: XCTestCase {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
         containerViewController = ViewController()
+        containerViewController.setUserDefaults()
     }
 
     // MARK: - Store Retrieve and Delete -

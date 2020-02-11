@@ -15,6 +15,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Properties
 
+
+/**
+ User defaults used for storing shouldUseAuthenticationWithBiometrics, askToUseAuthenticationWithBiometrics and shouldAddPasscodeToKeychainOnNextLogin values
+
+ Should be set once before using any other Locker methods.
+ If not set, standard user defaults will be used.
+ */
+@property (nonatomic, strong, class, nullable) NSUserDefaults *userDefaults;
+
 /**
  Boolean value that indicates if biometric settings have changed
  */
@@ -74,7 +83,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Additional helpers
 
 /**
-  Used for fetching whether user enabled authentication with biometrics.
+ Used for fetching whether user enabled authentication with biometrics.
 
  @param uniqueIdentifier used for fetching shouldUseAuthenticationWithBiometrics value
  @return used to determine whether user enabled authentication with biometrics

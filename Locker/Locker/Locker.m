@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "LockerHelpers.h"
 
+static NSUserDefaults *currentUserDefaults;
+
 @implementation Locker
 
 #pragma mark - Handle secrets (store, delete, fetch)
@@ -16,7 +18,7 @@
 + (void)setSecret:(NSString *)secret forUniqueIdentifier:(NSString *)uniqueIdentifier
 {
     #if TARGET_OS_SIMULATOR
-    [[NSUserDefaults standardUserDefaults] setObject:secret forKey:uniqueIdentifier];
+    [currentUserDefaults setObject:secret forKey:uniqueIdentifier];
     #else
     NSDictionary *query = @{
                             (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
@@ -61,7 +63,7 @@
 + (void)retrieveCurrentSecretForUniqueIdentifier:(NSString *)uniqueIdentifier operationPrompt:(NSString *)operationPrompt success:(void(^)(NSString * _Nullable secret))success failure:(void(^)(OSStatus failureStatus))failure
 {
     #if TARGET_OS_SIMULATOR
-    NSString *simulatorSecret = [[NSUserDefaults standardUserDefaults] stringForKey:uniqueIdentifier];
+    NSString *simulatorSecret = [currentUserDefaults stringForKey:uniqueIdentifier];
     if (!simulatorSecret) {
         failure(errSecItemNotFound);
         return;
@@ -105,7 +107,7 @@
 {
 
     #if TARGET_OS_SIMULATOR
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:uniqueIdentifier];
+    [currentUserDefaults removeObjectForKey:uniqueIdentifier];
     #else
     NSDictionary *query = @{
                             (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
@@ -123,7 +125,7 @@
 
 + (BOOL)shouldUseAuthenticationWithBiometricsForUniqueIdentifier:(NSString *)uniqueIdentifier
 {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:[LockerHelpers keyBiometricsIDActivatedForUniqueIdentifier:uniqueIdentifier]];
+    return [currentUserDefaults boolForKey:[LockerHelpers keyBiometricsIDActivatedForUniqueIdentifier:uniqueIdentifier]];
 }
 
 + (void)setShouldUseAuthenticationWithBiometrics:(BOOL)shouldUseAuthenticationWithBiometrics forUniqueIdentifier:(NSString *)uniqueIdentifier
@@ -132,36 +134,36 @@
         [Locker setShouldAddSecretToKeychainOnNextLogin:NO forUniqueIdentifier:uniqueIdentifier];
     }
     
-    [[NSUserDefaults standardUserDefaults] setBool:shouldUseAuthenticationWithBiometrics forKey:[LockerHelpers keyBiometricsIDActivatedForUniqueIdentifier:uniqueIdentifier]];
+    [currentUserDefaults setBool:shouldUseAuthenticationWithBiometrics forKey:[LockerHelpers keyBiometricsIDActivatedForUniqueIdentifier:uniqueIdentifier]];
 }
 
 + (BOOL)didAskToUseAuthenticationWithBiometricsForUniqueIdentifier:(NSString *)uniqueIdentifier
 {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:[LockerHelpers keyDidAskToUseBiometricsIDForUniqueIdentifier:uniqueIdentifier]];
+    return [currentUserDefaults boolForKey:[LockerHelpers keyDidAskToUseBiometricsIDForUniqueIdentifier:uniqueIdentifier]];
 }
 
 + (void)setDidAskToUseAuthenticationWithBiometrics:(BOOL)askToUseAuthenticationWithBiometrics forUniqueIdentifier:(NSString *)uniqueIdentifier
 {
-    [[NSUserDefaults standardUserDefaults] setBool:askToUseAuthenticationWithBiometrics forKey:[LockerHelpers keyDidAskToUseBiometricsIDForUniqueIdentifier:uniqueIdentifier]];
+    [currentUserDefaults setBool:askToUseAuthenticationWithBiometrics forKey:[LockerHelpers keyDidAskToUseBiometricsIDForUniqueIdentifier:uniqueIdentifier]];
 }
 
 + (BOOL)shouldAddSecretToKeychainOnNextLoginForUniqueIdentifier:(NSString *)uniqueIdentifier
 {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:[LockerHelpers keyShouldAddSecretToKeychainOnNextLoginForUniqueIdentifier:uniqueIdentifier]];
+    return [currentUserDefaults boolForKey:[LockerHelpers keyShouldAddSecretToKeychainOnNextLoginForUniqueIdentifier:uniqueIdentifier]];
 }
 
 + (void)setShouldAddSecretToKeychainOnNextLogin:(BOOL)shouldAddSecretToKeychainOnNextLogin forUniqueIdentifier:(NSString *)uniqueIdentifier
 {
-    [[NSUserDefaults standardUserDefaults] setBool:shouldAddSecretToKeychainOnNextLogin forKey:[LockerHelpers keyShouldAddSecretToKeychainOnNextLoginForUniqueIdentifier:uniqueIdentifier]];
+    [currentUserDefaults setBool:shouldAddSecretToKeychainOnNextLogin forKey:[LockerHelpers keyShouldAddSecretToKeychainOnNextLoginForUniqueIdentifier:uniqueIdentifier]];
 }
 
 #pragma mark - Data reset
 
 + (void)resetForUniqueIdentifier:(NSString *)uniqueIdentifier;
 {
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[LockerHelpers keyDidAskToUseBiometricsIDForUniqueIdentifier:uniqueIdentifier]];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[LockerHelpers keyShouldAddSecretToKeychainOnNextLoginForUniqueIdentifier:uniqueIdentifier]];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[LockerHelpers keyBiometricsIDActivatedForUniqueIdentifier:uniqueIdentifier]];
+    [currentUserDefaults removeObjectForKey:[LockerHelpers keyDidAskToUseBiometricsIDForUniqueIdentifier:uniqueIdentifier]];
+    [currentUserDefaults removeObjectForKey:[LockerHelpers keyShouldAddSecretToKeychainOnNextLoginForUniqueIdentifier:uniqueIdentifier]];
+    [currentUserDefaults removeObjectForKey:[LockerHelpers keyBiometricsIDActivatedForUniqueIdentifier:uniqueIdentifier]];
     [Locker deleteSecretForUniqueIdentifier:uniqueIdentifier];
 }
 
@@ -189,6 +191,22 @@
 + (BiometricsType)configuredBiometricsAuthentication
 {
     return LockerHelpers.configuredBiometricsAuthentication;
+}
+
++ (NSUserDefaults *)userDefaults
+{
+    return currentUserDefaults;
+}
+
+#pragma mark - Setters -
+
++ (void)setUserDefaults:(NSUserDefaults *)userDefaults
+{
+    if (userDefaults == nil) {
+        currentUserDefaults = [NSUserDefaults standardUserDefaults];
+    } else {
+        currentUserDefaults = userDefaults;
+    }
 }
 
 @end
