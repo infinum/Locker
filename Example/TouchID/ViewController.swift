@@ -65,8 +65,12 @@ extension ViewController {
 
 extension ViewController {
 
-    func setUserDefaults() {
+    func setCustomUserDefaults() {
         Locker.userDefaults = UserDefaults(suiteName: "customDomain")
+    }
+
+    func resetUserDefaults() {
+        Locker.userDefaults = nil
     }
 }
 
