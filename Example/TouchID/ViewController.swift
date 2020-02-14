@@ -18,6 +18,7 @@ public final class ViewController: UIViewController {
     // MARK: - Private properties -
 
     private let identifier = "TouchIDSampleApp"
+
 }
 
 // MARK: - Locker usage -
@@ -57,6 +58,19 @@ extension ViewController {
 
     var configuredBiometricsAuthentication: BiometricsType {
         return Locker.configuredBiometricsAuthentication
+    }
+}
+
+// MARK: User defaults
+
+extension ViewController {
+
+    func setCustomUserDefaults() {
+        Locker.userDefaults = UserDefaults(suiteName: "customDomain")
+    }
+
+    func resetUserDefaults() {
+        Locker.userDefaults = nil
     }
 }
 

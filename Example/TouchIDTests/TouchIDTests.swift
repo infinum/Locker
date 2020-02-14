@@ -19,8 +19,35 @@ class TouchIDTests: XCTestCase {
         containerViewController = ViewController()
     }
 
+    override func tearDown() {
+        containerViewController.resetUserDefaults()
+        super.tearDown()
+    }
+
     // MARK: - Store Retrieve and Delete -
     func testStoreAndRetrieveSecret() {
+
+        // Store
+        containerViewController.storeSecret()
+
+        // Retrieve
+        let asyncExpectation = expectation(description: "Async block executed")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.containerViewController.readSecret(success: { (secret) in
+                XCTAssertEqual(secret, self.containerViewController.topSecret)
+                asyncExpectation.fulfill()
+            }, failure: { _ in
+                XCTFail("Error while retrieve the secret")
+                asyncExpectation.fulfill()
+            })
+        }
+
+        waitForExpectations(timeout: 3, handler: nil)
+    }
+
+    func testStoreAndRetrieveSecretWithCustomUserDefaults() {
+
+        containerViewController.setCustomUserDefaults()
 
         // Store
         containerViewController.storeSecret()
@@ -90,12 +117,30 @@ class TouchIDTests: XCTestCase {
         XCTAssertTrue(containerViewController.shouldUseAuthWithBiometrics)
     }
 
+    func testShouldUseAuthFlagWithCustomUserDefaults() {
+        containerViewController.setCustomUserDefaults()
+        containerViewController.shouldUseAuthWithBiometrics = true
+        XCTAssertTrue(containerViewController.shouldUseAuthWithBiometrics)
+    }
+
     func testDidAskToUseAuthWithBiometrics() {
         containerViewController.didAskToUseAuthWithBiometrics = true
         XCTAssertTrue(containerViewController.didAskToUseAuthWithBiometrics)
     }
 
+    func testDidAskToUseAuthWithBiometricsWithCustomUserDefaults() {
+        containerViewController.setCustomUserDefaults()
+        containerViewController.didAskToUseAuthWithBiometrics = true
+        XCTAssertTrue(containerViewController.didAskToUseAuthWithBiometrics)
+    }
+
     func testShouldAddSecretToKeychainOnNextLogin() {
+        containerViewController.shouldAddSecretToKeychainOnNextLogin = true
+        XCTAssertTrue(containerViewController.shouldAddSecretToKeychainOnNextLogin)
+    }
+
+    func testShouldAddSecretToKeychainOnNextLoginWithCustomUserDefaults() {
+        containerViewController.setCustomUserDefaults()
         containerViewController.shouldAddSecretToKeychainOnNextLogin = true
         XCTAssertTrue(containerViewController.shouldAddSecretToKeychainOnNextLogin)
     }
