@@ -52,6 +52,16 @@ pod install
 
 ## Usage
 
+##### 0. Setup Xcode project `Info.plist` with required permission for **Face ID** usage.
+- add following to your **Info.plist** from drop down menu
+    - Privacy - Face ID usage description
+    - after new field was added, provide meaningful description
+- e.g. (when viewed as source code)
+```xml
+<key>NSFaceIDUsageDescription</key>
+<string>** Add your Face ID Usage Description **</string>
+```
+
 ##### 1. Save Your data with `setSecret: forUniqueIdentifier:` method. 
 For `uniqueIdentifier` pass `String` value You will later use to fetch Your data.
 
