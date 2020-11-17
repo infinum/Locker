@@ -175,7 +175,7 @@
         return YES;
     }
 
-    NSArray *faceIdDevices = @[@"iPhone10,3", @"iPhone10,6", @"iPhone11,2", @"iPhone11,4", @"iPhone11,6", @"iPhone11,8", @"iPhone12,1", @"iPhone12,3", @"iPhone12,5"];
+    NSArray *touchIdDevices = @[@"iPhone6,1", @"iPhone6,2", @"iPhone7,2", @"iPhone7,1", @"iPhone8,1", @"iPhone8,2", @"iPhone8,4", @"iPhone9,1", @"iPhone9,3", @"iPhone9,2", @"iPhone9,4", @"iPhone10,1", @"iPhone10,4", @"iPhone10,2", @"iPhone10,5", @"iPhone12,8", @"iPad4,7", @"iPad4,8", @"iPad4,9", @"iPad5,1", @"iPad5,2", @"iPad4,1", @"iPad4,2", @"iPad4,3", @"iPad5,3", @"iPad5,4", @"iPad6,3", @"iPad6,4", @"iPad6,7", @"iPad6,8", @"iPad6,11", @"iPad6,12", @"iPad7,1", @"iPad7,2", @"iPad7,3", @"iPad7,4", @"iPad7,5", @"iPad7,6", @"iPad7,11", @"iPad7,12", @"iPad11,3", @"iPad11,4", @"iPad11,6", @"iPad11,7", @"iPad13,1", @"iPad13,2"];
 
     return [faceIdDevices containsObject:LockerHelpers.deviceCode];
 }
