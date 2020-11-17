@@ -24,7 +24,7 @@ Lightweight library for handling sensitive data (`String` type) in Keychain usin
 
 ## Requirements
 
-- iOS 9.0 +
+- iOS 10.0 +
 
 ## Installation
 
@@ -38,7 +38,7 @@ See installation instructions for [CocoaPods](http://cocoapods.org) if not alrea
 To integrate the library into your Xcode project specify the pod dependency to your `Podfile`:
 
 ```ruby
-platform :ios, '9.0'
+platform :ios, '10.0'
 use_frameworks!
 
 pod 'Locker'
