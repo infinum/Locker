@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/infinum/Locker.git"
   s.license      = "MIT"
   s.author       = { "Barbara Vujičić" => "barbara.vujicic@infinum.com" }
-  s.platform     = :ios, "9.0"
+  s.platform     = :ios, "10.0"
   s.source       = { :git => "https://github.com/infinum/Locker.git", :tag => "#{s.version}" }
   s.source_files  = "Locker/**/*.{h,m}"
   s.private_header_files = "Locker/Internal/**/*.h"
