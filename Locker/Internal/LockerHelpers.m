@@ -16,9 +16,9 @@
 @interface LockerHelpers()
 
 @property (nonatomic, strong, class, readonly) NSString *keyLAPolicyDomainState;
-@property (nonatomic, assign, class, readonly) BOOL canUseAuthenticationWithFaceID;
+@property (nonatomic, assign, class, readonly) BOOL canUseAuthenticationWithTouchID;
 @property (nonatomic, strong, class, readonly) NSString *deviceCode;
-@property (nonatomic, assign, class, readonly) BOOL deviceSupportsAuthenticationWithFaceID;
+@property (nonatomic, assign, class, readonly) BOOL deviceSupportsAuthenticationWithTouchID;
 @property (nonatomic, assign, class, readonly) BOOL isSimulator;
 
 @end
@@ -101,7 +101,7 @@
     return biometricsSettingsChangedStatus;
 }
 
-+ (BOOL)canUseAuthenticationWithFaceID
++ (BOOL)canUseAuthenticationWithTouchID
 {
     LAContext *context = [LAContext new];
     NSError *error;
@@ -169,9 +169,9 @@
     return [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
 }
 
-+ (BOOL)deviceSupportsAuthenticationWithFaceID
++ (BOOL)deviceSupportsAuthenticationWithTouchID
 {
-    if (LockerHelpers.canUseAuthenticationWithFaceID) {
+    if (LockerHelpers.canUseAuthenticationWithTouchID) {
         return YES;
     }
 
