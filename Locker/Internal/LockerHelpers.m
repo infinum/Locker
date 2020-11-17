@@ -108,7 +108,7 @@
 
     if (@available(iOS 11.0, *)) {
         if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error] && [context respondsToSelector:@selector(biometryType)]) {
-            if (context.biometryType == LABiometryTypeFaceID) {
+            if (context.biometryType == LABiometryTypeTouchID) {
                 return YES;
             }
         }
@@ -118,8 +118,8 @@
 
 + (BiometricsType)deviceSupportsAuthenticationWithBiometrics
 {
-    if (LockerHelpers.deviceSupportsAuthenticationWithFaceID) {
-        return BiometricsTypeFaceID;
+    if (LockerHelpers.canUseAuthenticationWithTouchID) {
+        return BiometricsTypeTouchID;
     }
 
     LAContext *context = [[LAContext alloc] init];
@@ -143,10 +143,10 @@
                    canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
                    error:nil];
 
-    if (canUse && LockerHelpers.canUseAuthenticationWithFaceID) {
-        return BiometricsTypeFaceID;
-    } else if (canUse) {
+    if (canUse && LockerHelpers.canUseAuthenticationWithTouchID) {
         return BiometricsTypeTouchID;
+    } else if (canUse) {
+        return BiometricsTypeFaceID;
     } else {
         return BiometricsTypeNone;
     }
@@ -177,7 +177,7 @@
 
     NSArray *touchIdDevices = @[@"iPhone6,1", @"iPhone6,2", @"iPhone7,2", @"iPhone7,1", @"iPhone8,1", @"iPhone8,2", @"iPhone8,4", @"iPhone9,1", @"iPhone9,3", @"iPhone9,2", @"iPhone9,4", @"iPhone10,1", @"iPhone10,4", @"iPhone10,2", @"iPhone10,5", @"iPhone12,8", @"iPad4,7", @"iPad4,8", @"iPad4,9", @"iPad5,1", @"iPad5,2", @"iPad4,1", @"iPad4,2", @"iPad4,3", @"iPad5,3", @"iPad5,4", @"iPad6,3", @"iPad6,4", @"iPad6,7", @"iPad6,8", @"iPad6,11", @"iPad6,12", @"iPad7,1", @"iPad7,2", @"iPad7,3", @"iPad7,4", @"iPad7,5", @"iPad7,6", @"iPad7,11", @"iPad7,12", @"iPad11,3", @"iPad11,4", @"iPad11,6", @"iPad11,7", @"iPad13,1", @"iPad13,2"];
 
-    return ![touchIdDevices containsObject:LockerHelpers.deviceCode];
+    return [touchIdDevices containsObject:LockerHelpers.deviceCode];
 }
 
 + (BOOL)isSimulator
