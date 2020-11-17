@@ -118,7 +118,7 @@
 
 + (BiometricsType)deviceSupportsAuthenticationWithBiometrics
 {
-    if (LockerHelpers.canUseAuthenticationWithTouchID) {
+    if (LockerHelpers.deviceSupportsAuthenticationWithTouchID) {
         return BiometricsTypeTouchID;
     }
 
