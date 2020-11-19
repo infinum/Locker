@@ -175,7 +175,33 @@
         return YES;
     }
 
-    NSArray *faceIdDevices = @[@"iPhone10,3", @"iPhone10,6", @"iPhone11,2", @"iPhone11,4", @"iPhone11,6", @"iPhone11,8", @"iPhone12,1", @"iPhone12,3", @"iPhone12,5", @"iPhone13,1", @"iPhone13,2", @"iPhone13,3", @"iPhone13,4", @"iPad8,9", @"iPad8,1", @"iPad8,2", @"iPad8,3", @"iPad8,4", @"iPad8,5", @"iPad8,6", @"iPad8,7", @"iPad8,8", @"iPad8,9", @"iPad8,10", @"iPad8,11", @"iPad8,12"];
+    NSArray *faceIdDevices = @[
+        @"iPhone10,3", // iPhone X Global
+        @"iPhone10,6", // iPhone X GSM
+        @"iPhone11,2", // iPhone XS
+        @"iPhone11,4", // iPhone XS Max
+        @"iPhone11,6", // iPhone XS Max Global
+        @"iPhone11,8", // iPhone XR
+        @"iPhone12,1", // iPhone 11
+        @"iPhone12,3", // iPhone 11 Pro
+        @"iPhone12,5", // iPhone 11 Pro Max
+        @"iPhone13,1", // iPhone 12 Mini
+        @"iPhone13,2", // iPhone 12
+        @"iPhone13,3", // iPhone 12 Pro
+        @"iPhone13,4", // iPhone 12 Pro Max
+        @"iPad8,1", //  iPad Pro 11 inch 3rd Gen (WiFi)
+        @"iPad8,2", //  iPad Pro 11 inch 3rd Gen (1TB, WiFi)
+        @"iPad8,3", //  iPad Pro 11 inch 3rd Gen (WiFi+Cellular)
+        @"iPad8,4", //  iPad Pro 11 inch 3rd Gen (1TB, WiFi+Cellular)
+        @"iPad8,5", //  iPad Pro 12.9 inch 3rd Gen (WiFi)
+        @"iPad8,6", //  iPad Pro 12.9 inch 3rd Gen (1TB, WiFi)
+        @"iPad8,7", //  iPad Pro 12.9 inch 3rd Gen (WiFi+Cellular)
+        @"iPad8,8", //  iPad Pro 12.9 inch 3rd Gen (1TB, WiFi+Cellular)
+        @"iPad8,9", //  iPad Pro 11 inch 4th Gen (WiFi)
+        @"iPad8,10", // iPad Pro 11 inch 4th Gen (WiFi+Cellular)
+        @"iPad8,11", // iPad Pro 12.9 inch 4th Gen (WiFi)
+        @"iPad8,12" //  iPad Pro 12.9 inch 4th Gen (WiFi+Cellular)
+    ];
 
     return [faceIdDevices containsObject:LockerHelpers.deviceCode];
 }
