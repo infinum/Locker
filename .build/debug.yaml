@@ -1,0 +1,41 @@
+client:
+  name: basic
+tools: {}
+targets:
+  "Locker-debug.module": ["<Locker-debug.module>"]
+  "PackageStructure": ["<PackageStructure>"]
+  "main": ["<Locker-debug.module>"]
+  "test": ["<Locker-debug.module>"]
+default: "main"
+nodes:
+  "/Users/zvonimirmedak/Documents/Locker/Sources/":
+    is-directory-structure: true
+commands:
+  "/Users/zvonimirmedak/Documents/Locker/.build/x86_64-apple-macosx/debug/Locker.build/Locker/Locker/Locker.m.o":
+    tool: clang
+    inputs: ["/Users/zvonimirmedak/Documents/Locker/Sources/Locker/Locker/Locker.m"]
+    outputs: ["/Users/zvonimirmedak/Documents/Locker/.build/x86_64-apple-macosx/debug/Locker.build/Locker/Locker/Locker.m.o"]
+    description: "Compiling Locker Locker/Locker/Locker.m"
+    args: ["/Users/zvonimirmedak/Downloads/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang","-fobjc-arc","-target","x86_64-apple-macosx10.10","-isysroot","/Users/zvonimirmedak/Downloads/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk","-F","/Users/zvonimirmedak/Downloads/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-fPIC","-g","-O0","-DSWIFT_PACKAGE=1","-DDEBUG=1","-fblocks","-index-store-path","/Users/zvonimirmedak/Documents/Locker/.build/x86_64-apple-macosx/debug/index/store","-fmodules","-fmodule-name=Locker","-I","/Users/zvonimirmedak/Documents/Locker/Sources/include","-fmodules-cache-path=/Users/zvonimirmedak/Documents/Locker/.build/x86_64-apple-macosx/debug/ModuleCache","-MD","-MT","dependencies","-MF","/Users/zvonimirmedak/Documents/Locker/.build/x86_64-apple-macosx/debug/Locker.build/Locker/Locker/Locker.m.d","-c","/Users/zvonimirmedak/Documents/Locker/Sources/Locker/Locker/Locker.m","-o","/Users/zvonimirmedak/Documents/Locker/.build/x86_64-apple-macosx/debug/Locker.build/Locker/Locker/Locker.m.o"]
+    deps: "/Users/zvonimirmedak/Documents/Locker/.build/x86_64-apple-macosx/debug/Locker.build/Locker/Locker/Locker.m.d"
+
+  "/Users/zvonimirmedak/Documents/Locker/.build/x86_64-apple-macosx/debug/Locker.build/Locker/Locker/LockerHelpers.m.o":
+    tool: clang
+    inputs: ["/Users/zvonimirmedak/Documents/Locker/Sources/Locker/Locker/LockerHelpers.m"]
+    outputs: ["/Users/zvonimirmedak/Documents/Locker/.build/x86_64-apple-macosx/debug/Locker.build/Locker/Locker/LockerHelpers.m.o"]
+    description: "Compiling Locker Locker/Locker/LockerHelpers.m"
+    args: ["/Users/zvonimirmedak/Downloads/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang","-fobjc-arc","-target","x86_64-apple-macosx10.10","-isysroot","/Users/zvonimirmedak/Downloads/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk","-F","/Users/zvonimirmedak/Downloads/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-fPIC","-g","-O0","-DSWIFT_PACKAGE=1","-DDEBUG=1","-fblocks","-index-store-path","/Users/zvonimirmedak/Documents/Locker/.build/x86_64-apple-macosx/debug/index/store","-fmodules","-fmodule-name=Locker","-I","/Users/zvonimirmedak/Documents/Locker/Sources/include","-fmodules-cache-path=/Users/zvonimirmedak/Documents/Locker/.build/x86_64-apple-macosx/debug/ModuleCache","-MD","-MT","dependencies","-MF","/Users/zvonimirmedak/Documents/Locker/.build/x86_64-apple-macosx/debug/Locker.build/Locker/Locker/LockerHelpers.m.d","-c","/Users/zvonimirmedak/Documents/Locker/Sources/Locker/Locker/LockerHelpers.m","-o","/Users/zvonimirmedak/Documents/Locker/.build/x86_64-apple-macosx/debug/Locker.build/Locker/Locker/LockerHelpers.m.o"]
+    deps: "/Users/zvonimirmedak/Documents/Locker/.build/x86_64-apple-macosx/debug/Locker.build/Locker/Locker/LockerHelpers.m.d"
+
+  "<Locker-debug.module>":
+    tool: phony
+    inputs: ["/Users/zvonimirmedak/Documents/Locker/.build/x86_64-apple-macosx/debug/Locker.build/Locker/Locker/Locker.m.o","/Users/zvonimirmedak/Documents/Locker/.build/x86_64-apple-macosx/debug/Locker.build/Locker/Locker/LockerHelpers.m.o"]
+    outputs: ["<Locker-debug.module>"]
+
+  "PackageStructure":
+    tool: package-structure-tool
+    inputs: ["/Users/zvonimirmedak/Documents/Locker/Sources/","/Users/zvonimirmedak/Documents/Locker/Package.swift","/Users/zvonimirmedak/Documents/Locker/Package.resolved"]
+    outputs: ["<PackageStructure>"]
+    description: "Planning build"
+    allow-missing-inputs: true
+
