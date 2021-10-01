@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		377E10AB2706E979006BD249 /* Lockerr in Frameworks */ = {isa = PBXBuildFile; productRef = 377E10AA2706E979006BD249 /* Lockerr */; };
 		AB567BE52049A57C003ABEE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB567BE42049A57C003ABEE0 /* AppDelegate.swift */; };
 		AB567BE72049A57C003ABEE0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB567BE62049A57C003ABEE0 /* ViewController.swift */; };
 		AB567BEA2049A57C003ABEE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB567BE82049A57C003ABEE0 /* Main.storyboard */; };
@@ -26,7 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		377FD4862705D07A0006AD3F /* Locker */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Locker; path = ..; sourceTree = "<group>"; };
+		377E10AD2706E9A5006BD249 /* Lockerr */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Lockerr; path = ..; sourceTree = "<group>"; };
 		AB567BE12049A57C003ABEE0 /* TouchID.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TouchID.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB567BE42049A57C003ABEE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB567BE62049A57C003ABEE0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -44,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				377E10AB2706E979006BD249 /* Lockerr in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,10 +66,17 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		377FD4852705D07A0006AD3F /* Packages */ = {
+		377E10A92706E979006BD249 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				377FD4862705D07A0006AD3F /* Locker */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		377E10AC2706E9A5006BD249 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				377E10AD2706E9A5006BD249 /* Lockerr */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -75,11 +84,12 @@
 		AB567BD82049A57C003ABEE0 = {
 			isa = PBXGroup;
 			children = (
-				377FD4852705D07A0006AD3F /* Packages */,
+				377E10AC2706E9A5006BD249 /* Packages */,
 				AB567BE32049A57C003ABEE0 /* TouchID */,
 				AB567BF82049A57C003ABEE0 /* TouchIDTests */,
 				AB567BE22049A57C003ABEE0 /* Products */,
 				1860A71C98A721BC83577021 /* Pods */,
+				377E10A92706E979006BD249 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -130,6 +140,9 @@
 			dependencies = (
 			);
 			name = TouchID;
+			packageProductDependencies = (
+				377E10AA2706E979006BD249 /* Lockerr */,
+			);
 			productName = TouchID;
 			productReference = AB567BE12049A57C003ABEE0 /* TouchID.app */;
 			productType = "com.apple.product-type.application";
@@ -362,7 +375,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -374,7 +388,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5F5M64F878;
 				INFOPLIST_FILE = TouchID/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.infinum.TouchID;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -389,7 +406,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5F5M64F878;
 				INFOPLIST_FILE = TouchID/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.infinum.TouchID;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -405,7 +425,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5F5M64F878;
 				INFOPLIST_FILE = TouchIDTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.infinum.TouchIDTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -422,7 +446,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5F5M64F878;
 				INFOPLIST_FILE = TouchIDTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.infinum.TouchIDTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -462,6 +490,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		377E10AA2706E979006BD249 /* Lockerr */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Lockerr;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AB567BD92049A57C003ABEE0 /* Project object */;
 }
