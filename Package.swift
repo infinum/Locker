@@ -21,6 +21,6 @@ let package = Package(
         .target(
             name: "Locker",
             dependencies: [],
-            path: "Sources/")
+            path: "Sources/Locker/")
     ]
 )

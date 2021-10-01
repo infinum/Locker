@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		377E10AB2706E979006BD249 /* Lockerr in Frameworks */ = {isa = PBXBuildFile; productRef = 377E10AA2706E979006BD249 /* Lockerr */; };
+		37D35DC12706F2FC00AF91C2 /* LockerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 37D35DC02706F2FC00AF91C2 /* LockerKit */; };
 		AB567BE52049A57C003ABEE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB567BE42049A57C003ABEE0 /* AppDelegate.swift */; };
 		AB567BE72049A57C003ABEE0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB567BE62049A57C003ABEE0 /* ViewController.swift */; };
 		AB567BEA2049A57C003ABEE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB567BE82049A57C003ABEE0 /* Main.storyboard */; };
@@ -27,7 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		377E10AD2706E9A5006BD249 /* Lockerr */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Lockerr; path = ..; sourceTree = "<group>"; };
+		37D35DBF2706F2F400AF91C2 /* Lockerr */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Lockerr; path = ..; sourceTree = "<group>"; };
 		AB567BE12049A57C003ABEE0 /* TouchID.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TouchID.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB567BE42049A57C003ABEE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB567BE62049A57C003ABEE0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -45,7 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				377E10AB2706E979006BD249 /* Lockerr in Frameworks */,
+				37D35DC12706F2FC00AF91C2 /* LockerKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,10 +73,10 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		377E10AC2706E9A5006BD249 /* Packages */ = {
+		37D347252706EE10002F0F41 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				377E10AD2706E9A5006BD249 /* Lockerr */,
+				37D35DBF2706F2F400AF91C2 /* Lockerr */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -84,7 +84,7 @@
 		AB567BD82049A57C003ABEE0 = {
 			isa = PBXGroup;
 			children = (
-				377E10AC2706E9A5006BD249 /* Packages */,
+				37D347252706EE10002F0F41 /* Packages */,
 				AB567BE32049A57C003ABEE0 /* TouchID */,
 				AB567BF82049A57C003ABEE0 /* TouchIDTests */,
 				AB567BE22049A57C003ABEE0 /* Products */,
@@ -141,7 +141,7 @@
 			);
 			name = TouchID;
 			packageProductDependencies = (
-				377E10AA2706E979006BD249 /* Lockerr */,
+				37D35DC02706F2FC00AF91C2 /* LockerKit */,
 			);
 			productName = TouchID;
 			productReference = AB567BE12049A57C003ABEE0 /* TouchID.app */;
@@ -195,6 +195,8 @@
 				Base,
 			);
 			mainGroup = AB567BD82049A57C003ABEE0;
+			packageReferences = (
+			);
 			productRefGroup = AB567BE22049A57C003ABEE0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -492,9 +494,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		377E10AA2706E979006BD249 /* Lockerr */ = {
+		37D35DC02706F2FC00AF91C2 /* LockerKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = Lockerr;
+			productName = LockerKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
