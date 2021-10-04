@@ -15,7 +15,7 @@
     "git": "https://github.com/infinum/Locker.git",
     "tag": "2.3.4"
   },
-  "source_files": "Sources/Locker/Include/*.{h,m}",
+  "source_files": "Sources/Locker/**/*.swift",
   "exclude_files": [
     "Sources/Locker/Include/Locker-umbrella.h"
   ],
