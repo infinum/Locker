@@ -171,18 +171,18 @@ public class Locker: Lockable {
     // MARK: - Additional helpers
 
     public static func shouldUseAuthenticationWithBiometrics(for uniqueIdentifier: String) -> Bool {
-        Locker.userDefaults?.bool(forKey: LockerHelpers.keyBiometricsIDActivated(for: uniqueIdentifier)) ?? false
+        return Locker.userDefaults?.bool(forKey: LockerHelpers.keyBiometricsIDActivated(for: uniqueIdentifier)) ?? false
     }
 
     public static func setShouldUseAuthenticationWithBiometrics(_ shouldUse: Bool, for uniqueIdentifier: String) {
         if shouldUse == false && Locker.shouldAddSecretToKeychainOnNextLogin(for: uniqueIdentifier) {
             Locker.setShouldAddSecretToKeychainOnNextLogin(false, for: uniqueIdentifier)
         }
-        Locker.userDefaults?.set(shouldUseAuthenticationWithBiometrics(for: LockerHelpers.keyBiometricsIDActivated(for: uniqueIdentifier)), forKey: uniqueIdentifier)
+        Locker.userDefaults?.set(shouldUse, forKey: LockerHelpers.keyBiometricsIDActivated(for: uniqueIdentifier))
     }
 
     public static func didAskToUseAuthenticationWithBiometrics(for uniqueIdentifier: String) -> Bool {
-        Locker.userDefaults?.bool(forKey: LockerHelpers.keyBiometricsIDActivated(for: uniqueIdentifier)) ?? false
+        Locker.userDefaults?.bool(forKey: LockerHelpers.keyDidAskToUserBiometricsID(for: uniqueIdentifier)) ?? false
     }
 
     public static func setDidAskToUseAuthenticationWithBiometrics(_ useAuthenticationBiometrics: Bool, for uniqueIdentifier: String) {
