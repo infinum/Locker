@@ -83,11 +83,8 @@ class LockerHelpers: LockerHelpable {
         if LockerHelpers.canUseAuthenticationWithFaceID {
             completion(true)
         } else {
-            AF.request(
-                deviceList.api,
-                method: .get
-            ).validate().responseData { data in
-                guard let data = data.data else {
+            URLSession.shared.dataTask(with: deviceList.api) { data, _, error in
+                guard let data = data, error == nil else {
                     completion(false)
                     return
                 }
@@ -95,10 +92,9 @@ class LockerHelpers: LockerHelpable {
                     let deviceList = try JSONDecoder().decode(DeviceResponse.self, from: data).devices
                     completion(deviceList.contains(LockerHelpers.deviceCode))
                 } catch {
-                    print(error)
                     completion(false)
                 }
-            }
+            }.resume()
         }
     }
 
