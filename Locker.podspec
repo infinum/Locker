@@ -13,5 +13,6 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/infinum/Locker.git", :tag => "#{s.version}" }
   s.source_files  = "Sources/Locker/**/*.swift"
   s.exclude_files = [ 'Sources/Locker/Include/Locker-umbrella.h' ]
+  s.dependency 'Alamofire'
   s.frameworks = "UIKit", "LocalAuthentication", "Security"
 end
