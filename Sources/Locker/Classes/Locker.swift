@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 #endif
 
-@available(macOS 10.13.2, *)
+@available(macOS 10.13.4, *)
 public class Locker: Lockable {
 
     // MARK: - Private properties
@@ -42,8 +42,10 @@ public class Locker: Lockable {
         TARGET_OS_SIMULATOR != 0 ? true : false
     }
 
-    public static var deviceSupportsAuthenticationWithBiometrics: BiometricsType {
-        LockerHelpers.deviceSupportsAuthenticationWithBiometrics
+    public static func deviceSupportsAuthenticationWithBiometrics(_ completion: @escaping ((BiometricsType) -> Void)) {
+        LockerHelpers.deviceSupportsAuthenticationWithBiometrics { biometryType in
+            completion(biometryType)
+        }
     }
 
     public static var configuredBiometricsAuthentication: BiometricsType {

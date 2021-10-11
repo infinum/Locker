@@ -33,11 +33,6 @@ protocol Lockable {
     static var isRunningFromTheSimulator: Bool { get }
 
     /**
-     The biometrics type that the device supports (None, TouchID, FaceID).
-     */
-    static var deviceSupportsAuthenticationWithBiometrics: BiometricsType { get }
-
-    /**
      The biometrics type that the device supports which is enabled and configured in the device settings.
      */
     static var configuredBiometricsAuthentication: BiometricsType { get }
@@ -124,6 +119,12 @@ protocol Lockable {
      @param uniqueIdentifier used for saving shouldAddPasscodeToKeychainOnNextLogin value
      */
     static func setShouldAddSecretToKeychainOnNextLogin(_ shouldAdd: Bool, for uniqueIdentifier: String)
+
+    /**
+     The biometrics type that the device supports (None, TouchID, FaceID).
+     Closure is used to get the deviceList from an API
+     */
+    static func deviceSupportsAuthenticationWithBiometrics(_ completion: @escaping ((BiometricsType) -> Void))
 
 
     // MARK: - Data reset
