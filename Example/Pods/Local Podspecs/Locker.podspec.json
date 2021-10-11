@@ -19,11 +19,6 @@
   "exclude_files": [
     "Sources/Locker/Include/Locker-umbrella.h"
   ],
-  "dependencies": {
-    "Alamofire": [
-
-    ]
-  },
   "frameworks": [
     "UIKit",
     "LocalAuthentication",
