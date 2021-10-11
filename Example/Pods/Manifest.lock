@@ -1,16 +1,23 @@
 PODS:
-  - Locker (2.3.4)
+  - Alamofire (5.4.4)
+  - Locker (2.3.4):
+    - Alamofire
 
 DEPENDENCIES:
   - Locker (from `../Locker.podspec`)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
 
 EXTERNAL SOURCES:
   Locker:
     :path: "../Locker.podspec"
 
 SPEC CHECKSUMS:
-  Locker: 27c43b5719b5b249356dafdaac95304cae1a2d28
+  Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
+  Locker: 0d2805376d4efd2d717f80fd732ae6b846d4ea18
 
-PODFILE CHECKSUM: ffc994a4ed4a9f019de7d9c4cae5147951c79fd6
+PODFILE CHECKSUM: 2f4d4a211d85178f90c49bc27512af032afe2b9e
 
 COCOAPODS: 1.11.0

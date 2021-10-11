@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		90007AC26AC5065F2A42E0B0 /* Pods_TouchID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5FB95A7B1992F34ADEF3E16 /* Pods_TouchID.framework */; };
-		A164011274D4E4E5BF7EC64B /* Pods_TouchIDTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26C454D0653FEE831F3EB897 /* Pods_TouchIDTests.framework */; };
+		36F4BEC554914F4681100779 /* Pods_TouchIDTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E403DFE513FE18C11037BB0A /* Pods_TouchIDTests.framework */; };
 		AB567BE52049A57C003ABEE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB567BE42049A57C003ABEE0 /* AppDelegate.swift */; };
 		AB567BE72049A57C003ABEE0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB567BE62049A57C003ABEE0 /* ViewController.swift */; };
 		AB567BEA2049A57C003ABEE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB567BE82049A57C003ABEE0 /* Main.storyboard */; };
 		AB567BEC2049A57C003ABEE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB567BEB2049A57C003ABEE0 /* Assets.xcassets */; };
 		AB567BEF2049A57C003ABEE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB567BED2049A57C003ABEE0 /* LaunchScreen.storyboard */; };
 		AB567BFA2049A57C003ABEE0 /* TouchIDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB567BF92049A57C003ABEE0 /* TouchIDTests.swift */; };
+		F308E46A2703E3ECD4B0860C /* Pods_TouchID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8852004169079CEB3FB8B521 /* Pods_TouchID.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,9 +28,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		10B24FF75DF9C31626B7B772 /* Pods-TouchID.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouchID.release.xcconfig"; path = "Target Support Files/Pods-TouchID/Pods-TouchID.release.xcconfig"; sourceTree = "<group>"; };
-		162BEBC059C705ED8AC9ECE6 /* Pods-TouchID.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouchID.debug.xcconfig"; path = "Target Support Files/Pods-TouchID/Pods-TouchID.debug.xcconfig"; sourceTree = "<group>"; };
-		26C454D0653FEE831F3EB897 /* Pods_TouchIDTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TouchIDTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4048305F66CAAA9085059CE8 /* Pods-TouchID.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouchID.release.xcconfig"; path = "Target Support Files/Pods-TouchID/Pods-TouchID.release.xcconfig"; sourceTree = "<group>"; };
+		502F2F72F8BAA576BBD997D2 /* Pods-TouchIDTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouchIDTests.debug.xcconfig"; path = "Target Support Files/Pods-TouchIDTests/Pods-TouchIDTests.debug.xcconfig"; sourceTree = "<group>"; };
+		74893E02631B8C0F6BDB36F0 /* Pods-TouchIDTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouchIDTests.release.xcconfig"; path = "Target Support Files/Pods-TouchIDTests/Pods-TouchIDTests.release.xcconfig"; sourceTree = "<group>"; };
+		8852004169079CEB3FB8B521 /* Pods_TouchID.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TouchID.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB567BE12049A57C003ABEE0 /* TouchID.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TouchID.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB567BE42049A57C003ABEE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB567BE62049A57C003ABEE0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -41,9 +42,8 @@
 		AB567BF52049A57C003ABEE0 /* TouchIDTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TouchIDTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB567BF92049A57C003ABEE0 /* TouchIDTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchIDTests.swift; sourceTree = "<group>"; };
 		AB567BFB2049A57C003ABEE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B3E44DEFF05B5B399718EA08 /* Pods-TouchIDTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouchIDTests.debug.xcconfig"; path = "Target Support Files/Pods-TouchIDTests/Pods-TouchIDTests.debug.xcconfig"; sourceTree = "<group>"; };
-		C5FB95A7B1992F34ADEF3E16 /* Pods_TouchID.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TouchID.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D514548DFAAE39E7524757AD /* Pods-TouchIDTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouchIDTests.release.xcconfig"; path = "Target Support Files/Pods-TouchIDTests/Pods-TouchIDTests.release.xcconfig"; sourceTree = "<group>"; };
+		BC4EC1288380CE1A533FE727 /* Pods-TouchID.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TouchID.debug.xcconfig"; path = "Target Support Files/Pods-TouchID/Pods-TouchID.debug.xcconfig"; sourceTree = "<group>"; };
+		E403DFE513FE18C11037BB0A /* Pods_TouchIDTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TouchIDTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,7 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90007AC26AC5065F2A42E0B0 /* Pods_TouchID.framework in Frameworks */,
+				F308E46A2703E3ECD4B0860C /* Pods_TouchID.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A164011274D4E4E5BF7EC64B /* Pods_TouchIDTests.framework in Frameworks */,
+				36F4BEC554914F4681100779 /* Pods_TouchIDTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,21 +69,12 @@
 		1860A71C98A721BC83577021 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				162BEBC059C705ED8AC9ECE6 /* Pods-TouchID.debug.xcconfig */,
-				10B24FF75DF9C31626B7B772 /* Pods-TouchID.release.xcconfig */,
-				B3E44DEFF05B5B399718EA08 /* Pods-TouchIDTests.debug.xcconfig */,
-				D514548DFAAE39E7524757AD /* Pods-TouchIDTests.release.xcconfig */,
+				BC4EC1288380CE1A533FE727 /* Pods-TouchID.debug.xcconfig */,
+				4048305F66CAAA9085059CE8 /* Pods-TouchID.release.xcconfig */,
+				502F2F72F8BAA576BBD997D2 /* Pods-TouchIDTests.debug.xcconfig */,
+				74893E02631B8C0F6BDB36F0 /* Pods-TouchIDTests.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		37CD47DC270B42D000E9AF2E /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				C5FB95A7B1992F34ADEF3E16 /* Pods_TouchID.framework */,
-				26C454D0653FEE831F3EB897 /* Pods_TouchIDTests.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		AB567BD82049A57C003ABEE0 = {
@@ -93,7 +84,7 @@
 				AB567BF82049A57C003ABEE0 /* TouchIDTests */,
 				AB567BE22049A57C003ABEE0 /* Products */,
 				1860A71C98A721BC83577021 /* Pods */,
-				37CD47DC270B42D000E9AF2E /* Frameworks */,
+				D1B801E703FFE8152A0CBEDA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,11 +101,11 @@
 			isa = PBXGroup;
 			children = (
 				AB567BE42049A57C003ABEE0 /* AppDelegate.swift */,
+				AB567BF02049A57C003ABEE0 /* Info.plist */,
 				AB567BE62049A57C003ABEE0 /* ViewController.swift */,
 				AB567BE82049A57C003ABEE0 /* Main.storyboard */,
 				AB567BEB2049A57C003ABEE0 /* Assets.xcassets */,
 				AB567BED2049A57C003ABEE0 /* LaunchScreen.storyboard */,
-				AB567BF02049A57C003ABEE0 /* Info.plist */,
 			);
 			path = TouchID;
 			sourceTree = "<group>";
@@ -128,6 +119,15 @@
 			path = TouchIDTests;
 			sourceTree = "<group>";
 		};
+		D1B801E703FFE8152A0CBEDA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8852004169079CEB3FB8B521 /* Pods_TouchID.framework */,
+				E403DFE513FE18C11037BB0A /* Pods_TouchIDTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,19 +135,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AB567BFE2049A57C003ABEE0 /* Build configuration list for PBXNativeTarget "TouchID" */;
 			buildPhases = (
-				99F39577B663DE238A8AC137 /* [CP] Check Pods Manifest.lock */,
+				CA9F3E987E291F08FDA9FC81 /* [CP] Check Pods Manifest.lock */,
 				AB567BDD2049A57C003ABEE0 /* Sources */,
 				AB567BDE2049A57C003ABEE0 /* Frameworks */,
 				AB567BDF2049A57C003ABEE0 /* Resources */,
-				A07F7DA633A75E871111DDD4 /* [CP] Embed Pods Frameworks */,
+				5C58B3329207F21372D0CE81 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = TouchID;
-			packageProductDependencies = (
-			);
 			productName = TouchID;
 			productReference = AB567BE12049A57C003ABEE0 /* TouchID.app */;
 			productType = "com.apple.product-type.application";
@@ -156,7 +154,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AB567C012049A57C003ABEE0 /* Build configuration list for PBXNativeTarget "TouchIDTests" */;
 			buildPhases = (
-				E5C93168561E8CCCCD7DE39F /* [CP] Check Pods Manifest.lock */,
+				30C1301C12C3A44610330657 /* [CP] Check Pods Manifest.lock */,
 				AB567BF12049A57C003ABEE0 /* Sources */,
 				AB567BF22049A57C003ABEE0 /* Frameworks */,
 				AB567BF32049A57C003ABEE0 /* Resources */,
@@ -232,47 +230,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		99F39577B663DE238A8AC137 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-TouchID-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A07F7DA633A75E871111DDD4 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TouchID/Pods-TouchID-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Locker/Locker.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Locker.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TouchID/Pods-TouchID-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E5C93168561E8CCCCD7DE39F /* [CP] Check Pods Manifest.lock */ = {
+		30C1301C12C3A44610330657 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -288,6 +246,48 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-TouchIDTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5C58B3329207F21372D0CE81 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TouchID/Pods-TouchID-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Locker/Locker.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Locker.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TouchID/Pods-TouchID-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CA9F3E987E291F08FDA9FC81 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TouchID-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -453,14 +453,14 @@
 		};
 		AB567BFF2049A57C003ABEE0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 162BEBC059C705ED8AC9ECE6 /* Pods-TouchID.debug.xcconfig */;
+			baseConfigurationReference = BC4EC1288380CE1A533FE727 /* Pods-TouchID.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T4AA5M3MX8;
 				INFOPLIST_FILE = TouchID/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = co.infinum.TouchID;
+				PRODUCT_BUNDLE_IDENTIFIER = com.infinum.TouchID;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -469,14 +469,14 @@
 		};
 		AB567C002049A57C003ABEE0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 10B24FF75DF9C31626B7B772 /* Pods-TouchID.release.xcconfig */;
+			baseConfigurationReference = 4048305F66CAAA9085059CE8 /* Pods-TouchID.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T4AA5M3MX8;
 				INFOPLIST_FILE = TouchID/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = co.infinum.TouchID;
+				PRODUCT_BUNDLE_IDENTIFIER = com.infinum.TouchID;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -485,7 +485,7 @@
 		};
 		AB567C022049A57C003ABEE0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B3E44DEFF05B5B399718EA08 /* Pods-TouchIDTests.debug.xcconfig */;
+			baseConfigurationReference = 502F2F72F8BAA576BBD997D2 /* Pods-TouchIDTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -503,7 +503,7 @@
 		};
 		AB567C032049A57C003ABEE0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D514548DFAAE39E7524757AD /* Pods-TouchIDTests.release.xcconfig */;
+			baseConfigurationReference = 74893E02631B8C0F6BDB36F0 /* Pods-TouchIDTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

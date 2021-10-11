@@ -52,8 +52,10 @@ extension ViewController {
         return Locker.isRunningFromTheSimulator
     }
 
-    var deviceSupportsAuthenticationWithBiometrics: BiometricsType {
-        return Locker.deviceSupportsAuthenticationWithBiometrics
+    func deviceSupportsAuthenticationWithBiometrics(_ completion: @escaping ((BiometricsType) -> Void)) {
+        Locker.deviceSupportsAuthenticationWithBiometrics { biometricsType in
+            completion(biometricsType)
+        }
     }
 
     var configuredBiometricsAuthentication: BiometricsType {
