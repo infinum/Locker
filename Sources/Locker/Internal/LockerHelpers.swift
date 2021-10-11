@@ -8,7 +8,6 @@
 import Foundation
 import LocalAuthentication
 import System
-import Alamofire
 
 @available(macOS 10.13.2, *)
 class LockerHelpers: LockerHelpable {
