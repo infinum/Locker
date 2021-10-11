@@ -8,6 +8,7 @@
 import Foundation
 import LocalAuthentication
 import System
+import Alamofire
 
 @available(macOS 10.13.2, *)
 class LockerHelpers: LockerHelpable {
@@ -35,30 +36,10 @@ class LockerHelpers: LockerHelpable {
         return biometricsSettingsChangedStatus
     }
 
-    static var deviceSupportsAuthenticationWithBiometrics: BiometricsType {
-        if LockerHelpers.deviceSupportsAuthenticationWithFaceID {
-            return .faceID
-        }
-
-        let context = LAContext()
-        var error: NSError? = nil
-
-        if !context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            // When user removes all fingers for TouchID, error code will be `notEnrolled`.
-            // In that case, we want to return that device supports TouchID.
-            // In case lib is used on simulator, error code will always be `notEnrolled` and only then
-            // we want to return that biometrics is not supported as we don't know what simulator is used.
-            if let error = error, error.code == kLAErrorBiometryNotAvailable || error.code == kLAErrorBiometryNotEnrolled && isSimulator {
-                return .none
-            }
-        }
-        return .touchID
-    }
-
     static var configureBiometricsAuthentication: BiometricsType {
         let canUse = LAContext().canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
 
-        if canUse && LockerHelpers.canUserAuthenticationWithFaceID {
+        if canUse && LockerHelpers.canUseAuthenticationWithFaceID {
             return .faceID
         } else if canUse {
             return .touchID
@@ -71,14 +52,16 @@ class LockerHelpers: LockerHelpable {
         String(format: "%@_UserDefaultsLAPolicyDomainState", locale: nil, LockerHelpers.kBundleIdentifier)
     }
 
-    static var canUserAuthenticationWithFaceID: Bool {
+    static var canUseAuthenticationWithFaceID: Bool {
         get {
             let context = LAContext()
             var error: NSError? = nil
             if #available(iOS 11.0, *) {
                 if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
                     && context.responds(to: #selector(getter: context.biometryType)) {
-                    return true
+                    if context.biometryType == .faceID {
+                        return true
+                    }
                 }
             }
             return false;
@@ -96,44 +79,27 @@ class LockerHelpers: LockerHelpable {
         return identifier
     }
 
-    static var deviceSupportsAuthenticationWithFaceID: Bool {
-        if LockerHelpers.canUserAuthenticationWithFaceID {
-            return true
+    static func deviceSupportsAuthenticationWithFaceID(_ completion: @escaping ((Bool) -> Void)) {
+        if LockerHelpers.canUseAuthenticationWithFaceID {
+            completion(true)
+        } else {
+            AF.request(
+                deviceList.api,
+                method: .get
+            ).validate().responseData { data in
+                guard let data = data.data else {
+                    completion(false)
+                    return
+                }
+                do {
+                    let deviceList = try JSONDecoder().decode(DeviceResponse.self, from: data).devices
+                    completion(deviceList.contains(LockerHelpers.deviceCode))
+                } catch {
+                    print(error)
+                    completion(false)
+                }
+            }
         }
-
-        let faceIDDevices = [
-            "iPhone10,3", // iPhone X Global
-            "iPhone10,6", // iPhone X GSM
-            "iPhone11,2", // iPhone XS
-            "iPhone11,4", // iPhone XS Max
-            "iPhone11,6", // iPhone XS Max Global
-            "iPhone11,8", // iPhone XR
-            "iPhone12,1", // iPhone 11
-            "iPhone12,3", // iPhone 11 Pro
-            "iPhone12,5", // iPhone 11 Pro Max
-            "iPhone13,1", // iPhone 12 Mini
-            "iPhone13,2", // iPhone 12
-            "iPhone13,3", // iPhone 12 Pro
-            "iPhone13,4", // iPhone 12 Pro Max
-            "iPhone14,2", // iPhone 13 Mini
-            "iPhone14,3", // iPhone 13
-            "iPhone14,4", // iPhone 13 Pro
-            "iPhone14,5", // iPhone 13 Pro Max
-            "iPad8,1", //  iPad Pro 11 inch 3rd Gen (WiFi)
-            "iPad8,2", //  iPad Pro 11 inch 3rd Gen (1TB, WiFi)
-            "iPad8,3", //  iPad Pro 11 inch 3rd Gen (WiFi+Cellular)
-            "iPad8,4", //  iPad Pro 11 inch 3rd Gen (1TB, WiFi+Cellular)
-            "iPad8,5", //  iPad Pro 12.9 inch 3rd Gen (WiFi)
-            "iPad8,6", //  iPad Pro 12.9 inch 3rd Gen (1TB, WiFi)
-            "iPad8,7", //  iPad Pro 12.9 inch 3rd Gen (WiFi+Cellular)
-            "iPad8,8", //  iPad Pro 12.9 inch 3rd Gen (1TB, WiFi+Cellular)
-            "iPad8,9", //  iPad Pro 11 inch 4th Gen (WiFi)
-            "iPad8,10", // iPad Pro 11 inch 4th Gen (WiFi+Cellular)
-            "iPad8,11", // iPad Pro 12.9 inch 4th Gen (WiFi)
-            "iPad8,12" //  iPad Pro 12.9 inch 4th Gen (WiFi+Cellular)
-        ]
-
-        return faceIDDevices.contains(LockerHelpers.deviceCode)
     }
 
     static var isSimulator: Bool {
@@ -193,4 +159,31 @@ class LockerHelpers: LockerHelpable {
     private static func setLAPolicyDomainState(with domainState: Data?) {
         UserDefaults.standard.set(domainState, forKey: LockerHelpers.keyLAPolicyDomainState)
     }
+
+    // MARK: - Apiary
+
+    static func deviceSupportsAuthenticationWithBiometrics(_ completion: @escaping ((BiometricsType) -> Void)) {
+        LockerHelpers.deviceSupportsAuthenticationWithFaceID({ isSupported in
+            if isSupported {
+                completion(.faceID)
+            } else {
+                let context = LAContext()
+                var error: NSError? = nil
+
+                if !context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+                    // When user removes all fingers for TouchID, error code will be `notEnrolled`.
+                    // In that case, we want to return that device supports TouchID.
+                    // In case lib is used on simulator, error code will always be `notEnrolled` and only then
+                    // we want to return that biometrics is not supported as we don't know what simulator is used.
+                    if let error = error, error.code == kLAErrorBiometryNotAvailable || error.code == kLAErrorBiometryNotEnrolled && isSimulator {
+                        completion(.none)
+                    }
+                } else {
+                    completion(.touchID)
+                }
+            }
+        })
+    }
+
+    internal static var deviceList: DeviceList = .shared
 }

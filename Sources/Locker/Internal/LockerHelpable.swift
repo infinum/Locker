@@ -13,12 +13,10 @@ protocol LockerHelpable {
     // Check device support
 
     static var biometricsSettingsChanged: Bool { get }
-    static var deviceSupportsAuthenticationWithBiometrics: BiometricsType { get }
     static var configureBiometricsAuthentication: BiometricsType { get }
     static var keyLAPolicyDomainState: String { get }
-    static var canUserAuthenticationWithFaceID: Bool { get }
+    static var canUseAuthenticationWithFaceID: Bool { get }
     static var deviceCode: String { get }
-    static var deviceSupportsAuthenticationWithFaceID: Bool { get }
     static var isSimulator: Bool { get }
 
     // LAPolicy helpers
@@ -32,4 +30,9 @@ protocol LockerHelpable {
     static func keyDidAskToUserBiometricsID(for uniqueIdentifier: String) -> String
     static func keyBiometricsIDActivated(for uniqueIdentifier: String) -> String
     static func keyShouldAddSecretToKeychainOnNextLogin(for uniqueIdentifier: String) -> String
+
+    // Apiary
+    static var deviceList: DeviceList { get }
+    static func deviceSupportsAuthenticationWithBiometrics(_ completion: @escaping ((BiometricsType) -> Void))
+    static func deviceSupportsAuthenticationWithFaceID(_ completion: @escaping ((Bool) -> Void))
 }
