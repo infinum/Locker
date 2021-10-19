@@ -28,7 +28,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		06FB9483236B264700988BA1 /* BiometricsType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BiometricsType.h; sourceTree = "<group>"; };
 		06FB9485236B264700988BA1 /* Locker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Locker.m; sourceTree = "<group>"; };
 		06FB9486236B264700988BA1 /* Locker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Locker.h; sourceTree = "<group>"; };
 		375E9681271EE79600896845 /* LockerHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockerHelpers.swift; sourceTree = "<group>"; };
@@ -66,7 +65,6 @@
 		06FB9484236B264700988BA1 /* Locker */ = {
 			isa = PBXGroup;
 			children = (
-				06FB9483236B264700988BA1 /* BiometricsType.h */,
 				06FB9486236B264700988BA1 /* Locker.h */,
 				06FB9485236B264700988BA1 /* Locker.m */,
 				375E9683271EE86200896845 /* BiometrucsType.swift */,
