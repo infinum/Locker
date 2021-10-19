@@ -1,5 +1,5 @@
 //
-//  BiometryType.swift
+//  BiometricsType.swift
 //  Locker
 //
 //  Created by Zvonimir Medak on 19.10.2021..
