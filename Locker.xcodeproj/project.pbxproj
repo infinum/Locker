@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		06FB948A236B265600988BA1 /* Locker.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FB9485236B264700988BA1 /* Locker.m */; };
-		06FB948B236B265B00988BA1 /* LockerHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FB9488236B264700988BA1 /* LockerHelpers.m */; };
+		375E9682271EE79600896845 /* LockerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E9681271EE79600896845 /* LockerHelpers.swift */; };
+		375E9684271EE86200896845 /* BiometryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E9683271EE86200896845 /* BiometryType.swift */; };
 		DF8FB52F1E8DAFFF00EC2740 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF8FB52E1E8DAFFF00EC2740 /* UIKit.framework */; };
 		DF8FB5311E8DB00600EC2740 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF8FB5301E8DB00600EC2740 /* LocalAuthentication.framework */; };
 		DF8FB5351E8DB03600EC2740 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF8FB5341E8DB03600EC2740 /* Security.framework */; };
@@ -30,8 +31,8 @@
 		06FB9483236B264700988BA1 /* BiometricsType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BiometricsType.h; sourceTree = "<group>"; };
 		06FB9485236B264700988BA1 /* Locker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Locker.m; sourceTree = "<group>"; };
 		06FB9486236B264700988BA1 /* Locker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Locker.h; sourceTree = "<group>"; };
-		06FB9488236B264700988BA1 /* LockerHelpers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LockerHelpers.m; sourceTree = "<group>"; };
-		06FB9489236B264700988BA1 /* LockerHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LockerHelpers.h; sourceTree = "<group>"; };
+		375E9681271EE79600896845 /* LockerHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockerHelpers.swift; sourceTree = "<group>"; };
+		375E9683271EE86200896845 /* BiometryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometryType.swift; sourceTree = "<group>"; };
 		DF8FB5001E8D119C00EC2740 /* libLocker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLocker.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF8FB52E1E8DAFFF00EC2740 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DF8FB5301E8DB00600EC2740 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
@@ -68,6 +69,7 @@
 				06FB9483236B264700988BA1 /* BiometricsType.h */,
 				06FB9486236B264700988BA1 /* Locker.h */,
 				06FB9485236B264700988BA1 /* Locker.m */,
+				375E9683271EE86200896845 /* BiometryType.swift */,
 			);
 			path = Locker;
 			sourceTree = "<group>";
@@ -75,8 +77,7 @@
 		06FB9487236B264700988BA1 /* Internal */ = {
 			isa = PBXGroup;
 			children = (
-				06FB9489236B264700988BA1 /* LockerHelpers.h */,
-				06FB9488236B264700988BA1 /* LockerHelpers.m */,
+				375E9681271EE79600896845 /* LockerHelpers.swift */,
 			);
 			path = Internal;
 			sourceTree = "<group>";
@@ -141,6 +142,7 @@
 					DF8FB4FF1E8D119C00EC2740 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 3GN7X2W9W5;
+						LastSwiftMigration = 1300;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -168,8 +170,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				375E9682271EE79600896845 /* LockerHelpers.swift in Sources */,
 				06FB948A236B265600988BA1 /* Locker.m in Sources */,
-				06FB948B236B265B00988BA1 /* LockerHelpers.m in Sources */,
+				375E9684271EE86200896845 /* BiometryType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,20 +288,27 @@
 		DF8FB50A1E8D119C00EC2740 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 3GN7X2W9W5;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
 		DF8FB50B1E8D119C00EC2740 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 3GN7X2W9W5;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
