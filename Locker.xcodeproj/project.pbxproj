@@ -11,6 +11,9 @@
 		375E9684271EE86200896845 /* BiometricsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E9683271EE86200896845 /* BiometricsType.swift */; };
 		375E9686271EF02300896845 /* Locker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E9685271EF02300896845 /* Locker.swift */; };
 		377D681627202257002C31FE /* LockerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377D681527202257002C31FE /* LockerError.swift */; };
+		377D68212720395D002C31FE /* Devices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377D681F2720395D002C31FE /* Devices.swift */; };
+		377D68222720395D002C31FE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377D68202720395D002C31FE /* Constants.swift */; };
+		377D682527203995002C31FE /* DeviceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377D682427203995002C31FE /* DeviceResponse.swift */; };
 		DF8FB52F1E8DAFFF00EC2740 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF8FB52E1E8DAFFF00EC2740 /* UIKit.framework */; };
 		DF8FB5311E8DB00600EC2740 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF8FB5301E8DB00600EC2740 /* LocalAuthentication.framework */; };
 		DF8FB5351E8DB03600EC2740 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF8FB5341E8DB03600EC2740 /* Security.framework */; };
@@ -33,6 +36,9 @@
 		375E9683271EE86200896845 /* BiometricsType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricsType.swift; sourceTree = "<group>"; };
 		375E9685271EF02300896845 /* Locker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Locker.swift; sourceTree = "<group>"; };
 		377D681527202257002C31FE /* LockerError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockerError.swift; sourceTree = "<group>"; };
+		377D681F2720395D002C31FE /* Devices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Devices.swift; sourceTree = "<group>"; };
+		377D68202720395D002C31FE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		377D682427203995002C31FE /* DeviceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceResponse.swift; sourceTree = "<group>"; };
 		DF8FB5001E8D119C00EC2740 /* libLocker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLocker.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF8FB52E1E8DAFFF00EC2740 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DF8FB5301E8DB00600EC2740 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
@@ -76,9 +82,20 @@
 		06FB9487236B264700988BA1 /* Internal */ = {
 			isa = PBXGroup;
 			children = (
+				377D68232720398D002C31FE /* Model */,
+				377D68202720395D002C31FE /* Constants.swift */,
+				377D681F2720395D002C31FE /* Devices.swift */,
 				375E9681271EE79600896845 /* LockerHelpers.swift */,
 			);
 			path = Internal;
+			sourceTree = "<group>";
+		};
+		377D68232720398D002C31FE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				377D682427203995002C31FE /* DeviceResponse.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		DF8FB4F71E8D119C00EC2740 = {
@@ -191,10 +208,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				377D68212720395D002C31FE /* Devices.swift in Sources */,
 				375E9682271EE79600896845 /* LockerHelpers.swift in Sources */,
 				375E9684271EE86200896845 /* BiometricsType.swift in Sources */,
 				377D681627202257002C31FE /* LockerError.swift in Sources */,
+				377D682527203995002C31FE /* DeviceResponse.swift in Sources */,
 				375E9686271EF02300896845 /* Locker.swift in Sources */,
+				377D68222720395D002C31FE /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
