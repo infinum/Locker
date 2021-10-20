@@ -95,6 +95,7 @@ extension ViewController {
         set (newValue) { Locker.setShouldUseAuthenticationWithBiometrics(newValue, for: identifier) }
     }
 
+    // swiftlint:disable unused_setter_value
     var didAskToUseAuthWithBiometrics: Bool {
         get { return Locker.didAskToUseAuthenticationWithBiometrics(for: identifier) }
         set { Locker.setDidAskToUseAuthenticationWithBiometrics(true, for: identifier) }

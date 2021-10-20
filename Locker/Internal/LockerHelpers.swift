@@ -10,6 +10,7 @@ import Foundation
 import LocalAuthentication
 import System
 
+// swiftlint:disable identifier_name
 class LockerHelpers {
 
     // MARK: - Public properties
