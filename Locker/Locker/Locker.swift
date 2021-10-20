@@ -28,11 +28,11 @@ public class Locker {
     }
 
     public static var isRunningFromTheSimulator: Bool {
-#if targetEnvironment(simulator)
+    #if targetEnvironment(simulator)
         return true
-#else
+    #else
         return false
-#endif
+    #endif
     }
 
     public static var deviceSupportsAuthenticationWithBiometrics: BiometricsType {
@@ -49,9 +49,9 @@ public class Locker {
 
     // MARK: - Handle secrets (store, delete, fetch)
 
-    public static func setSecret(_ secret: String, forUniqueIdentifier: String) {
+    public static func setSecret(_ secret: String, for uniqueIdentifier: String) {
     #if targetEnvironment(simulator)
-        Locker.userDefaults.set(secret, forKey: forUniqueIdentifier)
+        Locker.userDefaults.set(secret, forKey: uniqueIdentifier)
     #else
         let query: [CFString : Any] = [
             kSecClass : kSecClassGenericPassword,
@@ -104,7 +104,7 @@ public class Locker {
 
     }
 
-    public static func retrieveCurrentSecretForUniqueIdentifier(_ uniqueIdentifier: String, operationPrompt: String, success: ((String) -> Void)?, failure: ((OSStatus) -> Void)?) {
+    public static func retrieveCurrentSecret(for uniqueIdentifier: String, operationPrompt: String, success: ((String) -> Void)?, failure: ((OSStatus) -> Void)?) {
 
     #if targetEnvironment(simulator)
         let simulatorSecret = Locker.userDefaults.string(forKey: uniqueIdentifier)
@@ -144,7 +144,7 @@ public class Locker {
     #endif
     }
 
-    public static func deleteSecretForUniqueIdentifier(_ uniqueIdentifier: String) {
+    public static func deleteSecret(for uniqueIdentifier: String) {
 
     #if targetEnvironment(simulator)
         Locker.userDefaults.removeObject(forKey: uniqueIdentifier)
@@ -166,30 +166,30 @@ public class Locker {
 
 public extension Locker {
 
-    static func shouldUseAuthenticationWithBiometricsForUniqueIdentifier(_ uniqueIdentifier: String) -> Bool {
+    static func shouldUseAuthenticationWithBiometrics(for uniqueIdentifier: String) -> Bool {
         return Locker.userDefaults.bool(forKey: LockerHelpers.keyBiometricsIDActivatedForUniqueIdentifier(uniqueIdentifier))
     }
 
-    static func setShouldUseAuthenticationWithBiometrics(_ shouldUse: Bool, forUniqueIdentifier uniqueIdentifier: String) {
-        if !shouldUse && Locker.shouldAddSecretToKeychainOnNextLoginForUniqueIdentifier( uniqueIdentifier) {
-            Locker.setShouldAddSecretToKeychainOnNextLogin(false, forUniqueIdentifier: uniqueIdentifier)
+    static func setShouldUseAuthenticationWithBiometrics(_ shouldUse: Bool, for uniqueIdentifier: String) {
+        if !shouldUse && Locker.shouldAddSecretToKeychainOnNextLogin(for: uniqueIdentifier) {
+            Locker.setShouldAddSecretToKeychainOnNextLogin(false, for: uniqueIdentifier)
         }
         Locker.userDefaults.set(shouldUse, forKey: LockerHelpers.keyBiometricsIDActivatedForUniqueIdentifier(uniqueIdentifier))
     }
 
-    static func didAskToUseAuthenticationWithBiometricsForUniqueIdentifier(_ uniqueIdentifier: String) -> Bool {
+    static func didAskToUseAuthenticationWithBiometrics(for uniqueIdentifier: String) -> Bool {
         Locker.userDefaults.bool(forKey: LockerHelpers.keyDidAskToUseBiometricsIDForUniqueIdentifier(uniqueIdentifier))
     }
 
-    static func setDidAskToUseAuthenticationWithBiometrics(_ useAuthenticationBiometrics: Bool, forUniqueIdentifier uniqueIdentifier: String) {
+    static func setDidAskToUseAuthenticationWithBiometrics(_ useAuthenticationBiometrics: Bool, for uniqueIdentifier: String) {
         Locker.userDefaults.set(useAuthenticationBiometrics, forKey: LockerHelpers.keyDidAskToUseBiometricsIDForUniqueIdentifier(uniqueIdentifier))
     }
 
-    static func shouldAddSecretToKeychainOnNextLoginForUniqueIdentifier(_ uniqueIdentifier: String) -> Bool {
+    static func shouldAddSecretToKeychainOnNextLogin(for uniqueIdentifier: String) -> Bool {
         Locker.userDefaults.bool(forKey: LockerHelpers.keyShouldAddSecretToKeychainOnNextLoginForUniqueIdentifier(uniqueIdentifier))
     }
 
-    static func setShouldAddSecretToKeychainOnNextLogin(_ shouldAdd: Bool, forUniqueIdentifier uniqueIdentifier: String) {
+    static func setShouldAddSecretToKeychainOnNextLogin(_ shouldAdd: Bool, for uniqueIdentifier: String) {
         Locker.userDefaults.set(shouldAdd, forKey: LockerHelpers.keyShouldAddSecretToKeychainOnNextLoginForUniqueIdentifier(uniqueIdentifier))
     }
 }
@@ -198,10 +198,10 @@ public extension Locker {
 
 public extension Locker {
 
-    static func resetForUniqueIdentifier(_ uniqueIdentifier: String) {
+    static func reset(for uniqueIdentifier: String) {
         Locker.userDefaults.removeObject(forKey: LockerHelpers.keyDidAskToUseBiometricsIDForUniqueIdentifier(uniqueIdentifier))
         Locker.userDefaults.removeObject(forKey: LockerHelpers.keyShouldAddSecretToKeychainOnNextLoginForUniqueIdentifier(uniqueIdentifier))
         Locker.userDefaults.removeObject(forKey: LockerHelpers.keyBiometricsIDActivatedForUniqueIdentifier(uniqueIdentifier))
-        Locker.deleteSecretForUniqueIdentifier(uniqueIdentifier)
+        Locker.deleteSecret(for: uniqueIdentifier)
     }
 }
