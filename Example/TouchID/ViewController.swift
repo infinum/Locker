@@ -78,7 +78,7 @@ extension ViewController {
     }
 
     func resetUserDefaults() {
-//        Locker.userDefaults = nil
+        Locker.userDefaults = nil
     }
 }
 
