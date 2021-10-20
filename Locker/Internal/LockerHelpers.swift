@@ -172,22 +172,22 @@ class LockerHelpers {
 
     // MARK: - User defaults keys help methods
 
-    static func keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier: String) -> String {
+    static func keyKeychainAccountNameForUniqueIdentifier(_ uniqueIdentifier: String) -> String {
         let kKeychainAccountName = String(format: "%@_KeychainAccount", locale: nil, kBundleIdentifier)
         return String(format: "%@_%@", kKeychainAccountName, uniqueIdentifier)
     }
 
-    static func keyDidAskToUseBiometricsIDForUniqueIdentifier(uniqueIdentifier: String) -> String {
+    static func keyDidAskToUseBiometricsIDForUniqueIdentifier(_ uniqueIdentifier: String) -> String {
         let kUserDefaultsDidAskToUseBiometricsID = String(format: "%@_UserDefaultsDidAskToUseTouchID", locale: nil, kBundleIdentifier)
         return String(format: "%@_%@", kUserDefaultsDidAskToUseBiometricsID, uniqueIdentifier)
     }
 
-    static func keyBiometricsIDActivatedForUniqueIdentifier(uniqueIdentifier: String) -> String {
+    static func keyBiometricsIDActivatedForUniqueIdentifier(_ uniqueIdentifier: String) -> String {
         let kUserDefaultsKeyBiometricsIDActivated = String(format: "%@_UserDefaultsKeyTouchIDActivated", kBundleIdentifier)
         return String(format: "%@_%@", kUserDefaultsKeyBiometricsIDActivated, uniqueIdentifier)
     }
 
-    static func keyShouldAddSecretToKeychainOnNextLoginForUniqueIdentifier(uniqueIdentifier: String) -> String {
+    static func keyShouldAddSecretToKeychainOnNextLoginForUniqueIdentifier(_ uniqueIdentifier: String) -> String {
         let kUserDefaultsShouldAddSecretToKeychainOnNextLogin = String(format: "%@_UserDefaultsShouldAddPasscodeToKeychainOnNextLogin", kBundleIdentifier)
         return String(format: "%@_%@", kUserDefaultsShouldAddSecretToKeychainOnNextLogin, uniqueIdentifier)
     }

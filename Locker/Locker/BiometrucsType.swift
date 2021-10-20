@@ -8,6 +8,6 @@
 
 import Foundation
 
-enum BiometricsType {
+public enum BiometricsType {
     case biometricsTypeNone, biometricsTypeTouchID, biometricsTypeFaceID
 }
