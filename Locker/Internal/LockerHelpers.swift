@@ -31,7 +31,7 @@ class LockerHelpers {
     }
 
     static var keyLAPolicyDomainState: String {
-        String(format: "%@_UserDefaultsLAPolicyDomainState", locale: nil, LockerHelpers.bundleIdentifier)
+        return "\(LockerHelpers.bundleIdentifier)_UserDefaultsLAPolicyDomainState"
     }
 
     static var canUseAuthenticationWithFaceID: Bool {
@@ -76,23 +76,23 @@ extension LockerHelpers {
     // MARK: - User defaults keys help methods
 
     static func keyKeychainAccountNameForUniqueIdentifier(_ uniqueIdentifier: String) -> String {
-        let keychainAccountName = String(format: "%@_KeychainAccount", locale: nil, bundleIdentifier)
-        return String(format: "%@_%@", keychainAccountName, uniqueIdentifier)
+        let keychainAccountName = "\(LockerHelpers.bundleIdentifier)_KeychainAccount"
+        return "\(keychainAccountName)_\(uniqueIdentifier)"
     }
 
     static func keyDidAskToUseBiometricsIDForUniqueIdentifier(_ uniqueIdentifier: String) -> String {
-        let userDefaultsDidAskToUseBiometricsID = String(format: "%@_UserDefaultsDidAskToUseTouchID", locale: nil, bundleIdentifier)
-        return String(format: "%@_%@", userDefaultsDidAskToUseBiometricsID, uniqueIdentifier)
+        let userDefaultsDidAskToUseBiometricsID = "\(LockerHelpers.bundleIdentifier)_UserDefaultsDidAskToUseTouchID"
+        return "\(userDefaultsDidAskToUseBiometricsID)_\(uniqueIdentifier)"
     }
 
     static func keyBiometricsIDActivatedForUniqueIdentifier(_ uniqueIdentifier: String) -> String {
-        let userDefaultsKeyBiometricsIDActivated = String(format: "%@_UserDefaultsKeyTouchIDActivated", bundleIdentifier)
-        return String(format: "%@_%@", userDefaultsKeyBiometricsIDActivated, uniqueIdentifier)
+        let userDefaultsKeyBiometricsIDActivated = "\(LockerHelpers.bundleIdentifier)_UserDefaultsKeyTouchIDActivated"
+        return "\(userDefaultsKeyBiometricsIDActivated)_\(uniqueIdentifier)"
     }
 
     static func keyShouldAddSecretToKeychainOnNextLoginForUniqueIdentifier(_ uniqueIdentifier: String) -> String {
-        let userDefaultsShouldAddSecretToKeychainOnNextLogin = String(format: "%@_UserDefaultsShouldAddPasscodeToKeychainOnNextLogin", bundleIdentifier)
-        return String(format: "%@_%@", userDefaultsShouldAddSecretToKeychainOnNextLogin, uniqueIdentifier)
+        let userDefaultsShouldAddSecretToKeychainOnNextLogin = "\(LockerHelpers.bundleIdentifier)_UserDefaultsShouldAddPasscodeToKeychainOnNextLogin"
+        return "\(userDefaultsShouldAddSecretToKeychainOnNextLogin)_\(uniqueIdentifier)"
     }
 
     // MARK: - Biometric helpers
@@ -103,7 +103,7 @@ extension LockerHelpers {
     }
 
     static var keyKeychainServiceName: String {
-        String(format: "%@_KeychainService", LockerHelpers.bundleIdentifier)
+        return "\(LockerHelpers.bundleIdentifier)_KeychainService"
     }
 }
 
@@ -119,7 +119,7 @@ private extension LockerHelpers {
         // For deactivated biometrics, LAContext in validation will return nil
         // storing that nil and comparing it to nil will result as `isEqual` NO
         // even data is not actually changed.
-        let biometricsDeactivated: Bool   = (oldDomainState == nil)  || (newDomainState == nil)
+        let biometricsDeactivated = oldDomainState == nil || newDomainState == nil
         let biometricSettingsDidChange = oldDomainState?.elementsEqual(newDomainState!) ?? false
         if (biometricsDeactivated && biometricSettingsDidChange) {
             LockerHelpers.setLAPolicyDomainState(with: newDomainState)
