@@ -108,14 +108,13 @@ public class Locker: NSObject {
     #endif
 
     }
-    
+
     @objc(retreiveCurrentSecretForUniqueIdentifier:operationPrompt:success:failure:)
     public static func retrieveCurrentSecret(
         for uniqueIdentifier: String,
         operationPrompt: String,
         success: ((String) -> Void)?,
         failure: ((OSStatus) -> Void)?
-    ) {
     ) {
 
     #if targetEnvironment(simulator)
@@ -202,15 +201,14 @@ public extension Locker {
         Locker.userDefaults?.bool(
             forKey: LockerHelpers.keyDidAskToUseBiometricsIDForUniqueIdentifier(uniqueIdentifier)
         ) ?? false
-        @objc(setDidAskToUseAuthenticationWithBiometrics:forUniqueIdentifier:)
+    }
+
+    @objc(setDidAskToUseAuthenticationWithBiometrics:forUniqueIdentifier:)
     static func setDidAskToUseAuthenticationWithBiometrics(
         _ useAuthenticationBiometrics: Bool,
         for uniqueIdentifier: String
     ) {
         Locker.userDefaults?.set(
-            useAuthenticationBiometrics,
-            forKey: LockerHelpers.keyDidAskToUseBiometricsIDForUniqueIdentifier(uniqueIdentifier)
-        )
             useAuthenticationBiometrics,
             forKey: LockerHelpers.keyDidAskToUseBiometricsIDForUniqueIdentifier(uniqueIdentifier)
         )
