@@ -15,8 +15,103 @@ class LockerHelpers {
     // MARK: - Public properties
 
     static var biometricsSettingsChanged: Bool {
-        var biometricsSettingsChangedStatus = false
+        return checkIfBiometricsSettingsChanged()
+    }
 
+    static var deviceSupportsAuthenticationWithBiometrics: BiometricsType {
+        if LockerHelpers.deviceSupportsAuthenticationWithFaceID {
+            return .biometricsTypeFaceID
+        }
+
+        return checkIfCanAuthenticateWithBiometrics() ? .biometricsTypeTouchID : .biometricsTypeNone
+    }
+
+    static var configuredBiometricsAuthentication: BiometricsType {
+        return getConfiguredBiometricsAuthenticationType()
+    }
+
+    static var keyLAPolicyDomainState: String {
+        String(format: "%@_UserDefaultsLAPolicyDomainState", locale: nil, LockerHelpers.bundleIdentifier)
+    }
+
+    static var canUseAuthenticationWithFaceID: Bool {
+        return isFaceIDEnabled()
+    }
+
+    static var deviceCode: String {
+        return getDeviceIdentifierFromSystem()
+    }
+
+    static var deviceSupportsAuthenticationWithFaceID: Bool {
+        if LockerHelpers.canUseAuthenticationWithFaceID {
+            return true
+        }
+
+        return checkIfDeviceSupportsAuthenticationWithFaceID()
+    }
+
+    static var isSimulator: Bool {
+        LockerHelpers.deviceCode == "x86_64"
+    }
+
+    // MARK: - Private properties
+
+    static private var currentLAPolicyDomainState: Data? {
+        let context = LAContext()
+        context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
+        return context.evaluatedPolicyDomainState
+    }
+
+    static private var savedLAPolicyDomainState: Data? {
+        UserDefaults.standard.object(forKey: LockerHelpers.keyLAPolicyDomainState) as? Data
+    }
+
+    private static let bundleIdentifier = Bundle.main.bundleIdentifier ?? ""
+}
+
+// MARK: - Public extension
+
+extension LockerHelpers {
+
+    // MARK: - User defaults keys help methods
+
+    static func keyKeychainAccountNameForUniqueIdentifier(_ uniqueIdentifier: String) -> String {
+        let keychainAccountName = String(format: "%@_KeychainAccount", locale: nil, bundleIdentifier)
+        return String(format: "%@_%@", keychainAccountName, uniqueIdentifier)
+    }
+
+    static func keyDidAskToUseBiometricsIDForUniqueIdentifier(_ uniqueIdentifier: String) -> String {
+        let userDefaultsDidAskToUseBiometricsID = String(format: "%@_UserDefaultsDidAskToUseTouchID", locale: nil, bundleIdentifier)
+        return String(format: "%@_%@", userDefaultsDidAskToUseBiometricsID, uniqueIdentifier)
+    }
+
+    static func keyBiometricsIDActivatedForUniqueIdentifier(_ uniqueIdentifier: String) -> String {
+        let userDefaultsKeyBiometricsIDActivated = String(format: "%@_UserDefaultsKeyTouchIDActivated", bundleIdentifier)
+        return String(format: "%@_%@", userDefaultsKeyBiometricsIDActivated, uniqueIdentifier)
+    }
+
+    static func keyShouldAddSecretToKeychainOnNextLoginForUniqueIdentifier(_ uniqueIdentifier: String) -> String {
+        let userDefaultsShouldAddSecretToKeychainOnNextLogin = String(format: "%@_UserDefaultsShouldAddPasscodeToKeychainOnNextLogin", bundleIdentifier)
+        return String(format: "%@_%@", userDefaultsShouldAddSecretToKeychainOnNextLogin, uniqueIdentifier)
+    }
+
+    // MARK: - Biometric helpers
+
+    static func storeCurrentLAPolicyDomainState() {
+        let newDomainState = LockerHelpers.currentLAPolicyDomainState
+        LockerHelpers.setLAPolicyDomainState(with: newDomainState)
+    }
+
+    static var keyKeychainServiceName: String {
+        String(format: "%@_KeychainService", LockerHelpers.bundleIdentifier)
+    }
+}
+
+// MARK: - Private extension
+
+private extension LockerHelpers {
+
+    static func checkIfBiometricsSettingsChanged() -> Bool {
         let oldDomainState = LockerHelpers.savedLAPolicyDomainState
         let newDomainState = LockerHelpers.currentLAPolicyDomainState
 
@@ -27,20 +122,14 @@ class LockerHelpers {
         let biometricsDeactivated: Bool   = (oldDomainState == nil)  || (newDomainState == nil)
         let biometricSettingsDidChange = oldDomainState?.elementsEqual(newDomainState!) ?? false
         if (biometricsDeactivated && biometricSettingsDidChange) {
-            biometricsSettingsChangedStatus = true
-
             LockerHelpers.setLAPolicyDomainState(with: newDomainState)
+            return true
         }
 
-        return biometricsSettingsChangedStatus
+        return false
     }
 
-    static var deviceSupportsAuthenticationWithBiometrics: BiometricsType {
-
-        if LockerHelpers.deviceSupportsAuthenticationWithFaceID {
-            return .biometricsTypeFaceID
-        }
-
+    static func checkIfCanAuthenticateWithBiometrics() -> Bool {
         let context = LAContext()
         var error: NSError?
 
@@ -50,14 +139,14 @@ class LockerHelpers {
             // In case lib is used on simulator, error code will always be `notEnrolled` and only then
             // we want to return that biometrics is not supported as we don't know what simulator is used.
             if let error = error, error.code == kLAErrorBiometryNotAvailable || (error.code == kLAErrorBiometryNotEnrolled && isSimulator) {
-                return .biometricsTypeNone
+                return false
             }
         }
 
-        return .biometricsTypeTouchID
+        return true
     }
 
-    static var configuredBiometricsAuthentication: BiometricsType {
+    static func getConfiguredBiometricsAuthenticationType() -> BiometricsType {
         let canUse = LAContext().canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
 
         if canUse && LockerHelpers.canUseAuthenticationWithFaceID {
@@ -69,28 +158,22 @@ class LockerHelpers {
         }
     }
 
-    static var keyLAPolicyDomainState: String {
-        String(format: "%@_UserDefaultsLAPolicyDomainState", locale: nil, LockerHelpers.bundleIdentifier)
-    }
+    static func isFaceIDEnabled() -> Bool {
+        let context = LAContext()
+        var error: NSError? = nil
 
-    static var canUseAuthenticationWithFaceID: Bool {
-        get {
-            let context = LAContext()
-            var error: NSError? = nil
-
-            if #available(iOS 11.0, *) {
-                if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
-                    && context.responds(to: #selector(getter: context.biometryType)) {
-                    if context.biometryType == .faceID {
-                        return true
-                    }
+        if #available(iOS 11.0, *) {
+            if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
+                && context.responds(to: #selector(getter: context.biometryType)) {
+                if context.biometryType == .faceID {
+                    return true
                 }
             }
-            return false;
         }
+        return false;
     }
 
-    static var deviceCode: String {
+    static func getDeviceIdentifierFromSystem() -> String {
         var systemInfo = utsname()
         uname(&systemInfo)
         let machineMirror = Mirror(reflecting: systemInfo.machine)
@@ -101,11 +184,7 @@ class LockerHelpers {
         return identifier
     }
 
-    static var deviceSupportsAuthenticationWithFaceID: Bool {
-        if LockerHelpers.canUseAuthenticationWithFaceID {
-            return true
-        }
-
+    static func checkIfDeviceSupportsAuthenticationWithFaceID() -> Bool {
         let faceIDDevices = [
             "iPhone10,3", // iPhone X Global
             "iPhone10,6", // iPhone X GSM
@@ -140,63 +219,6 @@ class LockerHelpers {
 
         return faceIDDevices.contains(LockerHelpers.deviceCode)
     }
-
-    static var isSimulator: Bool {
-        LockerHelpers.deviceCode == "x86_64"
-    }
-
-    // MARK: - Private properties
-
-    static private var currentLAPolicyDomainState: Data? {
-        let context = LAContext()
-        context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
-        return context.evaluatedPolicyDomainState
-    }
-
-    static private var savedLAPolicyDomainState: Data? {
-        UserDefaults.standard.object(forKey: LockerHelpers.keyLAPolicyDomainState) as? Data
-    }
-
-    private static let bundleIdentifier = Bundle.main.bundleIdentifier ?? ""
-
-    // MARK: - Biometric helpers
-
-    static func storeCurrentLAPolicyDomainState() {
-        let newDomainState = LockerHelpers.currentLAPolicyDomainState
-        LockerHelpers.setLAPolicyDomainState(with: newDomainState)
-    }
-
-    static var keyKeychainServiceName: String {
-        String(format: "%@_KeychainService", LockerHelpers.bundleIdentifier)
-    }
-}
-
-// MARK: - User defaults keys help methods
-
-extension LockerHelpers {
-
-    static func keyKeychainAccountNameForUniqueIdentifier(_ uniqueIdentifier: String) -> String {
-        let keychainAccountName = String(format: "%@_KeychainAccount", locale: nil, bundleIdentifier)
-        return String(format: "%@_%@", keychainAccountName, uniqueIdentifier)
-    }
-
-    static func keyDidAskToUseBiometricsIDForUniqueIdentifier(_ uniqueIdentifier: String) -> String {
-        let userDefaultsDidAskToUseBiometricsID = String(format: "%@_UserDefaultsDidAskToUseTouchID", locale: nil, bundleIdentifier)
-        return String(format: "%@_%@", userDefaultsDidAskToUseBiometricsID, uniqueIdentifier)
-    }
-
-    static func keyBiometricsIDActivatedForUniqueIdentifier(_ uniqueIdentifier: String) -> String {
-        let userDefaultsKeyBiometricsIDActivated = String(format: "%@_UserDefaultsKeyTouchIDActivated", bundleIdentifier)
-        return String(format: "%@_%@", userDefaultsKeyBiometricsIDActivated, uniqueIdentifier)
-    }
-
-    static func keyShouldAddSecretToKeychainOnNextLoginForUniqueIdentifier(_ uniqueIdentifier: String) -> String {
-        let userDefaultsShouldAddSecretToKeychainOnNextLogin = String(format: "%@_UserDefaultsShouldAddPasscodeToKeychainOnNextLogin", bundleIdentifier)
-        return String(format: "%@_%@", userDefaultsShouldAddSecretToKeychainOnNextLogin, uniqueIdentifier)
-    }
-}
-
-private extension LockerHelpers {
 
     static func setLAPolicyDomainState(with domainState: Data?) {
         UserDefaults.standard.set(domainState, forKey: LockerHelpers.keyLAPolicyDomainState)
