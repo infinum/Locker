@@ -9,5 +9,5 @@
 import Foundation
 
 public enum BiometricsType {
-    case biometricsTypeNone, biometricsTypeTouchID, biometricsTypeFaceID
+    case none, touchID, faceID
 }

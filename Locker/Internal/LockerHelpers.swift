@@ -20,10 +20,10 @@ class LockerHelpers {
 
     static var deviceSupportsAuthenticationWithBiometrics: BiometricsType {
         if LockerHelpers.deviceSupportsAuthenticationWithFaceID {
-            return .biometricsTypeFaceID
+            return .faceID
         }
 
-        return checkIfCanAuthenticateWithBiometrics() ? .biometricsTypeTouchID : .biometricsTypeNone
+        return checkIfCanAuthenticateWithBiometrics() ? .touchID : .none
     }
 
     static var configuredBiometricsAuthentication: BiometricsType {
@@ -133,7 +133,7 @@ private extension LockerHelpers {
         let context = LAContext()
         var error: NSError?
 
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+        if !context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             // When user removes all fingers for TouchID, error code will be `notEnrolled`.
             // In that case, we want to return that device supports TouchID.
             // In case lib is used on simulator, error code will always be `notEnrolled` and only then
@@ -150,11 +150,11 @@ private extension LockerHelpers {
         let canUse = LAContext().canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
 
         if canUse && LockerHelpers.canUseAuthenticationWithFaceID {
-            return .biometricsTypeFaceID
+            return .faceID
         } else if canUse {
-            return .biometricsTypeTouchID
+            return .touchID
         } else {
-            return .biometricsTypeNone
+            return .none
         }
     }
 
