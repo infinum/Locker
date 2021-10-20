@@ -39,6 +39,7 @@
 		377D681F2720395D002C31FE /* Devices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Devices.swift; sourceTree = "<group>"; };
 		377D68202720395D002C31FE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		377D682427203995002C31FE /* DeviceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceResponse.swift; sourceTree = "<group>"; };
+		377D682627203AD8002C31FE /* devices.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = devices.json; sourceTree = "<group>"; };
 		DF8FB5001E8D119C00EC2740 /* libLocker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLocker.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF8FB52E1E8DAFFF00EC2740 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DF8FB5301E8DB00600EC2740 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
@@ -86,6 +87,7 @@
 				377D68202720395D002C31FE /* Constants.swift */,
 				377D681F2720395D002C31FE /* Devices.swift */,
 				375E9681271EE79600896845 /* LockerHelpers.swift */,
+				377D682627203AD8002C31FE /* devices.json */,
 			);
 			path = Internal;
 			sourceTree = "<group>";
