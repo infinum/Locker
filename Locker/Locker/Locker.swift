@@ -49,7 +49,7 @@ public class Locker {
 
     // MARK: - Handle secrets (store, delete, fetch)
 
-    public static func setSecret(_ secret: String, for uniqueIdentifier: String) {
+    public static func setSecret(_ secret: String, for uniqueIdentifier: String) throws {
     #if targetEnvironment(simulator)
         Locker.userDefaults.set(secret, forKey: uniqueIdentifier)
     #else
@@ -81,7 +81,10 @@ public class Locker {
 
 
             guard let sacObject = sacObject, errorRef == nil, secretData = secret.data(using: .utf8) else {
-                print("can't create sacObject: ", errorRef?.pointee.debugDescription ?? "")
+                if let errorRef = errorRef {
+                    throw LockerError.accessControl("Unable to initialize access control: \(errorRef.pointee.description)")
+                }
+                throw LockerError.invalidData("Invalid storing data")
                 return
             }
             let attributes: [CFString : Any] = [
