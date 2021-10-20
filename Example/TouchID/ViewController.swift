@@ -28,10 +28,15 @@ public final class ViewController: UIViewController {
 extension ViewController {
 
     func storeSecret() {
-        Locker.setSecret(topSecret, for: identifier)
+        do {
+            try Locker.setSecret(topSecret, for: identifier)
+        } catch {
+            // handle error
+            print(error.localizedDescription)
+        }
     }
 
-    func readSecret(success: @escaping (String?) -> Void, failure: @escaping (OSStatus) -> Void) {
+    func readSecret(success: @escaping (String) -> Void, failure: @escaping (OSStatus) -> Void) {
         Locker.retrieveCurrentSecret(for: identifier, operationPrompt: "Unlock locker!", success: success, failure: failure)
     }
 
@@ -66,11 +71,14 @@ extension ViewController {
 extension ViewController {
 
     func setCustomUserDefaults() {
-        Locker.userDefaults = UserDefaults(suiteName: "customDomain")
+        guard let userDefaults = UserDefaults(suiteName: "customDomain") else {
+            return
+        }
+        Locker.userDefaults = userDefaults
     }
 
     func resetUserDefaults() {
-        Locker.userDefaults = nil
+//        Locker.userDefaults = nil
     }
 }
 
