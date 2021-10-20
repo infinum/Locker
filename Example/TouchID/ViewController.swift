@@ -37,7 +37,11 @@ extension ViewController {
     }
 
     func readSecret(success: @escaping (String) -> Void, failure: @escaping (OSStatus) -> Void) {
-        Locker.retrieveCurrentSecret(for: identifier, operationPrompt: "Unlock locker!", success: success, failure: failure)
+        Locker.retrieveCurrentSecret(
+            for: identifier,
+               operationPrompt: "Unlock locker!",
+               success: success, failure: failure
+        )
     }
 
     func deleteSecret() {
@@ -56,7 +60,7 @@ extension ViewController {
     var runningFromTheSimulator: Bool {
         return Locker.isRunningFromTheSimulator
     }
-
+    // swiftlint:disable:next identifier_name
     var deviceSupportsAuthenticationWithBiometrics: BiometricsType {
         return Locker.deviceSupportsAuthenticationWithBiometrics
     }
@@ -93,12 +97,12 @@ extension ViewController {
 
     var didAskToUseAuthWithBiometrics: Bool {
         get { return Locker.didAskToUseAuthenticationWithBiometrics(for: identifier) }
-        set (newValue) { Locker.setDidAskToUseAuthenticationWithBiometrics(true, for: identifier) }
+        set { Locker.setDidAskToUseAuthenticationWithBiometrics(true, for: identifier) }
     }
 
     var shouldAddSecretToKeychainOnNextLogin: Bool {
         get { return Locker.shouldAddSecretToKeychainOnNextLogin(for: identifier) }
-        set (newValue) { Locker.setShouldAddSecretToKeychainOnNextLogin(true, for: identifier) }
+        set { Locker.setShouldAddSecretToKeychainOnNextLogin(true, for: identifier) }
     }
 }
 

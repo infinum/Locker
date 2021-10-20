@@ -91,7 +91,8 @@ extension LockerHelpers {
     }
 
     static func keyShouldAddSecretToKeychainOnNextLoginForUniqueIdentifier(_ uniqueIdentifier: String) -> String {
-        let userDefaultsShouldAddSecretToKeychainOnNextLogin = "\(LockerHelpers.bundleIdentifier)_UserDefaultsShouldAddPasscodeToKeychainOnNextLogin"
+        let userDefaultsShouldAddSecretToKeychainOnNextLogin =
+        "\(LockerHelpers.bundleIdentifier)_UserDefaultsShouldAddPasscodeToKeychainOnNextLogin"
         return "\(userDefaultsShouldAddSecretToKeychainOnNextLogin)_\(uniqueIdentifier)"
     }
 
@@ -121,7 +122,7 @@ private extension LockerHelpers {
         // even data is not actually changed.
         let biometricsDeactivated = oldDomainState == nil || newDomainState == nil
         let biometricSettingsDidChange = oldDomainState?.elementsEqual(newDomainState!) ?? false
-        if (biometricsDeactivated && biometricSettingsDidChange) {
+        if biometricsDeactivated && biometricSettingsDidChange {
             LockerHelpers.setLAPolicyDomainState(with: newDomainState)
             return true
         }
@@ -138,7 +139,8 @@ private extension LockerHelpers {
             // In that case, we want to return that device supports TouchID.
             // In case lib is used on simulator, error code will always be `notEnrolled` and only then
             // we want to return that biometrics is not supported as we don't know what simulator is used.
-            if let error = error, error.code == kLAErrorBiometryNotAvailable || (error.code == kLAErrorBiometryNotEnrolled && isSimulator) {
+            if let error = error, error.code == kLAErrorBiometryNotAvailable
+                || (error.code == kLAErrorBiometryNotEnrolled && isSimulator) {
                 return false
             }
         }
@@ -160,7 +162,7 @@ private extension LockerHelpers {
 
     static func isFaceIDEnabled() -> Bool {
         let context = LAContext()
-        var error: NSError? = nil
+        var error: NSError?
 
         if #available(iOS 11.0, *) {
             if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
@@ -170,7 +172,7 @@ private extension LockerHelpers {
                 }
             }
         }
-        return false;
+        return false
     }
 
     static func getDeviceIdentifierFromSystem() -> String {
