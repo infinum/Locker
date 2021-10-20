@@ -9,31 +9,31 @@
 /* Begin PBXBuildFile section */
 		11BB14784B503F171C75BF9793BAD083 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20AB2D4810A62CBD231D67118BFFB6AE /* Foundation.framework */; };
 		124290DAFCEDCE944416DDFCB6546C9E /* Pods-TouchIDTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F7F5550DF3FA176C63F78AED6615C68B /* Pods-TouchIDTests-dummy.m */; };
-		182454D8C8A388C401A88B701E318DB2 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16046E9E25D39B33762AD55B9388C050 /* LocalAuthentication.framework */; };
-		1898489D34179EE3AD3D2A11028BF594 /* Locker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3822AEB0F1012350C5FC50D2A6E7E06A /* Locker.swift */; };
-		244300DC1E8E106CC666DA4CF27D57A0 /* Locker-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4911A1947B1EE4D264BF6F896A5125D7 /* Locker-dummy.m */; };
-		377D681227200B0C002C31FE /* LockerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377D681127200B0C002C31FE /* LockerError.swift */; };
+		1E8E77145DC6FA18D7BACE1C967438C3 /* BiometricsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F6ED3B69088ACB2DB919E9B0699328 /* BiometricsType.swift */; };
+		282280EBFFBF9CEBAA3C6C63A49B0B1D /* Locker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1801983015628558F4CF2051741A86F6 /* Locker.swift */; };
+		41832DA49D55167D5EF4E3D865D56EF7 /* Locker-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 32079F14D9E735398086D95AA5401E3B /* Locker-dummy.m */; };
+		48ABC681C68130408EF13C2472738ECD /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16046E9E25D39B33762AD55B9388C050 /* LocalAuthentication.framework */; };
+		4930EFDC48E68333C9664A3C9A95B10F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 334ED410D9F4B1A3FC38F0AFB43E85F5 /* Security.framework */; };
 		5A6E1BFEC8CE71680F882BF182867F2A /* Pods-TouchID-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9661D1E0980FE73340B5865C3FEC9154 /* Pods-TouchID-dummy.m */; };
+		6571B124902FDB138E6E13A7354326A1 /* Locker-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F9B9920B767893939ED9390C281E2589 /* Locker-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6E6B463B4F8E4B7FEC436EC8B339E23E /* LockerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C26C349D5A8DAD6C38156754FE13FE9 /* LockerHelpers.swift */; };
 		7B90F57A077974DFC82B4D0516D0D5B3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20AB2D4810A62CBD231D67118BFFB6AE /* Foundation.framework */; };
-		7BF9F7F047A450122913D0EE81F2AB7B /* BiometrucsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CE47FDDAD7F6EB52CC9AE9F7A5E93F /* BiometrucsType.swift */; };
-		8ABC8D0F717D14145F32B2130F8B98F2 /* LockerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533B1F1F7E4669C12102528378FCD9CE /* LockerHelpers.swift */; };
+		96ACF4F73299C1B9E5DB106475426719 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F43EB2F76E12821EC7682DFCE08090B /* UIKit.framework */; };
 		A7B864CEA5C0E543672ACFAADCB13B24 /* Pods-TouchID-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E78FC59F8073247CA7CA998C445D078 /* Pods-TouchID-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B2AC379B6B44D238FC101AFA0B6A30C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F43EB2F76E12821EC7682DFCE08090B /* UIKit.framework */; };
-		CE07537AF9568CADC669C693469FCECA /* Locker-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C7965D2B71D75B627F806BEF1E262E21 /* Locker-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D1775B5C6505DC9D90AA2DF2430AD0A7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 334ED410D9F4B1A3FC38F0AFB43E85F5 /* Security.framework */; };
+		D6233A21F7F3B0E46408FC9DEA14E19C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20AB2D4810A62CBD231D67118BFFB6AE /* Foundation.framework */; };
+		DF26ED6B83C63270C4B47DA4598AF6CD /* LockerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C064A42CC6370705921A49913A1E3198 /* LockerError.swift */; };
 		E0EC910DC3520A18CF477A1822C54139 /* Pods-TouchIDTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DBADDE39020FBE2C723A8466EE915E13 /* Pods-TouchIDTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E3DE30F3D7143740A45DDA422AEFAA6C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20AB2D4810A62CBD231D67118BFFB6AE /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1E08F4F73BA292526F7873B57FB45EBE /* PBXContainerItemProxy */ = {
+		A98C15839FED30F5C8B9668C9B6BE402 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = C23DEDFAACC805E48F6E5EB548ECE5D6;
 			remoteInfo = Locker;
 		};
-		B8DDF37C5F5BC577C16D87D3F6DB7DB9 /* PBXContainerItemProxy */ = {
+		E4A409130D783CB9917A8D22C2DC6092 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -43,45 +43,45 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		087BCF60A92558E6FEAEF6C3652686E9 /* Locker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Locker.release.xcconfig; sourceTree = "<group>"; };
-		1218811E9FB576604F8930DE4775EC9E /* Locker-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Locker-Info.plist"; sourceTree = "<group>"; };
+		15120831327445F7773A1D6CB4BABE89 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		16046E9E25D39B33762AD55B9388C050 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/LocalAuthentication.framework; sourceTree = DEVELOPER_DIR; };
+		1616B8BAD236777B19659CFC4C8E9356 /* Locker-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Locker-Info.plist"; sourceTree = "<group>"; };
+		1801983015628558F4CF2051741A86F6 /* Locker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Locker.swift; sourceTree = "<group>"; };
 		18AC515F563370BF8AFB5293B0770E2F /* Pods-TouchIDTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-TouchIDTests.modulemap"; sourceTree = "<group>"; };
+		1C26C349D5A8DAD6C38156754FE13FE9 /* LockerHelpers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LockerHelpers.swift; sourceTree = "<group>"; };
 		20AB2D4810A62CBD231D67118BFFB6AE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		27E03D7840E3525D51AE682723969BBD /* Locker.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = Locker.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		2F89A4FD5247D675349483B7A808E1FF /* Pods-TouchID-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TouchID-acknowledgements.markdown"; sourceTree = "<group>"; };
+		32079F14D9E735398086D95AA5401E3B /* Locker-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Locker-dummy.m"; sourceTree = "<group>"; };
 		325A4CE9EAD42100D254281904B200B8 /* Pods-TouchID-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TouchID-acknowledgements.plist"; sourceTree = "<group>"; };
 		334ED410D9F4B1A3FC38F0AFB43E85F5 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
-		377D681127200B0C002C31FE /* LockerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LockerError.swift; path = ../../../../LockerError.swift; sourceTree = "<group>"; };
-		3822AEB0F1012350C5FC50D2A6E7E06A /* Locker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Locker.swift; sourceTree = "<group>"; };
-		4911A1947B1EE4D264BF6F896A5125D7 /* Locker-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Locker-dummy.m"; sourceTree = "<group>"; };
-		4AC79060F83881DBE217DAA098A3DB8B /* Locker.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Locker.modulemap; sourceTree = "<group>"; };
 		4B97EB5E37FC139E090F5AF90178E035 /* Pods-TouchID.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TouchID.release.xcconfig"; sourceTree = "<group>"; };
-		533B1F1F7E4669C12102528378FCD9CE /* LockerHelpers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LockerHelpers.swift; sourceTree = "<group>"; };
 		561F548BC01A8A8F8A54CA5F56B24A90 /* Pods-TouchID-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TouchID-frameworks.sh"; sourceTree = "<group>"; };
-		56CE47FDDAD7F6EB52CC9AE9F7A5E93F /* BiometrucsType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BiometrucsType.swift; sourceTree = "<group>"; };
 		6F43EB2F76E12821EC7682DFCE08090B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		7E6F9499D0EF91BF10F32CF1EEB00C6F /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		80F6ED3B69088ACB2DB919E9B0699328 /* BiometricsType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BiometricsType.swift; sourceTree = "<group>"; };
+		81C0F207A780D415F1623E17B9D96FAB /* Locker.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Locker.modulemap; sourceTree = "<group>"; };
 		8884DE14C1B77D433289654A361DA6AC /* Pods-TouchIDTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TouchIDTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		8D8211BE1A0E19EB6E6794651A8A5A0B /* Pods-TouchIDTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TouchIDTests.release.xcconfig"; sourceTree = "<group>"; };
 		8E78FC59F8073247CA7CA998C445D078 /* Pods-TouchID-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TouchID-umbrella.h"; sourceTree = "<group>"; };
-		95D0BE52033A54F4539C42330C868AD3 /* Locker-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Locker-prefix.pch"; sourceTree = "<group>"; };
+		919358026C013E9DDF316C4C3A97F661 /* Locker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Locker.debug.xcconfig; sourceTree = "<group>"; };
 		9661D1E0980FE73340B5865C3FEC9154 /* Pods-TouchID-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TouchID-dummy.m"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		AD9A402A7C39C77DDEE653F6CA0E640D /* Pods-TouchID */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-TouchID"; path = Pods_TouchID.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC60B325447A5AF058ECE54573439EC1 /* Pods-TouchID-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TouchID-Info.plist"; sourceTree = "<group>"; };
+		C064A42CC6370705921A49913A1E3198 /* LockerError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LockerError.swift; sourceTree = "<group>"; };
 		C165B1A739B7141D6C1047EEC9A1D92F /* Pods-TouchIDTests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-TouchIDTests"; path = Pods_TouchIDTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C416D2E32E54B784CBA82A85DFACFC84 /* Locker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Locker.debug.xcconfig; sourceTree = "<group>"; };
-		C7965D2B71D75B627F806BEF1E262E21 /* Locker-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Locker-umbrella.h"; sourceTree = "<group>"; };
+		C417BBD190AB08C63E5AC15FF1645D0D /* Locker-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Locker-prefix.pch"; sourceTree = "<group>"; };
 		CACBA41C4FE6574D94AFEAC9C5D9C2D0 /* Pods-TouchID.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-TouchID.modulemap"; sourceTree = "<group>"; };
+		D7364E2FB18DF7C4D4BCE2F34E9A0D54 /* Locker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Locker.release.xcconfig; sourceTree = "<group>"; };
 		D7846027E73C5C746F736D2091E3254F /* Pods-TouchIDTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TouchIDTests-Info.plist"; sourceTree = "<group>"; };
 		D8E0BE05BFEC090D0B144112C07EF79E /* Pods-TouchIDTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TouchIDTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DBADDE39020FBE2C723A8466EE915E13 /* Pods-TouchIDTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TouchIDTests-umbrella.h"; sourceTree = "<group>"; };
 		DBBE528CA4AF22CCF1ECCD1581B0D5B8 /* Pods-TouchID.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TouchID.debug.xcconfig"; sourceTree = "<group>"; };
-		DE50BDAD2AD220F69ADD5AFC59008E8F /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		E76B511BC6DC86091919388504FE983A /* Locker */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Locker; path = Locker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8EF887850B592C4661132D46B69408F /* Pods-TouchIDTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TouchIDTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		F7F5550DF3FA176C63F78AED6615C68B /* Pods-TouchIDTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TouchIDTests-dummy.m"; sourceTree = "<group>"; };
-		F8609656162B4DE2BA7029134D0EB164 /* Locker.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = Locker.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		F9B9920B767893939ED9390C281E2589 /* Locker-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Locker-umbrella.h"; sourceTree = "<group>"; };
+		FE84D19B020D2A9CBC2A26FF2ABF928C /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,17 +93,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		33EB8DB4F0109917C3EE433EECE24D51 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E3DE30F3D7143740A45DDA422AEFAA6C /* Foundation.framework in Frameworks */,
-				182454D8C8A388C401A88B701E318DB2 /* LocalAuthentication.framework in Frameworks */,
-				D1775B5C6505DC9D90AA2DF2430AD0A7 /* Security.framework in Frameworks */,
-				B2AC379B6B44D238FC101AFA0B6A30C3 /* UIKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		5AF043DA48CE7395B568B60C9D480ED0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -112,34 +101,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EFB192519CBF2E06F31CD7679182DDAE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6233A21F7F3B0E46408FC9DEA14E19C /* Foundation.framework in Frameworks */,
+				48ABC681C68130408EF13C2472738ECD /* LocalAuthentication.framework in Frameworks */,
+				4930EFDC48E68333C9664A3C9A95B10F /* Security.framework in Frameworks */,
+				96ACF4F73299C1B9E5DB106475426719 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		29DBDE41F12833DEE3AD248B9D5038A5 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				4AC79060F83881DBE217DAA098A3DB8B /* Locker.modulemap */,
-				4911A1947B1EE4D264BF6F896A5125D7 /* Locker-dummy.m */,
-				1218811E9FB576604F8930DE4775EC9E /* Locker-Info.plist */,
-				95D0BE52033A54F4539C42330C868AD3 /* Locker-prefix.pch */,
-				C7965D2B71D75B627F806BEF1E262E21 /* Locker-umbrella.h */,
-				C416D2E32E54B784CBA82A85DFACFC84 /* Locker.debug.xcconfig */,
-				087BCF60A92558E6FEAEF6C3652686E9 /* Locker.release.xcconfig */,
-			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/Locker";
-			sourceTree = "<group>";
-		};
-		4F87B1B492E7FA42C10721A36BE45842 /* Locker */ = {
-			isa = PBXGroup;
-			children = (
-				56CE47FDDAD7F6EB52CC9AE9F7A5E93F /* BiometrucsType.swift */,
-				3822AEB0F1012350C5FC50D2A6E7E06A /* Locker.swift */,
-			);
-			name = Locker;
-			path = Locker/Locker;
-			sourceTree = "<group>";
-		};
 		5429FAF2D5BB5930924F1B3493A6ED29 /* Pods-TouchIDTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,18 +140,6 @@
 				6F43EB2F76E12821EC7682DFCE08090B /* UIKit.framework */,
 			);
 			name = iOS;
-			sourceTree = "<group>";
-		};
-		662509C25F8B8930912BEA1BF45B7B48 /* Locker */ = {
-			isa = PBXGroup;
-			children = (
-				A37B40CC2FEED8B06A6C6197A54F3414 /* Internal */,
-				4F87B1B492E7FA42C10721A36BE45842 /* Locker */,
-				D27516D229D50891D46BDD8EC55B0518 /* Pod */,
-				29DBDE41F12833DEE3AD248B9D5038A5 /* Support Files */,
-			);
-			name = Locker;
-			path = ../..;
 			sourceTree = "<group>";
 		};
 		8DC66E0DC4F90E54194954A026FF4668 /* Pods-TouchID */ = {
@@ -215,22 +178,38 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		A37B40CC2FEED8B06A6C6197A54F3414 /* Internal */ = {
-			isa = PBXGroup;
-			children = (
-				533B1F1F7E4669C12102528378FCD9CE /* LockerHelpers.swift */,
-				377D681127200B0C002C31FE /* LockerError.swift */,
-			);
-			name = Internal;
-			path = Locker/Internal;
-			sourceTree = "<group>";
-		};
 		BA4F31F07263C99FC76E66D632A59F09 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				5A70F6784B646DD1DB64AE9994F14D7E /* iOS */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BE0ADE6741F62083B0A4D055DFC02D71 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				81C0F207A780D415F1623E17B9D96FAB /* Locker.modulemap */,
+				32079F14D9E735398086D95AA5401E3B /* Locker-dummy.m */,
+				1616B8BAD236777B19659CFC4C8E9356 /* Locker-Info.plist */,
+				C417BBD190AB08C63E5AC15FF1645D0D /* Locker-prefix.pch */,
+				F9B9920B767893939ED9390C281E2589 /* Locker-umbrella.h */,
+				919358026C013E9DDF316C4C3A97F661 /* Locker.debug.xcconfig */,
+				D7364E2FB18DF7C4D4BCE2F34E9A0D54 /* Locker.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/Locker";
+			sourceTree = "<group>";
+		};
+		C5D1F00CEA9442CE5F43FE960805668F /* Locker */ = {
+			isa = PBXGroup;
+			children = (
+				80F6ED3B69088ACB2DB919E9B0699328 /* BiometricsType.swift */,
+				1801983015628558F4CF2051741A86F6 /* Locker.swift */,
+				C064A42CC6370705921A49913A1E3198 /* LockerError.swift */,
+			);
+			name = Locker;
+			path = Locker/Locker;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
@@ -244,40 +223,61 @@
 			);
 			sourceTree = "<group>";
 		};
-		D27516D229D50891D46BDD8EC55B0518 /* Pod */ = {
+		D5B7C6B14FD2C25EA0678640AE8F9D7D /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				DE50BDAD2AD220F69ADD5AFC59008E8F /* LICENSE */,
-				F8609656162B4DE2BA7029134D0EB164 /* Locker.podspec */,
-				7E6F9499D0EF91BF10F32CF1EEB00C6F /* README.md */,
+				EA3215DCDD4CC338C9AF8E8E538DA3BF /* Locker */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		D9502DC9567082FA491CF34C0B13BB7D /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				FE84D19B020D2A9CBC2A26FF2ABF928C /* LICENSE */,
+				27E03D7840E3525D51AE682723969BBD /* Locker.podspec */,
+				15120831327445F7773A1D6CB4BABE89 /* README.md */,
 			);
 			name = Pod;
 			sourceTree = "<group>";
 		};
-		D5B7C6B14FD2C25EA0678640AE8F9D7D /* Development Pods */ = {
+		EA3215DCDD4CC338C9AF8E8E538DA3BF /* Locker */ = {
 			isa = PBXGroup;
 			children = (
-				662509C25F8B8930912BEA1BF45B7B48 /* Locker */,
+				F55E882FAC4EC50083A6CE08E1A65B41 /* Internal */,
+				C5D1F00CEA9442CE5F43FE960805668F /* Locker */,
+				D9502DC9567082FA491CF34C0B13BB7D /* Pod */,
+				BE0ADE6741F62083B0A4D055DFC02D71 /* Support Files */,
 			);
-			name = "Development Pods";
+			name = Locker;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		F55E882FAC4EC50083A6CE08E1A65B41 /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				1C26C349D5A8DAD6C38156754FE13FE9 /* LockerHelpers.swift */,
+			);
+			name = Internal;
+			path = Locker/Internal;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		6258F7F094F68DD3A51D86263335F993 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6571B124902FDB138E6E13A7354326A1 /* Locker-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		942AE49B088D91B7618BD4B722A20B6F /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				A7B864CEA5C0E543672ACFAADCB13B24 /* Pods-TouchID-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A27EF68126A8813F7C31ED4862DDA41C /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CE07537AF9568CADC669C693469FCECA /* Locker-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,7 +304,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				E1DF421D877925396C85620CC7013895 /* PBXTargetDependency */,
+				1410BABA9A08BD1964006058A0418A37 /* PBXTargetDependency */,
 			);
 			name = "Pods-TouchID";
 			productName = Pods_TouchID;
@@ -313,12 +313,12 @@
 		};
 		C23DEDFAACC805E48F6E5EB548ECE5D6 /* Locker */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4F30BBFA71A0B7AF5F2A546F3BEF264C /* Build configuration list for PBXNativeTarget "Locker" */;
+			buildConfigurationList = 33FF2CD6C9BB54F8DE37236022C38A37 /* Build configuration list for PBXNativeTarget "Locker" */;
 			buildPhases = (
-				A27EF68126A8813F7C31ED4862DDA41C /* Headers */,
-				8B1DB9818449C2132EF5AE3C2E51866A /* Sources */,
-				33EB8DB4F0109917C3EE433EECE24D51 /* Frameworks */,
-				ED5E60D80F7DCD1BB808C9BAD94AC811 /* Resources */,
+				6258F7F094F68DD3A51D86263335F993 /* Headers */,
+				935205095154E8F844EFCBB29A25A048 /* Sources */,
+				EFB192519CBF2E06F31CD7679182DDAE /* Frameworks */,
+				EAC7C324FBBB2DACADD8CA4C1406FD5D /* Resources */,
 			);
 			buildRules = (
 			);
@@ -341,7 +341,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				E5FCC32BD994900219FB58C935906AC8 /* PBXTargetDependency */,
+				E82C4F2A6903153EF2D8BE29551E8FB5 /* PBXTargetDependency */,
 			);
 			name = "Pods-TouchIDTests";
 			productName = Pods_TouchIDTests;
@@ -392,7 +392,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		ED5E60D80F7DCD1BB808C9BAD94AC811 /* Resources */ = {
+		EAC7C324FBBB2DACADD8CA4C1406FD5D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -402,23 +402,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		8B1DB9818449C2132EF5AE3C2E51866A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7BF9F7F047A450122913D0EE81F2AB7B /* BiometrucsType.swift in Sources */,
-				1898489D34179EE3AD3D2A11028BF594 /* Locker.swift in Sources */,
-				244300DC1E8E106CC666DA4CF27D57A0 /* Locker-dummy.m in Sources */,
-				8ABC8D0F717D14145F32B2130F8B98F2 /* LockerHelpers.swift in Sources */,
-				377D681227200B0C002C31FE /* LockerError.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		8F7C33CF5738B65619F26439AF516306 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				124290DAFCEDCE944416DDFCB6546C9E /* Pods-TouchIDTests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		935205095154E8F844EFCBB29A25A048 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E8E77145DC6FA18D7BACE1C967438C3 /* BiometricsType.swift in Sources */,
+				282280EBFFBF9CEBAA3C6C63A49B0B1D /* Locker.swift in Sources */,
+				41832DA49D55167D5EF4E3D865D56EF7 /* Locker-dummy.m in Sources */,
+				DF26ED6B83C63270C4B47DA4598AF6CD /* LockerError.swift in Sources */,
+				6E6B463B4F8E4B7FEC436EC8B339E23E /* LockerHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,17 +433,17 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		E1DF421D877925396C85620CC7013895 /* PBXTargetDependency */ = {
+		1410BABA9A08BD1964006058A0418A37 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Locker;
 			target = C23DEDFAACC805E48F6E5EB548ECE5D6 /* Locker */;
-			targetProxy = 1E08F4F73BA292526F7873B57FB45EBE /* PBXContainerItemProxy */;
+			targetProxy = A98C15839FED30F5C8B9668C9B6BE402 /* PBXContainerItemProxy */;
 		};
-		E5FCC32BD994900219FB58C935906AC8 /* PBXTargetDependency */ = {
+		E82C4F2A6903153EF2D8BE29551E8FB5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-TouchID";
 			target = A267EADEE36C7D507318E25BFD6ACA10 /* Pods-TouchID */;
-			targetProxy = B8DDF37C5F5BC577C16D87D3F6DB7DB9 /* PBXContainerItemProxy */;
+			targetProxy = E4A409130D783CB9917A8D22C2DC6092 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -579,37 +579,6 @@
 			};
 			name = Debug;
 		};
-		5F9F54EB02F5C345E14AA1AEC386E9D3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C416D2E32E54B784CBA82A85DFACFC84 /* Locker.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Locker/Locker-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Locker/Locker-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Locker/Locker.modulemap";
-				PRODUCT_MODULE_NAME = Locker;
-				PRODUCT_NAME = Locker;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		87BAA131E1445252EC647534F822512B /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4B97EB5E37FC139E090F5AF90178E035 /* Pods-TouchID.release.xcconfig */;
@@ -643,38 +612,6 @@
 			};
 			name = Release;
 		};
-		9EEC510F22E79D1162F1B4DD000B1F81 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 087BCF60A92558E6FEAEF6C3652686E9 /* Locker.release.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Locker/Locker-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Locker/Locker-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Locker/Locker.modulemap";
-				PRODUCT_MODULE_NAME = Locker;
-				PRODUCT_NAME = Locker;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		A8B2D785611E214909E42B8FC398BCE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D8E0BE05BFEC090D0B144112C07EF79E /* Pods-TouchIDTests.debug.xcconfig */;
@@ -701,6 +638,37 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		AFC337BFF30100D304E930956FAF2A3F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 919358026C013E9DDF316C4C3A97F661 /* Locker.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Locker/Locker-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Locker/Locker-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Locker/Locker.modulemap";
+				PRODUCT_MODULE_NAME = Locker;
+				PRODUCT_NAME = Locker;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -762,29 +730,62 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		CAD6CAAA258F63972BBC89EF3A6044DD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D7364E2FB18DF7C4D4BCE2F34E9A0D54 /* Locker.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Locker/Locker-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Locker/Locker-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Locker/Locker.modulemap";
+				PRODUCT_MODULE_NAME = Locker;
+				PRODUCT_NAME = Locker;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		33FF2CD6C9BB54F8DE37236022C38A37 /* Build configuration list for PBXNativeTarget "Locker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AFC337BFF30100D304E930956FAF2A3F /* Debug */,
+				CAD6CAAA258F63972BBC89EF3A6044DD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				25AD9454612BF454A1E3DC4CD4FA8C6D /* Debug */,
 				CA547D2C7E9A8A153DC2B27FBE00B112 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		4F30BBFA71A0B7AF5F2A546F3BEF264C /* Build configuration list for PBXNativeTarget "Locker" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5F9F54EB02F5C345E14AA1AEC386E9D3 /* Debug */,
-				9EEC510F22E79D1162F1B4DD000B1F81 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
