@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 @objcMembers
-public class Locker {
+public class Locker: NSObject {
 
     // MARK: - Public properties
 

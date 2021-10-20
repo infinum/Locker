@@ -8,6 +8,7 @@
 
 import Foundation
 
-public enum BiometricsType {
+@objc
+public enum BiometricsType: Int {
     case none, touchID, faceID
 }
