@@ -46,18 +46,20 @@ public class Locker: NSObject {
 
     public static var enableDeviceListSync: Bool {
         get {
-            return false
+            return isSyncSet
         }
         set {
             if newValue {
                 LockerHelpers.fetchNewDeviceList()
             }
+            isSyncSet = newValue
         }
     }
 
     // MARK: - Private properties
 
     private static var currentUserDefaults: UserDefaults?
+    private static var isSyncSet = false
 
     // MARK: - Handle secrets (store, delete, fetch)
 
