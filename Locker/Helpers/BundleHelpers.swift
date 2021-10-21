@@ -17,19 +17,20 @@ class BundleHelpers {
         return resourceBundle
     }
 
+    private static var decoder: JSONDecoder {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        return decoder
+    }
+
     public static func write(_ data: Data, to url: URL) {
+        // we'll have periodic updates to the library so we don't want to throw errors
         do {
             let decodedResponse = try BundleHelpers.decoder.decode(DeviceResponse.self, from: data)
             let encodedData = try? JSONEncoder().encode(decodedResponse)
             try encodedData!.write(to: url)
         } catch {
         }
-    }
-
-    private static var decoder: JSONDecoder {
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        return decoder
     }
 }
 
@@ -52,7 +53,6 @@ extension BundleHelpers {
         do {
             return try BundleHelpers.decoder.decode(T.self, from: jsonData)
         } catch {
-            print(error)
             return nil
         }
     }
