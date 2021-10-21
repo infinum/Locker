@@ -63,22 +63,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		06FB9482236B264700988BA1 /* Locker */ = {
+		06FB9482236B264700988BA1 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				3755F103272071F100D62955 /* Models */,
 				06FB9484236B264700988BA1 /* Locker */,
-				06FB9487236B264700988BA1 /* Helpers */,
 			);
-			path = Locker;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		06FB9484236B264700988BA1 /* Locker */ = {
 			isa = PBXGroup;
 			children = (
-				377D681527202257002C31FE /* LockerError.swift */,
-				375E9683271EE86200896845 /* BiometricsType.swift */,
-				375E9685271EF02300896845 /* Locker.swift */,
+				376B905627218E480021B54F /* Core */,
+				06FB9487236B264700988BA1 /* Helpers */,
+				3755F103272071F100D62955 /* Models */,
 			);
 			path = Locker;
 			sourceTree = "<group>";
@@ -103,10 +101,20 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		376B905627218E480021B54F /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				375E9685271EF02300896845 /* Locker.swift */,
+				375E9683271EE86200896845 /* BiometricsType.swift */,
+				377D681527202257002C31FE /* LockerError.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 		DF8FB4F71E8D119C00EC2740 = {
 			isa = PBXGroup;
 			children = (
-				06FB9482236B264700988BA1 /* Locker */,
+				06FB9482236B264700988BA1 /* Sources */,
 				DF8FB5011E8D119C00EC2740 /* Products */,
 				DF8FB52D1E8DAFFF00EC2740 /* Frameworks */,
 			);
