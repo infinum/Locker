@@ -50,7 +50,7 @@ public class Locker: NSObject {
         }
         set {
             if newValue {
-                LockerHelpers.getDeviceList()
+                LockerHelpers.fetchNewDeviceList()
             }
         }
     }

@@ -111,11 +111,9 @@ extension LockerHelpers {
 
     // MARK: - Device list
 
-    static func getDeviceList() {
+    static func fetchNewDeviceList() {
     #if !targetEnvironment(simulator)
-        if !devices.isDeviceInDeviceList(device: LockerHelpers.deviceCode) {
-            devices.fetchDevices()
-        }
+        devices.fetchDevices()
     #endif
     }
 }
