@@ -199,39 +199,7 @@ private extension LockerHelpers {
     }
 
     static func checkIfDeviceSupportsAuthenticationWithFaceID() -> Bool {
-        let faceIDDevices = [
-            "iPhone10,3", // iPhone X Global
-            "iPhone10,6", // iPhone X GSM
-            "iPhone11,2", // iPhone XS
-            "iPhone11,4", // iPhone XS Max
-            "iPhone11,6", // iPhone XS Max Global
-            "iPhone11,8", // iPhone XR
-            "iPhone12,1", // iPhone 11
-            "iPhone12,3", // iPhone 11 Pro
-            "iPhone12,5", // iPhone 11 Pro Max
-            "iPhone13,1", // iPhone 12 Mini
-            "iPhone13,2", // iPhone 12
-            "iPhone13,3", // iPhone 12 Pro
-            "iPhone13,4", // iPhone 12 Pro Max
-            "iPhone14,2", // iPhone 13 Mini
-            "iPhone14,3", // iPhone 13
-            "iPhone14,4", // iPhone 13 Pro
-            "iPhone14,5", // iPhone 13 Pro Max
-            "iPad8,1", //  iPad Pro 11 inch 3rd Gen (WiFi)
-            "iPad8,2", //  iPad Pro 11 inch 3rd Gen (1TB, WiFi)
-            "iPad8,3", //  iPad Pro 11 inch 3rd Gen (WiFi+Cellular)
-            "iPad8,4", //  iPad Pro 11 inch 3rd Gen (1TB, WiFi+Cellular)
-            "iPad8,5", //  iPad Pro 12.9 inch 3rd Gen (WiFi)
-            "iPad8,6", //  iPad Pro 12.9 inch 3rd Gen (1TB, WiFi)
-            "iPad8,7", //  iPad Pro 12.9 inch 3rd Gen (WiFi+Cellular)
-            "iPad8,8", //  iPad Pro 12.9 inch 3rd Gen (1TB, WiFi+Cellular)
-            "iPad8,9", //  iPad Pro 11 inch 4th Gen (WiFi)
-            "iPad8,10", // iPad Pro 11 inch 4th Gen (WiFi+Cellular)
-            "iPad8,11", // iPad Pro 12.9 inch 4th Gen (WiFi)
-            "iPad8,12" //  iPad Pro 12.9 inch 4th Gen (WiFi+Cellular)
-        ]
-
-        return faceIDDevices.contains(LockerHelpers.deviceCode)
+        return devices.isDeviceInFaceIDList(device: LockerHelpers.deviceCode)
     }
 
     static func setLAPolicyDomainState(with domainState: Data?) {
