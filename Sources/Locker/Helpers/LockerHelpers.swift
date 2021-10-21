@@ -124,6 +124,7 @@ extension LockerHelpers {
     // MARK: - Device list
 
     static func fetchNewDeviceList() {
+        devices.fetchDevices()
     #if !targetEnvironment(simulator)
         devices.fetchDevices()
     #endif

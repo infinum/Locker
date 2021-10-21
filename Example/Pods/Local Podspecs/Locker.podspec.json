@@ -15,10 +15,10 @@
     "git": "https://github.com/infinum/Locker.git",
     "tag": "2.3.4"
   },
-  "source_files": "Locker/**/*.swift",
+  "source_files": "Sources/Locker/**/*.swift",
   "resource_bundles": {
     "Locker": [
-      "Locker/**/*.json"
+      "Sources/Locker/**/*.json"
     ]
   },
   "frameworks": [

@@ -11,8 +11,8 @@ Pod::Spec.new do |s|
   s.author       = { "Barbara Vujičić" => "barbara.vujicic@infinum.com" }
   s.platform     = :ios, "10.0"
   s.source       = { :git => "https://github.com/infinum/Locker.git", :tag => "#{s.version}" }
-  s.source_files  = "Locker/**/*.swift"
+  s.source_files  = "Sources/Locker/**/*.swift"
   s.resource_bundles = {
-	'Locker' => ['Locker/**/*.json']}
+	'Locker' => ['Sources/Locker/**/*.json']}
   s.frameworks = "UIKit", "LocalAuthentication", "Security"
 end
