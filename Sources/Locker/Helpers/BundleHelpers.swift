@@ -12,8 +12,10 @@ class BundleHelpers {
 
     public static var bundleResource: Bundle? {
         let myBundle = Bundle(for: Self.self)
-        guard let resourceBundleURL = myBundle.url(forResource: "Locker", withExtension: "bundle"),
+
+        guard let resourceBundleURL = myBundle.url(forResource: "LockerKit_Locker", withExtension: "bundle"),
               let resourceBundle = Bundle(url: resourceBundleURL) else { return nil }
+
         return resourceBundle
     }
 
