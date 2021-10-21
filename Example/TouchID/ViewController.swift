@@ -19,17 +19,6 @@ public final class ViewController: UIViewController {
 
     private let identifier = "TouchIDSampleApp"
 
-    public override func viewDidLoad() {
-        super.viewDidLoad()
-        Locker.enableDeviceListSync = true
-        storeSecret()
-        readSecret { secret in
-            print(secret)
-        } failure: { status in
-            print(status)
-        }
-
-    }
 }
 
 // MARK: - Locker usage -
