@@ -68,6 +68,7 @@ class LockerHelpers {
     }
 
     private static let bundleIdentifier = Bundle.main.bundleIdentifier ?? ""
+    private static let devices = Devices.shared
 }
 
 // MARK: - Public extension
@@ -106,6 +107,16 @@ extension LockerHelpers {
 
     static var keyKeychainServiceName: String {
         return "\(LockerHelpers.bundleIdentifier)_KeychainService"
+    }
+
+    // MARK: - Device list
+
+    static func getDeviceList() {
+    #if !targetEnvironment(simulator)
+        if !devices.isDeviceInDeviceList(device: LockerHelpers.deviceCode) {
+            devices.fetchDevices()
+        }
+    #endif
     }
 }
 
