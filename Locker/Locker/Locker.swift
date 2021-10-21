@@ -44,6 +44,17 @@ public class Locker: NSObject {
         LockerHelpers.configuredBiometricsAuthentication
     }
 
+    public static var enableDeviceListSync: Bool {
+        get {
+            return false
+        }
+        set {
+            if newValue {
+                LockerHelpers.getDeviceList()
+            }
+        }
+    }
+
     // MARK: - Private properties
 
     private static var currentUserDefaults: UserDefaults?
