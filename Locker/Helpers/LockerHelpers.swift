@@ -24,7 +24,7 @@ class LockerHelpers {
             return .faceID
         }
 
-        return checkIfCanAuthenticateWithBiometrics() ? .touchID : .none
+        return deviceSupportsAuthenticationWithTouchID ? .touchID : .none
     }
 
     static var configuredBiometricsAuthentication: BiometricsType {
@@ -39,6 +39,10 @@ class LockerHelpers {
         return isFaceIDEnabled()
     }
 
+    static var canUseAuthenticationWithTouchID: Bool {
+        return isTouchIDEnabled()
+    }
+
     static var deviceCode: String {
         return getDeviceIdentifierFromSystem()
     }
@@ -49,6 +53,14 @@ class LockerHelpers {
         }
 
         return checkIfDeviceSupportsAuthenticationWithFaceID()
+    }
+
+    static var deviceSupportsAuthenticationWithTouchID: Bool {
+        if LockerHelpers.canUseAuthenticationWithTouchID {
+            return true
+        }
+
+        return checkIfDeviceSupportsAuthenticationWithTouchID()
     }
 
     static var isSimulator: Bool {
@@ -140,7 +152,7 @@ private extension LockerHelpers {
         return false
     }
 
-    static func checkIfCanAuthenticateWithBiometrics() -> Bool {
+    static func isTouchIDEnabled() -> Bool {
         let context = LAContext()
         var error: NSError?
 
@@ -198,6 +210,10 @@ private extension LockerHelpers {
 
     static func checkIfDeviceSupportsAuthenticationWithFaceID() -> Bool {
         return devices.isDeviceInFaceIDList(device: LockerHelpers.deviceCode)
+    }
+
+    static func checkIfDeviceSupportsAuthenticationWithTouchID() -> Bool {
+        return devices.isDeviceInTouchIDList(device: LockerHelpers.deviceCode)
     }
 
     static func setLAPolicyDomainState(with domainState: Data?) {
