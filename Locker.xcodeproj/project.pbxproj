@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3755F109272072F800D62955 /* BundleHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3755F108272072F800D62955 /* BundleHelpers.swift */; };
 		375E9682271EE79600896845 /* LockerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E9681271EE79600896845 /* LockerHelpers.swift */; };
 		375E9684271EE86200896845 /* BiometricsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E9683271EE86200896845 /* BiometricsType.swift */; };
 		375E9686271EF02300896845 /* Locker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E9685271EF02300896845 /* Locker.swift */; };
+		376B905127214C270021B54F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376B905027214C270021B54F /* Constants.swift */; };
+		376B905327214C370021B54F /* DeviceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376B905227214C370021B54F /* DeviceResponse.swift */; };
 		377D681627202257002C31FE /* LockerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377D681527202257002C31FE /* LockerError.swift */; };
 		377D68212720395D002C31FE /* Devices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377D681F2720395D002C31FE /* Devices.swift */; };
-		377D68222720395D002C31FE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377D68202720395D002C31FE /* Constants.swift */; };
-		377D682527203995002C31FE /* DeviceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377D682427203995002C31FE /* DeviceResponse.swift */; };
 		DF8FB52F1E8DAFFF00EC2740 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF8FB52E1E8DAFFF00EC2740 /* UIKit.framework */; };
 		DF8FB5311E8DB00600EC2740 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF8FB5301E8DB00600EC2740 /* LocalAuthentication.framework */; };
 		DF8FB5351E8DB03600EC2740 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF8FB5341E8DB03600EC2740 /* Security.framework */; };
@@ -32,13 +33,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3755F108272072F800D62955 /* BundleHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleHelpers.swift; sourceTree = "<group>"; };
 		375E9681271EE79600896845 /* LockerHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockerHelpers.swift; sourceTree = "<group>"; };
 		375E9683271EE86200896845 /* BiometricsType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricsType.swift; sourceTree = "<group>"; };
 		375E9685271EF02300896845 /* Locker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Locker.swift; sourceTree = "<group>"; };
+		376B905027214C270021B54F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		376B905227214C370021B54F /* DeviceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceResponse.swift; sourceTree = "<group>"; };
 		377D681527202257002C31FE /* LockerError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockerError.swift; sourceTree = "<group>"; };
 		377D681F2720395D002C31FE /* Devices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Devices.swift; sourceTree = "<group>"; };
-		377D68202720395D002C31FE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		377D682427203995002C31FE /* DeviceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceResponse.swift; sourceTree = "<group>"; };
 		377D682627203AD8002C31FE /* devices.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = devices.json; sourceTree = "<group>"; };
 		DF8FB5001E8D119C00EC2740 /* libLocker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLocker.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF8FB52E1E8DAFFF00EC2740 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -64,8 +66,9 @@
 		06FB9482236B264700988BA1 /* Locker */ = {
 			isa = PBXGroup;
 			children = (
+				3755F103272071F100D62955 /* Models */,
 				06FB9484236B264700988BA1 /* Locker */,
-				06FB9487236B264700988BA1 /* Internal */,
+				06FB9487236B264700988BA1 /* Helpers */,
 			);
 			path = Locker;
 			sourceTree = "<group>";
@@ -80,24 +83,24 @@
 			path = Locker;
 			sourceTree = "<group>";
 		};
-		06FB9487236B264700988BA1 /* Internal */ = {
+		06FB9487236B264700988BA1 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				377D68232720398D002C31FE /* Model */,
-				377D68202720395D002C31FE /* Constants.swift */,
+				377D682627203AD8002C31FE /* devices.json */,
 				377D681F2720395D002C31FE /* Devices.swift */,
 				375E9681271EE79600896845 /* LockerHelpers.swift */,
-				377D682627203AD8002C31FE /* devices.json */,
+				3755F108272072F800D62955 /* BundleHelpers.swift */,
 			);
-			path = Internal;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
-		377D68232720398D002C31FE /* Model */ = {
+		3755F103272071F100D62955 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				377D682427203995002C31FE /* DeviceResponse.swift */,
+				376B905027214C270021B54F /* Constants.swift */,
+				376B905227214C370021B54F /* DeviceResponse.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		DF8FB4F71E8D119C00EC2740 = {
@@ -212,11 +215,12 @@
 			files = (
 				377D68212720395D002C31FE /* Devices.swift in Sources */,
 				375E9682271EE79600896845 /* LockerHelpers.swift in Sources */,
+				3755F109272072F800D62955 /* BundleHelpers.swift in Sources */,
 				375E9684271EE86200896845 /* BiometricsType.swift in Sources */,
 				377D681627202257002C31FE /* LockerError.swift in Sources */,
-				377D682527203995002C31FE /* DeviceResponse.swift in Sources */,
 				375E9686271EF02300896845 /* Locker.swift in Sources */,
-				377D68222720395D002C31FE /* Constants.swift in Sources */,
+				376B905327214C370021B54F /* DeviceResponse.swift in Sources */,
+				376B905127214C270021B54F /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
