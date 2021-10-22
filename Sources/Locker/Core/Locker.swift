@@ -73,7 +73,17 @@ public class Locker: NSObject {
             kSecAttrService: LockerHelpers.keyKeychainServiceName,
             kSecAttrAccount: LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier)
         ]
+        opfunction(secret: secret, uniqueIdentifier, query: query) { error in
+            guard let error = error else {
+                return
+            }
+            throw error
+        }
+    #endif
 
+    }
+
+    private static func opfunction(secret: String, _ uniqueIdentifier: String, query: [CFString: Any], _ completion: @escaping ((LockerError?) throws -> Void)) {
         DispatchQueue.global(qos: .default).async {
             // First delete the previous item if it exists
             SecItemDelete(query as CFDictionary)
@@ -94,12 +104,25 @@ public class Locker: NSObject {
                 errorRef
             )
 
-            guard let sacObject = sacObject, errorRef == nil, secretData = secret.data(using: .utf8) else {
+            guard let sacObject = sacObject, errorRef == nil, let secretData = secret.data(using: .utf8) else {
                 if let errorRef = errorRef {
-                    throw LockerError
-                        .accessControl("Unable to initialize access control: \(errorRef.pointee.description)")
+                    do {
+                        try completion(LockerError
+                                    .accessControl(
+                                        "Unable to initialize access control: \(errorRef.pointee.debugDescription)"
+                                    ))
+                    } catch {
+
+                    }
+
+                } else {
+                    do {
+                        try completion(LockerError.invalidData("Invalid storing data"))
+                    } catch {
+
+                    }
+
                 }
-                throw LockerError.invalidData("Invalid storing data")
                 return
             }
             let attributes: [CFString: Any] = [
@@ -118,8 +141,6 @@ public class Locker: NSObject {
                 LockerHelpers.storeCurrentLAPolicyDomainState()
             }
         }
-    #endif
-
     }
 
     @objc(retreiveCurrentSecretForUniqueIdentifier:operationPrompt:success:failure:)
