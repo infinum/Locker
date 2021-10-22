@@ -59,21 +59,6 @@ public class Locker: NSObject {
             guard let error = error else {
                 return
             }
-            let attributes: [CFString: Any] = [
-                kSecClass: kSecClassGenericPassword,
-                kSecAttrService: LockerHelpers.keyKeychainServiceName,
-                kSecAttrAccount: LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier),
-                kSecValueData: secretData,
-                kSecUseAuthenticationUI: false,
-                kSecAttrAccessControl: sacObject
-            ]
-
-            DispatchQueue.global(qos: .default).async {
-                SecItemAdd(attributes as CFDictionary, nil)
-
-                // Store current LA policy domain state
-                LockerHelpers.storeCurrentLAPolicyDomainState()
-            }
             throw error
         }
     #endif
@@ -223,11 +208,16 @@ public extension Locker {
 private extension Locker {
     // added a function with a closure since we can't throw errors
     // from async threads which is throwable
-    private static func setSecretForDevice(_ secret: String, for uniqueIdentifier: String, _ completion: @escaping ((LockerError?) throws -> Void)) {
-        let query: [CFString : Any] = [
-            kSecClass : kSecClassGenericPassword,
-            kSecAttrService : LockerHelpers.keyKeychainServiceName,
-            kSecAttrAccount : LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier)
+    // swiftlint:disable:next function_body_length
+    private static func setSecretForDevice(
+        _ secret: String,
+        for uniqueIdentifier: String,
+        _ completion: @escaping ((LockerError?) throws -> Void)
+    ) {
+        let query: [CFString: Any] = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrService: LockerHelpers.keyKeychainServiceName,
+            kSecAttrAccount: LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier)
         ]
 
         DispatchQueue.global(qos: .default).async {
@@ -242,7 +232,6 @@ private extension Locker {
             } else {
                 flags = .touchIDCurrentSet
             }
-
             let sacObject = SecAccessControlCreateWithFlags(
                 kCFAllocatorDefault,
                 kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly,
@@ -250,30 +239,30 @@ private extension Locker {
                 errorRef
             )
 
-
             guard let sacObject = sacObject, errorRef == nil, let secretData = secret.data(using: .utf8) else {
                 if let errorRef = errorRef {
                     do {
                         try completion(
-                            LockerError.accessControl("Unable to initialize access control: \(errorRef.pointee.debugDescription)")
+                            LockerError
+                                .accessControl(
+                                    "Unable to initialize access control: \(errorRef.pointee.debugDescription)"
+                                )
                         )
-                    } catch {
-                    }
+                    } catch {}
                 } else {
                     do {
                         try completion(LockerError.invalidData("Invalid storing data"))
-                    } catch {
-                    }
+                    } catch {}
                 }
                 return
             }
-            let attributes: [CFString : Any] = [
-                kSecClass : kSecClassGenericPassword,
-                kSecAttrService : LockerHelpers.keyKeychainServiceName,
-                kSecAttrAccount : LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier),
-                kSecValueData : secretData,
+            let attributes: [CFString: Any] = [
+                kSecClass: kSecClassGenericPassword,
+                kSecAttrService: LockerHelpers.keyKeychainServiceName,
+                kSecAttrAccount: LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier),
+                kSecValueData: secretData,
                 kSecUseAuthenticationUI: false,
-                kSecAttrAccessControl : sacObject
+                kSecAttrAccessControl: sacObject
             ]
 
             DispatchQueue.global(qos: .default).async {
@@ -283,8 +272,7 @@ private extension Locker {
                 LockerHelpers.storeCurrentLAPolicyDomainState()
                 do {
                     try completion(nil)
-                } catch {
-                }
+                } catch {}
             }
         }
     }
