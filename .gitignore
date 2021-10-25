@@ -4,3 +4,4 @@ Example/.DS_Store
 project.xcworkspace/
 xcuserdata/
 .build/
+Carthage/Build
