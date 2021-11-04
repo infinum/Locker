@@ -9,6 +9,5 @@
 import Foundation
 
 enum Constants {
-
     static let devicesURL = URL(string: "https://private-7d1e4-lockerdevices.apiary-mock.com/devices")
 }

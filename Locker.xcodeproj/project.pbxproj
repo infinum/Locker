@@ -14,7 +14,7 @@
 		376B905127214C270021B54F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376B905027214C270021B54F /* Constants.swift */; };
 		376B905327214C370021B54F /* DeviceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376B905227214C370021B54F /* DeviceResponse.swift */; };
 		377D681627202257002C31FE /* LockerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377D681527202257002C31FE /* LockerError.swift */; };
-		377D68212720395D002C31FE /* Devices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377D681F2720395D002C31FE /* Devices.swift */; };
+		377D68212720395D002C31FE /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377D681F2720395D002C31FE /* DeviceManager.swift */; };
 		DF8FB52F1E8DAFFF00EC2740 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF8FB52E1E8DAFFF00EC2740 /* UIKit.framework */; };
 		DF8FB5311E8DB00600EC2740 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF8FB5301E8DB00600EC2740 /* LocalAuthentication.framework */; };
 		DF8FB5351E8DB03600EC2740 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF8FB5341E8DB03600EC2740 /* Security.framework */; };
@@ -33,7 +33,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		373FB0C32734262B00092F9E /* Locker+ObjectiveC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Locker+ObjectiveC.swift"; sourceTree = "<group>"; };
 		3755F108272072F800D62955 /* BundleHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleHelpers.swift; sourceTree = "<group>"; };
 		375E9681271EE79600896845 /* LockerHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockerHelpers.swift; sourceTree = "<group>"; };
 		375E9683271EE86200896845 /* BiometricsType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricsType.swift; sourceTree = "<group>"; };
@@ -41,8 +40,8 @@
 		376B905027214C270021B54F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		376B905227214C370021B54F /* DeviceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceResponse.swift; sourceTree = "<group>"; };
 		377D681527202257002C31FE /* LockerError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockerError.swift; sourceTree = "<group>"; };
-		377D681F2720395D002C31FE /* Devices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Devices.swift; sourceTree = "<group>"; };
-		377D682627203AD8002C31FE /* devices.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = devices.json; sourceTree = "<group>"; };
+		377D681F2720395D002C31FE /* DeviceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
+		377D682627203AD8002C31FE /* BiometryAvailabilityDeviceList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BiometryAvailabilityDeviceList.json; sourceTree = "<group>"; };
 		DF8FB5001E8D119C00EC2740 /* libLocker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLocker.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF8FB52E1E8DAFFF00EC2740 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DF8FB5301E8DB00600EC2740 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
@@ -78,7 +77,6 @@
 			isa = PBXGroup;
 			children = (
 				375E9685271EF02300896845 /* Locker.swift */,
-				373FB0C32734262B00092F9E /* Locker+ObjectiveC.swift */,
 				377D681527202257002C31FE /* LockerError.swift */,
 				375E9683271EE86200896845 /* BiometricsType.swift */,
 			);
@@ -88,8 +86,8 @@
 		06FB9487236B264700988BA1 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				377D682627203AD8002C31FE /* devices.json */,
-				377D681F2720395D002C31FE /* Devices.swift */,
+				377D682627203AD8002C31FE /* BiometryAvailabilityDeviceList.json */,
+				377D681F2720395D002C31FE /* DeviceManager.swift */,
 				375E9681271EE79600896845 /* LockerHelpers.swift */,
 				3755F108272072F800D62955 /* BundleHelpers.swift */,
 			);
@@ -215,12 +213,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				377D68212720395D002C31FE /* Devices.swift in Sources */,
+				377D68212720395D002C31FE /* DeviceManager.swift in Sources */,
 				375E9682271EE79600896845 /* LockerHelpers.swift in Sources */,
 				3755F109272072F800D62955 /* BundleHelpers.swift in Sources */,
 				375E9684271EE86200896845 /* BiometricsType.swift in Sources */,
 				377D681627202257002C31FE /* LockerError.swift in Sources */,
-				373FB0C42734262B00092F9E /* Locker+ObjectiveC.swift in Sources */,
 				375E9686271EF02300896845 /* Locker.swift in Sources */,
 				376B905327214C370021B54F /* DeviceResponse.swift in Sources */,
 				376B905127214C270021B54F /* Constants.swift in Sources */,

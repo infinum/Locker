@@ -43,22 +43,20 @@ public class Locker: NSObject {
         LockerHelpers.configuredBiometricsAuthentication
     }
 
-    public static var enableDeviceListSync: Bool {
-        get {
-            return isSyncSet
-        }
-        set {
-            if newValue {
-                LockerHelpers.fetchNewDeviceList()
-            }
-            isSyncSet = newValue
+    // if enableDeviceListSync is set to true
+    // it checks if the users device model is contained in the local JSON file
+    // which contains every device model which has TouchID or FaceID
+    // if not, it will fetch a new device list from the API
+    public static var enableDeviceListSync: Bool = false {
+        didSet {
+            guard enableDeviceListSync else { return }
+            LockerHelpers.fetchNewDeviceList()
         }
     }
 
     // MARK: - Private properties
 
     private static var currentUserDefaults: UserDefaults?
-    private static var isSyncSet = false
 
     // MARK: - Handle secrets (store, delete, fetch)
 
@@ -72,6 +70,18 @@ public class Locker: NSObject {
     #else
         setSecretForDevice(secret, for: uniqueIdentifier, completion: { error in
             completion?(error)
+        })
+    #endif
+    }
+
+    @available(swift, obsoleted: 1.0)
+    @objc(setSecret:forUniqueIdentifier:completion:)
+    static func setSecret(_ secret: String, for uniqueIdentifier: String, completion: ((NSError?) -> Void)? = nil) {
+    #if targetEnvironment(simulator)
+        Locker.userDefaults?.set(secret, forKey: uniqueIdentifier)
+    #else
+        setSecretForDevice(secret, for: uniqueIdentifier, completion: { error in
+            completion?(error?.asNSError)
         })
     #endif
     }

@@ -10,50 +10,41 @@ import Foundation
 
 class BundleHelpers {
 
+    // MARK: - Public properties
+
     public static var bundleResource: Bundle? {
-        let myBundle = Bundle(for: Self.self)
-        guard let resourceBundleURL = myBundle.url(forResource: "Locker", withExtension: "bundle"),
+        guard let resourceBundleURL = Bundle(for: Self.self).url(forResource: "Locker", withExtension: "bundle"),
               let resourceBundle = Bundle(url: resourceBundleURL) else { return nil }
         return resourceBundle
     }
 
-    private static var decoder: JSONDecoder {
+    public static var decoder: JSONDecoder {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
     }
-
-    public static func write(_ data: Data, to url: URL) {
-        // we'll have periodic updates to the library so we don't want to throw errors
-        do {
-            let decodedResponse = try BundleHelpers.decoder.decode(DeviceResponse.self, from: data)
-            let encodedData = try? JSONEncoder().encode(decodedResponse)
-            try encodedData!.write(to: url)
-        } catch {
-        }
-    }
 }
+
+// MARK: - Public extension -
 
 extension BundleHelpers {
 
-    static func readFromJSON(_ name: String) -> Data? {
-        do {
-            if let bundlePath = BundleHelpers.bundleResource?.path(forResource: name, ofType: "json"),
-               let jsonData = try String(contentsOfFile: bundlePath).data(using: .utf8) {
-                return jsonData
-            }
-        } catch {
-            return nil
-        }
-
-        return nil
+    public static func write(_ data: Data, to url: URL) {
+        // we'll have periodic updates to the library so we don't want to throw errors
+        guard let decodedResponse = try? BundleHelpers.decoder.decode(DeviceResponse.self, from: data),
+              let encodedData = try? JSONEncoder().encode(decodedResponse)
+        else { return }
+        try? encodedData.write(to: url)
     }
 
-    static func parse<T: Codable>(jsonData: Data) -> T? {
-        do {
-            return try BundleHelpers.decoder.decode(T.self, from: jsonData)
-        } catch {
-            return nil
-        }
+    static func readFromJSON(_ name: String) -> Data? {
+        guard let path = BundleHelpers.bundleResource?.path(forResource: name, ofType: "json"),
+        let data = try? String(contentsOfFile: path).data(using: .utf8)
+        else { return nil }
+        return data
+    }
+
+    public static func getFileURL(for name: String, with nameExtension: String) -> URL? {
+        return BundleHelpers.bundleResource?.url(forResource: name, withExtension: nameExtension)
     }
 }

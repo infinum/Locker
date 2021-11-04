@@ -39,7 +39,7 @@ class LockerHelpers {
     }
 
     static var canUseAuthenticationWithTouchID: Bool {
-        return isTouchIDEnabled()
+        return touchIDEnabled
     }
 
     static var deviceCode: String {
@@ -51,7 +51,7 @@ class LockerHelpers {
             return true
         }
 
-        return checkIfDeviceSupportsAuthenticationWithFaceID()
+        return deviceManager.isDeviceInFaceIDList(device: LockerHelpers.deviceCode)
     }
 
     static var deviceSupportsAuthenticationWithTouchID: Bool {
@@ -59,7 +59,7 @@ class LockerHelpers {
             return true
         }
 
-        return checkIfDeviceSupportsAuthenticationWithTouchID()
+        return deviceManager.isDeviceInTouchIDList(device: LockerHelpers.deviceCode)
     }
 
     static var isSimulator: Bool {
@@ -82,6 +82,24 @@ class LockerHelpers {
         return checkFaceIdState()
     }
 
+    private static var touchIDEnabled: Bool {
+        let context = LAContext()
+        var error: NSError?
+
+        if !context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            // When user removes all fingers for TouchID, error code will be `notEnrolled`.
+            // In that case, we want to return that device supports TouchID.
+            // In case lib is used on simulator, error code will always be `notEnrolled` and only then
+            // we want to return that biometrics is not supported as we don't know what simulator is used.
+            if let error = error,
+               error.code == biometryNotAvailableCode || (error.code == biometryNotEnrolledCode && isSimulator) {
+                return false
+            }
+        }
+
+        return true
+    }
+
     private static let bundleIdentifier = Bundle.main.bundleIdentifier ?? ""
 
     private static var biometryNotAvailableCode: Int {
@@ -99,7 +117,8 @@ class LockerHelpers {
             return Int(kLAErrorBiometryNotEnrolled)
         }
     }
-    private static let devices = Devices.shared
+
+    private static let deviceManager: DeviceManager = .shared
 }
 
 // MARK: - Public extension
@@ -143,7 +162,9 @@ extension LockerHelpers {
 
     static func fetchNewDeviceList() {
     #if !targetEnvironment(simulator)
-        devices.fetchDevices()
+        if !deviceSupportsAuthenticationWithTouchID && !deviceSupportsAuthenticationWithFaceID {
+            deviceManager.fetchDevices()
+        }
     #endif
     }
 }
@@ -162,24 +183,6 @@ private extension LockerHelpers {
               oldDomainState.elementsEqual(newDomainState)
         else { return false }
         LockerHelpers.setLAPolicyDomainState(with: LockerHelpers.currentLAPolicyDomainState)
-        return true
-    }
-
-    static func isTouchIDEnabled() -> Bool {
-        let context = LAContext()
-        var error: NSError?
-
-        if !context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            // When user removes all fingers for TouchID, error code will be `notEnrolled`.
-            // In that case, we want to return that device supports TouchID.
-            // In case lib is used on simulator, error code will always be `notEnrolled` and only then
-            // we want to return that biometrics is not supported as we don't know what simulator is used.
-            if let error = error,
-               error.code == biometryNotAvailableCode || (error.code == biometryNotEnrolledCode && isSimulator) {
-                return false
-            }
-        }
-
         return true
     }
 
@@ -219,14 +222,6 @@ private extension LockerHelpers {
             return identifier + String(UnicodeScalar(UInt8(value)))
         }
         return identifier
-    }
-
-    static func checkIfDeviceSupportsAuthenticationWithFaceID() -> Bool {
-        return devices.isDeviceInFaceIDList(device: LockerHelpers.deviceCode)
-    }
-
-    static func checkIfDeviceSupportsAuthenticationWithTouchID() -> Bool {
-        return devices.isDeviceInTouchIDList(device: LockerHelpers.deviceCode)
     }
 
     static func setLAPolicyDomainState(with domainState: Data?) {

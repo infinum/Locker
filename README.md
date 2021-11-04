@@ -161,6 +161,10 @@ if biometrySettingsChanged && usingBiometry {
 `supportedBiometricsAuthentication` checks if device has support for some Biometric type.
 `configuredBiometricsAuthentication` checks if device has support for some Biometrics type and if that Biometric is enabled in device settings.
 
+
+#### 8. There is a local JSON file which contains every iPhone and iPad model which has FaceID or TouchID. That way we can check if the user's device can use FaceID or TouchID. If you want to allow the JSON file to sync itself with an API if the user's device isn't contained in the list, you can set `enableDeviceListSync` to be true.
+`enableDeviceListSync` checks if the user's device is on the JSON file biometry supported device list. If the device is not on the list, it syncs the list with a list from the API and writes it to the local JSON file.
+
 ## Contributing
 
 Feedback and code contributions are very much welcome. Just make a pull request with a short description of your changes. By making contributions to this project you give permission for your code to be used under the same [license](https://github.com/infinum/Locker/blob/master/LICENSE).
