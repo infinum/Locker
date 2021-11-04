@@ -10,7 +10,6 @@ import Foundation
 import LocalAuthentication
 import System
 
-// swiftlint:disable identifier_name
 class LockerHelpers {
 
     // MARK: - Public properties
@@ -19,7 +18,7 @@ class LockerHelpers {
         return checkIfBiometricsSettingsChanged()
     }
 
-    static var deviceSupportsAuthenticationWithBiometrics: BiometricsType {
+    static var supportedBiometricAuthentication: BiometricsType {
         if LockerHelpers.deviceSupportsAuthenticationWithFaceID {
             return .faceID
         }
@@ -112,9 +111,8 @@ extension LockerHelpers {
     }
 
     static func keyShouldAddSecretToKeychainOnNextLoginForUniqueIdentifier(_ uniqueIdentifier: String) -> String {
-        let userDefaultsShouldAddSecretToKeychainOnNextLogin =
-        "\(LockerHelpers.bundleIdentifier)_UserDefaultsShouldAddPasscodeToKeychainOnNextLogin"
-        return "\(userDefaultsShouldAddSecretToKeychainOnNextLogin)_\(uniqueIdentifier)"
+        let shouldAddSecretToKeychainOnNextLogin = "\(LockerHelpers.bundleIdentifier)_UserDefaultsShouldAddPasscodeToKeychainOnNextLogin"
+        return "\(shouldAddSecretToKeychainOnNextLogin)_\(uniqueIdentifier)"
     }
 
     // MARK: - Biometric helpers

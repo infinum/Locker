@@ -35,9 +35,8 @@ public class Locker: NSObject {
     #endif
     }
 
-    // swiftlint:disable:next identifier_name
-    public static var deviceSupportsAuthenticationWithBiometrics: BiometricsType {
-        LockerHelpers.deviceSupportsAuthenticationWithBiometrics
+    public static var supportedBiometricsAuthentication: BiometricsType {
+        LockerHelpers.supportedBiometricAuthentication
     }
 
     public static var configuredBiometricsAuthentication: BiometricsType {
@@ -50,7 +49,11 @@ public class Locker: NSObject {
 
     // MARK: - Handle secrets (store, delete, fetch)
 
-    public static func setSecret(_ secret: String, for uniqueIdentifier: String, completion: ((LockerError?) -> Void)? = nil) {
+    public static func setSecret(
+        _ secret: String,
+        for uniqueIdentifier: String,
+        completion: ((LockerError?) -> Void)? = nil
+    ) {
     #if targetEnvironment(simulator)
         Locker.userDefaults?.set(secret, forKey: uniqueIdentifier)
     #else
@@ -201,11 +204,15 @@ public extension Locker {
 }
 
 private extension Locker {
-    private static func setSecretForDevice(_ secret: String, for uniqueIdentifier: String, completion: ((LockerError?) -> Void)? = nil) {
-        let query: [CFString : Any] = [
-            kSecClass : kSecClassGenericPassword,
-            kSecAttrService : LockerHelpers.keyKeychainServiceName,
-            kSecAttrAccount : LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier)
+    private static func setSecretForDevice(
+        _ secret: String,
+        for uniqueIdentifier: String,
+        completion: ((LockerError?) -> Void)? = nil
+    ) {
+        let query: [CFString: Any] = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrService: LockerHelpers.keyKeychainServiceName,
+            kSecAttrAccount: LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier)
         ]
 
         DispatchQueue.global(qos: .default).async {
@@ -235,22 +242,30 @@ private extension Locker {
                 }
                 return
             }
-            let attributes: [CFString: Any] = [
-                kSecClass: kSecClassGenericPassword,
-                kSecAttrService: LockerHelpers.keyKeychainServiceName,
-                kSecAttrAccount: LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier),
-                kSecValueData: secretData,
-                kSecUseAuthenticationUI: false,
-                kSecAttrAccessControl: sacObject
-            ]
+            addSecItem(for: uniqueIdentifier, secretData, sacObject: sacObject, completion: completion)
+        }
+    }
 
-            DispatchQueue.global(qos: .default).async {
-                SecItemAdd(attributes as CFDictionary, nil)
+    private static func addSecItem(
+        for uniqueIdentifier: String,
+        _ secretData: Data, sacObject: SecAccessControl,
+        completion: ((LockerError?) -> Void)? = nil
+    ) {
+        let attributes: [CFString: Any] = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrService: LockerHelpers.keyKeychainServiceName,
+            kSecAttrAccount: LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier),
+            kSecValueData: secretData,
+            kSecUseAuthenticationUI: false,
+            kSecAttrAccessControl: sacObject
+        ]
 
-                // Store current LA policy domain state
-                LockerHelpers.storeCurrentLAPolicyDomainState()
-                completion?(nil)
-            }
+        DispatchQueue.global(qos: .default).async {
+            SecItemAdd(attributes as CFDictionary, nil)
+
+            // Store current LA policy domain state
+            LockerHelpers.storeCurrentLAPolicyDomainState()
+            completion?(nil)
         }
     }
 }
