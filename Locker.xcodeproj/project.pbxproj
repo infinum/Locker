@@ -66,9 +66,9 @@
 		06FB9484236B264700988BA1 /* Locker */ = {
 			isa = PBXGroup;
 			children = (
+				375E9685271EF02300896845 /* Locker.swift */,
 				377D681527202257002C31FE /* LockerError.swift */,
 				375E9683271EE86200896845 /* BiometricsType.swift */,
-				375E9685271EF02300896845 /* Locker.swift */,
 			);
 			path = Locker;
 			sourceTree = "<group>";
