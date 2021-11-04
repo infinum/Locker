@@ -59,6 +59,18 @@ public class Locker: NSObject {
     #endif
     }
 
+    @available(swift, obsoleted: 1.0)
+    @objc(setSecret:forUniqueIdentifier:completion:)
+    static func setSecret(_ secret: String, for uniqueIdentifier: String, completion: ((NSError?) -> Void)? = nil) {
+    #if targetEnvironment(simulator)
+        Locker.userDefaults?.set(secret, forKey: uniqueIdentifier)
+    #else
+        setSecretForDevice(secret, for: uniqueIdentifier, completion: { error in
+            completion?(error?.asNSError)
+        })
+    #endif
+    }
+
     @objc(retreiveCurrentSecretForUniqueIdentifier:operationPrompt:success:failure:)
     public static func retrieveCurrentSecret(for uniqueIdentifier: String, operationPrompt: String, success: ((String) -> Void)?, failure: ((OSStatus) -> Void)?) {
 
