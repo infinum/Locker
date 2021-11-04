@@ -138,12 +138,10 @@ private extension LockerHelpers {
         // even data is not actually changed.
         guard let oldDomainState = LockerHelpers.savedLAPolicyDomainState,
               let newDomainState = LockerHelpers.currentLAPolicyDomainState,
-              !oldDomainState.elementsEqual(newDomainState)
-        else {
-            LockerHelpers.setLAPolicyDomainState(with: LockerHelpers.currentLAPolicyDomainState)
-            return true
-        }
-        return false
+              oldDomainState.elementsEqual(newDomainState)
+        else { return false }
+        LockerHelpers.setLAPolicyDomainState(with: LockerHelpers.currentLAPolicyDomainState)
+        return true
     }
 
     static func checkIfCanAuthenticateWithBiometrics() -> Bool {
