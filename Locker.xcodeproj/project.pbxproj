@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		373FB0C42734262B00092F9E /* Locker+ObjectiveC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373FB0C32734262B00092F9E /* Locker+ObjectiveC.swift */; };
 		375E9682271EE79600896845 /* LockerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E9681271EE79600896845 /* LockerHelpers.swift */; };
 		375E9684271EE86200896845 /* BiometricsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E9683271EE86200896845 /* BiometricsType.swift */; };
 		375E9686271EF02300896845 /* Locker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E9685271EF02300896845 /* Locker.swift */; };
@@ -30,7 +29,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		373FB0C32734262B00092F9E /* Locker+ObjectiveC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Locker+ObjectiveC.swift"; sourceTree = "<group>"; };
 		375E9681271EE79600896845 /* LockerHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockerHelpers.swift; sourceTree = "<group>"; };
 		375E9683271EE86200896845 /* BiometricsType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricsType.swift; sourceTree = "<group>"; };
 		375E9685271EF02300896845 /* Locker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Locker.swift; sourceTree = "<group>"; };
@@ -69,7 +67,6 @@
 			isa = PBXGroup;
 			children = (
 				375E9685271EF02300896845 /* Locker.swift */,
-				373FB0C32734262B00092F9E /* Locker+ObjectiveC.swift */,
 				377D681527202257002C31FE /* LockerError.swift */,
 				375E9683271EE86200896845 /* BiometricsType.swift */,
 			);
@@ -197,7 +194,6 @@
 				375E9682271EE79600896845 /* LockerHelpers.swift in Sources */,
 				375E9684271EE86200896845 /* BiometricsType.swift in Sources */,
 				377D681627202257002C31FE /* LockerError.swift in Sources */,
-				373FB0C42734262B00092F9E /* Locker+ObjectiveC.swift in Sources */,
 				375E9686271EF02300896845 /* Locker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
