@@ -7,6 +7,30 @@
 
 import Foundation
 
-public enum LockerError: Error {
-    case accessControl(String), invalidData(String)
+@objc
+public enum LockerError: Int, Error {
+    case accessControl
+    case invalidData
+
+    var asNSError: NSError {
+        convertToNSError()
+    }
+}
+
+extension LockerError: LocalizedError {
+
+    public var errorDescription: String? {
+        switch self {
+        case .accessControl:
+            return "Unable to initialize access control"
+        case .invalidData:
+            return "Invalid storing data"
+        }
+    }
+}
+
+private extension LockerError {
+    func convertToNSError() -> NSError {
+        return self as NSError
+    }
 }

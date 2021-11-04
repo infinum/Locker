@@ -28,12 +28,10 @@ public final class ViewController: UIViewController {
 extension ViewController {
 
     func storeSecret() {
-        do {
-            try Locker.setSecret(topSecret, for: identifier)
-        } catch {
+        Locker.setSecret(topSecret, for: identifier, completion: { error in
             // handle error
-            print(error.localizedDescription)
-        }
+            print(error)
+        }) 
     }
 
     func readSecret(success: @escaping (String) -> Void, failure: @escaping (OSStatus) -> Void) {

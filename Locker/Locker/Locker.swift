@@ -19,7 +19,7 @@ public class Locker: NSObject {
             return currentUserDefaults == nil ? UserDefaults.standard : currentUserDefaults
         }
         set {
-            currentUserDefaults = currentUserDefaults == nil ? UserDefaults.standard : newValue
+            currentUserDefaults = newValue ?? .standard
         }
     }
 
@@ -50,19 +50,14 @@ public class Locker: NSObject {
 
     // MARK: - Handle secrets (store, delete, fetch)
 
-    @objc(setSecret:forUniqueIdentifier:error:)
-    public static func setSecret(_ secret: String, for uniqueIdentifier: String) throws {
+    public static func setSecret(_ secret: String, for uniqueIdentifier: String, completion: ((LockerError?) -> Void)? = nil) {
     #if targetEnvironment(simulator)
         Locker.userDefaults?.set(secret, forKey: uniqueIdentifier)
     #else
-        setSecretForDevice(secret, for: uniqueIdentifier) { error in
-            guard let error = error else {
-                return
-            }
-            throw error
-        }
+        setSecretForDevice(secret, for: uniqueIdentifier, completion: { error in
+            completion?(error)
+        })
     #endif
-
     }
 
     @objc(retreiveCurrentSecretForUniqueIdentifier:operationPrompt:success:failure:)
@@ -206,18 +201,11 @@ public extension Locker {
 }
 
 private extension Locker {
-    // added a function with a closure since we can't throw errors
-    // from async threads which is throwable
-    // swiftlint:disable:next function_body_length
-    private static func setSecretForDevice(
-        _ secret: String,
-        for uniqueIdentifier: String,
-        _ completion: @escaping ((LockerError?) throws -> Void)
-    ) {
-        let query: [CFString: Any] = [
-            kSecClass: kSecClassGenericPassword,
-            kSecAttrService: LockerHelpers.keyKeychainServiceName,
-            kSecAttrAccount: LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier)
+    private static func setSecretForDevice(_ secret: String, for uniqueIdentifier: String, completion: ((LockerError?) -> Void)? = nil) {
+        let query: [CFString : Any] = [
+            kSecClass : kSecClassGenericPassword,
+            kSecAttrService : LockerHelpers.keyKeychainServiceName,
+            kSecAttrAccount : LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier)
         ]
 
         DispatchQueue.global(qos: .default).async {
@@ -240,19 +228,10 @@ private extension Locker {
             )
 
             guard let sacObject = sacObject, errorRef == nil, let secretData = secret.data(using: .utf8) else {
-                if let errorRef = errorRef {
-                    do {
-                        try completion(
-                            LockerError
-                                .accessControl(
-                                    "Unable to initialize access control: \(errorRef.pointee.debugDescription)"
-                                )
-                        )
-                    } catch {}
+                if errorRef != nil {
+                    completion?(.accessControl)
                 } else {
-                    do {
-                        try completion(LockerError.invalidData("Invalid storing data"))
-                    } catch {}
+                    completion?(.invalidData)
                 }
                 return
             }
@@ -270,9 +249,7 @@ private extension Locker {
 
                 // Store current LA policy domain state
                 LockerHelpers.storeCurrentLAPolicyDomainState()
-                do {
-                    try completion(nil)
-                } catch {}
+                completion?(nil)
             }
         }
     }
