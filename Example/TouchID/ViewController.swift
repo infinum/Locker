@@ -18,7 +18,6 @@ public final class ViewController: UIViewController {
     // MARK: - Private properties -
 
     private let identifier = "TouchIDSampleApp"
-
 }
 
 // MARK: - Locker usage -
@@ -28,19 +27,17 @@ public final class ViewController: UIViewController {
 extension ViewController {
 
     func storeSecret() {
-        do {
-            try Locker.setSecret(topSecret, for: identifier)
-        } catch {
+        Locker.setSecret(topSecret, for: identifier, completion: { error in
             // handle error
-            print(error.localizedDescription)
-        }
+            print(error)
+        })
     }
 
     func readSecret(success: @escaping (String) -> Void, failure: @escaping (OSStatus) -> Void) {
         Locker.retrieveCurrentSecret(
             for: identifier,
-               operationPrompt: "Unlock locker!",
-               success: success, failure: failure
+            operationPrompt: "Unlock locker!",
+            success: success, failure: failure
         )
     }
 
@@ -60,9 +57,9 @@ extension ViewController {
     var runningFromTheSimulator: Bool {
         return Locker.isRunningFromTheSimulator
     }
-    // swiftlint:disable:next identifier_name
-    var deviceSupportsAuthenticationWithBiometrics: BiometricsType {
-        return Locker.deviceSupportsAuthenticationWithBiometrics
+
+    var supportedBiometricAuthentication: BiometricsType {
+        return Locker.supportedBiometricsAuthentication
     }
 
     var configuredBiometricsAuthentication: BiometricsType {

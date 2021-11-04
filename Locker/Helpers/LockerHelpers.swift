@@ -10,7 +10,6 @@ import Foundation
 import LocalAuthentication
 import System
 
-// swiftlint:disable identifier_name
 class LockerHelpers {
 
     // MARK: - Public properties
@@ -19,7 +18,7 @@ class LockerHelpers {
         return checkIfBiometricsSettingsChanged()
     }
 
-    static var deviceSupportsAuthenticationWithBiometrics: BiometricsType {
+    static var supportedBiometricAuthentication: BiometricsType {
         if LockerHelpers.deviceSupportsAuthenticationWithFaceID {
             return .faceID
         }
@@ -36,7 +35,7 @@ class LockerHelpers {
     }
 
     static var canUseAuthenticationWithFaceID: Bool {
-        return isFaceIDEnabled()
+        return faceIDEnabled
     }
 
     static var canUseAuthenticationWithTouchID: Bool {
@@ -79,7 +78,27 @@ class LockerHelpers {
         UserDefaults.standard.object(forKey: LockerHelpers.keyLAPolicyDomainState) as? Data
     }
 
+    private static var faceIDEnabled: Bool {
+        return checkFaceIdState()
+    }
+
     private static let bundleIdentifier = Bundle.main.bundleIdentifier ?? ""
+
+    private static var biometryNotAvailableCode: Int {
+        if #available(iOS 11.0, *) {
+            return LAError.biometryNotAvailable.rawValue
+        } else {
+            return Int(kLAErrorBiometryNotAvailable)
+        }
+    }
+
+    private static var biometryNotEnrolledCode: Int {
+        if #available(iOS 11, *) {
+            return LAError.biometryNotEnrolled.rawValue
+        } else {
+            return Int(kLAErrorBiometryNotEnrolled)
+        }
+    }
     private static let devices = Devices.shared
 }
 
@@ -105,9 +124,8 @@ extension LockerHelpers {
     }
 
     static func keyShouldAddSecretToKeychainOnNextLoginForUniqueIdentifier(_ uniqueIdentifier: String) -> String {
-        let userDefaultsShouldAddSecretToKeychainOnNextLogin =
-        "\(LockerHelpers.bundleIdentifier)_UserDefaultsShouldAddPasscodeToKeychainOnNextLogin"
-        return "\(userDefaultsShouldAddSecretToKeychainOnNextLogin)_\(uniqueIdentifier)"
+        let shouldAddSecretToKeychainOnNextLogin = "\(LockerHelpers.bundleIdentifier)_UserDefaultsShouldAddPasscodeToKeychainOnNextLogin"
+        return "\(shouldAddSecretToKeychainOnNextLogin)_\(uniqueIdentifier)"
     }
 
     // MARK: - Biometric helpers
@@ -135,21 +153,16 @@ extension LockerHelpers {
 private extension LockerHelpers {
 
     static func checkIfBiometricsSettingsChanged() -> Bool {
-        let oldDomainState = LockerHelpers.savedLAPolicyDomainState
-        let newDomainState = LockerHelpers.currentLAPolicyDomainState
-
         // Check for domain state changes
         // For deactivated biometrics, LAContext in validation will return nil
         // storing that nil and comparing it to nil will result as `isEqual` NO
         // even data is not actually changed.
-        let biometricsDeactivated = oldDomainState == nil || newDomainState == nil
-        let biometricSettingsDidChange = oldDomainState?.elementsEqual(newDomainState!) ?? false
-        if biometricsDeactivated && biometricSettingsDidChange {
-            LockerHelpers.setLAPolicyDomainState(with: newDomainState)
-            return true
-        }
-
-        return false
+        guard let oldDomainState = LockerHelpers.savedLAPolicyDomainState,
+              let newDomainState = LockerHelpers.currentLAPolicyDomainState,
+              oldDomainState.elementsEqual(newDomainState)
+        else { return false }
+        LockerHelpers.setLAPolicyDomainState(with: LockerHelpers.currentLAPolicyDomainState)
+        return true
     }
 
     static func isTouchIDEnabled() -> Bool {
@@ -161,8 +174,8 @@ private extension LockerHelpers {
             // In that case, we want to return that device supports TouchID.
             // In case lib is used on simulator, error code will always be `notEnrolled` and only then
             // we want to return that biometrics is not supported as we don't know what simulator is used.
-            if let error = error, error.code == kLAErrorBiometryNotAvailable
-                || (error.code == kLAErrorBiometryNotEnrolled && isSimulator) {
+            if let error = error,
+               error.code == biometryNotAvailableCode || (error.code == biometryNotEnrolledCode && isSimulator) {
                 return false
             }
         }
@@ -182,7 +195,7 @@ private extension LockerHelpers {
         }
     }
 
-    static func isFaceIDEnabled() -> Bool {
+    static func checkFaceIdState() -> Bool {
         let context = LAContext()
         var error: NSError?
 

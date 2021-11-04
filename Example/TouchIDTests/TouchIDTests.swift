@@ -103,7 +103,7 @@ class TouchIDTests: XCTestCase {
     }
 
     func testDeviceSupportsAuthenticationWithBiometrics() {
-        XCTAssertTrue(containerViewController.deviceSupportsAuthenticationWithBiometrics == .none)
+        XCTAssertTrue(containerViewController.supportedBiometricAuthentication == .none)
     }
 
     func testConfiguredBiometricsAuthentication() {
