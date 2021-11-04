@@ -153,7 +153,8 @@ private extension LockerHelpers {
             // In that case, we want to return that device supports TouchID.
             // In case lib is used on simulator, error code will always be `notEnrolled` and only then
             // we want to return that biometrics is not supported as we don't know what simulator is used.
-            if let error = error, error.code == biometryNotAvailableCode || (error.code == biometryNotEnrolledCode && isSimulator) {
+            if let error = error,
+               error.code == biometryNotAvailableCode || (error.code == biometryNotEnrolledCode && isSimulator) {
                 return false
             }
         }
