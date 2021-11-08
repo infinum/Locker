@@ -9,6 +9,11 @@
 import Foundation
 
 struct DeviceResponse: Codable {
-    let faceIdDevices: [String]
-    let touchIdDevices: [String]
+    let faceIdDevices: [Device]
+    let touchIdDevices: [Device]
+}
+
+struct Device: Codable {
+    let id: String
+    let name: String
 }

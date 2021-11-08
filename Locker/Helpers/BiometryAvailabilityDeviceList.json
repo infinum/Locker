@@ -1,75 +1,311 @@
 {
             "face_id_devices": [
-                "iPhone10,3",
-                "iPhone10,6",
-                "iPhone11,2",
-                "iPhone11,4",
-                "iPhone11,6",
-                "iPhone11,8",
-                "iPhone12,1",
-                "iPhone12,3",
-                "iPhone12,5",
-                "iPhone13,1",
-                "iPhone13,2",
-                "iPhone13,3",
-                "iPhone13,4",
-                "iPhone14,2",
-                "iPhone14,3",
-                "iPhone14,4",
-                "iPhone14,5",
-                "iPad8,1",
-                "iPad8,2",
-                "iPad8,3",
-                "iPad8,4",
-                "iPad8,5",
-                "iPad8,6",
-                "iPad8,7",
-                "iPad8,8",
-                "iPad8,9",
-                "iPad8,10",
-                "iPad8,11",
-                "iPad8,12"
+                {
+                    "id": "iPhone10,3",
+                    "name": "iPhone X Global"
+                },
+                {
+                    "id": "iPhone10,6",
+                    "name": "iPhone X GSM"
+                },
+                {
+                    "id": "iPhone11,2",
+                    "name": "iPhone XS"
+                },
+                {
+                    "id": "iPhone11,4",
+                    "name": "iPhone XS Max"
+                },
+                {
+                    "id": "iPhone11,6",
+                    "name": "iPhone XS Max Global"
+                },
+                {
+                    "id": "iPhone11,8",
+                    "name": "iPhone XR"
+                },
+                {
+                    "id": "iPhone12,1",
+                    "name": "iPhone 11"
+                },
+                {
+                    "id": "iPhone12,3",
+                    "name": "iPhone 11 Pro"
+                },
+                {
+                    "id": "iPhone12,5",
+                    "name": "iPhone 11 Pro Max"
+                },
+                {
+                    "id": "iPhone13,1",
+                    "name": "iPhone 12 Mini"
+                },
+                {
+                    "id": "iPhone13,2",
+                    "name": "iPhone 12"
+                },
+                {
+                    "id": "iPhone13,3",
+                    "name": "iPhone 12 Pro"
+                },
+                {
+                    "id": "iPhone13,4",
+                    "name": "iPhone 12 Pro Max"
+                },
+                {
+                    "id": "iPhone14,2",
+                    "name": "iPhone 13 Mini"
+                },
+                {
+                    "id": "iPhone14,3",
+                    "name": "iPhone 13"
+                },
+                {
+                    "id": "iPhone14,4",
+                    "name": "iPhone 13 Pro"
+                },
+                {
+                    "id": "iPhone14,5",
+                    "name": "iPhone 13 Pro Max"
+                },
+                {
+                    "id": "iPad8,1",
+                    "name": "iPad Pro 11 inch 3rd Gen (WiFi)"
+                },
+                {
+                    "id": "iPad8,2",
+                    "name": "iPad Pro 11 inch 3rd Gen (1TB, WiFi)"
+                },
+                {
+                    "id": "iPad8,3",
+                    "name": "iPad Pro 11 inch 3rd Gen (WiFi+Cellular)"
+                },
+                {
+                    "id": "iPad8,4",
+                    "name": "iPad Pro 11 inch 3rd Gen (1TB, WiFi+Cellular)"
+                },
+                {
+                    "id": "iPad8,5",
+                    "name": "iPad Pro 12.9 inch 3rd Gen (WiFi)"
+                },
+                {
+                    "id": "iPad8,6",
+                    "name": "iPad Pro 12.9 inch 3rd Gen (1TB, WiFi)"
+                },
+                {
+                    "id": "iPad8,7",
+                    "name": "iPad Pro 12.9 inch 3rd Gen (WiFi+Cellular)"
+                },
+                {
+                    "id": "iPad8,8",
+                    "name": "iPad Pro 12.9 inch 3rd Gen (1TB, WiFi+Cellular)"
+                },
+                {
+                    "id": "iPad8,9",
+                    "name": "iPad Pro 11 inch 4th Gen (WiFi)"
+                },
+                {
+                    "id": "iPad8,10",
+                    "name": "iPad Pro 11 inch 4th Gen (WiFi+Cellular)"
+                },
+                {
+                    "id": "iPad8,11",
+                    "name": "iPad Pro 12.9 inch 4th Gen (WiFi)"
+                },
+                {
+                    "id": "iPad8,12",
+                    "name": "iPad Pro 12.9 inch 4th Gen (WiFi+Cellular)"
+                }
             ],
 
             "touch_id_devices": [
-                "iPhone6,1",
-                "iPhone7,1",
-                "iPhone7,2",
-                "iPhone8,1",
-                "iPhone8,2",
-                "iPhone8,4",
-                "iPhone9,1",
-                "iPhone9,4",
-                "iPhone10,1",
-                "iPhone10,2",
-                "iPhone12,8",
-                "iPad4,7",
-                "iPad4,8",
-                "iPad5,1",
-                "iPad5,2",
-                "iPad5,3",
-                "iPad5,4",
-                "iPad6,4",
-                "iPad6,7",
-                "iPad6,8",
-                "iPad6,11",
-                "iPad7,1",
-                "iPad7,2",
-                "iPad7,3",
-                "iPad7,4",
-                "iPad7,5",
-                "iPad7,6",
-                "iPad7,11",
-                "iPad11,1",
-                "iPad11,2",
-                "iPad11,3",
-                "iPad11,4",
-                "iPad11,6",
-                "iPad12,1",
-                "iPad12,2",
-                "iPad13,1",
-                "iPad13,2",
-                "iPad14,1",
-                "iPad14,2",
+                {
+                    "id": "iPhone6,1",
+                    "name": "iPhone 5S (GSM)"
+                },
+                {
+                    "id": "iPhone6,2",
+                    "name": "iPhone 5S (Global)"
+                },
+                {
+                    "id": "iPhone7,1",
+                    "name": "iPhone 6 Plus"
+                },
+                {
+                    "id": "iPhone7,2",
+                    "name": "iPhone 6"
+                },
+                {
+                    "id": "iPhone8,1",
+                    "name": "iPhone 6s"
+                },
+                {
+                    "id": "iPhone8,2",
+                    "name": "iPhone 6s Plus"
+                },
+                {
+                    "id": "iPhone8,4",
+                    "name": "iPhone SE (GSM)"
+                },
+                {
+                    "id": "iPhone9,1",
+                    "name": "iPhone 7"
+                },
+                {
+                    "id": "iPhone9,2",
+                    "name": "iPhone 7 Plus"
+                },
+                {
+                    "id": "iPhone9,3",
+                    "name": "iPhone 7"
+                },
+                {
+                    "id": "iPhone9,4",
+                    "name": "iPhone 7 Plus"
+                },
+                {
+                    "id": "iPhone10,1",
+                    "name": "iPhone 8"
+                },
+                {
+                    "id": "iPhone10,2",
+                    "name": "iPhone 8 Plus"
+                },
+                {
+                    "id": "iPhone12,8",
+                    "name": "iPhone SE 2nd Gen"
+                },
+                {
+                    "id": "iPad4,7",
+                    "name": "iPad mini 3 (WiFi)"
+                },
+                {
+                    "id": "iPad4,8",
+                    "name": "iPad mini 3 (GSM+CDMA)"
+                },
+                {
+                    "id": "iPad4,9",
+                    "name": "iPad Mini 3 (China)"
+                },
+                {
+                    "id": "iPad5,1",
+                    "name": "iPad mini 4 (WiFi)"
+                },
+                {
+                    "id": "iPad5,2",
+                    "name": "4th Gen iPad mini (WiFi+Cellular)"
+                },
+                {
+                    "id": "iPad5,3",
+                    "name": "iPad Air 2 (WiFi)"
+                },
+                {
+                    "id": "iPad5,4",
+                    "name": "iPad Air 2 (Cellular)"
+                },
+                {
+                    "id": "iPad6,3",
+                    "name": "iPad Pro (9.7 inch, WiFi)"
+                },
+                {
+                    "id": "iPad6,4",
+                    "name": "iPad Pro (9.7 inch, WiFi+LTE)"
+                },
+                {
+                    "id": "iPad6,7",
+                    "name": "iPad Pro (12.9 inch, WiFi)"
+                },
+                {
+                    "id": "iPad6,8",
+                    "name": "iPad Pro (12.9 inch, WiFi+LTE)"
+                },
+                {
+                    "id": "iPad6,11",
+                    "name": "iPad (2017)"
+                },
+                {
+                    "id": "iPad6,12",
+                    "name": "iPad (2017)"
+                },
+                {
+                    "id": "iPad7,1",
+                    "name": "iPad Pro 2nd Gen (WiFi)"
+                },
+                {
+                    "id": "iPad7,2",
+                    "name": "iPad Pro 2nd Gen (WiFi+Cellular)"
+                },
+                {
+                    "id": "iPad7,3",
+                    "name": "iPad Pro 10.5-inch 2nd Gen"
+                },
+                {
+                    "id": "iPad7,4",
+                    "name": "iPad Pro 10.5-inch 2nd Gen"
+                },
+                {
+                    "id": "iPad7,5",
+                    "name": "iPad 6th Gen (WiFi)"
+                },
+                {
+                    "id": "iPad7,6",
+                    "name": "iPad 6th Gen (WiFi+Cellular)"
+                },
+                {
+                    "id": "iPad7,11",
+                    "name": "iPad 7th Gen 10.2-inch (WiFi)"
+                },
+                {
+                    "id": "iPad7,12",
+                    "name": "iPad 7th Gen 10.2-inch (WiFi+Cellular)"
+                },
+                {
+                    "id": "iPad11,1",
+                    "name": "iPad mini 5th Gen (WiFi)"
+                },
+                {
+                    "id": "iPad11,2",
+                    "name": "iPad mini 5th Gen"
+                },
+                {
+                    "id": "iPad11,3",
+                    "name": "iPad Air 3rd Gen (WiFi)"
+                },
+                {
+                    "id": "iPad11,4",
+                    "name": "iPad Air 3rd Gen"
+                },
+                {
+                    "id": "iPad11,6",
+                    "name": "iPad 8th Gen (WiFi)"
+                },
+                {
+                    "id": "iPad11,7",
+                    "name": "iPad 8th Gen (WiFi+Cellular)"
+                },
+                {
+                    "id": "iPad12,1",
+                    "name": "iPad 9th Gen (WiFi)"
+                },
+                {
+                    "id": "iPad12,2",
+                    "name": "iPad 9th Gen (WiFi+Cellular)"
+                },
+                {
+                    "id": "iPad13,1",
+                    "name": "iPad Air 4th Gen (WiFi)"
+                },
+                {
+                    "id": "iPad13,2",
+                    "name": "iPad Air 4th Gen (WiFi+Cellular)"
+                },
+                {
+                    "id": "iPad14,1",
+                    "name": "iPad mini 6th Gen (WiFi)"
+                },
+                {
+                    "id": "iPad14,2",
+                    "name": "iPad mini 6th Gen (WiFi+Cellular)"
+                }
             ]
 }

@@ -33,12 +33,12 @@ extension DeviceManager {
 
     func isDeviceInFaceIDList(device: String) -> Bool {
         let deviceResponse = readDataFromDevices()
-        return deviceResponse?.faceIdDevices.contains(device) ?? false
+        return deviceResponse?.faceIdDevices.contains { $0.id == device } ?? false
     }
 
     func isDeviceInTouchIDList(device: String) -> Bool {
         let deviceResponse = readDataFromDevices()
-        return deviceResponse?.touchIdDevices.contains(device) ?? false
+        return deviceResponse?.touchIdDevices.contains{ $0.id == device } ?? false
     }
 }
 
