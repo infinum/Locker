@@ -143,6 +143,7 @@ extension LockerHelpers {
     }
 
     static func keyShouldAddSecretToKeychainOnNextLoginForUniqueIdentifier(_ uniqueIdentifier: String) -> String {
+        // swiftlint:disable:next line_length
         let shouldAddSecretToKeychainOnNextLogin = "\(LockerHelpers.bundleIdentifier)_UserDefaultsShouldAddPasscodeToKeychainOnNextLogin"
         return "\(shouldAddSecretToKeychainOnNextLogin)_\(uniqueIdentifier)"
     }
