@@ -19,7 +19,7 @@ public class Locker: NSObject {
             return currentUserDefaults == nil ? UserDefaults.standard : currentUserDefaults
         }
         set {
-            currentUserDefaults = currentUserDefaults == nil ? UserDefaults.standard : newValue
+            currentUserDefaults = newValue ?? .standard
         }
     }
 
@@ -35,47 +35,55 @@ public class Locker: NSObject {
     #endif
     }
 
-    // swiftlint:disable:next identifier_name
-    public static var deviceSupportsAuthenticationWithBiometrics: BiometricsType {
-        LockerHelpers.deviceSupportsAuthenticationWithBiometrics
+    public static var supportedBiometricsAuthentication: BiometricsType {
+        LockerHelpers.supportedBiometricAuthentication
     }
 
     public static var configuredBiometricsAuthentication: BiometricsType {
         LockerHelpers.configuredBiometricsAuthentication
     }
 
-    public static var enableDeviceListSync: Bool {
-        get {
-            return isSyncSet
-        }
-        set {
-            if newValue {
-                LockerHelpers.fetchNewDeviceList()
-            }
-            isSyncSet = newValue
+    // if enableDeviceListSync is set to true
+    // it checks if the users device model is contained in the local JSON file
+    // which contains every device model which has TouchID or FaceID
+    // if not, it will fetch a new device list from the API
+    public static var enableDeviceListSync: Bool = false {
+        didSet {
+            guard enableDeviceListSync else { return }
+            LockerHelpers.fetchNewDeviceList()
         }
     }
 
     // MARK: - Private properties
 
     private static var currentUserDefaults: UserDefaults?
-    private static var isSyncSet = false
 
     // MARK: - Handle secrets (store, delete, fetch)
 
-    @objc(setSecret:forUniqueIdentifier:error:)
-    public static func setSecret(_ secret: String, for uniqueIdentifier: String) throws {
+    public static func setSecret(
+        _ secret: String,
+        for uniqueIdentifier: String,
+        completion: ((LockerError?) -> Void)? = nil
+    ) {
     #if targetEnvironment(simulator)
         Locker.userDefaults?.set(secret, forKey: uniqueIdentifier)
     #else
-        setSecretForDevice(secret, for: uniqueIdentifier) { error in
-            guard let error = error else {
-                return
-            }
-            throw error
-        }
+        setSecretForDevice(secret, for: uniqueIdentifier, completion: { error in
+            completion?(error)
+        })
     #endif
+    }
 
+    @available(swift, obsoleted: 1.0)
+    @objc(setSecret:forUniqueIdentifier:completion:)
+    static func setSecret(_ secret: String, for uniqueIdentifier: String, completion: ((NSError?) -> Void)? = nil) {
+    #if targetEnvironment(simulator)
+        Locker.userDefaults?.set(secret, forKey: uniqueIdentifier)
+    #else
+        setSecretForDevice(secret, for: uniqueIdentifier, completion: { error in
+            completion?(error?.asNSError)
+        })
+    #endif
     }
 
     @objc(retreiveCurrentSecretForUniqueIdentifier:operationPrompt:success:failure:)
@@ -219,13 +227,10 @@ public extension Locker {
 }
 
 private extension Locker {
-    // added a function with a closure since we can't throw errors
-    // from async threads which is throwable
-    // swiftlint:disable:next function_body_length
     private static func setSecretForDevice(
         _ secret: String,
         for uniqueIdentifier: String,
-        _ completion: @escaping ((LockerError?) throws -> Void)
+        completion: ((LockerError?) -> Void)? = nil
     ) {
         let query: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
@@ -253,40 +258,37 @@ private extension Locker {
             )
 
             guard let sacObject = sacObject, errorRef == nil, let secretData = secret.data(using: .utf8) else {
-                if let errorRef = errorRef {
-                    do {
-                        try completion(
-                            LockerError
-                                .accessControl(
-                                    "Unable to initialize access control: \(errorRef.pointee.debugDescription)"
-                                )
-                        )
-                    } catch {}
+                if errorRef != nil {
+                    completion?(.accessControl)
                 } else {
-                    do {
-                        try completion(LockerError.invalidData("Invalid storing data"))
-                    } catch {}
+                    completion?(.invalidData)
                 }
                 return
             }
-            let attributes: [CFString: Any] = [
-                kSecClass: kSecClassGenericPassword,
-                kSecAttrService: LockerHelpers.keyKeychainServiceName,
-                kSecAttrAccount: LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier),
-                kSecValueData: secretData,
-                kSecUseAuthenticationUI: false,
-                kSecAttrAccessControl: sacObject
-            ]
+            addSecItem(for: uniqueIdentifier, secretData, sacObject: sacObject, completion: completion)
+        }
+    }
 
-            DispatchQueue.global(qos: .default).async {
-                SecItemAdd(attributes as CFDictionary, nil)
+    private static func addSecItem(
+        for uniqueIdentifier: String,
+        _ secretData: Data, sacObject: SecAccessControl,
+        completion: ((LockerError?) -> Void)? = nil
+    ) {
+        let attributes: [CFString: Any] = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrService: LockerHelpers.keyKeychainServiceName,
+            kSecAttrAccount: LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier),
+            kSecValueData: secretData,
+            kSecUseAuthenticationUI: false,
+            kSecAttrAccessControl: sacObject
+        ]
 
-                // Store current LA policy domain state
-                LockerHelpers.storeCurrentLAPolicyDomainState()
-                do {
-                    try completion(nil)
-                } catch {}
-            }
+        DispatchQueue.global(qos: .default).async {
+            SecItemAdd(attributes as CFDictionary, nil)
+
+            // Store current LA policy domain state
+            LockerHelpers.storeCurrentLAPolicyDomainState()
+            completion?(nil)
         }
     }
 }

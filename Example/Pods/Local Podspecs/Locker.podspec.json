@@ -17,7 +17,7 @@
   },
   "source_files": "Sources/Locker/**/*.swift",
   "resource_bundles": {
-    "LockerKit_Locker": [
+    "Locker_Locker": [
       "Sources/Locker/**/*.json"
     ]
   },

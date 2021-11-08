@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../Locker.podspec"
 
 SPEC CHECKSUMS:
-  Locker: e47ab25f1546de027912c056786c35da342e61f0
+  Locker: 528efc19cf1e4ee4000cabf44e6cf4f59a217759
 
 PODFILE CHECKSUM: ffc994a4ed4a9f019de7d9c4cae5147951c79fd6
 

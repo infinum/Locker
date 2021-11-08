@@ -4,14 +4,14 @@
 import PackageDescription
 
 let package = Package(
-    name: "LockerKit",
+    name: "Locker",
     platforms: [
             .iOS(.v10)
     ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
-            name: "LockerKit",
+            name: "Locker",
             targets: ["Locker"])
     ],
     dependencies: [
@@ -24,7 +24,7 @@ let package = Package(
         .target(
             name: "Locker",
             resources: [
-                .process("Helpers/devices.json")]
+                .process("Helpers/BiometryAvailabilityDeviceList.json")]
         )
     ]
 )
