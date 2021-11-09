@@ -170,7 +170,7 @@ public extension Locker {
     }
 }
 
-public extension Locker {
+internal extension Locker {
     static func setSecretForDevice(_ secret: String, for uniqueIdentifier: String, completion: ((LockerError?) -> Void)? = nil) {
         let query: [CFString : Any] = [
             kSecClass : kSecClassGenericPassword,

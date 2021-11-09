@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 public extension Locker {
 
     @available(swift, obsoleted: 1.0)
