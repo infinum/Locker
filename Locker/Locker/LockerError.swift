@@ -9,8 +9,8 @@ import Foundation
 
 @objc
 public enum LockerError: Int, Error {
-    case accessControl
-    case invalidData
+    case accessControl = -99
+    case invalidData = -72
 
     var asNSError: NSError {
         convertToNSError()
@@ -31,6 +31,11 @@ extension LockerError: LocalizedError {
 
 private extension LockerError {
     func convertToNSError() -> NSError {
-        return self as NSError
+        return NSError(
+            domain: "com.infinum.locker",
+            code: self.rawValue,
+            userInfo: ["NSLocalizedDescriptionKey": self.errorDescription ?? "Something went wrong"]
+        )
+
     }
 }
