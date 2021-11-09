@@ -49,24 +49,12 @@ public class Locker: NSObject {
 
     // MARK: - Handle secrets (store, delete, fetch)
 
-    public static func setSecret(_ secret: String, for uniqueIdentifier: String, completion: ((LockerError?) -> Void)? = nil) {
+    public static func setSecret(_ secret: String, for uniqueIdentifier: String, completed: ((LockerError?) -> Void)? = nil) {
     #if targetEnvironment(simulator)
         Locker.userDefaults?.set(secret, forKey: uniqueIdentifier)
     #else
         setSecretForDevice(secret, for: uniqueIdentifier, completion: { error in
-            completion?(error)
-        })
-    #endif
-    }
-
-    @available(swift, obsoleted: 1.0)
-    @objc(setSecret:forUniqueIdentifier:completion:)
-    static func setSecret(_ secret: String, for uniqueIdentifier: String, completion: ((NSError?) -> Void)? = nil) {
-    #if targetEnvironment(simulator)
-        Locker.userDefaults?.set(secret, forKey: uniqueIdentifier)
-    #else
-        setSecretForDevice(secret, for: uniqueIdentifier, completion: { error in
-            completion?(error?.asNSError)
+            completed?(error)
         })
     #endif
     }
@@ -182,8 +170,8 @@ public extension Locker {
     }
 }
 
-private extension Locker {
-    private static func setSecretForDevice(_ secret: String, for uniqueIdentifier: String, completion: ((LockerError?) -> Void)? = nil) {
+public extension Locker {
+    static func setSecretForDevice(_ secret: String, for uniqueIdentifier: String, completion: ((LockerError?) -> Void)? = nil) {
         let query: [CFString : Any] = [
             kSecClass : kSecClassGenericPassword,
             kSecAttrService : LockerHelpers.keyKeychainServiceName,
