@@ -80,7 +80,7 @@ class TouchIDTests: XCTestCase {
         // Retrieve
         let asyncExpectation = expectation(description: "Async block executed")
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.containerViewController.readSecret(success: { (secret) in
+            self.containerViewController.readSecret(success: { _ in
                 XCTFail("Data should not be available")
                 asyncExpectation.fulfill()
             }, failure: { _ in
@@ -103,7 +103,7 @@ class TouchIDTests: XCTestCase {
     }
 
     func testDeviceSupportsAuthenticationWithBiometrics() {
-        XCTAssertTrue(containerViewController.deviceSupportsAuthenticationWithBiometrics == .none)
+        XCTAssertTrue(containerViewController.supportedBiometricAuthentication == .none)
     }
 
     func testConfiguredBiometricsAuthentication() {
@@ -111,7 +111,7 @@ class TouchIDTests: XCTestCase {
     }
 
     // MARK: - Helpers -
-    
+
     func testShouldUseAuthFlag() {
         containerViewController.shouldUseAuthWithBiometrics = true
         XCTAssertTrue(containerViewController.shouldUseAuthWithBiometrics)
@@ -163,7 +163,7 @@ class TouchIDTests: XCTestCase {
         // Check if everything is reseted
         let asyncExpectation = expectation(description: "Async block executed")
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.containerViewController.readSecret(success: { (secret) in
+            self.containerViewController.readSecret(success: { _ in
                 XCTFail("Data should not be available")
                 asyncExpectation.fulfill()
             }, failure: { _ in

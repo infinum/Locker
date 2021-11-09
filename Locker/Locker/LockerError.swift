@@ -17,6 +17,8 @@ public enum LockerError: Int, Error {
     }
 }
 
+// MARK: - Public extension -
+
 extension LockerError: LocalizedError {
 
     public var errorDescription: String? {
@@ -28,6 +30,8 @@ extension LockerError: LocalizedError {
         }
     }
 }
+
+// MARK: - Private extension -
 
 private extension LockerError {
     func convertToNSError() -> NSError {

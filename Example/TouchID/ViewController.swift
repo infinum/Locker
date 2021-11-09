@@ -18,7 +18,6 @@ public final class ViewController: UIViewController {
     // MARK: - Private properties -
 
     private let identifier = "TouchIDSampleApp"
-
 }
 
 // MARK: - Locker usage -
@@ -28,14 +27,18 @@ public final class ViewController: UIViewController {
 extension ViewController {
 
     func storeSecret() {
-        Locker.setSecret(topSecret, for: identifier) { error in
-            //handle error
+        Locker.setSecret(topSecret, for: identifier, completed: { error in
+            // handle error
             print(error)
-        }
+        })
     }
 
     func readSecret(success: @escaping (String) -> Void, failure: @escaping (OSStatus) -> Void) {
-        Locker.retrieveCurrentSecret(for: identifier, operationPrompt: "Unlock locker!", success: success, failure: failure)
+        Locker.retrieveCurrentSecret(
+            for: identifier,
+            operationPrompt: "Unlock locker!",
+            success: success, failure: failure
+        )
     }
 
     func deleteSecret() {
@@ -55,8 +58,8 @@ extension ViewController {
         return Locker.isRunningFromTheSimulator
     }
 
-    var deviceSupportsAuthenticationWithBiometrics: BiometricsType {
-        return Locker.deviceSupportsAuthenticationWithBiometrics
+    var supportedBiometricAuthentication: BiometricsType {
+        return Locker.supportedBiometricsAuthentication
     }
 
     var configuredBiometricsAuthentication: BiometricsType {
@@ -89,14 +92,15 @@ extension ViewController {
         set (newValue) { Locker.setShouldUseAuthenticationWithBiometrics(newValue, for: identifier) }
     }
 
+    // swiftlint:disable unused_setter_value
     var didAskToUseAuthWithBiometrics: Bool {
         get { return Locker.didAskToUseAuthenticationWithBiometrics(for: identifier) }
-        set (newValue) { Locker.setDidAskToUseAuthenticationWithBiometrics(true, for: identifier) }
+        set { Locker.setDidAskToUseAuthenticationWithBiometrics(true, for: identifier) }
     }
 
     var shouldAddSecretToKeychainOnNextLogin: Bool {
         get { return Locker.shouldAddSecretToKeychainOnNextLogin(for: identifier) }
-        set (newValue) { Locker.setShouldAddSecretToKeychainOnNextLogin(true, for: identifier) }
+        set { Locker.setShouldAddSecretToKeychainOnNextLogin(true, for: identifier) }
     }
 }
 
