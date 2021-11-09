@@ -43,6 +43,17 @@ public class Locker: NSObject {
         LockerHelpers.configuredBiometricsAuthentication
     }
 
+    // if enableDeviceListSync is set to true
+    // it checks if the users device model is contained in the local JSON file
+    // which contains every device model which has TouchID or FaceID
+    // if not, it will fetch a new device list from the API
+    public static var enableDeviceListSync: Bool = false {
+        didSet {
+            guard enableDeviceListSync else { return }
+            LockerHelpers.fetchNewDeviceList()
+        }
+    }
+
     // MARK: - Private properties
 
     private static var currentUserDefaults: UserDefaults?

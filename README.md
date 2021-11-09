@@ -72,9 +72,7 @@ For `uniqueIdentifier` pass `String` value You will later use to fetch Your data
 
 ```swift
 // Swift
-Locker.setSecret(topSecret, for: identifier, completion: { error in
-    // handle error
-})
+Locker.setSecret(topSecret, for: identifier)
 ```
 
 > If Locker is run from the Simulator, instead of storing it into the Keychain, Locker will store data to the `UserDefaults`. You can check if Locker is running from the simulator with `isRunningFromTheSimulator` property.
@@ -141,7 +139,7 @@ It will return `true` if Biometric settings are changed since Your last calling 
 
 ```objective-c
 // Objective-C
-BOOL biometrySettingsChanged = Locker.biometricsSettingsDidChange;
+BOOL biometrySettingsChanged = Locker.biometricsSettingsAreChanged;
 BOOL usingBiometry = [Locker shouldUseAuthenticationWithBiometricsForUniqueIdentifier:@"kUniqueIdentifier"];
 if (biometrySettingsChanged && usingBiometry) {
     // handle case when settings are changed and biometry should be used
@@ -150,16 +148,16 @@ if (biometrySettingsChanged && usingBiometry) {
 
 ```swift
 // Swift
-let biometrySettingsChanged = Locker.biometricsSettingsDidChange
+let biometrySettingsChanged = Locker.biometricsSettingsAreChanged
 let usingBiometry = Locker.shouldUseAuthenticationWithBiometrics(for: "kUniqueIdentifier")
 if biometrySettingsChanged && usingBiometry {
 // handle case when settings are changed and biometry should be used
 }
 ```
 
-##### 7. There are `supportedBiometricsAuthentication` and `configuredBiometricsAuthentication` computed properties which return `BiometricsType` enum (`BiometricsTypeNone`, `BiometricsTypeTouchID`, `BiometricsTypeFaceID`).
-`supportedBiometricsAuthentication` checks if device has support for some Biometric type.
-`configuredBiometricsAuthentication` checks if device has support for some Biometrics type and if that Biometric is enabled in device settings.
+##### 7. There are `deviceSupportsAuthenticationWithBiometrics` and `canUseAuthenticationWithBiometrics` methods which return `BiometricsType` enum (`BiometricsTypeNone`, `BiometricsTypeTouchID`, `BiometricsTypeFaceID`).
+`deviceSupportsAuthenticationWithBiometrics` checks if device has support for some Biometric type.
+`canUseAuthenticationWithBiometrics` checks if device has support for some Biometrics type and if that Biometric is enabled in device settings.
 
 ## Contributing
 

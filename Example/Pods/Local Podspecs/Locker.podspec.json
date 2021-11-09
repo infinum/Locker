@@ -16,6 +16,11 @@
     "tag": "2.3.4"
   },
   "source_files": "Locker/**/*.swift",
+  "resource_bundles": {
+    "Locker": [
+      "Locker/**/*.json"
+    ]
+  },
   "frameworks": [
     "UIKit",
     "LocalAuthentication",
