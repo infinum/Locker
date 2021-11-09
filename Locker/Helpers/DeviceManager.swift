@@ -38,7 +38,7 @@ extension DeviceManager {
 
     func isDeviceInTouchIDList(device: String) -> Bool {
         let deviceResponse = readDataFromDevices()
-        return deviceResponse?.touchIdDevices.contains{ $0.id == device } ?? false
+        return deviceResponse?.touchIdDevices.contains { $0.id == device } ?? false
     }
 }
 

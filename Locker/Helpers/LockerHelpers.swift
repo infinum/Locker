@@ -175,10 +175,6 @@ extension LockerHelpers {
 private extension LockerHelpers {
 
     static func checkIfBiometricsSettingsChanged() -> Bool {
-        // Check for domain state changes
-        // For deactivated biometrics, LAContext in validation will return nil
-        // storing that nil and comparing it to nil will result as `isEqual` NO
-        // even data is not actually changed.
         guard let oldDomainState = LockerHelpers.savedLAPolicyDomainState,
               let newDomainState = LockerHelpers.currentLAPolicyDomainState,
               oldDomainState.elementsEqual(newDomainState)
