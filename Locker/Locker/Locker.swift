@@ -214,7 +214,7 @@ public extension Locker {
     }
 }
 
-public extension Locker {
+internal extension Locker {
     static func setSecretForDevice(
         _ secret: String,
         for uniqueIdentifier: String,
