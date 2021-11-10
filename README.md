@@ -72,7 +72,7 @@ For `uniqueIdentifier` pass `String` value You will later use to fetch Your data
 
 ```swift
 // Swift
-Locker.setSecret("passcode", for: "kUniqueIdentifier")
+Locker.setSecret(topSecret, for: identifier)
 ```
 
 > If Locker is run from the Simulator, instead of storing it into the Keychain, Locker will store data to the `UserDefaults`. You can check if Locker is running from the simulator with `isRunningFromTheSimulator` property.
