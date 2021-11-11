@@ -51,6 +51,37 @@ run pod install
 pod install
 ```
 
+
+#### Swift Package Manager
+
+Add the dependency to your `Package.swift` and use in your target
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/infinum/Locker.git", .upToNextMajor(from: "2.0.0"))
+]
+```
+
+Sample `Package.swift`
+
+```swift
+let package = Package(
+    name: "YourDependency",
+    products: [
+        .library(name: "YourDependency", targets: ["YourDependency"])
+    ],
+    dependencies: [
+        .package(url: "https://github.com/infinum/Locker.git", .upToNextMajor(from: "2.0.0")),
+    ],
+    targets: [
+        .target(
+            name: "YourDependency",
+            dependencies: [.product(name: "Locker", package: "Locker")]
+        )
+    ]
+)
+```
+
 ## Usage
 
 ##### 0. Setup Xcode project `Info.plist` with required permission for **Face ID** usage.
