@@ -121,7 +121,7 @@ class LockerHelpers {
     private static let deviceManager: DeviceManager = .shared
 }
 
-// MARK: - Public extension
+// MARK: - Internal extension
 
 extension LockerHelpers {
 

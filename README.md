@@ -65,7 +65,7 @@ pod install
 
 ##### 1. Save Your data with `setSecret: forUniqueIdentifier: completed:` method. 
 For `uniqueIdentifier` pass `String` value You will later use to fetch Your data.
-The `completed` is a closure which you can pass to handle the error if it occurs.
+The `completed` is a closure that is called upon finished secret storage. If the error occurs upon storing, info will be passed through the completion block.
 
 ```objective-c
 // Objective-C
@@ -76,7 +76,7 @@ The `completed` is a closure which you can pass to handle the error if it occurs
 
 ```swift
 // Swift
-Locker.setSecret("passcode", for: "SomeUniqueIdentifier", completed: { error in
+Locker.setSecret("passcode", for: "UniqueIdentifier", completed: { error in
     // handle error
 })
 ```
@@ -165,8 +165,8 @@ if biometrySettingsChanged && usingBiometry {
 `supportedBiometricsAuthentication` checks if the device has support for some Biometric type.
 `configuredBiometricsAuthentication` checks if the device has support for some Biometrics type and if that Biometric is enabled in device settings.
 
-#### 8. There is a local JSON file which contains every iPhone and iPad model which has FaceID or TouchID. That way we can check if the user's device can use FaceID or TouchID. If you want to allow the JSON file to sync itself with an API if the user's device isn't contained in the list, you can set `enableDeviceListSync` to be true.
-`enableDeviceListSync` checks if the user's device is on the JSON file biometry supported device list. If the device is not on the list, it syncs the list with a list from the API and writes it down to the local JSON file.
+#### 8. There is a local JSON file that contains every iPhone and iPad model which has FaceID or TouchID. That way we can check if the user's device can use FaceID or TouchID. If you want to allow the JSON file to sync itself with a server, you can set `enableDeviceListSync` to `true`.
+`enableDeviceListSync` when enabled, if the device is not present on the local list, it syncs the list with a list from the server and writes it down to the local JSON file.
 
 ## Contributing
 

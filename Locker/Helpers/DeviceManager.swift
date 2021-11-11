@@ -16,7 +16,7 @@ class DeviceManager {
     private init() {}
 }
 
-// MARK: - Public extension -
+// MARK: - Internal extension -
 
 extension DeviceManager {
 

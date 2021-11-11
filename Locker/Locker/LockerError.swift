@@ -9,9 +9,12 @@ import Foundation
 
 @objc
 public enum LockerError: Int, Error {
+    /// Access control couldn't be initialized while trying to save the secret
     case accessControl = -99
+    /// Conversion from secret to data failed
     case invalidData = -72
 
+    /// NSError representation used in Obj-C methods
     var asNSError: NSError {
         convertToNSError()
     }

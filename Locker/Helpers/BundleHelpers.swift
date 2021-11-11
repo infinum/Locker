@@ -12,24 +12,24 @@ class BundleHelpers {
 
     // MARK: - Public properties
 
-    public static var bundleResource: Bundle? {
+    static var bundleResource: Bundle? {
         guard let resourceBundleURL = Bundle(for: Self.self).url(forResource: "Locker", withExtension: "bundle"),
               let resourceBundle = Bundle(url: resourceBundleURL) else { return nil }
         return resourceBundle
     }
 
-    public static var decoder: JSONDecoder {
+    static var decoder: JSONDecoder {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
     }
 }
 
-// MARK: - Public extension -
+// MARK: - Internal extension -
 
 extension BundleHelpers {
 
-    public static func write(_ data: Data, to url: URL) {
+    static func write(_ data: Data, to url: URL) {
         // we'll have periodic updates to the library so we don't want to throw errors
         guard let decodedResponse = try? BundleHelpers.decoder.decode(DeviceResponse.self, from: data),
               let encodedData = try? JSONEncoder().encode(decodedResponse)
@@ -44,7 +44,7 @@ extension BundleHelpers {
         return data
     }
 
-    public static func getFileURL(for name: String, with nameExtension: String) -> URL? {
+    static func getFileURL(for name: String, with nameExtension: String) -> URL? {
         return BundleHelpers.bundleResource?.url(forResource: name, withExtension: nameExtension)
     }
 }
