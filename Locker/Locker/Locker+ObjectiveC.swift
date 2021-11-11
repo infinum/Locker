@@ -10,6 +10,15 @@ import Foundation
 
 public extension Locker {
 
+    /**
+    Sets a `secret` for a specified unique identifier
+
+    - Parameters:
+     - secret: the value you want to store to UserDefaults
+     - uniqueIdentifier: the identifier you want to use when retrieving the value
+     - completed: closure that is called upon finished secret storage. If the error occurs upon storing,
+        info will be passed through the completion block
+     */
     @available(swift, obsoleted: 1.0)
     @objc(setSecret:forUniqueIdentifier:completion:)
     static func setSecret(
