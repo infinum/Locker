@@ -121,7 +121,7 @@ class LockerHelpers {
     private static let deviceManager: DeviceManager = .shared
 }
 
-// MARK: - Public extension
+// MARK: - Internal extension
 
 extension LockerHelpers {
 
@@ -143,6 +143,7 @@ extension LockerHelpers {
     }
 
     static func keyShouldAddSecretToKeychainOnNextLoginForUniqueIdentifier(_ uniqueIdentifier: String) -> String {
+        // swiftlint:disable:next line_length
         let shouldAddSecretToKeychainOnNextLogin = "\(LockerHelpers.bundleIdentifier)_UserDefaultsShouldAddPasscodeToKeychainOnNextLogin"
         return "\(shouldAddSecretToKeychainOnNextLogin)_\(uniqueIdentifier)"
     }
@@ -174,10 +175,6 @@ extension LockerHelpers {
 private extension LockerHelpers {
 
     static func checkIfBiometricsSettingsChanged() -> Bool {
-        // Check for domain state changes
-        // For deactivated biometrics, LAContext in validation will return nil
-        // storing that nil and comparing it to nil will result as `isEqual` NO
-        // even data is not actually changed.
         guard let oldDomainState = LockerHelpers.savedLAPolicyDomainState,
               let newDomainState = LockerHelpers.currentLAPolicyDomainState,
               oldDomainState.elementsEqual(newDomainState)

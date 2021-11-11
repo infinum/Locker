@@ -21,6 +21,7 @@ Lightweight library for handling sensitive data (`String` type) in Keychain usin
   * Detect changes in Biometric settings.
   * Check if device has support for certain Biometric ID.
   * Detect and supports Simulator.
+  * Update the supported devices list without updating the library
 
 ## Requirements
 
@@ -62,17 +63,20 @@ pod install
 <string>** Add your Face ID Usage Description **</string>
 ```
 
-##### 1. Save Your data with `setSecret: forUniqueIdentifier:` method. 
+##### 1. Save Your data with `setSecret: forUniqueIdentifier: completed:` method. 
 For `uniqueIdentifier` pass `String` value You will later use to fetch Your data.
+The `completed` is a closure that is called upon finished secret storage. If the error occurs upon storing, info will be passed through the completion block.
 
 ```objective-c
 // Objective-C
-[Locker setSecret:@"passcode" forUniqueIdentifier:@"kUniqueIdentifier"];
+[Locker setSecret:@"passcode" forUniqueIdentifier:@"kUniqueIdentifier" completed: ^(NSError *error) {
+    //handle error
+}];
 ```
 
 ```swift
 // Swift
-Locker.setSecret(topSecret, for: identifier, completion: { error in
+Locker.setSecret("passcode", for: "UniqueIdentifier", completed: { error in
     // handle error
 })
 ```
@@ -119,7 +123,7 @@ Locker.retrieveCurrentSecret(
 Locker.deleteSecret(for: "kUniqueIdentifier")
 ```
 
-##### 4. If You need to update Your saved data, just call `setSecret: forUniqueIdentifier:`. This method first deletes old value, if there is one, and then saves new one. 
+##### 4. If You need to update Your saved data, just call `setSecret: forUniqueIdentifier: completed:`. This method first deletes old value, if there is one, and then saves new one. 
 
 ##### 5. There are some additional methods that may help You with handling the authentication with Biometric usage.
 
@@ -136,7 +140,7 @@ Note: This methods are here because they were used on some of our projects.
 You should probably want to use the first two, `setShouldUseAuthenticationWithBiometrics: forUniqueIdentifier` and `shouldUseAuthenticationWithBiometricsForUniqueIdentifier`.
 The other ones will be useful if Your app has certain behaviour.
 
-##### 6. You can check for Biometrics settings changes with `biometricsSettingsAreChanged`.
+##### 6. You can check for Biometrics settings changes with `biometricsSettingsDidChange`.
 It will return `true` if Biometric settings are changed since Your last calling this method or last saving in Keychain.
 
 ```objective-c
@@ -158,12 +162,11 @@ if biometrySettingsChanged && usingBiometry {
 ```
 
 ##### 7. There are `supportedBiometricsAuthentication` and `configuredBiometricsAuthentication` computed properties which return `BiometricsType` enum (`BiometricsTypeNone`, `BiometricsTypeTouchID`, `BiometricsTypeFaceID`).
-`supportedBiometricsAuthentication` checks if device has support for some Biometric type.
-`configuredBiometricsAuthentication` checks if device has support for some Biometrics type and if that Biometric is enabled in device settings.
+`supportedBiometricsAuthentication` checks if the device has support for some Biometric type.
+`configuredBiometricsAuthentication` checks if the device has support for some Biometrics type and if that Biometric is enabled in device settings.
 
-
-#### 8. There is a local JSON file which contains every iPhone and iPad model which has FaceID or TouchID. That way we can check if the user's device can use FaceID or TouchID. If you want to allow the JSON file to sync itself with an API if the user's device isn't contained in the list, you can set `enableDeviceListSync` to be true.
-`enableDeviceListSync` checks if the user's device is on the JSON file biometry supported device list. If the device is not on the list, it syncs the list with a list from the API and writes it to the local JSON file.
+#### 8. There is a local JSON file that contains every iPhone and iPad model which has FaceID or TouchID. That way we can check if the user's device can use FaceID or TouchID. If you want to allow the JSON file to sync itself with a server, you can set `enableDeviceListSync` to `true`.
+`enableDeviceListSync` when enabled, if the device is not present on the local list, it syncs the list with a list from the server and writes it down to the local JSON file.
 
 ## Contributing
 

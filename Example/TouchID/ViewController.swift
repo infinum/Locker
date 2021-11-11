@@ -33,7 +33,7 @@ public final class ViewController: UIViewController {
 extension ViewController {
 
     func storeSecret() {
-        Locker.setSecret(topSecret, for: identifier, completion: { error in
+        Locker.setSecret(topSecret, for: identifier, completed: { error in
             // handle error
             print(error)
         })

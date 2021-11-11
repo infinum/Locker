@@ -23,6 +23,7 @@ public class Locker: NSObject {
         }
     }
 
+    /// Is `true` if the settings changed since Your last calling this method or last saving in Keychain
     public static var biometricsSettingsDidChange: Bool {
         LockerHelpers.biometricsSettingsChanged
     }
@@ -35,18 +36,18 @@ public class Locker: NSObject {
     #endif
     }
 
+    /// Gives you an available biomertry type (none, touchID, faceID) for Your device
     public static var supportedBiometricsAuthentication: BiometricsType {
         LockerHelpers.supportedBiometricAuthentication
     }
 
+    /// Gives you an enrolled biometry type (none, touchID, faceID) for Your device
     public static var configuredBiometricsAuthentication: BiometricsType {
         LockerHelpers.configuredBiometricsAuthentication
     }
 
-    // if enableDeviceListSync is set to true
-    // it checks if the users device model is contained in the local JSON file
-    // which contains every device model which has TouchID or FaceID
-    // if not, it will fetch a new device list from the API
+    /// When enabled, if the device is not present on the local list of supported devices,
+    /// it syncs the list with a list from the server and writes it down to the local JSON file.
     public static var enableDeviceListSync: Bool = false {
         didSet {
             guard enableDeviceListSync else { return }
@@ -60,32 +61,39 @@ public class Locker: NSObject {
 
     // MARK: - Handle secrets (store, delete, fetch)
 
+    /**
+    Sets a `secret` for a specified unique identifier
+
+    - Parameters:
+     - secret: the value you want to store to UserDefaults
+     - uniqueIdentifier: the identifier you want to use when retrieving the value
+     - completed: closure that is called upon finished secret storage. If the error occurs upon storing,
+        info will be passed through the completion block
+     */
     public static func setSecret(
         _ secret: String,
         for uniqueIdentifier: String,
-        completion: ((LockerError?) -> Void)? = nil
+        completed: ((LockerError?) -> Void)? = nil
     ) {
     #if targetEnvironment(simulator)
         Locker.userDefaults?.set(secret, forKey: uniqueIdentifier)
     #else
         setSecretForDevice(secret, for: uniqueIdentifier, completion: { error in
-            completion?(error)
+            completed?(error)
         })
     #endif
     }
 
-    @available(swift, obsoleted: 1.0)
-    @objc(setSecret:forUniqueIdentifier:completion:)
-    static func setSecret(_ secret: String, for uniqueIdentifier: String, completion: ((NSError?) -> Void)? = nil) {
-    #if targetEnvironment(simulator)
-        Locker.userDefaults?.set(secret, forKey: uniqueIdentifier)
-    #else
-        setSecretForDevice(secret, for: uniqueIdentifier, completion: { error in
-            completion?(error?.asNSError)
-        })
-    #endif
-    }
+    /**
+     Retrieves a `secret` for a specified unique identifier.
+     If the `secret` was found, success block will be called, otherwise the failure block's called.
 
+     - Parameters:
+        - uniqueIdentifier: the indetifier for which you want to retrieve the `secret`
+        - operationPrompt: the identifier which will be used for a reason why LAContext is used
+        - success: closure which retrives the secret for the specified unique identifier
+        - failure: closure which retrieves the failure status if the secret wasn't found
+     */
     @objc(retreiveCurrentSecretForUniqueIdentifier:operationPrompt:success:failure:)
     public static func retrieveCurrentSecret(
         for uniqueIdentifier: String,
@@ -132,6 +140,11 @@ public class Locker: NSObject {
     #endif
     }
 
+    /**
+     Deletes the stored `secret` for the specified unique identifier
+
+     - Parameter uniqueIdentifier: the identifier for which you want to delete the `secret`
+     */
     @objc(deleteSecretForUniqueIdentifier:)
     public static func deleteSecret(for uniqueIdentifier: String) {
 
@@ -155,6 +168,12 @@ public class Locker: NSObject {
 
 public extension Locker {
 
+    /// Checks if the flag for biometrics usage for the specified unique identifier has been set
+    ///
+    /// - Parameter uniqueIdentifier: the unique identifier for which You want to retrieve the value
+    ///
+    /// - Returns: a boolean value for the specified unique identifier
+    /// which represents if it should use biometric authentication
     @objc(shouldUseAuthenticationWithBiometricsForUniqueIdentifier:)
     static func shouldUseAuthenticationWithBiometrics(for uniqueIdentifier: String) -> Bool {
         return Locker.userDefaults?.bool(
@@ -162,6 +181,12 @@ public extension Locker {
         ) ?? false
     }
 
+    /// Sets a new value in User Deafults which represents if it should use
+    /// biometric authentication for the specified unique identifier
+    ///
+    /// - Parameters:
+    ///     - shouldUse: boolean value which represents if it should use the biometric authentication
+    ///     - uniqueIdentifier: the specified indentifier for which to save the new value in user defaults
     @objc(setShouldUseAuthenticationWithBiometrics:forUniqueIdentifier:)
     static func setShouldUseAuthenticationWithBiometrics(_ shouldUse: Bool, for uniqueIdentifier: String) {
         if !shouldUse && Locker.shouldAddSecretToKeychainOnNextLogin(for: uniqueIdentifier) {
@@ -173,6 +198,12 @@ public extension Locker {
         )
     }
 
+    /// Checks if the user asked to use biometric authentication for the specified unique identifier
+    ///
+    /// - Parameter uniqueIdentifier: the unique identifier for which You want to retrieve the value
+    ///
+    /// - Returns: a boolean value for the specified unique identifier which represents
+    /// if the user asked to use biometrics authentication
     @objc(didAskToUseAuthenticationWithBiometricsForUniqueIdentifier:)
     static func didAskToUseAuthenticationWithBiometrics(for uniqueIdentifier: String) -> Bool {
         Locker.userDefaults?.bool(
@@ -180,6 +211,12 @@ public extension Locker {
         ) ?? false
     }
 
+    /// Sets a new value in User Deafults which represents if the user asked
+    /// to use biometric authentication  for the specified unique identifier
+    ///
+    /// - Parameters:
+    ///     - useAuthenticationBiometrics: boolean value which represents if the user asked for biometric authentication
+    ///     - uniqueIdentifier: the specified indentifier for which to save the new value in user defaults
     @objc(setDidAskToUseAuthenticationWithBiometrics:forUniqueIdentifier:)
     static func setDidAskToUseAuthenticationWithBiometrics(
         _ useAuthenticationBiometrics: Bool,
@@ -191,6 +228,12 @@ public extension Locker {
         )
     }
 
+    /// Checks if it should add the `secret` to Keychain on the next login
+    ///
+    /// - Parameter uniqueIdentifier: the unique identifier for which You want to retrieve the value
+    ///
+    /// - Returns: a boolean value for the specified unique identifier which represents
+    /// if the `secret` should be saved to Keychain on the next login
     @objc(shouldAddSecretToKeychainOnNextLoginForUniqueIdentifier:)
     static func shouldAddSecretToKeychainOnNextLogin(for uniqueIdentifier: String) -> Bool {
         Locker.userDefaults?.bool(
@@ -198,6 +241,12 @@ public extension Locker {
         ) ?? false
     }
 
+    /// Sets a new value in User Defaults which represents if it should save the `secret` to Keychain
+    /// on the next login for the specified unique identifier
+    ///
+    /// - Parameters:
+    ///     - shouldAdd: boolean value which represents if `secret` should be saved to Keychain on the next login
+    ///     - uniqueIdentifier: the specified indentifier for which to save the new value
     @objc(setShouldAddSecretToKeychainOnNextLogin:forUniqueIdentifier:)
     static func setShouldAddSecretToKeychainOnNextLogin(_ shouldAdd: Bool, for uniqueIdentifier: String) {
         Locker.userDefaults?.set(
@@ -211,6 +260,9 @@ public extension Locker {
 
 public extension Locker {
 
+    /// Removes all values which were currently stored for the specified unique identifier
+
+    /// - Parameter uniqueIdentifier: the identifier for which to remove values
     @objc(resetForUniqueIdentifier:)
     static func reset(for uniqueIdentifier: String) {
         Locker.userDefaults?.removeObject(
@@ -226,8 +278,8 @@ public extension Locker {
     }
 }
 
-private extension Locker {
-    private static func setSecretForDevice(
+internal extension Locker {
+    static func setSecretForDevice(
         _ secret: String,
         for uniqueIdentifier: String,
         completion: ((LockerError?) -> Void)? = nil

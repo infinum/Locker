@@ -16,7 +16,7 @@ class DeviceManager {
     private init() {}
 }
 
-// MARK: - Public extension -
+// MARK: - Internal extension -
 
 extension DeviceManager {
 
@@ -32,13 +32,13 @@ extension DeviceManager {
     }
 
     func isDeviceInFaceIDList(device: String) -> Bool {
-        let deviceResponse = readDataFromDeviceList()
-        return deviceResponse?.faceIdDevices.contains(device) ?? false
+        let deviceResponse = readDataFromDevices()
+        return deviceResponse?.faceIdDevices.contains { $0.id == device } ?? false
     }
 
     func isDeviceInTouchIDList(device: String) -> Bool {
-        let deviceResponse = readDataFromDeviceList()
-        return deviceResponse?.touchIdDevices.contains(device) ?? false
+        let deviceResponse = readDataFromDevices()
+        return deviceResponse?.touchIdDevices.contains { $0.id == device } ?? false
     }
 }
 
@@ -46,7 +46,7 @@ extension DeviceManager {
 
 private extension DeviceManager {
 
-    func readDataFromDeviceList() -> DeviceResponse? {
+    func readDataFromDevices() -> DeviceResponse? {
         guard let data = BundleHelpers.readFromJSON("BiometryAvailabilityDeviceList") else {
             return nil
         }
