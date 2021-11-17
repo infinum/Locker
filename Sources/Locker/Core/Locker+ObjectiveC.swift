@@ -11,13 +11,15 @@ import Foundation
 public extension Locker {
 
     /**
-    Sets a `secret` for a specified unique identifier
+     Used for storing value to Keychain with unique identifier.
 
-    - Parameters:
-     - secret: the value you want to store to UserDefaults
-     - uniqueIdentifier: the identifier you want to use when retrieving the value
-     - completed: closure that is called upon finished secret storage. If the error occurs upon storing,
-        info will be passed through the completion block
+     If Locker is run on the Simulator, the secret will not be stored securely in the keychain.
+     Instead, the UserDefaults storage will be used.
+
+     - Parameters:
+        - secret: value to store to Keychain
+        - uniqueIdentifier: unique key used for storing secret
+        - completed: completion block returning an error if something went wrong
      */
     @available(swift, obsoleted: 1.0)
     @objc(setSecret:forUniqueIdentifier:completion:)
