@@ -67,9 +67,9 @@ For the Carthage installation and usage instruction, you can check official [qui
 
 To integrate the library into your Xcode project, specify it in your `Cartfile`:
 
-\```
+```
 github "infinum/Locker"
-\```
+```
 
 Run `carthage update`.
 
