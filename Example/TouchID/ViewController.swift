@@ -18,6 +18,7 @@ public final class ViewController: UIViewController {
     // MARK: - Private properties -
 
     private let identifier = "TouchIDSampleApp"
+
 }
 
 // MARK: - Locker usage -
