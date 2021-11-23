@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Locker
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?
     ) -> Bool {
         // Override point for customization after application launch.
+        Locker.enableDeviceListSync = true
         return true
     }
 }

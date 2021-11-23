@@ -29,7 +29,7 @@ Lightweight library for handling sensitive data (`String` type) in Keychain usin
 
 ## Installation
 
-The easiest way to use Locker in your project is by using the CocoaPods package manager.
+Locker supports CocoaPods, Swift Package Manager and Carthage.
 
 
 #### CocoaPods
@@ -50,6 +50,28 @@ run pod install
 ```bash
 pod install
 ```
+
+
+#### Swift Package Manager
+
+To install Locker from the Swift Package Manager, you should:
+* In Xcode 11+ select File → Packages → Add Package Dependency
+* Enter project's URL: https://github.com/infinum/Locker.git
+
+For more information, check [Swift Package Manager](https://swift.org/package-manager/).
+
+
+#### Carthage
+
+For the Carthage installation and usage instruction, you can check official [quick start documentation](https://github.com/Carthage/Carthage#quick-start).
+
+To integrate the library into your Xcode project, specify it in your `Cartfile`:
+
+```
+github "infinum/Locker"
+```
+
+Run `carthage update`.
 
 ## Usage
 
