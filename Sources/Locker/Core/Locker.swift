@@ -15,7 +15,8 @@ public class Locker: NSObject {
     // MARK: - Public properties
 
     /**
-     User defaults used for storing shouldUseAuthenticationWithBiometrics, askToUseAuthenticationWithBiometrics and shouldAddPasscodeToKeychainOnNextLogin values
+     User defaults used for storing shouldUseAuthenticationWithBiometrics,
+     askToUseAuthenticationWithBiometrics and shouldAddPasscodeToKeychainOnNextLogin values
 
      Should be set once before using any other Locker methods.
      If not set, standard user defaults will be used.
@@ -134,7 +135,9 @@ public class Locker: NSObject {
             failure?(errSecItemNotFound)
             return
         }
-        success?(simulatorSecret)
+        DispatchQueue.main.async {
+            success?(simulatorSecret)
+        }
     #else
         let query: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
@@ -160,7 +163,9 @@ public class Locker: NSObject {
                     success?(result)
                 }
             } else {
-                failure?(status)
+                DispatchQueue.main.async {
+                    failure?(status)
+                }
             }
         }
     #endif
