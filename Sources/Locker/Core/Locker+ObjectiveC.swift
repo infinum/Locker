@@ -32,7 +32,9 @@ public extension Locker {
         Locker.userDefaults?.set(secret, forKey: uniqueIdentifier)
     #else
         setSecretForDevice(secret, for: uniqueIdentifier, completion: { error in
-            completed?(error?.asNSError)
+            DispatchQueue.main.async {
+                completed?(error?.asNSError)
+            }
         })
     #endif
     }

@@ -175,10 +175,13 @@ extension LockerHelpers {
 private extension LockerHelpers {
 
     static func checkIfBiometricsSettingsChanged() -> Bool {
-        guard let oldDomainState = LockerHelpers.savedLAPolicyDomainState,
-              let newDomainState = LockerHelpers.currentLAPolicyDomainState,
-              oldDomainState.elementsEqual(newDomainState)
+        let oldDomainState = LockerHelpers.savedLAPolicyDomainState
+        let newDomainState = LockerHelpers.currentLAPolicyDomainState
+
+        guard (oldDomainState == nil) || (newDomainState == nil),
+              !(oldDomainState == newDomainState)
         else { return false }
+
         LockerHelpers.setLAPolicyDomainState(with: LockerHelpers.currentLAPolicyDomainState)
         return true
     }

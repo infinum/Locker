@@ -105,7 +105,9 @@ public class Locker: NSObject {
         Locker.userDefaults?.set(secret, forKey: uniqueIdentifier)
     #else
         setSecretForDevice(secret, for: uniqueIdentifier, completion: { error in
-            completed?(error)
+            DispatchQueue.main.async {
+                completed?(error)
+            }
         })
     #endif
     }
@@ -131,10 +133,14 @@ public class Locker: NSObject {
     #if targetEnvironment(simulator)
         let simulatorSecret = Locker.userDefaults?.string(forKey: uniqueIdentifier)
         guard let simulatorSecret = simulatorSecret else {
-            failure?(errSecItemNotFound)
+            DispatchQueue.main.async {
+                failure?(errSecItemNotFound)
+            }
             return
         }
-        success?(simulatorSecret)
+        DispatchQueue.main.async {
+            success?(simulatorSecret)
+        }
     #else
         let query: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
@@ -152,7 +158,9 @@ public class Locker: NSObject {
             if status == errSecSuccess {
                 guard let resultData = dataTypeRef as? Data,
                       let result = String(data: resultData, encoding: .utf8) else {
-                          failure?(errSecItemNotFound)
+                          DispatchQueue.main.async {
+                              failure?(errSecItemNotFound)
+                          }
                           return
                       }
 
@@ -160,7 +168,9 @@ public class Locker: NSObject {
                     success?(result)
                 }
             } else {
-                failure?(status)
+                DispatchQueue.main.async {
+                    failure?(status)
+                }
             }
         }
     #endif
@@ -346,9 +356,13 @@ extension Locker {
 
             guard let sacObject = sacObject, errorRef == nil, let secretData = secret.data(using: .utf8) else {
                 if errorRef != nil {
-                    completion?(.accessControl)
+                    DispatchQueue.main.async {
+                        completion?(.accessControl)
+                    }
                 } else {
-                    completion?(.invalidData)
+                    DispatchQueue.main.async {
+                        completion?(.invalidData)
+                    }
                 }
                 return
             }
@@ -375,7 +389,9 @@ extension Locker {
 
             // Store current LA policy domain state
             LockerHelpers.storeCurrentLAPolicyDomainState()
-            completion?(nil)
+            DispatchQueue.main.async {
+                completion?(nil)
+            }
         }
     }
 }
