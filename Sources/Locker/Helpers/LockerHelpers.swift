@@ -203,8 +203,7 @@ private extension LockerHelpers {
         var error: NSError?
 
         if #available(iOS 11.0, *) {
-            if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
-                && context.responds(to: #selector(getter: context.biometryType)) {
+            if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
                 if context.biometryType == .faceID {
                     return true
                 }
