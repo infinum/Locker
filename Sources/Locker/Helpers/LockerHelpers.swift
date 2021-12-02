@@ -178,8 +178,8 @@ private extension LockerHelpers {
         let oldDomainState = LockerHelpers.savedLAPolicyDomainState
         let newDomainState = LockerHelpers.currentLAPolicyDomainState
 
-        guard (oldDomainState == nil) || (newDomainState == nil),
-              !(oldDomainState == newDomainState)
+        guard !(oldDomainState == nil || newDomainState == nil),
+              oldDomainState != newDomainState
         else { return false }
 
         LockerHelpers.setLAPolicyDomainState(with: LockerHelpers.currentLAPolicyDomainState)
