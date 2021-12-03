@@ -12,6 +12,7 @@ Pod::Spec.new do |s|
 "Jasmin Abou Aldan" => "jasmin.aboualdan@infinum.com",
 "Zvonimir Medak" => "zvonimir.medak@infinum.com"}
   s.platform     = :ios, "10.0"
+  s.swift_version = "5.1"
   s.source       = { :git => "https://github.com/infinum/Locker.git", :tag => "#{s.version}" }
   s.source_files  = "Sources/Locker/**/*.swift"
   s.resource_bundles = {
