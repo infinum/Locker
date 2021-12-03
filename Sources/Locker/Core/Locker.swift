@@ -347,14 +347,14 @@ extension Locker {
             } else {
                 flags = .touchIDCurrentSet
             }
-            let sacObject = SecAccessControlCreateWithFlags(
+            let sac = SecAccessControlCreateWithFlags(
                 kCFAllocatorDefault,
                 kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly,
                 flags,
                 errorRef
             )
 
-            guard let sacObject = sacObject, errorRef == nil, let secretData = secret.data(using: .utf8) else {
+            guard let sacObject = sac, errorRef == nil, let secretData = secret.data(using: .utf8) else {
                 if errorRef != nil {
                     DispatchQueue.main.async {
                         completion?(.accessControl)
