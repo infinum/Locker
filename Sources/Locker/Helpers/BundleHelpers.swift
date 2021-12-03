@@ -13,8 +13,9 @@ class BundleHelpers {
     // MARK: - Public properties
 
     static var bundleResource: Bundle? {
-        guard let resourceBundleURL = Bundle(for: Self.self).url(forResource: "Locker", withExtension: "bundle"),
-              let resourceBundle = Bundle(url: resourceBundleURL) else { return nil }
+        guard let resourceBundleURL = Bundle(for: Self.self).url(forResource: "Locker_Locker", withExtension: "bundle"),
+              let resourceBundle = Bundle(url: resourceBundleURL)
+        else { return nil }
         return resourceBundle
     }
 
@@ -39,7 +40,7 @@ extension BundleHelpers {
 
     static func readFromJSON(_ name: String) -> Data? {
         guard let path = BundleHelpers.bundleResource?.path(forResource: name, ofType: "json"),
-        let data = try? String(contentsOfFile: path).data(using: .utf8)
+              let data = try? String(contentsOfFile: path).data(using: .utf8)
         else { return nil }
         return data
     }
