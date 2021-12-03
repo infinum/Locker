@@ -8,7 +8,6 @@
 
 import Foundation
 import LocalAuthentication
-import System
 
 class LockerHelpers {
 

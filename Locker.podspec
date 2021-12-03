@@ -11,7 +11,6 @@ Pod::Spec.new do |s|
   s.author       = { "Barbara Vujičić" => "barbara.vujicic@infinum.com",
 "Jasmin Abou Aldan" => "jasmin.aboualdan@infinum.com",
 "Zvonimir Medak" => "zvonimir.medak@infinum.com"}
-  s.swift_version = '5.1'
   s.platform     = :ios, "10.0"
   s.source       = { :git => "https://github.com/infinum/Locker.git", :tag => "#{s.version}" }
   s.source_files  = "Sources/Locker/**/*.swift"
