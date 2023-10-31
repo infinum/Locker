@@ -85,6 +85,22 @@
                     "name": "iPhone 14 Pro Max"
                 },
                 {
+                    "id": "iPhone15,4",
+                    "name": "iPhone 15"
+                },
+                {
+                    "id": "iPhone15,5",
+                    "name": "iPhone 15 Plus"
+                },
+                {
+                    "id": "iPhone16,1",
+                    "name": "iPhone 15 Pro"
+                },
+                {
+                    "id": "iPhone16,2",
+                    "name": "iPhone 15 Pro Max"
+                },
+                {
                     "id": "iPad8,1",
                     "name": "iPad Pro 11 inch 3rd Gen (WiFi)"
                 },
