@@ -13,9 +13,6 @@ public extension Locker {
     /**
      Used for storing value to Keychain with unique identifier.
 
-     If Locker is run on the Simulator, the secret will not be stored securely in the keychain.
-     Instead, the UserDefaults storage will be used.
-
      - Parameters:
         - secret: value to store to Keychain
         - uniqueIdentifier: unique key used for storing secret
@@ -28,15 +25,11 @@ public extension Locker {
         for uniqueIdentifier: String,
         completed: ((NSError?) -> Void)? = nil
     ) {
-    #if targetEnvironment(simulator)
-        Locker.userDefaults?.set(secret, forKey: uniqueIdentifier)
-    #else
         setSecretForDevice(secret, for: uniqueIdentifier, completion: { error in
             DispatchQueue.main.async {
                 completed?(error?.asNSError)
             }
         })
-    #endif
     }
 
 }
