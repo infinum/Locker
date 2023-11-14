@@ -205,8 +205,9 @@ public class Locker: NSObject {
 public extension Locker {
     
     /**
-     Used for setting a custom keychain service key. If this is not set, Locker will use a combination of the bundle identifier
-     and a string constant to set the keychain service.
+     Used for setting a custom keychain service key. 
+     
+     If this is not set, Locker will use a combination of the bundle identifier and a string constant to set the keychain service.
 
      - Parameter service: the custom keychain service key you want to use to interact with the Keychain
      */
