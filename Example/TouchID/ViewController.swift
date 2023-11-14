@@ -90,6 +90,10 @@ extension ViewController {
         return Locker.biometricsSettingsDidChange
     }
 
+    var runningFromTheSimulator: Bool {
+        return Locker.isRunningFromTheSimulator
+    }
+
     var supportedBiometricAuthentication: BiometricsType {
         return Locker.supportedBiometricsAuthentication
     }

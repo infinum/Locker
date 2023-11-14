@@ -37,6 +37,20 @@ public class Locker: NSObject {
     }
 
     /**
+     Boolean value that indicates if Locker is running from the simulator
+
+     As Simulator does not support Keychain storage, Locker run from the simulator
+     will use UserDefaults storage instead.
+     */
+    public static var isRunningFromTheSimulator: Bool {
+    #if targetEnvironment(simulator)
+        return true
+    #else
+        return false
+    #endif
+    }
+
+    /**
      The biometrics type that the device supports (None, TouchID, FaceID).
      */
     public static var supportedBiometricsAuthentication: BiometricsType {
@@ -55,6 +69,8 @@ public class Locker: NSObject {
 
      If the sync is enabled, Locker will check if the device is already contained in the list. If the
      device is not found in the local list, Locker will updated the local JSON device list.
+
+     If you're using a simulator Locker will not sync the list.
      */
     public static var enableDeviceListSync: Bool = false {
         didSet {
@@ -72,6 +88,9 @@ public class Locker: NSObject {
     /**
      Used for storing value to Keychain with unique identifier.
 
+     If Locker is run on the Simulator, the secret will not be stored securely in the keychain.
+     Instead, the UserDefaults storage will be used.
+
      - Parameters:
         - secret: value to store to Keychain
         - uniqueIdentifier: unique key used for storing secret
@@ -82,11 +101,15 @@ public class Locker: NSObject {
         for uniqueIdentifier: String,
         completed: ((LockerError?) -> Void)? = nil
     ) {
+    #if targetEnvironment(simulator)
+        Locker.userDefaults?.set(secret, forKey: uniqueIdentifier)
+    #else
         setSecretForDevice(secret, for: uniqueIdentifier, completion: { error in
             DispatchQueue.main.async {
                 completed?(error)
             }
         })
+    #endif
     }
 
     /**
@@ -106,6 +129,19 @@ public class Locker: NSObject {
         success: ((String) -> Void)?,
         failure: ((OSStatus) -> Void)?
     ) {
+
+    #if targetEnvironment(simulator)
+        let simulatorSecret = Locker.userDefaults?.string(forKey: uniqueIdentifier)
+        guard let simulatorSecret = simulatorSecret else {
+            DispatchQueue.main.async {
+                failure?(errSecItemNotFound)
+            }
+            return
+        }
+        DispatchQueue.main.async {
+            success?(simulatorSecret)
+        }
+    #else
         let query: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrService: LockerHelpers.keyKeychainServiceName,
@@ -137,6 +173,7 @@ public class Locker: NSObject {
                 }
             }
         }
+    #endif
     }
 
     /**
@@ -146,6 +183,10 @@ public class Locker: NSObject {
      */
     @objc(deleteSecretForUniqueIdentifier:)
     public static func deleteSecret(for uniqueIdentifier: String) {
+
+    #if targetEnvironment(simulator)
+        Locker.userDefaults?.removeObject(forKey: uniqueIdentifier)
+    #else
         let query: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrService: LockerHelpers.keyKeychainServiceName,
@@ -155,6 +196,7 @@ public class Locker: NSObject {
         DispatchQueue.global(qos: .default).async {
             SecItemDelete(query as CFDictionary)
         }
+    #endif
     }
 }
 

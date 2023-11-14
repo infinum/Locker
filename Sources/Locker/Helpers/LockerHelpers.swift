@@ -60,7 +60,11 @@ class LockerHelpers {
 
         return deviceManager.isDeviceInTouchIDList(device: LockerHelpers.deviceCode)
     }
-    
+
+    static var isSimulator: Bool {
+        LockerHelpers.deviceCode == "x86_64"
+    }
+
     // MARK: - Private properties
 
     static private var currentLAPolicyDomainState: Data? {
@@ -87,7 +91,7 @@ class LockerHelpers {
             // In case lib is used on simulator, error code will always be `notEnrolled` and only then
             // we want to return that biometrics is not supported as we don't know what simulator is used.
             if let error = error,
-               error.code == biometryNotAvailableCode {
+               error.code == biometryNotAvailableCode || (error.code == biometryNotEnrolledCode && isSimulator) {
                 return false
             }
         }
@@ -164,9 +168,11 @@ extension LockerHelpers {
     // MARK: - Device list
 
     static func fetchNewDeviceList() {
-    if !deviceSupportsAuthenticationWithTouchID && !deviceSupportsAuthenticationWithFaceID {
-        deviceManager.fetchDevices()
-    }
+    #if !targetEnvironment(simulator)
+        if !deviceSupportsAuthenticationWithTouchID && !deviceSupportsAuthenticationWithFaceID {
+            deviceManager.fetchDevices()
+        }
+    #endif
     }
 }
 
