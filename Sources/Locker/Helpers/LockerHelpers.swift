@@ -159,8 +159,9 @@ extension LockerHelpers {
     }
 
     static var keyKeychainServiceName: String {
-        guard let service = UserDefaults.standard.object(forKey: keyCustomKeychainService) as? String
-        else { return "\(LockerHelpers.bundleIdentifier)_KeychainService" }
+        guard let service = UserDefaults.standard.object(forKey: keyCustomKeychainService) as? String else { 
+            return "\(LockerHelpers.bundleIdentifier)_KeychainService" 
+        }
         
         return service
     }
