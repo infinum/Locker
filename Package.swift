@@ -24,7 +24,9 @@ let package = Package(
         .target(
             name: "Locker",
             resources: [
-                .process("Helpers/BiometryAvailabilityDeviceList.json")]
+                .process("Helpers/BiometryAvailabilityDeviceList.json"),
+                .copy("SupportingFiles/PrivacyInfo.xcprivacy")
+                ]
         )
     ]
 )
