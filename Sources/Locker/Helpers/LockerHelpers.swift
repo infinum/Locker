@@ -62,7 +62,11 @@ class LockerHelpers {
     }
 
     static var isSimulator: Bool {
-        LockerHelpers.deviceCode == "x86_64"
+        #if targetEnvironment(simulator)
+            return true
+        #else
+            return false
+        #endif
     }
 
     // MARK: - Private properties

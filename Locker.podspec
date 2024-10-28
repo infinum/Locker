@@ -15,7 +15,6 @@ Pod::Spec.new do |s|
   s.swift_version = "5.1"
   s.source       = { :git => "https://github.com/infinum/Locker.git", :tag => "#{s.version}" }
   s.source_files  = "Sources/Locker/**/*.swift"
-  s.resource_bundles = {
-	'Locker_Locker' => ['Sources/Locker/**/*.json']}
+  s.resource_bundles = { 'Locker_Locker' => ['Sources/Locker/**/*.json', 'Sources/Locker/SupportingFiles/PrivacyInfo.xcprivacy'] }
   s.frameworks = "UIKit", "LocalAuthentication", "Security"
 end

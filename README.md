@@ -190,6 +190,10 @@ if biometrySettingsChanged && usingBiometry {
 #### 8. There is a local JSON file that contains every iPhone and iPad model which has FaceID or TouchID. That way we can check if the user's device can use FaceID or TouchID. If you want to allow the JSON file to sync itself with a server, you can set `enableDeviceListSync` to `true`.
 `enableDeviceListSync` when enabled, if the device is not present on the local list, it syncs the list with a list from the server and writes it down to the local JSON file.
 
+## Privacy
+
+Locker does not collect any user data. We have provided a [privacy manifest](https://github.com/infinum/Locker/blob/master/Sources/Locker/SupportingFiles/PrivacyInfo.xcprivacy) file that can be included in your app.
+
 ## Contributing
 
 Feedback and code contributions are very much welcome. Just make a pull request with a short description of your changes. By making contributions to this project you give permission for your code to be used under the same [license](https://github.com/infinum/Locker/blob/master/LICENSE).
