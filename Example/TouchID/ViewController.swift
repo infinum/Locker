@@ -17,8 +17,36 @@ public final class ViewController: UIViewController {
 
     // MARK: - Private properties -
 
+    @IBOutlet private weak var storeResultLabel: UILabel!
+    @IBOutlet private weak var readResultLabel: UILabel!
+
     private let identifier = "TouchIDSampleApp"
 
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+//        Locker.setKeychainService("someCustomService")
+//        shouldUseAuthWithBiometrics = true
+    }
+
+
+    @IBAction private func storeSecretAction() {
+        storeSecret()
+    }
+
+    @IBAction private func readSecretAction() {
+        readSecret { [weak self] secret in
+            self?.readResultLabel.text = "Read: \(secret)"
+        } failure: { [weak self] status in
+            self?.readResultLabel.text = "Failed to read with status: \(status)"
+        }
+    }
+
+    @IBAction private func resetEverythingAction() {
+        resetUserDefaults()
+        resetEverything()
+        readResultLabel.text = "--"
+        storeResultLabel.text = "--"
+    }
 }
 
 // MARK: - Locker usage -
@@ -28,9 +56,16 @@ public final class ViewController: UIViewController {
 extension ViewController {
 
     func storeSecret() {
-        Locker.setSecret(topSecret, for: identifier, completed: { error in
-            // handle error
-            print(error)
+        Locker.setSecret(topSecret, for: identifier, completed: { [weak self] error in
+            guard let self else { return }
+
+            guard let error
+            else {
+                self.storeResultLabel.text = "Stored: \(self.topSecret)"
+                return
+            }
+            
+            self.storeResultLabel.text = "Failed to store: \(error)"
         })
     }
 

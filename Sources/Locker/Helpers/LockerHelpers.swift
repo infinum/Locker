@@ -151,6 +151,10 @@ extension LockerHelpers {
         return "\(shouldAddSecretToKeychainOnNextLogin)_\(uniqueIdentifier)"
     }
 
+    static var keyCustomKeychainService: String {
+        return "\(LockerHelpers.bundleIdentifier)_UserDefaultsCustomKeychainService"
+    }
+
     // MARK: - Biometric helpers
 
     static func storeCurrentLAPolicyDomainState() {
@@ -159,7 +163,11 @@ extension LockerHelpers {
     }
 
     static var keyKeychainServiceName: String {
-        return "\(LockerHelpers.bundleIdentifier)_KeychainService"
+        guard let service = UserDefaults.standard.object(forKey: keyCustomKeychainService) as? String else { 
+            return "\(LockerHelpers.bundleIdentifier)_KeychainService" 
+        }
+        
+        return service
     }
 
     // MARK: - Device list

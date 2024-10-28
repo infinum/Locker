@@ -203,6 +203,18 @@ public class Locker: NSObject {
 // MARK: - Additional helpers
 
 public extension Locker {
+    
+    /**
+     Used for setting a custom keychain service key. 
+     
+     If this is not set, Locker will use a combination of the bundle identifier and a string constant to set the keychain service.
+
+     - Parameter service: the custom keychain service key you want to use to interact with the Keychain
+     */
+    @objc(setKeychainService:)
+    static func setKeychainService(_ service: String) {
+        Locker.userDefaults?.set(service, forKey: LockerHelpers.keyCustomKeychainService)
+    }
 
     /**
      Used for fetching whether user enabled authentication with biometrics.
