@@ -37,7 +37,7 @@ public final class ViewController: UIViewController {
         readSecret { [weak self] secret in
             self?.readResultLabel.text = "Read: \(secret)"
         } failure: { [weak self] status in
-            self?.readResultLabel.text = "Failed to read w status: \(status)"
+            self?.readResultLabel.text = "Failed to read with status: \(status)"
         }
     }
 
