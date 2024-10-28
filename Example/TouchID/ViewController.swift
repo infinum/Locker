@@ -33,7 +33,7 @@ public final class ViewController: UIViewController {
         storeSecret()
     }
 
-    @IBAction private func readSecretAction(_ sender: Any) {
+    @IBAction private func readSecretAction() {
         readSecret { [weak self] secret in
             self?.readResultLabel.text = "Read: \(secret)"
         } failure: { [weak self] status in
