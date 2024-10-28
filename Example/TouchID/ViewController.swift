@@ -41,7 +41,7 @@ public final class ViewController: UIViewController {
         }
     }
 
-    @IBAction private func resetEverythingAction(_ sender: Any) {
+    @IBAction private func resetEverythingAction() {
         resetUserDefaults()
         resetEverything()
         readResultLabel.text = "--"
