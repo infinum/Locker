@@ -29,7 +29,7 @@ public final class ViewController: UIViewController {
     }
 
 
-    @IBAction private func storeSecretAction(_ sender: Any) {
+    @IBAction private func storeSecretAction() {
         storeSecret()
     }
 
