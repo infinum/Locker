@@ -47,6 +47,16 @@
                ReferencedContainer = "container:TouchID.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "774CE38747FC1E3B94290266C4AB2071"
+               BuildableName = "Locker-Unit-Tests.xctest"
+               BlueprintName = "Locker-Unit-Tests"
+               ReferencedContainer = "container:Pods/Pods.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
