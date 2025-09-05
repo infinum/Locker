@@ -8,10 +8,10 @@ Pod::Spec.new do |s|
                    DESC
   s.homepage     = "https://github.com/infinum/Locker.git"
   s.license      = "MIT"
-  s.author       = { 
-    "Barbara Vujičić" => "barbara.vujicic@infinum.com",
+  s.author       = {
     "Jasmin Abou Aldan" => "jasmin.aboualdan@infinum.com",
-    "Zvonimir Medak" => "zvonimir.medak@infinum.com"
+    "Siniša Abramović" => "sinisa.abramovic@infinum.com",
+    "Nikola Šimunko" => "nikola.simunko@infinum.com"
   }
   s.platform     = :ios, "10.0"
   s.swift_version = "5.5"
