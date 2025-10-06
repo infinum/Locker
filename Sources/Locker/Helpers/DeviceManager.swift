@@ -11,7 +11,7 @@ class DeviceManager {
 
     // MARK: - Singleton creation -
 
-    static let shared = DeviceManager()
+    @MainActor static let shared = DeviceManager()
 
     private init() {}
 }

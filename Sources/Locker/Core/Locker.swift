@@ -72,7 +72,7 @@ public class Locker: NSObject {
 
      If you're using a simulator Locker will not sync the list.
      */
-    public static var enableDeviceListSync: Bool = false {
+    @MainActor public static var enableDeviceListSync: Bool = false {
         didSet {
             guard enableDeviceListSync else { return }
             LockerHelpers.fetchNewDeviceList()
@@ -81,7 +81,7 @@ public class Locker: NSObject {
 
     // MARK: - Private properties
 
-    private static var currentUserDefaults: UserDefaults?
+    @MainActor private static var currentUserDefaults: UserDefaults?
 
     // MARK: - Handle secrets (store, delete, fetch)
 
