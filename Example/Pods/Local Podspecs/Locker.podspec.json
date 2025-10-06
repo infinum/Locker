@@ -1,22 +1,22 @@
 {
   "name": "Locker",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "summary": "Securely lock your secrets under the watch of TouchID or FaceID keeper 🔒",
   "description": "Lightweight manager for saving, fetching and updating secrets (string value) in Keychain using Biometric Authentication. \nIncludes methods for checking general changes in Biometric settings and device biometric type info (FaceID / TouchID / None).",
   "homepage": "https://github.com/infinum/Locker.git",
   "license": "MIT",
   "authors": {
-    "Barbara Vujičić": "barbara.vujicic@infinum.com",
     "Jasmin Abou Aldan": "jasmin.aboualdan@infinum.com",
-    "Zvonimir Medak": "zvonimir.medak@infinum.com"
+    "Siniša Abramović": "sinisa.abramovic@infinum.com",
+    "Nikola Šimunko": "nikola.simunko@infinum.com"
   },
   "platforms": {
-    "ios": "10.0"
+    "ios": "13.0"
   },
-  "swift_versions": "5.6",
+  "swift_versions": "6.0",
   "source": {
     "git": "https://github.com/infinum/Locker.git",
-    "tag": "3.0.5"
+    "tag": "3.0.6"
   },
   "source_files": "Sources/Locker/**/*.swift",
   "exclude_files": "Sources/Locker/Tests/",
@@ -38,5 +38,5 @@
       "source_files": "Sources/Locker/Tests/**/*.swift"
     }
   ],
-  "swift_version": "5.6"
+  "swift_version": "6.0"
 }
