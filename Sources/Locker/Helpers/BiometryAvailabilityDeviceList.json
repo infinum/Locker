@@ -117,6 +117,26 @@
             "name": "iPhone 16 Plus"
         },
         {
+            "id": "iPhone17,5",
+            "name": "iPhone 16e"
+        },
+        {
+            "id": "iPhone18,4",
+            "name": "iPhone Air"
+        },
+        {
+            "id": "iPhone18,3",
+            "name": "iPhone 17"
+        },
+        {
+            "id": "iPhone18,1",
+            "name": "iPhone 17 Pro"
+        },
+        {
+            "id": "iPhone18,2",
+            "name": "iPhone 17 Pro Max"
+        },
+        {
             "id": "iPad8,1",
             "name": "iPad Pro 11 inch 3rd Gen (WiFi)"
         },
