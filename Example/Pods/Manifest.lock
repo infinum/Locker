@@ -1,6 +1,6 @@
 PODS:
-  - Locker (3.0.6)
-  - Locker/Tests (3.0.6)
+  - Locker (3.0.5)
+  - Locker/Tests (3.0.5)
 
 DEPENDENCIES:
   - Locker (from `../Locker.podspec`)
