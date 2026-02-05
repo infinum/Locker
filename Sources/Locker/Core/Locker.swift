@@ -6,7 +6,7 @@
 //  Copyright © 2021 Infinum. All rights reserved.
 //
 
-import Foundation
+@preconcurrency import Foundation
 import UIKit
 
 @objcMembers
@@ -72,7 +72,7 @@ public class Locker: NSObject {
 
      If you're using a simulator Locker will not sync the list.
      */
-    public static var enableDeviceListSync: Bool = false {
+    nonisolated(unsafe) public static var enableDeviceListSync: Bool = false {
         didSet {
             guard enableDeviceListSync else { return }
             LockerHelpers.fetchNewDeviceList()
@@ -81,7 +81,7 @@ public class Locker: NSObject {
 
     // MARK: - Private properties
 
-    private static var currentUserDefaults: UserDefaults?
+    nonisolated(unsafe) private static var currentUserDefaults: UserDefaults?
 
     // MARK: - Handle secrets (store, delete, fetch)
 
@@ -99,7 +99,7 @@ public class Locker: NSObject {
     public static func setSecret(
         _ secret: String,
         for uniqueIdentifier: String,
-        completed: ((LockerError?) -> Void)? = nil
+        completed: (@Sendable (LockerError?) -> Void)? = nil
     ) {
     #if targetEnvironment(simulator)
         Locker.userDefaults?.set(secret, forKey: uniqueIdentifier)
@@ -126,8 +126,8 @@ public class Locker: NSObject {
     public static func retrieveCurrentSecret(
         for uniqueIdentifier: String,
         operationPrompt: String,
-        success: ((String) -> Void)?,
-        failure: ((OSStatus) -> Void)?
+        success: (@Sendable (String) -> Void)?,
+        failure: (@Sendable (OSStatus) -> Void)?
     ) {
 
     #if targetEnvironment(simulator)
@@ -142,13 +142,13 @@ public class Locker: NSObject {
             success?(simulatorSecret)
         }
     #else
-        let query: [CFString: Any] = [
-            kSecClass: kSecClassGenericPassword,
-            kSecAttrService: LockerHelpers.keyKeychainServiceName,
-            kSecAttrAccount: LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier),
-            kSecMatchLimit: kSecMatchLimitOne,
-            kSecReturnData: true,
-            kSecUseOperationPrompt: operationPrompt
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: LockerHelpers.keyKeychainServiceName,
+            kSecAttrAccount as String: LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier),
+            kSecMatchLimit as String: kSecMatchLimitOne,
+            kSecReturnData as String: true,
+            kSecUseOperationPrompt as String: operationPrompt
         ]
 
         DispatchQueue.global(qos: .default).async {
@@ -187,10 +187,10 @@ public class Locker: NSObject {
     #if targetEnvironment(simulator)
         Locker.userDefaults?.removeObject(forKey: uniqueIdentifier)
     #else
-        let query: [CFString: Any] = [
-            kSecClass: kSecClassGenericPassword,
-            kSecAttrService: LockerHelpers.keyKeychainServiceName,
-            kSecAttrAccount: LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier)
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: LockerHelpers.keyKeychainServiceName,
+            kSecAttrAccount as String: LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier)
         ]
 
         DispatchQueue.global(qos: .default).async {
@@ -339,15 +339,17 @@ extension Locker {
     static func setSecretForDevice(
         _ secret: String,
         for uniqueIdentifier: String,
-        completion: ((LockerError?) -> Void)? = nil
+        completion: (@Sendable (LockerError?) -> Void)? = nil
     ) {
-        let query: [CFString: Any] = [
-            kSecClass: kSecClassGenericPassword,
-            kSecAttrService: LockerHelpers.keyKeychainServiceName,
-            kSecAttrAccount: LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier)
-        ]
+        let serviceName = LockerHelpers.keyKeychainServiceName
+        let accountName = LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier)
 
         DispatchQueue.global(qos: .default).async {
+            let query: [String: Any] = [
+                kSecClass as String: kSecClassGenericPassword,
+                kSecAttrService as String: serviceName,
+                kSecAttrAccount as String: accountName
+            ]
             // First delete the previous item if it exists
             SecItemDelete(query as CFDictionary)
 
@@ -385,18 +387,20 @@ extension Locker {
     private static func addSecItem(
         for uniqueIdentifier: String,
         _ secretData: Data, sacObject: SecAccessControl,
-        completion: ((LockerError?) -> Void)? = nil
+        completion: (@Sendable (LockerError?) -> Void)? = nil
     ) {
-        let attributes: [CFString: Any] = [
-            kSecClass: kSecClassGenericPassword,
-            kSecAttrService: LockerHelpers.keyKeychainServiceName,
-            kSecAttrAccount: LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier),
-            kSecValueData: secretData,
-            kSecUseAuthenticationUI: false,
-            kSecAttrAccessControl: sacObject
-        ]
+        let serviceName = LockerHelpers.keyKeychainServiceName
+        let accountName = LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier)
 
         DispatchQueue.global(qos: .default).async {
+            let attributes: [String: Any] = [
+                kSecClass as String: kSecClassGenericPassword,
+                kSecAttrService as String: serviceName,
+                kSecAttrAccount as String: accountName,
+                kSecValueData as String: secretData,
+                kSecUseAuthenticationUI as String: false,
+                kSecAttrAccessControl as String: sacObject
+            ]
             SecItemAdd(attributes as CFDictionary, nil)
 
             // Store current LA policy domain state

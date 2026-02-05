@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DeviceManager {
+final class DeviceManager: Sendable {
 
     // MARK: - Singleton creation -
 
