@@ -11,7 +11,7 @@ final class DeviceManager: Sendable {
 
     // MARK: - Singleton creation -
 
-    @MainActor static let shared = DeviceManager()
+    static let shared = DeviceManager()
 
     private init() {}
 }
