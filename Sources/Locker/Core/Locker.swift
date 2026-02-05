@@ -14,6 +14,9 @@ public class Locker: NSObject {
 
     // MARK: - Public properties
 
+    /// Lock for thread-safe access to mutable state
+    private static let lock = NSLock()
+
     /**
      User defaults used for storing shouldUseAuthenticationWithBiometrics, askToUseAuthenticationWithBiometrics and shouldAddPasscodeToKeychainOnNextLogin values
 
@@ -22,10 +25,14 @@ public class Locker: NSObject {
      */
     public static var userDefaults: UserDefaults? {
         get {
-            return currentUserDefaults == nil ? UserDefaults.standard : currentUserDefaults
+            lock.lock()
+            defer { lock.unlock() }
+            return _currentUserDefaults == nil ? UserDefaults.standard : _currentUserDefaults
         }
         set {
-            currentUserDefaults = newValue ?? .standard
+            lock.lock()
+            defer { lock.unlock() }
+            _currentUserDefaults = newValue ?? .standard
         }
     }
 
@@ -72,16 +79,29 @@ public class Locker: NSObject {
 
      If you're using a simulator Locker will not sync the list.
      */
-    nonisolated(unsafe) public static var enableDeviceListSync: Bool = false {
-        didSet {
-            guard enableDeviceListSync else { return }
-            LockerHelpers.fetchNewDeviceList()
+    public static var enableDeviceListSync: Bool {
+        get {
+            lock.lock()
+            defer { lock.unlock() }
+            return _enableDeviceListSync
+        }
+        set {
+            lock.lock()
+            let shouldFetch = newValue && !_enableDeviceListSync
+            _enableDeviceListSync = newValue
+            lock.unlock()
+            if shouldFetch {
+                LockerHelpers.fetchNewDeviceList()
+            }
         }
     }
 
     // MARK: - Private properties
 
-    nonisolated(unsafe) private static var currentUserDefaults: UserDefaults?
+    /// Backing storage for enableDeviceListSync - access only through the lock-protected computed property
+    nonisolated(unsafe) private static var _enableDeviceListSync: Bool = false
+    /// Backing storage for currentUserDefaults - access only through the lock-protected computed property
+    nonisolated(unsafe) private static var _currentUserDefaults: UserDefaults?
 
     // MARK: - Handle secrets (store, delete, fetch)
 

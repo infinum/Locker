@@ -9,7 +9,7 @@
 import Foundation
 import LocalAuthentication
 
-class LockerHelpers {
+final class LockerHelpers: Sendable {
 
     // MARK: - Public properties
 

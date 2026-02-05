@@ -8,7 +8,12 @@
 
 import Foundation
 
-class BundleHelpers {
+final class BundleHelpers: Sendable {
+
+    // MARK: - Private properties
+
+    /// Lock for thread-safe file operations
+    private static let fileLock = NSLock()
 
     // MARK: - Public properties
 
@@ -35,10 +40,14 @@ extension BundleHelpers {
         guard let decodedResponse = try? BundleHelpers.decoder.decode(DeviceResponse.self, from: data),
               let encodedData = try? JSONEncoder().encode(decodedResponse)
         else { return }
+        fileLock.lock()
+        defer { fileLock.unlock() }
         try? encodedData.write(to: url)
     }
 
     static func readFromJSON(_ name: String) -> Data? {
+        fileLock.lock()
+        defer { fileLock.unlock() }
         guard let path = BundleHelpers.bundleResource?.path(forResource: name, ofType: "json"),
               let data = try? String(contentsOfFile: path).data(using: .utf8)
         else { return nil }
