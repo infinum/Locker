@@ -353,6 +353,191 @@ public extension Locker {
     }
 }
 
+// MARK: - Async/Await API (Swift 6)
+
+@available(iOS 13.0, *)
+public extension Locker {
+
+    /// Error thrown when retrieving a secret fails
+    enum RetrievalError: Error, Sendable {
+        /// The secret was not found in the keychain
+        case notFound
+        /// The keychain operation failed with the given status
+        case keychainError(OSStatus)
+        /// The retrieved data could not be decoded as a string
+        case invalidData
+    }
+
+    /**
+     Stores a secret in the Keychain with biometric protection.
+
+     This is the async/await version of `setSecret(_:for:completed:)`.
+
+     - Parameters:
+        - secret: The secret string to store
+        - uniqueIdentifier: A unique key to identify the secret
+
+     - Throws: `LockerError` if the operation fails
+     */
+    static func setSecret(_ secret: String, for uniqueIdentifier: String) async throws {
+        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
+            setSecret(secret, for: uniqueIdentifier) { error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else {
+                    continuation.resume()
+                }
+            }
+        }
+    }
+
+    /**
+     Retrieves a secret from the Keychain using biometric authentication.
+
+     This is the async/await version of `retrieveCurrentSecret(for:operationPrompt:success:failure:)`.
+
+     - Parameters:
+        - uniqueIdentifier: The unique key used when storing the secret
+        - operationPrompt: The message shown to the user during biometric authentication
+
+     - Returns: The stored secret string
+
+     - Throws: `RetrievalError` if the secret cannot be retrieved
+     */
+    static func retrieveCurrentSecret(
+        for uniqueIdentifier: String,
+        operationPrompt: String
+    ) async throws -> String {
+        try await withCheckedThrowingContinuation { continuation in
+            retrieveCurrentSecret(
+                for: uniqueIdentifier,
+                operationPrompt: operationPrompt,
+                success: { secret in
+                    continuation.resume(returning: secret)
+                },
+                failure: { status in
+                    if status == errSecItemNotFound {
+                        continuation.resume(throwing: RetrievalError.notFound)
+                    } else {
+                        continuation.resume(throwing: RetrievalError.keychainError(status))
+                    }
+                }
+            )
+        }
+    }
+
+    /**
+     Deletes a secret from the Keychain.
+
+     This is the async version of `deleteSecret(for:)` that ensures the operation
+     completes on a background thread.
+
+     - Parameter uniqueIdentifier: The unique key of the secret to delete
+     */
+    static func deleteSecret(for uniqueIdentifier: String) async {
+        await withCheckedContinuation { continuation in
+            #if targetEnvironment(simulator)
+            Locker.userDefaults?.removeObject(forKey: uniqueIdentifier)
+            continuation.resume()
+            #else
+            let query: [String: Any] = [
+                kSecClass as String: kSecClassGenericPassword,
+                kSecAttrService as String: LockerHelpers.keyKeychainServiceName,
+                kSecAttrAccount as String: LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier)
+            ]
+
+            DispatchQueue.global(qos: .default).async {
+                SecItemDelete(query as CFDictionary)
+                continuation.resume()
+            }
+            #endif
+        }
+    }
+
+    /**
+     Resets all stored data for a unique identifier.
+
+     This is the async version of `reset(for:)`.
+
+     - Parameter uniqueIdentifier: The unique key for which to delete all stored data
+     */
+    static func reset(for uniqueIdentifier: String) async {
+        Locker.userDefaults?.removeObject(
+            forKey: LockerHelpers.keyDidAskToUseBiometricsIDForUniqueIdentifier(uniqueIdentifier)
+        )
+        Locker.userDefaults?.removeObject(
+            forKey: LockerHelpers.keyShouldAddSecretToKeychainOnNextLoginForUniqueIdentifier(uniqueIdentifier)
+        )
+        Locker.userDefaults?.removeObject(
+            forKey: LockerHelpers.keyBiometricsIDActivatedForUniqueIdentifier(uniqueIdentifier)
+        )
+        await deleteSecret(for: uniqueIdentifier)
+    }
+}
+
+// MARK: - MainActor isolated callbacks (Swift 6)
+
+@available(iOS 13.0, *)
+public extension Locker {
+
+    /**
+     Stores a secret in the Keychain with a MainActor-isolated completion handler.
+
+     Use this when you need to update UI directly in the completion handler.
+
+     - Parameters:
+        - secret: The secret string to store
+        - uniqueIdentifier: A unique key to identify the secret
+        - completed: A MainActor-isolated completion handler called with any error
+     */
+    @MainActor
+    static func setSecret(
+        _ secret: String,
+        for uniqueIdentifier: String,
+        onMainActor completed: (@MainActor @Sendable (LockerError?) -> Void)?
+    ) {
+        setSecret(secret, for: uniqueIdentifier) { error in
+            Task { @MainActor in
+                completed?(error)
+            }
+        }
+    }
+
+    /**
+     Retrieves a secret from the Keychain with MainActor-isolated callbacks.
+
+     Use this when you need to update UI directly in the success/failure handlers.
+
+     - Parameters:
+        - uniqueIdentifier: The unique key used when storing the secret
+        - operationPrompt: The message shown to the user during biometric authentication
+        - success: A MainActor-isolated handler called with the retrieved secret
+        - failure: A MainActor-isolated handler called with the error status
+     */
+    @MainActor
+    static func retrieveCurrentSecret(
+        for uniqueIdentifier: String,
+        operationPrompt: String,
+        onMainActorSuccess success: (@MainActor @Sendable (String) -> Void)?,
+        onMainActorFailure failure: (@MainActor @Sendable (OSStatus) -> Void)?
+    ) {
+        retrieveCurrentSecret(
+            for: uniqueIdentifier,
+            operationPrompt: operationPrompt,
+            success: { secret in
+                Task { @MainActor in
+                    success?(secret)
+                }
+            },
+            failure: { status in
+                Task { @MainActor in
+                    failure?(status)
+                }
+            }
+        )
+    }
+}
+
 // MARK: - Internal extension
 
 extension Locker {
