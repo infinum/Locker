@@ -5,3 +5,4 @@ project.xcworkspace/
 xcuserdata/
 .build/
 Carthage/Build
+.claude/
