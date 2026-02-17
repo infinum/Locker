@@ -35,7 +35,8 @@ Locker does not collect any user data. We have provided a [privacy manifest](htt
 
 ## Requirements
 
-- iOS 10.0 +
+- iOS 13.0+
+- Swift 6.0+
 
 ## Getting started
 
@@ -49,7 +50,7 @@ See installation instructions for [CocoaPods](http://cocoapods.org) if not alrea
 To integrate the library into your Xcode project specify the pod dependency to your `Podfile`:
 
 ```ruby
-platform :ios, '10.0'
+platform :ios, '13.0'
 use_frameworks!
 
 pod 'Locker'
@@ -199,6 +200,37 @@ if biometrySettingsChanged && usingBiometry {
 
 #### 8. There is a local JSON file that contains every iPhone and iPad model which has FaceID or TouchID. That way we can check if the user's device can use FaceID or TouchID. If you want to allow the JSON file to sync itself with a server, you can set `enableDeviceListSync` to `true`.
 `enableDeviceListSync` when enabled, if the device is not present on the local list, it syncs the list with a list from the server and writes it down to the local JSON file.
+
+##### 9. Async/Await API
+
+Locker provides `async`/`await` versions of all secret management methods:
+
+```swift
+// Store
+try await Locker.setSecret("passcode", for: "UniqueIdentifier")
+
+// Retrieve
+let secret = try await Locker.retrieveCurrentSecret(
+    for: "UniqueIdentifier",
+    operationPrompt: "Authenticate to access secret"
+)
+
+// Delete
+await Locker.deleteSecret(for: "UniqueIdentifier")
+
+// Reset all data for identifier
+await Locker.reset(for: "UniqueIdentifier")
+```
+
+##### 10. Custom UserDefaults
+
+If you set `Locker.userDefaults` to a custom suite, **all** Locker internal storage uses that suite consistently. This includes keychain service name overrides, biometric settings change detection (LA policy domain state), and all boolean flags.
+
+```swift
+Locker.userDefaults = UserDefaults(suiteName: "com.myapp.locker")
+```
+
+If you previously used Locker with `UserDefaults.standard` and then switch to a custom suite, Locker will automatically migrate existing values (keychain service override, LA policy state) from `.standard` to the new suite on first access.
 
 
 ## Contributing

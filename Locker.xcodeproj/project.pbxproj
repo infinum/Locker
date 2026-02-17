@@ -15,6 +15,8 @@
 		376B905327214C370021B54F /* DeviceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376B905227214C370021B54F /* DeviceResponse.swift */; };
 		377D681627202257002C31FE /* LockerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377D681527202257002C31FE /* LockerError.swift */; };
 		377D68212720395D002C31FE /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377D681F2720395D002C31FE /* DeviceManager.swift */; };
+		37A1B20D2826A3F500AB1234 /* LockerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A1B20C2826A3F500AB1234 /* LockerState.swift */; };
+		37A1B20F2826A3F500AB5678 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A1B20E2826A3F500AB5678 /* KeychainHelper.swift */; };
 		37D08735273D20E10025F45F /* Locker+ObjectiveC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D08734273D20E10025F45F /* Locker+ObjectiveC.swift */; };
 		DF8FB52F1E8DAFFF00EC2740 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF8FB52E1E8DAFFF00EC2740 /* UIKit.framework */; };
 		DF8FB5311E8DB00600EC2740 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF8FB5301E8DB00600EC2740 /* LocalAuthentication.framework */; };
@@ -43,6 +45,8 @@
 		377D681527202257002C31FE /* LockerError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockerError.swift; sourceTree = "<group>"; };
 		377D681F2720395D002C31FE /* DeviceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
 		377D682627203AD8002C31FE /* BiometryAvailabilityDeviceList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BiometryAvailabilityDeviceList.json; sourceTree = "<group>"; };
+		37A1B20C2826A3F500AB1234 /* LockerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockerState.swift; sourceTree = "<group>"; };
+		37A1B20E2826A3F500AB5678 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		37D08734273D20E10025F45F /* Locker+ObjectiveC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Locker+ObjectiveC.swift"; sourceTree = "<group>"; };
 		DF8FB5001E8D119C00EC2740 /* libLocker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLocker.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF8FB52E1E8DAFFF00EC2740 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -90,6 +94,7 @@
 				377D681F2720395D002C31FE /* DeviceManager.swift */,
 				375E9681271EE79600896845 /* LockerHelpers.swift */,
 				3755F108272072F800D62955 /* BundleHelpers.swift */,
+				37A1B20E2826A3F500AB5678 /* KeychainHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -110,6 +115,7 @@
 				37D08734273D20E10025F45F /* Locker+ObjectiveC.swift */,
 				375E9683271EE86200896845 /* BiometricsType.swift */,
 				377D681527202257002C31FE /* LockerError.swift */,
+				37A1B20C2826A3F500AB1234 /* LockerState.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -233,6 +239,8 @@
 				375E9686271EF02300896845 /* Locker.swift in Sources */,
 				376B905327214C370021B54F /* DeviceResponse.swift in Sources */,
 				376B905127214C270021B54F /* Constants.swift in Sources */,
+				37A1B20D2826A3F500AB1234 /* LockerState.swift in Sources */,
+				37A1B20F2826A3F500AB5678 /* KeychainHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

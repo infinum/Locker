@@ -31,11 +31,12 @@ public extension Locker {
     #if targetEnvironment(simulator)
         Locker.userDefaults?.set(secret, forKey: uniqueIdentifier)
     #else
-        setSecretForDevice(secret, for: uniqueIdentifier, completion: { error in
+        Task.detached {
+            let error = await KeychainHelper.storeSecret(secret, for: uniqueIdentifier)
             DispatchQueue.main.async {
                 completed?(error?.asNSError)
             }
-        })
+        }
     #endif
     }
 

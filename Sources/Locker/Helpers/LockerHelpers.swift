@@ -77,8 +77,24 @@ final class LockerHelpers: Sendable {
         return context.evaluatedPolicyDomainState
     }
 
+    /// Reads LA policy domain state from the unified Locker.userDefaults.
+    /// On first access, migrates any existing value from UserDefaults.standard
+    /// if a custom suite is in use and the key doesn't exist there yet.
     static private var savedLAPolicyDomainState: Data? {
-        UserDefaults.standard.object(forKey: LockerHelpers.keyLAPolicyDomainState) as? Data
+        let defaults = resolvedUserDefaults
+        let key = LockerHelpers.keyLAPolicyDomainState
+
+        // Migration: if using a custom suite and no value exists yet,
+        // check UserDefaults.standard for a previously stored value.
+        if defaults !== UserDefaults.standard {
+            if defaults.object(forKey: key) == nil,
+               let legacyValue = UserDefaults.standard.object(forKey: key) as? Data {
+                defaults.set(legacyValue, forKey: key)
+                UserDefaults.standard.removeObject(forKey: key)
+            }
+        }
+
+        return defaults.object(forKey: key) as? Data
     }
 
     private static var faceIDEnabled: Bool {
@@ -106,22 +122,21 @@ final class LockerHelpers: Sendable {
     private static let bundleIdentifier = Bundle.main.bundleIdentifier ?? ""
 
     private static var biometryNotAvailableCode: Int {
-        if #available(iOS 11.0, *) {
-            return LAError.biometryNotAvailable.rawValue
-        } else {
-            return Int(kLAErrorBiometryNotAvailable)
-        }
+        return LAError.biometryNotAvailable.rawValue
     }
 
     private static var biometryNotEnrolledCode: Int {
-        if #available(iOS 11, *) {
-            return LAError.biometryNotEnrolled.rawValue
-        } else {
-            return Int(kLAErrorBiometryNotEnrolled)
-        }
+        return LAError.biometryNotEnrolled.rawValue
     }
 
     private static let deviceManager: DeviceManager = .shared
+
+    /// Returns the current Locker.userDefaults instance.
+    /// This ensures all UserDefaults access goes through the same instance,
+    /// eliminating divergence when a custom suite is configured.
+    private static var resolvedUserDefaults: UserDefaults {
+        Locker.userDefaults ?? .standard
+    }
 }
 
 // MARK: - Internal extension
@@ -162,11 +177,26 @@ extension LockerHelpers {
         LockerHelpers.setLAPolicyDomainState(with: newDomainState)
     }
 
+    /// Reads the keychain service name from the unified Locker.userDefaults.
+    /// On first access with a custom suite, migrates the value from UserDefaults.standard.
     static var keyKeychainServiceName: String {
-        guard let service = UserDefaults.standard.object(forKey: keyCustomKeychainService) as? String else { 
-            return "\(LockerHelpers.bundleIdentifier)_KeychainService" 
+        let defaults = resolvedUserDefaults
+        let key = keyCustomKeychainService
+
+        // Migration: if using a custom suite and no override exists yet,
+        // check UserDefaults.standard for a previously stored override.
+        if defaults !== UserDefaults.standard {
+            if defaults.object(forKey: key) == nil,
+               let legacyService = UserDefaults.standard.object(forKey: key) as? String {
+                defaults.set(legacyService, forKey: key)
+                UserDefaults.standard.removeObject(forKey: key)
+            }
         }
-        
+
+        guard let service = defaults.object(forKey: key) as? String else {
+            return "\(LockerHelpers.bundleIdentifier)_KeychainService"
+        }
+
         return service
     }
 
@@ -213,11 +243,9 @@ private extension LockerHelpers {
         let context = LAContext()
         var error: NSError?
 
-        if #available(iOS 11.0, *) {
-            if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-                if context.biometryType == .faceID {
-                    return true
-                }
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            if context.biometryType == .faceID {
+                return true
             }
         }
         return false
@@ -234,7 +262,8 @@ private extension LockerHelpers {
         return identifier
     }
 
+    /// Writes LA policy domain state to the unified Locker.userDefaults.
     static func setLAPolicyDomainState(with domainState: Data?) {
-        UserDefaults.standard.set(domainState, forKey: LockerHelpers.keyLAPolicyDomainState)
+        resolvedUserDefaults.set(domainState, forKey: LockerHelpers.keyLAPolicyDomainState)
     }
 }
