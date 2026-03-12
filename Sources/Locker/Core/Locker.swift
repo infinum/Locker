@@ -6,7 +6,8 @@
 //  Copyright © 2021 Infinum. All rights reserved.
 //
 
-import Foundation
+@preconcurrency import Foundation
+@preconcurrency import Security
 
 @objcMembers
 public class Locker: NSObject {
