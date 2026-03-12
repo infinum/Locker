@@ -13,14 +13,14 @@ Pod::Spec.new do |s|
     "Siniša Abramović" => "sinisa.abramovic@infinum.com",
     "Nikola Šimunko" => "nikola.simunko@infinum.com"
   }
-  s.platform     = :ios, "10.0"
-  s.swift_version = "5.5"
+  s.platform     = :ios, "12.0"
+  s.swift_version = "5.10"
   s.source       = { :git => "https://github.com/infinum/Locker.git", :tag => "#{s.version}" }
   s.source_files  = "Sources/Locker/**/*.swift"
   s.exclude_files = 'Sources/Locker/Tests/'
 
   s.resource_bundles = { 'Locker_Locker' => ['Sources/Locker/**/*.json', 'Sources/Locker/SupportingFiles/PrivacyInfo.xcprivacy'] }
-  s.frameworks = "UIKit", "LocalAuthentication", "Security"
+  s.frameworks = "LocalAuthentication", "Security"
 
   s.test_spec 'Tests' do |test_spec|
       test_spec.source_files = 'Sources/Locker/Tests/**/*.swift'

@@ -1,6 +1,6 @@
 PODS:
-  - Locker (3.0.5)
-  - Locker/Tests (3.0.5)
+  - Locker (3.0.6)
+  - Locker/Tests (3.0.6)
 
 DEPENDENCIES:
   - Locker (from `../Locker.podspec`)
@@ -11,8 +11,8 @@ EXTERNAL SOURCES:
     :path: "../Locker.podspec"
 
 SPEC CHECKSUMS:
-  Locker: 3c9daabe0fdf8c16a136c799ee30fc347ba66408
+  Locker: 877bcb37d4b27b05a9ec49060245b6d5c2b3521f
 
-PODFILE CHECKSUM: 4e54ee4f3c4f512d80ae1f8574c0ca8e06d2dda8
+PODFILE CHECKSUM: 2f2d2af38b81ebe9371e679f9ab2e93cfa9700d6
 
 COCOAPODS: 1.16.2

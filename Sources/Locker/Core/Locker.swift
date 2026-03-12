@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 
 @objcMembers
 public class Locker: NSObject {
@@ -354,7 +353,7 @@ extension Locker {
             // Then store it
             let errorRef: UnsafeMutablePointer<Unmanaged<CFError>?>? = nil
             var flags: SecAccessControlCreateFlags
-            if #available(iOS 11.3, *) {
+            if #available(iOS 11.3, macOS 10.13.4, *) {
                 flags = .biometryCurrentSet
             } else {
                 flags = .touchIDCurrentSet
