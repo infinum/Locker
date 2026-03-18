@@ -7,24 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [4.0.0] - Unreleased (to be tagged in a dedicated release PR after all Swift 6 migration chunks are merged)
-
-### Breaking Changes
-
-- **Minimum iOS deployment target raised from iOS 10.0 to iOS 12.0.**
-  Consumers targeting iOS 10 or iOS 11 must remain on Locker 3.x.
-  This change is required to support Swift 6 strict-concurrency toolchain
-  requirements and to drop now-unsupported `#available` workarounds for
-  APIs that became unconditional on iOS 12+.
+## [3.1.0] - Unreleased (to be tagged in a dedicated release PR after all Swift 6 migration chunks are merged)
 
 ### Changed
 
+- Bumped minimum iOS deployment target from iOS 10.0 to iOS 12.0.
+  All public API interfaces remain unchanged — this is a toolchain/platform
+  requirement for Swift 6 readiness. Consumers targeting iOS 10 or iOS 11
+  must remain on Locker 3.0.x.
 - Bumped SwiftPM tools version to 5.9.
 - Bumped CocoaPods `swift_version` to 5.10 (requires Xcode 15.3+).
 - Removed unused `import UIKit` from `Locker.swift`.
 - Replaced iOS-only `#available(iOS 11.0, *)` guards with dual-platform
   guards (`#available(iOS 11.0, macOS 10.13, *)`) for macOS compatibility.
-- Removed `UIKit` from `Locker.podspec` frameworks (it was never needed).
 
 ## [3.0.6] - 2024-03-01
 
