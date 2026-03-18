@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [4.0.0] - Unreleased
+## [4.0.0] - Unreleased (to be tagged in a dedicated release PR after all Swift 6 migration chunks are merged)
 
 ### Breaking Changes
 
