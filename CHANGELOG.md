@@ -18,8 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bumped SwiftPM tools version to 5.9.
 - Bumped CocoaPods `swift_version` to 5.10 (requires Xcode 15.3+).
 - Removed unused `import UIKit` from `Locker.swift`.
-- Replaced iOS-only `#available(iOS 11.0, *)` guards with dual-platform
-  guards (`#available(iOS 11.0, macOS 10.13, *)`) for macOS compatibility.
+- Replaced iOS-only `#available` guards with dual-platform variants for macOS
+  compatibility:
+  - `#available(iOS 11.3, macOS 10.13.4, *)` — keychain `SecAccessControl` guard
+  - `#available(iOS 11.0, macOS 10.13, *)` — `LABiometryType` availability guard
+  - `#available(iOS 11.0, macOS 10.15, *)` — `.faceID` / `.biometryType` guard
 
 ## [3.0.6] - 2024-03-01
 
