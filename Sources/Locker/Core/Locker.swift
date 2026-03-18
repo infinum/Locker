@@ -22,10 +22,14 @@ public class Locker: NSObject {
      */
     public static var userDefaults: UserDefaults? {
         get {
-            return currentUserDefaults == nil ? UserDefaults.standard : currentUserDefaults
+            _stateLock.lock()
+            defer { _stateLock.unlock() }
+            return _currentUserDefaults ?? .standard
         }
         set {
-            currentUserDefaults = newValue ?? .standard
+            _stateLock.lock()
+            defer { _stateLock.unlock() }
+            _currentUserDefaults = newValue ?? .standard
         }
     }
 
@@ -72,16 +76,33 @@ public class Locker: NSObject {
 
      If you're using a simulator Locker will not sync the list.
      */
-    public static var enableDeviceListSync: Bool = false {
-        didSet {
-            guard enableDeviceListSync else { return }
-            LockerHelpers.fetchNewDeviceList()
+    public static var enableDeviceListSync: Bool {
+        get {
+            _stateLock.lock()
+            defer { _stateLock.unlock() }
+            return _enableDeviceListSync
+        }
+        set {
+            _stateLock.lock()
+            _enableDeviceListSync = newValue
+            _stateLock.unlock()
+            // Lock must be released before calling fetchNewDeviceList to avoid deadlock.
+            if newValue {
+                LockerHelpers.fetchNewDeviceList()
+            }
         }
     }
 
     // MARK: - Private properties
 
-    private static var currentUserDefaults: UserDefaults?
+    // Serialises access to _currentUserDefaults and _enableDeviceListSync.
+    private static let _stateLock = NSLock()
+
+    // nonisolated(unsafe): protected by _stateLock; write-once config pattern.
+    nonisolated(unsafe) private static var _currentUserDefaults: UserDefaults?
+
+    // nonisolated(unsafe): protected by _stateLock; write-once config pattern.
+    nonisolated(unsafe) private static var _enableDeviceListSync: Bool = false
 
     // MARK: - Handle secrets (store, delete, fetch)
 
