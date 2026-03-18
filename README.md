@@ -35,7 +35,7 @@ Locker does not collect any user data. We have provided a [privacy manifest](htt
 
 ## Requirements
 
-- iOS 10.0 +
+- iOS 12.0 +
 
 ## Getting started
 
@@ -49,7 +49,7 @@ See installation instructions for [CocoaPods](http://cocoapods.org) if not alrea
 To integrate the library into your Xcode project specify the pod dependency to your `Podfile`:
 
 ```ruby
-platform :ios, '10.0'
+platform :ios, '12.0'
 use_frameworks!
 
 pod 'Locker'
