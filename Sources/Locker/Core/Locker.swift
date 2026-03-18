@@ -120,7 +120,7 @@ public class Locker: NSObject {
     public static func setSecret(
         _ secret: String,
         for uniqueIdentifier: String,
-        completed: ((LockerError?) -> Void)? = nil
+        completed: (@Sendable (LockerError?) -> Void)? = nil
     ) {
     #if targetEnvironment(simulator)
         Locker.userDefaults?.set(secret, forKey: uniqueIdentifier)
@@ -147,8 +147,8 @@ public class Locker: NSObject {
     public static func retrieveCurrentSecret(
         for uniqueIdentifier: String,
         operationPrompt: String,
-        success: ((String) -> Void)?,
-        failure: ((OSStatus) -> Void)?
+        success: (@Sendable (String) -> Void)?,
+        failure: (@Sendable (OSStatus) -> Void)?
     ) {
 
     #if targetEnvironment(simulator)
@@ -360,7 +360,7 @@ extension Locker {
     static func setSecretForDevice(
         _ secret: String,
         for uniqueIdentifier: String,
-        completion: ((LockerError?) -> Void)? = nil
+        completion: (@Sendable (LockerError?) -> Void)? = nil
     ) {
         let query: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
@@ -406,7 +406,7 @@ extension Locker {
     private static func addSecItem(
         for uniqueIdentifier: String,
         _ secretData: Data, sacObject: SecAccessControl,
-        completion: ((LockerError?) -> Void)? = nil
+        completion: (@Sendable (LockerError?) -> Void)? = nil
     ) {
         let attributes: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
