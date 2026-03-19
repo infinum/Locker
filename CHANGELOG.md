@@ -7,8 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [3.1.0] - Unreleased (to be tagged in a dedicated release PR after all Swift 6 migration chunks are merged)
-
 ### Changed
 
 - Bumped minimum iOS deployment target from iOS 10.0 to iOS 12.0.
