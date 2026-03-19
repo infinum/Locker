@@ -13,7 +13,7 @@
   "platforms": {
     "ios": "12.0"
   },
-  "swift_versions": "5.10",
+  "swift_versions": "5.0",
   "source": {
     "git": "https://github.com/infinum/Locker.git",
     "tag": "3.0.6"
@@ -37,5 +37,5 @@
       "source_files": "Sources/Locker/Tests/**/*.swift"
     }
   ],
-  "swift_version": "5.10"
+  "swift_version": "5.0"
 }

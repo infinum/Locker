@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
     "Nikola Šimunko" => "nikola.simunko@infinum.com"
   }
   s.platform     = :ios, "12.0"
-  s.swift_version = "5.10"
+  s.swift_version = "5.0"
   s.source       = { :git => "https://github.com/infinum/Locker.git", :tag => "#{s.version}" }
   s.source_files  = "Sources/Locker/**/*.swift"
   s.exclude_files = 'Sources/Locker/Tests/'
