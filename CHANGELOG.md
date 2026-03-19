@@ -14,8 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   requirement for Swift 6 readiness. Consumers targeting iOS 10 or iOS 11
   must remain on Locker 3.0.x.
 - Bumped SwiftPM tools version to 5.9.
-- Requires Xcode 15.3+ / Swift 5.10 toolchain or later (minimum toolchain needed
-  for `@preconcurrency` and strict-concurrency features added in later chunks).
+- Requires Xcode 26+ (minimum toolchain needed for strict-concurrency
+  features added in later chunks; Xcode 26 is the minimum version accepted
+  for App Store submissions).
 - Removed unused `import UIKit` from `Locker.swift`.
 - Replaced iOS-only `#available` guards with dual-platform variants for macOS
   compatibility:

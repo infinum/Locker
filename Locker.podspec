@@ -1,6 +1,7 @@
 Pod::Spec.new do |s|
   s.name         = "Locker"
   # Version will be bumped to 3.1.0 in the dedicated release PR once the tag is cut.
+  # Requires Xcode 26+.
   s.version      = "3.0.6"
   s.summary      = "Securely lock your secrets under the watch of TouchID or FaceID keeper 🔒"
   s.description  = <<-DESC
