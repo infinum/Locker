@@ -22,14 +22,10 @@ public class Locker: NSObject {
      */
     public static var userDefaults: UserDefaults? {
         get {
-            _stateLock.lock()
-            defer { _stateLock.unlock() }
-            return _currentUserDefaults ?? .standard
+            stateLock.withLock { currentUserDefaults ?? .standard }
         }
         set {
-            _stateLock.lock()
-            defer { _stateLock.unlock() }
-            _currentUserDefaults = newValue ?? .standard
+            stateLock.withLock { currentUserDefaults = newValue ?? .standard }
         }
     }
 
@@ -78,14 +74,10 @@ public class Locker: NSObject {
      */
     public static var enableDeviceListSync: Bool {
         get {
-            _stateLock.lock()
-            defer { _stateLock.unlock() }
-            return _enableDeviceListSync
+            stateLock.withLock { deviceListSyncEnabled }
         }
         set {
-            _stateLock.lock()
-            _enableDeviceListSync = newValue
-            _stateLock.unlock()
+            stateLock.withLock { deviceListSyncEnabled = newValue }
             // Lock must be released before calling fetchNewDeviceList to avoid deadlock.
             if newValue {
                 LockerHelpers.fetchNewDeviceList()
@@ -95,14 +87,14 @@ public class Locker: NSObject {
 
     // MARK: - Private properties
 
-    // Serialises access to _currentUserDefaults and _enableDeviceListSync.
-    private static let _stateLock = NSLock()
+    // Serialises access to currentUserDefaults and deviceListSyncEnabled.
+    private static let stateLock = NSLock()
 
-    // nonisolated(unsafe): protected by _stateLock; write-once config pattern.
-    nonisolated(unsafe) private static var _currentUserDefaults: UserDefaults?
+    // nonisolated(unsafe): protected by stateLock; write-once config pattern.
+    nonisolated(unsafe) private static var currentUserDefaults: UserDefaults?
 
-    // nonisolated(unsafe): protected by _stateLock; write-once config pattern.
-    nonisolated(unsafe) private static var _enableDeviceListSync: Bool = false
+    // nonisolated(unsafe): protected by stateLock; write-once config pattern.
+    nonisolated(unsafe) private static var deviceListSyncEnabled: Bool = false
 
     // MARK: - Handle secrets (store, delete, fetch)
 
