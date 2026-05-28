@@ -7,9 +7,9 @@
 
 import Foundation
 
-// @unchecked Sendable: no mutable instance state; private init prevents
-// subclassing with state; all methods are read-only or delegate to static utilities.
-class DeviceManager: @unchecked Sendable {
+// @unchecked Sendable: no mutable instance state; final prevents subclasses
+// from introducing non-Sendable state while inheriting the conformance.
+final class DeviceManager: @unchecked Sendable {
 
     // MARK: - Singleton creation -
 
