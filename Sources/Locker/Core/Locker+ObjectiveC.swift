@@ -26,7 +26,7 @@ public extension Locker {
     static func setSecret(
         _ secret: String,
         for uniqueIdentifier: String,
-        completed: ((NSError?) -> Void)? = nil
+        completed: (@Sendable (NSError?) -> Void)? = nil
     ) {
     #if targetEnvironment(simulator)
         Locker.userDefaults?.set(secret, forKey: uniqueIdentifier)
