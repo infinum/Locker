@@ -163,16 +163,15 @@ public class Locker: NSObject {
             success?(simulatorSecret)
         }
     #else
-        let query: [CFString: Any] = [
-            kSecClass: kSecClassGenericPassword,
-            kSecAttrService: LockerHelpers.keyKeychainServiceName,
-            kSecAttrAccount: LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier),
-            kSecMatchLimit: kSecMatchLimitOne,
-            kSecReturnData: true,
-            kSecUseOperationPrompt: operationPrompt
-        ]
-
         DispatchQueue.global(qos: .default).async {
+            let query: [CFString: Any] = [
+                kSecClass: kSecClassGenericPassword,
+                kSecAttrService: LockerHelpers.keyKeychainServiceName,
+                kSecAttrAccount: LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier),
+                kSecMatchLimit: kSecMatchLimitOne,
+                kSecReturnData: true,
+                kSecUseOperationPrompt: operationPrompt
+            ]
             var dataTypeRef: CFTypeRef?
 
             let status = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
@@ -208,13 +207,12 @@ public class Locker: NSObject {
     #if targetEnvironment(simulator)
         Locker.userDefaults?.removeObject(forKey: uniqueIdentifier)
     #else
-        let query: [CFString: Any] = [
-            kSecClass: kSecClassGenericPassword,
-            kSecAttrService: LockerHelpers.keyKeychainServiceName,
-            kSecAttrAccount: LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier)
-        ]
-
         DispatchQueue.global(qos: .default).async {
+            let query: [CFString: Any] = [
+                kSecClass: kSecClassGenericPassword,
+                kSecAttrService: LockerHelpers.keyKeychainServiceName,
+                kSecAttrAccount: LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier)
+            ]
             SecItemDelete(query as CFDictionary)
         }
     #endif
@@ -362,13 +360,12 @@ extension Locker {
         for uniqueIdentifier: String,
         completion: (@Sendable (LockerError?) -> Void)? = nil
     ) {
-        let query: [CFString: Any] = [
-            kSecClass: kSecClassGenericPassword,
-            kSecAttrService: LockerHelpers.keyKeychainServiceName,
-            kSecAttrAccount: LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier)
-        ]
-
         DispatchQueue.global(qos: .default).async {
+            let query: [CFString: Any] = [
+                kSecClass: kSecClassGenericPassword,
+                kSecAttrService: LockerHelpers.keyKeychainServiceName,
+                kSecAttrAccount: LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier)
+            ]
             // First delete the previous item if it exists
             SecItemDelete(query as CFDictionary)
 
@@ -408,16 +405,15 @@ extension Locker {
         _ secretData: Data, sacObject: SecAccessControl,
         completion: (@Sendable (LockerError?) -> Void)? = nil
     ) {
-        let attributes: [CFString: Any] = [
-            kSecClass: kSecClassGenericPassword,
-            kSecAttrService: LockerHelpers.keyKeychainServiceName,
-            kSecAttrAccount: LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier),
-            kSecValueData: secretData,
-            kSecUseAuthenticationUI: false,
-            kSecAttrAccessControl: sacObject
-        ]
-
         DispatchQueue.global(qos: .default).async {
+            let attributes: [CFString: Any] = [
+                kSecClass: kSecClassGenericPassword,
+                kSecAttrService: LockerHelpers.keyKeychainServiceName,
+                kSecAttrAccount: LockerHelpers.keyKeychainAccountNameForUniqueIdentifier(uniqueIdentifier),
+                kSecValueData: secretData,
+                kSecUseAuthenticationUI: false,
+                kSecAttrAccessControl: sacObject
+            ]
             SecItemAdd(attributes as CFDictionary, nil)
 
             // Store current LA policy domain state
