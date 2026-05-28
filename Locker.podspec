@@ -1,5 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Locker"
+  # Version will be bumped to 3.1.0 in the dedicated release PR once the tag is cut.
   s.version      = "3.0.6"
   s.summary      = "Securely lock your secrets under the watch of TouchID or FaceID keeper 🔒"
   s.description  = <<-DESC
@@ -13,14 +14,14 @@ Pod::Spec.new do |s|
     "Siniša Abramović" => "sinisa.abramovic@infinum.com",
     "Nikola Šimunko" => "nikola.simunko@infinum.com"
   }
-  s.platform     = :ios, "10.0"
-  s.swift_version = "5.5"
+  s.platform     = :ios, "12.0"
+  s.swift_version = "5.0"
   s.source       = { :git => "https://github.com/infinum/Locker.git", :tag => "#{s.version}" }
   s.source_files  = "Sources/Locker/**/*.swift"
   s.exclude_files = 'Sources/Locker/Tests/'
 
   s.resource_bundles = { 'Locker_Locker' => ['Sources/Locker/**/*.json', 'Sources/Locker/SupportingFiles/PrivacyInfo.xcprivacy'] }
-  s.frameworks = "UIKit", "LocalAuthentication", "Security"
+  s.frameworks = "LocalAuthentication", "Security"
 
   s.test_spec 'Tests' do |test_spec|
       test_spec.source_files = 'Sources/Locker/Tests/**/*.swift'
