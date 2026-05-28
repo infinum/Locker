@@ -22,6 +22,9 @@ let package = Package(
             resources: [
                 .process("Helpers/BiometryAvailabilityDeviceList.json"),
                 .copy("SupportingFiles/PrivacyInfo.xcprivacy")
+            ],
+            swiftSettings: [
+                .enableUpcomingFeature("StrictConcurrency")
             ]
         ),
         .testTarget(
