@@ -32,8 +32,5 @@ let package = Package(
             dependencies: ["Locker"],
             path: "Sources/Locker/Tests" // use the existing test folder inside Locker
         )
-    ],
-    // Keep Swift 5 language mode while concurrency fixes land in subsequent chunks.
-    // This will be removed in the final chunk when Swift 6 mode is fully enabled.
-    swiftLanguageModes: [.v5]
+    ]
 )
