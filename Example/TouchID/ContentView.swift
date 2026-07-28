@@ -22,6 +22,10 @@ struct ContentView: View {
                     Task { await viewModel.storeTapped() }
                 }
 
+                ActionButton(title: "Store custom secret") {
+                    viewModel.storeCustomTapped()
+                }
+
                 ActionButton(title: "Read stored secret") {
                     Task { await viewModel.readTapped() }
                 }
@@ -42,6 +46,17 @@ struct ContentView: View {
         .background {
             Color(.secondarySystemBackground)
                 .ignoresSafeArea()
+        }
+        .alert("Store custom secret", isPresented: $viewModel.isCustomSecretAlertPresented) {
+            TextField(ContentViewModel.customSecretPlaceholder, text: $viewModel.customSecret)
+
+            Button("Confirm") {
+                Task { await viewModel.confirmCustomSecretTapped() }
+            }
+
+            Button("Cancel", role: .cancel) {
+                viewModel.cancelCustomSecretTapped()
+            }
         }
     }
 }

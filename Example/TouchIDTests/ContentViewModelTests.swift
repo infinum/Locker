@@ -37,7 +37,7 @@ extension ContentViewModelTests {
 
     @Test("Stores and retrieves the secret")
     func storeAndRetrieveSecret() async throws {
-        try await viewModel.storeSecret()
+        try await viewModel.storeSecret(viewModel.topSecret)
 
         let secret = try await viewModel.readSecret()
 
@@ -48,7 +48,7 @@ extension ContentViewModelTests {
     func storeAndRetrieveSecretWithCustomUserDefaults() async throws {
         viewModel.setCustomUserDefaults()
 
-        try await viewModel.storeSecret()
+        try await viewModel.storeSecret(viewModel.topSecret)
         let secret = try await viewModel.readSecret()
 
         #expect(secret == viewModel.topSecret)
@@ -56,7 +56,7 @@ extension ContentViewModelTests {
 
     @Test("Deletes the secret")
     func deleteSecret() async throws {
-        try await viewModel.storeSecret()
+        try await viewModel.storeSecret(viewModel.topSecret)
 
         viewModel.deleteSecret()
 
@@ -92,6 +92,47 @@ extension ContentViewModelTests {
         await viewModel.readTapped()
 
         #expect(viewModel.result == ContentViewModel.noSecretsMessage)
+    }
+}
+
+// MARK: - Custom secret -
+
+extension ContentViewModelTests {
+
+    @Test("Tapping store custom secret presents the alert")
+    func storeCustomTappedPresentsAlert() {
+        viewModel.storeCustomTapped()
+
+        #expect(viewModel.isCustomSecretAlertPresented)
+    }
+
+    @Test("Confirming stores the entered secret and clears the field")
+    func confirmCustomSecretStoresEnteredValue() async throws {
+        viewModel.customSecret = "Entered secret"
+
+        await viewModel.confirmCustomSecretTapped()
+
+        #expect(viewModel.result == "Stored: Entered secret")
+        #expect(viewModel.customSecret.isEmpty)
+        #expect(try await viewModel.readSecret() == "Entered secret")
+    }
+
+    @Test("Confirming an empty field stores the placeholder")
+    func confirmCustomSecretStoresPlaceholderWhenEmpty() async throws {
+        await viewModel.confirmCustomSecretTapped()
+
+        #expect(viewModel.result == "Stored: \(ContentViewModel.customSecretPlaceholder)")
+        #expect(try await viewModel.readSecret() == ContentViewModel.customSecretPlaceholder)
+    }
+
+    @Test("Cancelling discards the entered secret")
+    func cancelCustomSecretDiscardsEnteredValue() async {
+        viewModel.customSecret = "Entered secret"
+
+        viewModel.cancelCustomSecretTapped()
+
+        #expect(viewModel.customSecret.isEmpty)
+        #expect(viewModel.result == ContentViewModel.clearMessage)
     }
 }
 
@@ -184,7 +225,7 @@ extension ContentViewModelTests {
         viewModel.shouldUseAuthWithBiometrics = true
         viewModel.didAskToUseAuthWithBiometrics = true
         viewModel.shouldAddSecretToKeychainOnNextLogin = true
-        try await viewModel.storeSecret()
+        try await viewModel.storeSecret(viewModel.topSecret)
 
         viewModel.resetEverything()
 

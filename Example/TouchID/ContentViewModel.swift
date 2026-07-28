@@ -18,10 +18,16 @@ final class ContentViewModel {
     static let clearMessage = "Keychain clear"
     static let noSecretsMessage = "No secrets to read"
 
+    /// Shown as the alert's text field placeholder, and stored when the field is left empty.
+    static let customSecretPlaceholder = "Custom secret"
+
     let topSecret = "My Secret!"
 
-    /// Result of the last store or read, shared by both actions.
+    /// Result of the last store or read, shared by all actions.
     var result = ContentViewModel.clearMessage
+
+    var customSecret = ""
+    var isCustomSecretAlertPresented = false
 
     // MARK: - Private properties -
 
@@ -34,12 +40,23 @@ final class ContentViewModel {
 extension ContentViewModel {
 
     func storeTapped() async {
-        do {
-            try await storeSecret()
-            result = "Stored: \(topSecret)"
-        } catch {
-            result = "Failed to store: \(error.localizedDescription)"
-        }
+        await store(topSecret)
+    }
+
+    func storeCustomTapped() {
+        isCustomSecretAlertPresented = true
+    }
+
+    func confirmCustomSecretTapped() async {
+        // An empty field stores the placeholder, so the alert always has something to store.
+        let secret = customSecret.isEmpty ? ContentViewModel.customSecretPlaceholder : customSecret
+        customSecret = ""
+
+        await store(secret)
+    }
+
+    func cancelCustomSecretTapped() {
+        customSecret = ""
     }
 
     func readTapped() async {
@@ -60,14 +77,28 @@ extension ContentViewModel {
     }
 }
 
+// MARK: Storing
+
+private extension ContentViewModel {
+
+    func store(_ secret: String) async {
+        do {
+            try await storeSecret(secret)
+            result = "Stored: \(secret)"
+        } catch {
+            result = "Failed to store: \(error.localizedDescription)"
+        }
+    }
+}
+
 // MARK: - Locker usage -
 
 // MARK: Read Write Delete
 
 extension ContentViewModel {
 
-    func storeSecret() async throws {
-        try await Locker.setSecret(topSecret, for: identifier)
+    func storeSecret(_ secret: String) async throws {
+        try await Locker.setSecret(secret, for: identifier)
     }
 
     func readSecret() async throws -> String {
