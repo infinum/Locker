@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Security
 import Locker
 
 @MainActor
@@ -14,10 +15,13 @@ final class ContentViewModel {
 
     // MARK: - Internal properties -
 
+    static let clearMessage = "Keychain clear"
+    static let noSecretsMessage = "No secrets to read"
+
     let topSecret = "My Secret!"
 
-    var storeResult = "--"
-    var readResult = "--"
+    /// Result of the last store or read, shared by both actions.
+    var result = ContentViewModel.clearMessage
 
     // MARK: - Private properties -
 
@@ -32,25 +36,27 @@ extension ContentViewModel {
     func storeTapped() async {
         do {
             try await storeSecret()
-            storeResult = "Stored: \(topSecret)"
+            result = "Stored: \(topSecret)"
         } catch {
-            storeResult = "Failed to store: \(error.localizedDescription)"
+            result = "Failed to store: \(error.localizedDescription)"
         }
     }
 
     func readTapped() async {
         do {
-            readResult = "Read: \(try await readSecret())"
+            result = "Read: \(try await readSecret())"
+        } catch let error as KeychainError where error.status == errSecItemNotFound {
+            // Nothing stored yet is an expected state, not a failure worth an OSStatus.
+            result = ContentViewModel.noSecretsMessage
         } catch {
-            readResult = "Failed to read: \(error.localizedDescription)"
+            result = "Failed to read: \(error.localizedDescription)"
         }
     }
 
     func resetTapped() {
         resetUserDefaults()
         resetEverything()
-        storeResult = "--"
-        readResult = "--"
+        result = ContentViewModel.clearMessage
     }
 }
 

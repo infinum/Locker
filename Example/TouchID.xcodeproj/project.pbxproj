@@ -11,6 +11,7 @@
 		B3BA96FFD52A35767964A4AC /* Pods_TouchID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F9CACE5FF571ED0B30B3B54 /* Pods_TouchID.framework */; };
 		C0DE00022049A57C003ABEE0 /* TouchIDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00012049A57C003ABEE0 /* TouchIDApp.swift */; };
 		C0DE00042049A57C003ABEE0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00032049A57C003ABEE0 /* ContentView.swift */; };
+		C0DE000A2049A57C003ABEE0 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00092049A57C003ABEE0 /* ActionButton.swift */; };
 		C0DE00062049A57C003ABEE0 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00052049A57C003ABEE0 /* ContentViewModel.swift */; };
 		C0DE00082049A57C003ABEE0 /* ContentViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00072049A57C003ABEE0 /* ContentViewModelTests.swift */; };
 		F53E4C4AB99CC215C428B6EC /* Pods_TouchIDTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496316EC081FCE2ABAB0F191 /* Pods_TouchIDTests.framework */; };
@@ -40,6 +41,7 @@
 		AB567BFB2049A57C003ABEE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C0DE00012049A57C003ABEE0 /* TouchIDApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchIDApp.swift; sourceTree = "<group>"; };
 		C0DE00032049A57C003ABEE0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		C0DE00092049A57C003ABEE0 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		C0DE00052049A57C003ABEE0 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		C0DE00072049A57C003ABEE0 /* ContentViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -110,6 +112,7 @@
 				C0DE00012049A57C003ABEE0 /* TouchIDApp.swift */,
 				C0DE00032049A57C003ABEE0 /* ContentView.swift */,
 				C0DE00052049A57C003ABEE0 /* ContentViewModel.swift */,
+				C0DE00092049A57C003ABEE0 /* ActionButton.swift */,
 				AB567BEB2049A57C003ABEE0 /* Assets.xcassets */,
 				AB567BF02049A57C003ABEE0 /* Info.plist */,
 			);
@@ -297,6 +300,7 @@
 				C0DE00022049A57C003ABEE0 /* TouchIDApp.swift in Sources */,
 				C0DE00042049A57C003ABEE0 /* ContentView.swift in Sources */,
 				C0DE00062049A57C003ABEE0 /* ContentViewModel.swift in Sources */,
+				C0DE000A2049A57C003ABEE0 /* ActionButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

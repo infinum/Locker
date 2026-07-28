@@ -16,26 +16,33 @@ struct ContentView: View {
     // MARK: - Body -
 
     var body: some View {
-        VStack(spacing: 12) {
-            Button("Reset everything", role: .destructive) {
+        VStack(spacing: 20) {
+            VStack(spacing: 12) {
+                ActionButton(title: "Store some secret") {
+                    Task { await viewModel.storeTapped() }
+                }
+
+                ActionButton(title: "Read stored secret") {
+                    Task { await viewModel.readTapped() }
+                }
+            }
+
+            Text(viewModel.result)
+                .font(.headline)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .safeAreaInset(edge: .bottom) {
+            ActionButton(title: "Reset everything", role: .destructive) {
                 viewModel.resetTapped()
             }
-
-            Button("Store some secret") {
-                Task { await viewModel.storeTapped() }
-            }
-
-            Text(viewModel.storeResult)
-
-            Button("Read stored secret") {
-                Task { await viewModel.readTapped() }
-            }
-
-            Text(viewModel.readResult)
+            .padding(.bottom, 20)
         }
-        .buttonStyle(.bordered)
         .multilineTextAlignment(.center)
-        .padding()
+        .padding(.horizontal, 24)
+        .background {
+            Color(.secondarySystemBackground)
+                .ignoresSafeArea()
+        }
     }
 }
 

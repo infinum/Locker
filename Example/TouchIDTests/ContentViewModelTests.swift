@@ -70,24 +70,28 @@ extension ContentViewModelTests {
 
 extension ContentViewModelTests {
 
-    @Test("Store, read and reset update the displayed results")
-    func viewActionsUpdateResults() async {
-        await viewModel.storeTapped()
-        #expect(viewModel.storeResult == "Stored: \(viewModel.topSecret)")
-
-        await viewModel.readTapped()
-        #expect(viewModel.readResult == "Read: \(viewModel.topSecret)")
-
-        viewModel.resetTapped()
-        #expect(viewModel.storeResult == "--")
-        #expect(viewModel.readResult == "--")
+    @Test("Starts with a clear keychain message")
+    func initialResult() {
+        #expect(viewModel.result == ContentViewModel.clearMessage)
     }
 
-    @Test("Reading a secret that is not stored shows a failure")
-    func readTappedWithoutStoredSecretShowsFailure() async {
+    @Test("Store, read and reset update the displayed result")
+    func viewActionsUpdateResult() async {
+        await viewModel.storeTapped()
+        #expect(viewModel.result == "Stored: \(viewModel.topSecret)")
+
+        await viewModel.readTapped()
+        #expect(viewModel.result == "Read: \(viewModel.topSecret)")
+
+        viewModel.resetTapped()
+        #expect(viewModel.result == ContentViewModel.clearMessage)
+    }
+
+    @Test("Reading before storing reports that there is nothing to read")
+    func readTappedWithoutStoredSecretShowsNoSecrets() async {
         await viewModel.readTapped()
 
-        #expect(viewModel.readResult.hasPrefix("Failed to read: "))
+        #expect(viewModel.result == ContentViewModel.noSecretsMessage)
     }
 }
 
