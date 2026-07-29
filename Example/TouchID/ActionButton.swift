@@ -7,52 +7,93 @@
 
 import SwiftUI
 
-/// Full width button with a rounded rectangular border shape, rendered with
-/// the Liquid Glass appearance on iOS 26 and later.
+/// Full width button in one of the two brand styles.
 struct ActionButton: View {
+
+    // MARK: - Style -
+
+    enum Style {
+
+        /// Brand red fill with a white title, for the primary actions.
+        case filled
+
+        /// Brand red border and title over the screen background, for destructive actions.
+        case outlined
+    }
 
     // MARK: - Internal properties -
 
     let title: String
-    var role: ButtonRole?
+    var style: Style = .filled
     let action: () -> Void
 
     // MARK: - Body -
 
     var body: some View {
-        Button(role: role, action: action) {
-            Text(title)
-                .frame(maxWidth: .infinity)
-        }
-        .controlSize(.large)
-        .buttonBorderShape(.roundedRectangle(radius: 12))
-        // The glass button styles don't tint a destructive role on their own, unlike the bordered ones.
-        .tint(role == .destructive ? Color.red : nil)
-        .glassOrBorderedButtonStyle()
+        Button(title, action: action)
+            .buttonStyle(BrandButtonStyle(style: style))
     }
 }
 
 // MARK: - Button style -
 
-private extension View {
+private struct BrandButtonStyle: ButtonStyle {
 
-    /// Liquid Glass button appearance on iOS 26 and later, bordered appearance below.
-    @ViewBuilder
-    func glassOrBorderedButtonStyle() -> some View {
-        if #available(iOS 26.0, *) {
-            buttonStyle(.glass)
-        } else {
-            buttonStyle(.bordered)
+    let style: ActionButton.Style
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(.system(size: Metrics.titleSize, weight: .bold))
+            .foregroundStyle(titleColor)
+            .frame(maxWidth: .infinity)
+            .frame(height: Metrics.height)
+            .background(background)
+            // The outlined style has no fill, so the whole shape needs to stay tappable.
+            .contentShape(.rect(cornerRadius: Metrics.cornerRadius))
+            .opacity(configuration.isPressed ? Metrics.pressedOpacity : 1)
+            .animation(.easeOut(duration: 0.1), value: configuration.isPressed)
+    }
+}
+
+private extension BrandButtonStyle {
+
+    var titleColor: Color {
+        switch style {
+        case .filled: .white
+        case .outlined: Color(.brandRed)
         }
     }
+
+    @ViewBuilder
+    var background: some View {
+        switch style {
+        case .filled:
+            RoundedRectangle(cornerRadius: Metrics.cornerRadius)
+                .fill(Color(.brandRed))
+        case .outlined:
+            RoundedRectangle(cornerRadius: Metrics.cornerRadius)
+                .strokeBorder(Color(.brandRed), lineWidth: Metrics.borderWidth)
+        }
+    }
+}
+
+// MARK: - Metrics -
+
+private enum Metrics {
+
+    static let titleSize: CGFloat = 17
+    static let height: CGFloat = 50
+    static let cornerRadius: CGFloat = 4
+    static let borderWidth: CGFloat = 2
+    static let pressedOpacity: CGFloat = 0.75
 }
 
 // MARK: - Preview -
 
 #Preview {
-    VStack(spacing: 12) {
-        ActionButton(title: "Regular") {}
-        ActionButton(title: "Destructive", role: .destructive) {}
+    VStack(spacing: 16) {
+        ActionButton(title: "Filled") {}
+        ActionButton(title: "Outlined", style: .outlined) {}
     }
-    .padding(.horizontal, 24)
+    .padding(.horizontal, 20)
 }
