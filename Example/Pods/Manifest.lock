@@ -1,6 +1,6 @@
 PODS:
-  - Locker (4.0.0)
-  - Locker/Tests (4.0.0)
+  - Locker (3.2.0)
+  - Locker/Tests (3.2.0)
 
 DEPENDENCIES:
   - Locker (from `../Locker.podspec`)
@@ -11,7 +11,7 @@ EXTERNAL SOURCES:
     :path: "../Locker.podspec"
 
 SPEC CHECKSUMS:
-  Locker: b4eb1f8347c756ce9bc971fbfde85aa18c4cdc5f
+  Locker: a248be8b282157a195a9c131a7be95a9de84bb6d
 
 PODFILE CHECKSUM: 2f2d2af38b81ebe9371e679f9ab2e93cfa9700d6
 
