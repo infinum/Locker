@@ -7,7 +7,9 @@
 
 import Foundation
 
-class DeviceManager {
+// @unchecked Sendable: no mutable instance state; final prevents subclasses
+// from introducing non-Sendable state while inheriting the conformance.
+final class DeviceManager: @unchecked Sendable {
 
     // MARK: - Singleton creation -
 

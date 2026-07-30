@@ -106,7 +106,7 @@ class LockerHelpers {
     private static let bundleIdentifier = Bundle.main.bundleIdentifier ?? ""
 
     private static var biometryNotAvailableCode: Int {
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, macOS 10.13, *) {
             return LAError.biometryNotAvailable.rawValue
         } else {
             return Int(kLAErrorBiometryNotAvailable)
@@ -114,7 +114,7 @@ class LockerHelpers {
     }
 
     private static var biometryNotEnrolledCode: Int {
-        if #available(iOS 11, *) {
+        if #available(iOS 11.0, macOS 10.13, *) {
             return LAError.biometryNotEnrolled.rawValue
         } else {
             return Int(kLAErrorBiometryNotEnrolled)
@@ -213,7 +213,7 @@ private extension LockerHelpers {
         let context = LAContext()
         var error: NSError?
 
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, macOS 10.15, *) {
             if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
                 if context.biometryType == .faceID {
                     return true
