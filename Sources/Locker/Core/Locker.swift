@@ -116,6 +116,9 @@ public class Locker: NSObject {
     ) {
     #if targetEnvironment(simulator)
         Locker.userDefaults?.set(secret, forKey: uniqueIdentifier)
+        DispatchQueue.main.async {
+            completed?(nil)
+        }
     #else
         setSecretForDevice(secret, for: uniqueIdentifier, completion: { error in
             DispatchQueue.main.async {
