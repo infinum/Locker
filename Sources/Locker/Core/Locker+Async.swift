@@ -38,7 +38,7 @@ public extension Locker {
 
      - Parameters:
         - uniqueIdentifier: unique key used for fetching secret
-        - operationPrompt: message showed to the user on TouchID dialog
+        - operationPrompt: message shown to the user on TouchID dialog
      - Returns: the stored secret
      - Throws: `KeychainError` carrying the failure `OSStatus`
      */
