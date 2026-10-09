@@ -13,10 +13,14 @@ class BundleHelpers {
     // MARK: - Public properties
 
     static var bundleResource: Bundle? {
+    #if SWIFT_PACKAGE
+        return Bundle.module
+    #else
         guard let resourceBundleURL = Bundle(for: Self.self).url(forResource: "Locker_Locker", withExtension: "bundle"),
               let resourceBundle = Bundle(url: resourceBundleURL)
         else { return nil }
         return resourceBundle
+    #endif
     }
 
     static var decoder: JSONDecoder {

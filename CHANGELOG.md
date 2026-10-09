@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - iPhone 18 Pro Max (`iPhone19,3`, `iPhone19,7`) — Face ID
   - iPhone Duo (`iPhone19,4`) — Touch ID
 
+### Fixed
+
+- Biometry device list now loads when Locker is built with Swift Package Manager
+  outside an app bundle (e.g. `swift test`). The resource bundle is resolved via
+  `Bundle.module` under SPM; CocoaPods lookup is unchanged.
+
 ## [3.1.0] - 2026-06-26
 
 ### Changed
