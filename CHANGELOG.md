@@ -5,7 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [3.2.0] - 2026-10-09
+## [3.2.1] - 2026-10-09
+
+### Added
+
+- Support for new devices:
+  - iPhone 18 Pro (`iPhone19,2`) — Face ID
+  - iPhone 18 Pro Max (`iPhone19,3`, `iPhone19,7`) — Face ID
+  - iPhone Duo (`iPhone19,4`) — Touch ID
+
+### Fixed
+
+- Biometry device list now loads when Locker is built with Swift Package Manager
+  outside an app bundle (e.g. `swift test`). The resource bundle is resolved via
+  `Bundle.module` under SPM; CocoaPods lookup is unchanged.
+
+## [3.2.0] - 2026-07-28
 
 ### Added
 
@@ -15,10 +30,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   and the library's iOS 12.0 minimum is unchanged. The async read throws the new
   public `KeychainError`, which carries the failing `OSStatus`; the async write
   throws the existing `LockerError`. The completion handler APIs are unchanged.
-- Support for new devices:
-  - iPhone 18 Pro (`iPhone19,2`) — Face ID
-  - iPhone 18 Pro Max (`iPhone19,3`, `iPhone19,7`) — Face ID
-  - iPhone Duo (`iPhone19,4`) — Touch ID
 
 ### Fixed
 
@@ -26,9 +37,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   running on the simulator. Previously the simulator code path stored the secret
   and returned without calling back, so callers waiting on the completion were
   never notified.
-- Biometry device list now loads when Locker is built with Swift Package Manager
-  outside an app bundle (e.g. `swift test`). The resource bundle is resolved via
-  `Bundle.module` under SPM; CocoaPods lookup is unchanged.
 
 ### Changed
 
