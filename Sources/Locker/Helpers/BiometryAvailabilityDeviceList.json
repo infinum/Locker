@@ -137,6 +137,18 @@
             "name": "iPhone 17 Pro Max"
         },
         {
+            "id": "iPhone19,2",
+            "name": "iPhone 18 Pro"
+        },
+        {
+            "id": "iPhone19,3",
+            "name": "iPhone 18 Pro Max"
+        },
+        {
+            "id": "iPhone19,7",
+            "name": "iPhone 18 Pro Max"
+        },
+        {
             "id": "iPad8,1",
             "name": "iPad Pro 11 inch 3rd Gen (WiFi)"
         },
@@ -266,6 +278,10 @@
         {
             "id": "iPhone12,8",
             "name": "iPhone SE 2nd Gen"
+        },
+        {
+            "id": "iPhone19,4",
+            "name": "iPhone Duo"
         },
         {
             "id": "iPad4,7",

@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.3.0] - 2026-10-09
+
+### Changed
+
+- Bumped minimum iOS deployment target from iOS 12.0 to iOS 15.0. Xcode 27
+  no longer builds for deployment targets below iOS 15.0. All public API
+  interfaces remain unchanged. Consumers targeting iOS 12, 13 or 14 must
+  remain on Locker 3.2.x.
+
+### Added
+
+- Support for new devices:
+  - iPhone 18 Pro (`iPhone19,2`) — Face ID
+  - iPhone 18 Pro Max (`iPhone19,3`, `iPhone19,7`) — Face ID
+  - iPhone Duo (`iPhone19,4`) — Touch ID
+
+### Fixed
+
+- Biometry device list now loads when Locker is built with Swift Package Manager
+  outside an app bundle (e.g. `swift test`). The resource bundle is resolved via
+  `Bundle.module` under SPM; CocoaPods lookup is unchanged.
+
 ## [3.2.0] - 2026-07-28
 
 ### Added
@@ -31,6 +53,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   call sites, and its unit tests are migrated to Swift Testing. The example app's
   deployment target is now iOS 17.0 — this is a demo app only requirement and does
   **not** change the library's supported minimum, which remains iOS 12.0.
+
+## [3.1.0] - 2026-06-26
+
+### Changed
+
 - Bumped minimum iOS deployment target from iOS 10.0 to iOS 12.0.
   All public API interfaces remain unchanged — this is a toolchain/platform
   requirement for Swift 6 readiness. Consumers targeting iOS 10 or iOS 11

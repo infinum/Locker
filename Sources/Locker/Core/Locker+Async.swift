@@ -5,8 +5,8 @@
 
 import Foundation
 
-// Swift concurrency back deploys to iOS 13 / macOS 10.15, so the async API is
-// gated rather than raising the package's iOS 12.0 minimum.
+// The package also builds for macOS (e.g. `swift test`), where Swift concurrency
+// requires macOS 10.15.
 @available(iOS 13.0, macOS 10.15, *)
 public extension Locker {
 
