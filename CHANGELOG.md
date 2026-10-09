@@ -5,7 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [3.2.1] - 2026-10-09
+## [3.3.0] - 2026-10-09
+
+### Changed
+
+- Bumped minimum iOS deployment target from iOS 12.0 to iOS 15.0. Xcode 27
+  no longer builds for deployment targets below iOS 15.0. All public API
+  interfaces remain unchanged. Consumers targeting iOS 12, 13 or 14 must
+  remain on Locker 3.2.x.
 
 ### Added
 
