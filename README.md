@@ -114,6 +114,17 @@ Locker.setSecret("passcode", for: "UniqueIdentifier", completed: { error in
 })
 ```
 
+```swift
+// Swift, async/await (iOS 13+)
+do {
+    try await Locker.setSecret("passcode", for: "UniqueIdentifier")
+} catch {
+    // handle error
+}
+```
+
+> Because `completed` has a default value, `setSecret(_:for:)` matches both the completion based and the `async` method. Inside an `async` context Swift picks the `async` one — pass `completed: nil` explicitly if you want the fire and forget call there.
+
 > If Locker is run from the Simulator, instead of storing it into the Keychain, Locker will store data to the `UserDefaults`. You can check if Locker is running from the simulator with `isRunningFromTheSimulator` property.
 
  ##### 2. Fetch Your data with `retrieveCurrentSecretForUniqueIdentifier: operationPrompt: success: failure:`. 
@@ -142,6 +153,19 @@ Locker.retrieveCurrentSecret(
     // handle failure
   }
 )
+```
+
+```swift
+// Swift, async/await (iOS 13+)
+do {
+    let secret = try await Locker.retrieveCurrentSecret(
+        for: "kUniqueIdentifier",
+        operationPrompt: "Touch ID description"
+    )
+    // do sth with secret
+} catch let error as KeychainError {
+    // handle failure, `error.status` carries the OSStatus
+}
 ```
 
 ##### 3. Delete data with `deleteSecretForUniqueIdentifier:` method.
