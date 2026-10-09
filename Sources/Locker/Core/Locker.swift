@@ -134,7 +134,7 @@ public class Locker: NSObject {
 
      - Parameters:
         - uniqueIdentifier: unique key used for fetching secret
-        - operationPrompt: message showed to the user on TouchID dialog
+        - operationPrompt: message shown to the user on TouchID dialog
         - success: completion block returning secret
         - failure: failure block returning failure status
      */
