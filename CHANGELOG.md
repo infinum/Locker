@@ -5,7 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [3.2.0] - 2026-10-09
+
+### Added
+
+- Support for new devices:
+  - iPhone 18 Pro (`iPhone19,2`) — Face ID
+  - iPhone 18 Pro Max (`iPhone19,3`, `iPhone19,7`) — Face ID
+  - iPhone Duo (`iPhone19,4`) — Touch ID
+
+## [3.1.0] - 2026-06-26
 
 ### Changed
 
