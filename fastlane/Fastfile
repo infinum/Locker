@@ -1,0 +1,15 @@
+default_platform(:ios)
+
+platform :ios do
+	lane :test do |options|
+		scan(
+			workspace: "Example/TouchID.xcworkspace",
+			scheme: options[:scheme],
+			destination: "platform=iOS Simulator,id=#{options[:device]}",
+			xcargs: "COMPILER_INDEX_STORE_ENABLE=NO",
+			number_of_retries: 2,
+			result_bundle: true,
+			output_directory: "fastlane/test_output"
+		)
+	end
+end

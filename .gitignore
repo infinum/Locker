@@ -4,4 +4,5 @@ Example/.DS_Store
 project.xcworkspace/
 xcuserdata/
 .build/
-Carthage/Build
+Carthage/Buildfastlane/test_output/
+fastlane/report.xml
