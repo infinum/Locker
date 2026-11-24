@@ -51,6 +51,10 @@ jobs:
             xcrun simctl spawn "$SIM_ID" launchctl bootout user/foreground/com.apple.mediaanalysisd' > /dev/null 2>&1 &
 
       - name: Run tests (TouchID)
+        env:
+          # The first xcodebuild call on a fresh hosted runner, while the simulator boots,
+          # takes longer than fastlane's 3 s default for reading build settings.
+          FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: 120
         run: fastlane test scheme:"TouchID" device:"$SIM_ID"
 
       - name: Upload test results
