@@ -1,6 +1,6 @@
 # **Locker 🔒** 
 
-![Bitrise](https://img.shields.io/bitrise/eb8928b119a9df30?token=753GPSmElQJ1aRfplKYJLw) ![GitHub](https://img.shields.io/github/license/infinum/Locker) ![Cocoapods](https://img.shields.io/cocoapods/v/Locker) ![Cocoapods platforms](https://img.shields.io/cocoapods/p/Locker) 
+![CI](https://github.com/infinum/Locker/actions/workflows/ci.yml/badge.svg) ![GitHub](https://img.shields.io/github/license/infinum/Locker) ![Cocoapods](https://img.shields.io/cocoapods/v/Locker) ![Cocoapods platforms](https://img.shields.io/cocoapods/p/Locker) 
 
 
 

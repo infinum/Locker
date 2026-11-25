@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize, reopened, ready_for_review]
+  workflow_dispatch:
+
+# Build and test code from the PR must not get a token that can do more than read.
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: CI
+    if: ${{ !github.event.pull_request.draft }}
+    runs-on: macos-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_26.6.app
+
+      - name: Create simulator
+        run: |
+          SDK=$(xcrun --sdk iphonesimulator --show-sdk-version)
+          RUNTIME=$(xcrun simctl list runtimes -j | jq -r --arg sdk "$SDK" '
+            def v: split(".") | map(tonumber);
+            [.runtimes[] | select(.isAvailable and .platform == "iOS" and (.version | v) >= ($sdk | v))]
+            | sort_by(.version | v) | first | .identifier // empty')
+          [ -n "$RUNTIME" ] || { echo "::error::No iOS runtime for SDK $SDK"; exit 1; }
+          echo "Simulator runtime: $RUNTIME (SDK $SDK)"
+          SIM_ID=$(xcrun simctl create 'iPhone 16' 'iPhone 16' "$RUNTIME")
+          echo "SIM_ID=$SIM_ID" >> "$GITHUB_ENV"
+          # Boot in the background while the build runs, then stop media indexing, which eats CPU on a fresh simulator.
+          export SIM_ID
+          nohup bash -c 'xcrun simctl bootstatus "$SIM_ID" -b > /dev/null &&
+            xcrun simctl spawn "$SIM_ID" launchctl disable user/foreground/com.apple.mediaanalysisd &&
+            xcrun simctl spawn "$SIM_ID" launchctl bootout user/foreground/com.apple.mediaanalysisd' > /dev/null 2>&1 &
+
+      - name: Run tests (TouchID)
+        env:
+          # The first xcodebuild call on a fresh hosted runner, while the simulator boots,
+          # takes longer than fastlane's 3 s default for reading build settings.
+          FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: 120
+        run: fastlane test scheme:"TouchID" device:"$SIM_ID"
+
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: test-results-${{ github.job }}
+          path: fastlane/test_output/*.xcresult
+          retention-days: 7
